@@ -1,0 +1,560 @@
+{
+  "meta": {
+    "city": "muenster",
+    "cityLabel": "Münster",
+    "lastUpdated": "2026-04-01",
+    "quarter": "Q1/2026",
+    "source": "Cross-validierte Daten aus ImmoScout24, immowelt, immoportal, Gutachterausschuss Münster",
+    "priceUnit": "€/m²",
+    "rentUnit": "€/m²",
+    "colorScale": [
+      { "min": 6000, "max": 99999, "color": "#052E26", "label": "6.000+ €/m²" },
+      { "min": 5000, "max": 5999, "color": "#1A5C4A", "label": "5.000–5.999 €/m²" },
+      { "min": 4000, "max": 4999, "color": "#3D8B6E", "label": "4.000–4.999 €/m²" },
+      { "min": 3000, "max": 3999, "color": "#7CB89E", "label": "3.000–3.999 €/m²" },
+      { "min": 0, "max": 2999, "color": "#C5DDD1", "label": "unter 3.000 €/m²" }
+    ]
+  },
+  "districts": [
+    {
+      "id": "altstadt-dom",
+      "name": "Altstadt/Dom",
+      "slug": "altstadt-dom",
+      "bezirk": "Münster-Mitte",
+      "priority": "kern",
+      "prices": {
+        "etwPerSqm": 6100,
+        "housePerSqm": 6820,
+        "rentPerSqm": 15.80,
+        "trend": "steigend",
+        "trendPercent": 1.5
+      },
+      "demographics": {
+        "population": 8968,
+        "areaSqKm": 1.19,
+        "distanceCityKm": 0,
+        "distanceCityMin": 0
+      },
+      "character": {
+        "typicalBuildings": "Altbau, Neubauwohnungen, MFH",
+        "targetGroups": ["Berufstätige", "Paare", "Investoren"],
+        "shortProfile": "Historisches Herz rund um Prinzipalmarkt und Dom. Teuerste Wohnlage Münsters mit Spitzenpreisen bis 9.000 €/m² bei Neubauwohnungen.",
+        "detailPageUrl": null
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in der Altstadt wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-muenster/"
+      }
+    },
+    {
+      "id": "kreuzviertel",
+      "name": "Kreuzviertel",
+      "slug": "kreuzviertel",
+      "bezirk": "Münster-Mitte",
+      "priority": "kern",
+      "prices": {
+        "etwPerSqm": 6100,
+        "housePerSqm": 6850,
+        "rentPerSqm": 16.79,
+        "trend": "steigend",
+        "trendPercent": 1.5
+      },
+      "demographics": {
+        "population": 12525,
+        "areaSqKm": 1.01,
+        "distanceCityKm": 1,
+        "distanceCityMin": 5
+      },
+      "character": {
+        "typicalBuildings": "Altbau, MFH, Gründerzeit",
+        "targetGroups": ["Akademiker", "Familien", "Studenten"],
+        "shortProfile": "Münsters beliebteste Wohnlage. Gründerzeit-Altbauten, Cafés und das Schillergymnasium prägen das Bild. Nur 1 km vom Prinzipalmarkt entfernt.",
+        "detailPageUrl": null
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie im Kreuzviertel wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-muenster/"
+      }
+    },
+    {
+      "id": "pluggendorf",
+      "name": "Pluggendorf",
+      "slug": "pluggendorf",
+      "bezirk": "Münster-Mitte",
+      "priority": "kern",
+      "prices": {
+        "etwPerSqm": 5900,
+        "housePerSqm": 5900,
+        "rentPerSqm": 18.23,
+        "trend": "steigend",
+        "trendPercent": 1.2
+      },
+      "demographics": {
+        "population": 4713,
+        "areaSqKm": 0.55,
+        "distanceCityKm": 0.5,
+        "distanceCityMin": 3
+      },
+      "character": {
+        "typicalBuildings": "MFH, Neubau, Altbau",
+        "targetGroups": ["Berufstätige", "Paare", "Studenten"],
+        "shortProfile": "Kompakt, urban, höchste Mieten Münsters (18,23 €/m²). Zwischen Aasee und Innenstadt gelegen. Am Klosterareal entstehen 500 neue Wohnungen.",
+        "detailPageUrl": null
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Pluggendorf wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-muenster/"
+      }
+    },
+    {
+      "id": "hafen-zentrum",
+      "name": "Hafen/Zentrum",
+      "slug": "hafen-zentrum",
+      "bezirk": "Münster-Mitte",
+      "priority": "kern",
+      "prices": {
+        "etwPerSqm": 5700,
+        "housePerSqm": 5000,
+        "rentPerSqm": 13.53,
+        "trend": "stabil",
+        "trendPercent": 0.3
+      },
+      "demographics": {
+        "population": 1156,
+        "areaSqKm": 1.05,
+        "distanceCityKm": 1,
+        "distanceCityMin": 5
+      },
+      "character": {
+        "typicalBuildings": "Lofts, Neubau, umgenutzte Industrie",
+        "targetGroups": ["Kreative", "Berufstätige", "Investoren"],
+        "shortProfile": "Münsters Trendviertel am Kreativkai. Umgenutzte Industriearchitektur, Lofts und Neubauten. Bevölkerung verdoppelt sich bis 2033 durch 2.000+ neue Wohnungen.",
+        "detailPageUrl": null
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie im Hafenviertel wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-muenster/"
+      }
+    },
+    {
+      "id": "sentrup",
+      "name": "Sentrup",
+      "slug": "sentrup",
+      "bezirk": "Münster-Mitte",
+      "priority": "kern",
+      "prices": {
+        "etwPerSqm": 5000,
+        "housePerSqm": 6430,
+        "rentPerSqm": 14.51,
+        "trend": "stabil",
+        "trendPercent": 0.5
+      },
+      "demographics": {
+        "population": 8394,
+        "areaSqKm": 6.63,
+        "distanceCityKm": 3,
+        "distanceCityMin": 10
+      },
+      "character": {
+        "typicalBuildings": "Villen, EFH, großzügige Grundstücke",
+        "targetGroups": ["Familien", "gehobenes Klientel"],
+        "shortProfile": "Gehobene Villenlage zwischen Aasee, Botanischem Garten und Allwetterzoo. Teuerste Hauspreise nach der Altstadt.",
+        "detailPageUrl": null
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Sentrup wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-muenster/"
+      }
+    },
+    {
+      "id": "aaseestadt",
+      "name": "Aaseestadt",
+      "slug": "aaseestadt",
+      "bezirk": "Münster-Mitte",
+      "priority": "kern",
+      "prices": {
+        "etwPerSqm": 4800,
+        "housePerSqm": 5910,
+        "rentPerSqm": 14.83,
+        "trend": "stabil",
+        "trendPercent": 0.4
+      },
+      "demographics": {
+        "population": 6053,
+        "areaSqKm": 1.48,
+        "distanceCityKm": 2,
+        "distanceCityMin": 8
+      },
+      "character": {
+        "typicalBuildings": "Neubau, MFH, gehobene ETW",
+        "targetGroups": ["Familien", "Berufstätige", "Senioren"],
+        "shortProfile": "Wohnen am Wasser mit Premiumcharakter. Moderner Architekturmix in direkter Aasee-Lage. Nur 2 km zur Innenstadt.",
+        "detailPageUrl": null
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in der Aaseestadt wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-muenster/"
+      }
+    },
+    {
+      "id": "mauritz",
+      "name": "Mauritz",
+      "slug": "mauritz",
+      "bezirk": "Münster-Ost",
+      "priority": "erweitert",
+      "prices": {
+        "etwPerSqm": 5200,
+        "housePerSqm": 5900,
+        "rentPerSqm": 15.50,
+        "trend": "steigend",
+        "trendPercent": 1.0
+      },
+      "demographics": {
+        "population": 27652,
+        "areaSqKm": 7.84,
+        "distanceCityKm": 2.5,
+        "distanceCityMin": 10
+      },
+      "character": {
+        "typicalBuildings": "Villen, EFH, MFH, Geschosswohnungsbau",
+        "targetGroups": ["Familien", "Berufstätige", "Senioren"],
+        "shortProfile": "Drei Gesichter: Villen im Westen, gehobene Familien in der Mitte, Geschosswohnungsbau im Osten. Insgesamt 27.652 Einwohner.",
+        "detailPageUrl": null
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Mauritz wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-muenster/"
+      }
+    },
+    {
+      "id": "gievenbeck",
+      "name": "Gievenbeck",
+      "slug": "gievenbeck",
+      "bezirk": "Münster-West",
+      "priority": "erweitert",
+      "prices": {
+        "etwPerSqm": 4300,
+        "housePerSqm": 4740,
+        "rentPerSqm": 13.88,
+        "trend": "stark steigend",
+        "trendPercent": 2.5
+      },
+      "demographics": {
+        "population": 21668,
+        "areaSqKm": 9.47,
+        "distanceCityKm": 4,
+        "distanceCityMin": 15
+      },
+      "character": {
+        "typicalBuildings": "EFH, RH, Neubau",
+        "targetGroups": ["Familien", "Studenten", "junge Berufstätige"],
+        "shortProfile": "Der große Aufsteiger. Oxford-Quartier (1.200 WE, Pritzker-Architekt Kéré) transformiert das Viertel vom Studentenstandort zum Familienfavoriten.",
+        "detailPageUrl": null
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Gievenbeck wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-muenster/"
+      }
+    },
+    {
+      "id": "gremmendorf",
+      "name": "Gremmendorf",
+      "slug": "gremmendorf",
+      "bezirk": "Münster-Südost",
+      "priority": "erweitert",
+      "prices": {
+        "etwPerSqm": 4200,
+        "housePerSqm": 4140,
+        "rentPerSqm": 12.80,
+        "trend": "steigend",
+        "trendPercent": 1.8
+      },
+      "demographics": {
+        "population": 13495,
+        "areaSqKm": 10.39,
+        "distanceCityKm": 5,
+        "distanceCityMin": 15
+      },
+      "character": {
+        "typicalBuildings": "EFH, RH, Neubau (York-Quartier)",
+        "targetGroups": ["Familien", "Erstbezieher"],
+        "shortProfile": "York-Quartier bringt 1.800 neue Wohnungen auf 50 ha. Neue Mitte mit Edeka, Lidl und Grundschule. Bevölkerung wächst auf 16.000+.",
+        "detailPageUrl": null
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Gremmendorf wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-muenster/"
+      }
+    },
+    {
+      "id": "hiltrup",
+      "name": "Hiltrup",
+      "slug": "hiltrup",
+      "bezirk": "Münster-Süd",
+      "priority": "erweitert",
+      "prices": {
+        "etwPerSqm": 3800,
+        "housePerSqm": 3960,
+        "rentPerSqm": 12.98,
+        "trend": "steigend",
+        "trendPercent": 1.2
+      },
+      "demographics": {
+        "population": 26070,
+        "areaSqKm": 21.65,
+        "distanceCityKm": 8,
+        "distanceCityMin": 20
+      },
+      "character": {
+        "typicalBuildings": "EFH, DHH, RH",
+        "targetGroups": ["Familien", "Pendler"],
+        "shortProfile": "Münsters kleinstädtischer Süden. Eigener Bahnhof (8 Min. zum Hbf), Marktallee, zwei Gymnasien. Größter Außenstadtteil mit 26.070 Einwohnern.",
+        "detailPageUrl": null
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Hiltrup wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-muenster/"
+      }
+    },
+    {
+      "id": "kinderhaus",
+      "name": "Kinderhaus",
+      "slug": "kinderhaus",
+      "bezirk": "Münster-Nord",
+      "priority": "erweitert",
+      "prices": {
+        "etwPerSqm": 3500,
+        "housePerSqm": 3940,
+        "rentPerSqm": 12.80,
+        "trend": "steigend",
+        "trendPercent": 1.5
+      },
+      "demographics": {
+        "population": 16377,
+        "areaSqKm": 7.78,
+        "distanceCityKm": 4,
+        "distanceCityMin": 12
+      },
+      "character": {
+        "typicalBuildings": "MFH, RH, Neubau",
+        "targetGroups": ["Familien", "junge Berufstätige"],
+        "shortProfile": "Bezahlbar und multikulturell. 282 neue VIVAWEST-Wohnungen werten das Zentrum Nord auf. Geschwister-Scholl-Gymnasium vor Ort.",
+        "detailPageUrl": null
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Kinderhaus wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-muenster/"
+      }
+    },
+    {
+      "id": "coerde",
+      "name": "Coerde",
+      "slug": "coerde",
+      "bezirk": "Münster-Nord",
+      "priority": "erweitert",
+      "prices": {
+        "etwPerSqm": 2600,
+        "housePerSqm": 3500,
+        "rentPerSqm": 11.74,
+        "trend": "steigend",
+        "trendPercent": 3.1
+      },
+      "demographics": {
+        "population": 11081,
+        "areaSqKm": 5.87,
+        "distanceCityKm": 5,
+        "distanceCityMin": 15
+      },
+      "character": {
+        "typicalBuildings": "MFH, Großsiedlung, RH",
+        "targetGroups": ["Familien", "Erstbezieher", "Kapitalanleger"],
+        "shortProfile": "Günstigstes Viertel Münsters mit stärkstem Preisanstieg (+3,1%). Großsiedlung aus den 1960ern, Erneuerungsprogramm \"Coerde in Bewegung\" läuft.",
+        "detailPageUrl": null
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Coerde wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-muenster/"
+      }
+    },
+    {
+      "id": "roxel",
+      "name": "Roxel",
+      "slug": "roxel",
+      "bezirk": "Münster-West",
+      "priority": "aussen",
+      "prices": {
+        "etwPerSqm": 3750,
+        "housePerSqm": 4250,
+        "rentPerSqm": 13.69,
+        "trend": "stabil",
+        "trendPercent": 0.3
+      },
+      "demographics": {
+        "population": 9452,
+        "areaSqKm": 19.93,
+        "distanceCityKm": 7,
+        "distanceCityMin": 20
+      },
+      "character": {
+        "typicalBuildings": "EFH, DHH, Bauernhäuser",
+        "targetGroups": ["Familien", "Naturliebhaber"],
+        "shortProfile": "Ländlicher Charme mit eigenem Ortskern am westlichen Stadtrand. Haus Rüschhaus (Droste-Hülshoff) und Aa-Tal als kulturelle Highlights.",
+        "detailPageUrl": null
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Roxel wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-muenster/"
+      }
+    },
+    {
+      "id": "wolbeck",
+      "name": "Wolbeck",
+      "slug": "wolbeck",
+      "bezirk": "Münster-Südost",
+      "priority": "aussen",
+      "prices": {
+        "etwPerSqm": 3550,
+        "housePerSqm": 4000,
+        "rentPerSqm": 12.30,
+        "trend": "steigend",
+        "trendPercent": 1.0
+      },
+      "demographics": {
+        "population": 10887,
+        "areaSqKm": 20.70,
+        "distanceCityKm": 8,
+        "distanceCityMin": 20
+      },
+      "character": {
+        "typicalBuildings": "EFH, DHH, historischer Ortskern",
+        "targetGroups": ["Familien", "Pendler"],
+        "shortProfile": "Eigenes Kleinstadtgefühl mit Schulzentrum, intaktem Ortskern und ländlicher Werse-Aue. Ehemals eigenständige Gemeinde.",
+        "detailPageUrl": null
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Wolbeck wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-muenster/"
+      }
+    },
+    {
+      "id": "nienberge",
+      "name": "Nienberge",
+      "slug": "nienberge",
+      "bezirk": "Münster-Nord",
+      "priority": "aussen",
+      "prices": {
+        "etwPerSqm": 3250,
+        "housePerSqm": 3840,
+        "rentPerSqm": 13.17,
+        "trend": "stabil",
+        "trendPercent": 0.2
+      },
+      "demographics": {
+        "population": 6979,
+        "areaSqKm": 27.76,
+        "distanceCityKm": 8,
+        "distanceCityMin": 20
+      },
+      "character": {
+        "typicalBuildings": "EFH, Bauernhäuser, Neubaugebiete",
+        "targetGroups": ["Familien", "Naturliebhaber"],
+        "shortProfile": "Dörfliche Struktur im Nordwesten mit Schienenanschluss (Haltepunkt Nienberge-Häger). Einfamilienhäuser in Münsterland-Parklandschaft.",
+        "detailPageUrl": null
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Nienberge wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-muenster/"
+      }
+    },
+    {
+      "id": "handorf",
+      "name": "Handorf",
+      "slug": "handorf",
+      "bezirk": "Münster-Ost",
+      "priority": "aussen",
+      "prices": {
+        "etwPerSqm": 3750,
+        "housePerSqm": 4200,
+        "rentPerSqm": 11.39,
+        "trend": "stabil",
+        "trendPercent": 0.4
+      },
+      "demographics": {
+        "population": 8196,
+        "areaSqKm": 30.79,
+        "distanceCityKm": 7,
+        "distanceCityMin": 18
+      },
+      "character": {
+        "typicalBuildings": "EFH, Villen, Reiterhöfe",
+        "targetGroups": ["Familien", "gehobenes Klientel", "Reiter"],
+        "shortProfile": "Gehobenes Wohnen in der Werseaue. Weitläufige Grundstücke, Reiterszene und Eichenhaine. Dünn besiedelt (267 EW/km²).",
+        "detailPageUrl": null
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Handorf wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-muenster/"
+      }
+    },
+    {
+      "id": "angelmodde",
+      "name": "Angelmodde",
+      "slug": "angelmodde",
+      "bezirk": "Münster-Südost",
+      "priority": "aussen",
+      "prices": {
+        "etwPerSqm": 3350,
+        "housePerSqm": 4040,
+        "rentPerSqm": 13.98,
+        "trend": "steigend",
+        "trendPercent": 1.3
+      },
+      "demographics": {
+        "population": 8821,
+        "areaSqKm": 5.02,
+        "distanceCityKm": 6,
+        "distanceCityMin": 18
+      },
+      "character": {
+        "typicalBuildings": "EFH, DHH, RH",
+        "targetGroups": ["Familien", "Naturliebhaber"],
+        "shortProfile": "Grüner Geheimtipp zwischen Gremmendorf und Wolbeck. Ruhige Einfamilienhauslage in der Werse-Aue mit steigenden Preisen.",
+        "detailPageUrl": null
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Angelmodde wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-muenster/"
+      }
+    },
+    {
+      "id": "amelsbueren",
+      "name": "Amelsbüren",
+      "slug": "amelsbueren",
+      "bezirk": "Münster-Süd",
+      "priority": "aussen",
+      "prices": {
+        "etwPerSqm": 3450,
+        "housePerSqm": 3700,
+        "rentPerSqm": 10.00,
+        "trend": "stabil",
+        "trendPercent": 0.1
+      },
+      "demographics": {
+        "population": 6881,
+        "areaSqKm": 43.36,
+        "distanceCityKm": 11,
+        "distanceCityMin": 25
+      },
+      "character": {
+        "typicalBuildings": "EFH, Bauernhäuser, dörflicher Kern",
+        "targetGroups": ["Familien", "Naturliebhaber", "Pendler"],
+        "shortProfile": "Münsters flächengrößtes Viertel (43 km²), überwiegend Natur (Davert). Dörflicher Kern mit günstigsten Mieten der Stadt.",
+        "detailPageUrl": null
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Amelsbüren wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-muenster/"
+      }
+    }
+  ]
+}

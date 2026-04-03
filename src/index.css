@@ -1,0 +1,65 @@
+@import "tailwindcss";
+
+/* DM Sans Schrift lokal einbinden */
+@font-face {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('./assets/fonts/dm-sans-v17-latin-regular.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('./assets/fonts/dm-sans-v17-latin-500.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('./assets/fonts/dm-sans-v17-latin-700.woff2') format('woff2');
+}
+
+/* Tailwind v4 Theme-Konfiguration */
+@theme {
+  --color-primary: #052E26;
+  --color-background: #F5F2F0;
+  --color-text: #333333;
+  --color-accent: #B8860B;
+  --color-border: #D1CDC9;
+  --color-city-bg: #E8E4E0;
+
+  /* Heatmap-Farben (Preisstufen) */
+  --color-heat-1: #052E26;
+  --color-heat-2: #1A5C4A;
+  --color-heat-3: #3D8B6E;
+  --color-heat-4: #7CB89E;
+  --color-heat-5: #C5DDD1;
+
+  --font-sans: 'DM Sans', system-ui, -apple-system, sans-serif;
+}
+
+/* Basis-Styles */
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  background-color: var(--color-background);
+  color: var(--color-text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  min-height: 100svh;
+}
+
+/* Keyboard-Focus für SVG-Viertel */
+.interactive-districts path:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 1px;
+}
