@@ -301,22 +301,42 @@ export function MuensterSVG({
       {/* SCHICHT 1: Stadtgrenze als Hintergrund-Fang */}
       <path d={CITY_BOUNDARY} fill="#E8E4E0" stroke="#B8B4B0" strokeWidth="2" strokeLinejoin="round" />
 
-      {/* SCHICHT 2: Graue nicht-interaktive Viertel */}
-      <g className="gray-districts">
+      {/* SCHICHT 2: Graue Viertel (klickbar, kein Heatmap) */}
+      <g className="gray-districts" role="list">
         {PATHS.filter(p => !p.interactive).map(({ id, path: d }) => {
           const si = STAGGER_ORDER.indexOf(id)
+          const label = GRAY_LABELS.find(l => l.id === id)
+          const isHovered = hoveredId === id
+          const isSelected = selectedId === id
+          const isDimmed = selectedId && !isSelected
+
           return (
             <path
               key={id}
+              id={id}
+              role="listitem"
+              tabIndex={0}
+              aria-label={`Stadtteil ${label?.text || id}`}
               d={d}
               fill="#E8E4E0"
               stroke="#D1CDC9"
               strokeWidth="1"
               strokeLinejoin="round"
               style={{
-                opacity: loaded ? 1 : 0,
-                transition: `opacity 400ms ease ${si * 30}ms`,
+                cursor: 'pointer',
+                outline: 'none',
+                opacity: loaded ? (isDimmed ? 0.6 : (isHovered ? 0.85 : 1)) : 0,
+                transition: loaded
+                  ? 'opacity 150ms ease, filter 150ms ease'
+                  : `opacity 400ms ease ${si * 30}ms`,
+                filter: isHovered ? 'brightness(0.95)' : undefined,
               }}
+              onClick={() => onDistrictClick?.(id)}
+              onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onDistrictClick?.(id) } }}
+              onMouseEnter={() => handleMouseEnter(id)}
+              onMouseLeave={() => onDistrictLeave?.()}
+              onFocus={() => handleMouseEnter(id)}
+              onBlur={() => onDistrictLeave?.()}
             />
           )
         })}

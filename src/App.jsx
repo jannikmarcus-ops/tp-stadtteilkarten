@@ -4,11 +4,24 @@ import { useMediaQuery } from './hooks/useMediaQuery'
 import { MuensterSVG } from './components/Map/MuensterSVG'
 import { MapTooltip } from './components/Map/MapTooltip'
 import { DetailPanel } from './components/Map/DetailPanel'
+import { GrayDistrictPanel } from './components/Map/GrayDistrictPanel'
 import { MapLegend } from './components/Map/MapLegend'
 import { ViewToggle } from './components/Mobile/ViewToggle'
 import { CardView } from './components/Mobile/CardView'
 import { Footer } from './components/shared/Footer'
 import districts from './data/districts.json'
+
+// Graue Viertel: ID → Anzeigename
+const GRAY_DISTRICTS = {
+  'haeger': 'Häger',
+  'sprakel': 'Sprakel',
+  'gelmer': 'Gelmer',
+  'geist': 'Geist',
+  'schuetzenhof': 'Schützenhof',
+  'berg-fidel': 'Berg Fidel',
+  'mecklenbeck': 'Mecklenbeck',
+  'albachten': 'Albachten',
+}
 
 function App() {
   const { selectedId, hoveredId, select, clearSelection, setHoveredId } = useDistrict()
@@ -50,6 +63,9 @@ function App() {
     ? districts.districts.find(d => d.id === selectedId)
     : null
 
+  const isGraySelected = selectedId && GRAY_DISTRICTS[selectedId]
+  const grayName = isGraySelected ? GRAY_DISTRICTS[selectedId] : null
+
   const handleDistrictRect = useCallback((rect) => {
     setAnchorRect(rect)
   }, [])
@@ -58,6 +74,15 @@ function App() {
     setHoveredId(null)
     setAnchorRect(null)
   }, [setHoveredId])
+
+  // Panel-Komponente je nach Typ (interaktiv oder grau)
+  const panelContent = isGraySelected
+    ? <GrayDistrictPanel name={grayName} onClose={clearSelection} />
+    : selectedDistrict
+      ? <DetailPanel district={selectedDistrict} onClose={clearSelection} />
+      : null
+
+  const hasPanel = !!(isGraySelected || selectedDistrict)
 
   // ─── DESKTOP ───
   if (isDesktop) {
@@ -73,11 +98,11 @@ function App() {
         </header>
 
         <main className="px-4 pb-6">
-          <div className={`max-w-5xl mx-auto ${isWide && selectedDistrict ? 'flex gap-6 items-start' : ''}`}>
+          <div className={`max-w-5xl mx-auto ${isWide && hasPanel ? 'flex gap-6 items-start' : ''}`}>
             {/* Karte */}
             <div
               ref={containerRef}
-              className={`relative ${isWide && selectedDistrict ? 'flex-1' : 'max-w-2xl mx-auto'}`}
+              className={`relative ${isWide && hasPanel ? 'flex-1' : 'max-w-2xl mx-auto'}`}
             >
               <MuensterSVG
                 selectedId={selectedId}
@@ -88,7 +113,8 @@ function App() {
                 onDistrictRect={handleDistrictRect}
               />
 
-              {hoveredDistrict && !selectedId && (
+              {/* Tooltip nur für interaktive Viertel (nicht grau) */}
+              {hoveredDistrict && !selectedId && !GRAY_DISTRICTS[hoveredId] && (
                 <MapTooltip
                   district={hoveredDistrict}
                   anchorRect={anchorRect}
@@ -98,9 +124,9 @@ function App() {
             </div>
 
             {/* Sidebar Panel (>= 1024px) */}
-            {isWide && selectedDistrict && (
+            {isWide && hasPanel && (
               <div className="w-80 flex-shrink-0">
-                <DetailPanel district={selectedDistrict} onClose={clearSelection} />
+                {panelContent}
               </div>
             )}
           </div>
@@ -109,9 +135,7 @@ function App() {
         </main>
 
         {/* Overlay Panel (768-1023px) */}
-        {!isWide && selectedDistrict && (
-          <DetailPanel district={selectedDistrict} onClose={clearSelection} />
-        )}
+        {!isWide && hasPanel && panelContent}
 
         <Footer />
       </div>
@@ -138,7 +162,7 @@ function App() {
         {mobileView === 'liste' ? (
           <CardView />
         ) : (
-          /* Mobile Karte (komplett sichtbar, kein Overflow) */
+          /* Mobile Karte */
           <div className="relative">
             <MuensterSVG
               selectedId={selectedId}
@@ -148,10 +172,8 @@ function App() {
               onDistrictLeave={() => {}}
             />
 
-            {/* Bottom Sheet bei Tap auf Viertel */}
-            {selectedDistrict && (
-              <DetailPanel district={selectedDistrict} onClose={clearSelection} />
-            )}
+            {/* Panel bei Tap auf Viertel (interaktiv oder grau) */}
+            {hasPanel && panelContent}
           </div>
         )}
 
