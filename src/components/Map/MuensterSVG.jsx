@@ -56,7 +56,7 @@ const B = {
 
 // Interne Knoten (wo 3+ Viertel aufeinandertreffen)
 // N-Zone: Trennung Häger/Sprakel/Gelmer von Nienberge/Kinderhaus/Coerde
-const N1 = [175, 155]   // Häger-Nienberge-Roxel (an Grenze nah)
+const N1 = [110, 145]   // Häger-Nienberge-Roxel (auf Stadtgrenze zwischen B.a1 und B.k4)
 const N2 = [248, 135]   // Häger-Nienberge-Kinderhaus
 const N3 = [325, 112]   // Häger-Sprakel-Kinderhaus
 const N4 = [438, 108]   // Sprakel-Gelmer-Kinderhaus-Coerde
@@ -141,7 +141,7 @@ const ALL_DISTRICTS = [
   { id: 'albachten',    pts: [S17, S14, S18, B.i1, B.i2, B.i3, B.i4, B.i5, [112,542]] },
 
   // ── ÄUSSERER RING ──
-  { id: 'nienberge',  pts: [N1, N2, K1, [172,248], [172,218], B.k4, B.k3] },
+  { id: 'nienberge',  pts: [N1, N2, K1, [172,248], [172,218], B.k3, B.k2, B.k4] },
 
   { id: 'kinderhaus', pts: [N2, N3, N4, K3, C3, C2, C1, AA1, K2, K1] },
 
@@ -159,7 +159,7 @@ const ALL_DISTRICTS = [
 
   { id: 'amelsbueren', pts: [S15, B.h1, B.h2, B.h3, B.h4, B.i1, S18, S14] },
 
-  { id: 'roxel', pts: [B.k3, [172,218], [172,248], [168,298], [175,348], [188,388], S16, S17, [112,542], B.j1, B.j2, B.j3, B.j4, B.j5, B.k1, B.k2] },
+  { id: 'roxel', pts: [B.k3, [172,218], [172,248], [168,298], [175,348], [188,388], S16, S17, [112,542], B.j1, B.j2, B.j3, B.j4, B.j5, B.k1] },
 ]
 
 // Pfade generieren
@@ -194,15 +194,15 @@ const INTERACTIVE_LABELS = [
   { id: 'sentrup',        x: 312, y: 412, lines: ['Sentrup'],           size: 10 },
   { id: 'mauritz',        x: 498, y: 328, lines: ['Mauritz'],           size: 11 },
   { id: 'gievenbeck',     x: 222, y: 328, lines: ['Gieven-', 'beck'],  size: 10 },
-  { id: 'nienberge',      x: 185, y: 208, lines: ['Nienberge'],        size: 11 },
+  { id: 'nienberge',      x: 165, y: 198, lines: ['Nienberge'],        size: 11 },
   { id: 'kinderhaus',     x: 370, y: 185, lines: ['Kinderhaus'],        size: 10 },
   { id: 'coerde',         x: 498, y: 172, lines: ['Coerde'],            size: 10 },
   { id: 'handorf',        x: 658, y: 278, lines: ['Handorf'],           size: 14 },
   { id: 'gremmendorf',    x: 595, y: 488, lines: ['Gremmen-', 'dorf'], size: 10 },
   { id: 'wolbeck',        x: 600, y: 608, lines: ['Wolbeck'],           size: 11 },
-  { id: 'angelmodde',     x: 525, y: 555, lines: ['Angel-', 'modde'],  size: 8 },
+  { id: 'angelmodde',     x: 505, y: 568, lines: ['Angel-', 'modde'],  size: 8 },
   { id: 'hiltrup',        x: 462, y: 668, lines: ['Hiltrup'],           size: 13 },
-  { id: 'amelsbueren',    x: 335, y: 698, lines: ['Amels-', 'büren'],  size: 10 },
+  { id: 'amelsbueren',    x: 332, y: 688, lines: ['Amels-', 'büren'],  size: 10 },
   { id: 'roxel',          x: 118, y: 418, lines: ['Roxel'],             size: 11 },
   // Ehemals graue Viertel (jetzt interaktiv)
   { id: 'haeger',         x: 198, y: 88,  lines: ['Häger'],             size: 10 },
