@@ -64,7 +64,9 @@ export function DistrictCard({ district, expanded, onToggle }) {
           {/* Demographics */}
           <div className="grid grid-cols-3 gap-2 text-center">
             <StatBox label="Einwohner" value={new Intl.NumberFormat('de-DE').format(demographics.population)} />
-            <StatBox label="Fläche" value={`${demographics.areaSqKm.toFixed(1).replace('.', ',')} km²`} />
+            {demographics.areaSqKm != null && (
+              <StatBox label="Fläche" value={`${demographics.areaSqKm.toFixed(1).replace('.', ',')} km²`} />
+            )}
             <StatBox label="zur City" value={demographics.distanceCityKm === 0 ? 'Zentrum' : `${demographics.distanceCityKm} km`} />
           </div>
 

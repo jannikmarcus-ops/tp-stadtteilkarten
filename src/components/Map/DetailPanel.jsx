@@ -65,10 +65,12 @@ export function DetailPanel({ district, onClose }) {
               label="Einwohner"
               value={new Intl.NumberFormat('de-DE').format(demographics.population)}
             />
-            <StatCard
-              label="Fläche"
-              value={`${demographics.areaSqKm.toFixed(1).replace('.', ',')} km²`}
-            />
+            {demographics.areaSqKm != null && (
+              <StatCard
+                label="Fläche"
+                value={`${demographics.areaSqKm.toFixed(1).replace('.', ',')} km²`}
+              />
+            )}
             <StatCard
               label="zur City"
               value={demographics.distanceCityKm === 0

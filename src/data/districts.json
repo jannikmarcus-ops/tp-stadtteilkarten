@@ -555,6 +555,134 @@
         "text": "Was ist Ihre Immobilie in Amelsbüren wert?",
         "url": "https://teigelerundpartner.de/immobilienbewertung-muenster/"
       }
+    },
+    {
+      "id": "sprakel",
+      "name": "Sprakel",
+      "slug": "sprakel",
+      "bezirk": "Münster-Nord",
+      "priority": "ergaenzend",
+      "prices": { "etwPerSqm": 3250, "housePerSqm": 3500, "rentPerSqm": 11.50, "trend": "stabil", "trendPercent": 0.5 },
+      "demographics": { "population": 3653, "areaSqKm": 22.5, "distanceCityKm": 9, "distanceCityMin": 10 },
+      "character": {
+        "typicalBuildings": "EFH, Höfe, ländlich",
+        "targetGroups": ["Familien", "Naturliebhaber"],
+        "shortProfile": "Münsters nördlichstes Viertel. Dörflich, ruhig und naturnah mit den Rieselfeldern (EU-Vogelschutzgebiet) vor der Haustür. Eigener Regionalbahn-Halt (10 Min. zum Hbf).",
+        "detailPageUrl": null
+      },
+      "cta": { "text": "Was ist Ihre Immobilie in Sprakel wert?", "url": "https://teigelerundpartner.de/immobilienbewertung-muenster/" }
+    },
+    {
+      "id": "gelmer",
+      "name": "Gelmer",
+      "slug": "gelmer",
+      "bezirk": "Münster-Ost",
+      "priority": "ergaenzend",
+      "prices": { "etwPerSqm": 3200, "housePerSqm": 4000, "rentPerSqm": 11.50, "trend": "steigend", "trendPercent": 5.0 },
+      "demographics": { "population": 1800, "areaSqKm": null, "distanceCityKm": 8, "distanceCityMin": 25 },
+      "character": {
+        "typicalBuildings": "EFH, Höfe, Neubau",
+        "targetGroups": ["Familien", "Pferdeliebhaber"],
+        "shortProfile": "Ländliches Kleinod am Dortmund-Ems-Kanal mit Deutschlands erstem Baugebiet 'Wohnen mit Pferden'. Bodenrichtwerte im stärksten Anstieg des Bezirks Ost.",
+        "detailPageUrl": null
+      },
+      "cta": { "text": "Was ist Ihre Immobilie in Gelmer wert?", "url": "https://teigelerundpartner.de/immobilienbewertung-muenster/" }
+    },
+    {
+      "id": "haeger",
+      "name": "Häger",
+      "slug": "haeger",
+      "bezirk": "Münster-West",
+      "priority": "ergaenzend",
+      "prices": { "etwPerSqm": 3100, "housePerSqm": 3500, "rentPerSqm": 11.50, "trend": "stabil", "trendPercent": 0 },
+      "demographics": { "population": 1200, "areaSqKm": null, "distanceCityKm": 9, "distanceCityMin": 20 },
+      "character": {
+        "typicalBuildings": "EFH, Höfe, Bauerschaft",
+        "targetGroups": ["Ruhesuchende", "Familien"],
+        "shortProfile": "Historische Bauerschaft im Grünen, formal Teil von Nienberge, mit eigenem Halt an der Euregio-Bahn. Münsters höchste Erhebung (~99 m) auf den Nienberger Höhen.",
+        "detailPageUrl": null
+      },
+      "cta": { "text": "Was ist Ihre Immobilie in Häger wert?", "url": "https://teigelerundpartner.de/immobilienbewertung-muenster/" }
+    },
+    {
+      "id": "geist",
+      "name": "Geist",
+      "slug": "geist",
+      "bezirk": "Münster-Mitte",
+      "priority": "ergaenzend",
+      "prices": { "etwPerSqm": 5000, "housePerSqm": 4500, "rentPerSqm": 13.00, "trend": "stabil", "trendPercent": 0.5 },
+      "demographics": { "population": 9245, "areaSqKm": 1.44, "distanceCityKm": 2.5, "distanceCityMin": 8 },
+      "character": {
+        "typicalBuildings": "Altbau-MFH, Gartenstadt, Reihenhäuser",
+        "targetGroups": ["Singles", "Paare", "Akademiker"],
+        "shortProfile": "Beliebtes Innenstadtviertel mit denkmalgeschützter Gartenstadt-Architektur der 1920er Jahre. Zweimal wöchentlich Geistmarkt, neues Südbad. Nur 2,5 km vom Prinzipalmarkt.",
+        "detailPageUrl": null
+      },
+      "cta": { "text": "Was ist Ihre Immobilie in Geist wert?", "url": "https://teigelerundpartner.de/immobilienbewertung-muenster/" }
+    },
+    {
+      "id": "schuetzenhof",
+      "name": "Schützenhof",
+      "slug": "schuetzenhof",
+      "bezirk": "Münster-Mitte",
+      "priority": "ergaenzend",
+      "prices": { "etwPerSqm": 5200, "housePerSqm": 4650, "rentPerSqm": 14.00, "trend": "steigend", "trendPercent": 2.5 },
+      "demographics": { "population": 8509, "areaSqKm": 1.01, "distanceCityKm": 1.5, "distanceCityMin": 5 },
+      "character": {
+        "typicalBuildings": "Altbau-MFH, Blockrandbebauung",
+        "targetGroups": ["Junge Berufstätige", "Studenten", "urbane Familien"],
+        "shortProfile": "Urbanes Innenstadtviertel mit dem Südpark als grüne Lunge. Fußläufig zum Hauptbahnhof und zur aufstrebenden Hafenszene. Steigende Preise.",
+        "detailPageUrl": null
+      },
+      "cta": { "text": "Was ist Ihre Immobilie am Schützenhof wert?", "url": "https://teigelerundpartner.de/immobilienbewertung-muenster/" }
+    },
+    {
+      "id": "berg-fidel",
+      "name": "Berg Fidel",
+      "slug": "berg-fidel",
+      "bezirk": "Münster-Hiltrup",
+      "priority": "ergaenzend",
+      "prices": { "etwPerSqm": 3600, "housePerSqm": 3850, "rentPerSqm": 11.00, "trend": "steigend", "trendPercent": 2.0 },
+      "demographics": { "population": 5899, "areaSqKm": 5.0, "distanceCityKm": 5, "distanceCityMin": 15 },
+      "character": {
+        "typicalBuildings": "Geschosswohnungsbau, Sozialwohnungen, Hochhaus",
+        "targetGroups": ["Budgetkäufer", "Sportler", "Investoren"],
+        "shortProfile": "Münsters günstigstes Innenstadtviertel. Sportstandort Nr. 1 (Preußenstadion, Volleydrom). Multikulturell (ca. 45 Nationen). Im Aufbruch durch InSEK 2025.",
+        "detailPageUrl": null
+      },
+      "cta": { "text": "Was ist Ihre Immobilie in Berg Fidel wert?", "url": "https://teigelerundpartner.de/immobilienbewertung-muenster/" }
+    },
+    {
+      "id": "mecklenbeck",
+      "name": "Mecklenbeck",
+      "slug": "mecklenbeck",
+      "bezirk": "Münster-West",
+      "priority": "ergaenzend",
+      "prices": { "etwPerSqm": 4450, "housePerSqm": 4350, "rentPerSqm": 13.50, "trend": "steigend", "trendPercent": 5.0 },
+      "demographics": { "population": 10791, "areaSqKm": 6.2, "distanceCityKm": 5.5, "distanceCityMin": 15 },
+      "character": {
+        "typicalBuildings": "EFH, RH, DHH, Neubau",
+        "targetGroups": ["Familien", "Eigennutzer"],
+        "shortProfile": "Familienfreundlicher Stadtteil mit eigenem Ortskern, drei Schulen und exzellenter Busanbindung. Stärkstes Bevölkerungswachstum aller Außenviertel (+17% seit 2014).",
+        "detailPageUrl": null
+      },
+      "cta": { "text": "Was ist Ihre Immobilie in Mecklenbeck wert?", "url": "https://teigelerundpartner.de/immobilienbewertung-muenster/" }
+    },
+    {
+      "id": "albachten",
+      "name": "Albachten",
+      "slug": "albachten",
+      "bezirk": "Münster-West",
+      "priority": "ergaenzend",
+      "prices": { "etwPerSqm": 3500, "housePerSqm": 3750, "rentPerSqm": 12.50, "trend": "stabil", "trendPercent": 2.0 },
+      "demographics": { "population": 6520, "areaSqKm": 13.0, "distanceCityKm": 8.5, "distanceCityMin": 10 },
+      "character": {
+        "typicalBuildings": "EFH, RH, Neubau (Albachten-Ost)",
+        "targetGroups": ["Familien", "Pendler"],
+        "shortProfile": "Eigenständiger Ortsteil mit Dorfcharakter, Wochenmarkt und über 30 Vereinen. Direkter Bahnanschluss (RE 42, 7 Min. zum Hbf). Großprojekt Albachten-Ost bringt 470 neue Wohnungen.",
+        "detailPageUrl": null
+      },
+      "cta": { "text": "Was ist Ihre Immobilie in Albachten wert?", "url": "https://teigelerundpartner.de/immobilienbewertung-muenster/" }
     }
   ]
 }

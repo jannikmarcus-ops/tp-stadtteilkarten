@@ -114,6 +114,7 @@ const INTERACTIVE_IDS = new Set([
   'aaseestadt', 'sentrup', 'mauritz', 'gievenbeck',
   'nienberge', 'kinderhaus', 'coerde', 'handorf',
   'gremmendorf', 'wolbeck', 'angelmodde', 'hiltrup', 'amelsbueren', 'roxel',
+  'sprakel', 'gelmer', 'haeger', 'geist', 'schuetzenhof', 'berg-fidel', 'mecklenbeck', 'albachten',
 ])
 
 const ALL_DISTRICTS = [
@@ -180,7 +181,7 @@ const CITY_BOUNDARY = pts2path(BOUNDARY_PTS)
 
 const DARK_DISTRICTS = new Set([
   'altstadt-dom', 'kreuzviertel', 'pluggendorf', 'hafen-zentrum',
-  'sentrup', 'mauritz',
+  'sentrup', 'mauritz', 'geist', 'schuetzenhof',
 ])
 
 // Labels für interaktive Viertel
@@ -203,18 +204,15 @@ const INTERACTIVE_LABELS = [
   { id: 'hiltrup',        x: 462, y: 668, lines: ['Hiltrup'],           size: 13 },
   { id: 'amelsbueren',    x: 335, y: 698, lines: ['Amels-', 'büren'],  size: 10 },
   { id: 'roxel',          x: 118, y: 418, lines: ['Roxel'],             size: 11 },
-]
-
-// Labels für graue Viertel (hellgrau, kleiner)
-const GRAY_LABELS = [
-  { id: 'haeger',       x: 198, y: 88,  text: 'Häger' },
-  { id: 'sprakel',      x: 382, y: 68,  text: 'Sprakel' },
-  { id: 'gelmer',       x: 528, y: 78,  text: 'Gelmer' },
-  { id: 'geist',        x: 392, y: 422, text: 'Geist' },
-  { id: 'schuetzenhof', x: 492, y: 438, text: 'Schützenhof' },
-  { id: 'berg-fidel',   x: 415, y: 498, text: 'Berg Fidel' },
-  { id: 'mecklenbeck',  x: 282, y: 498, text: 'Mecklenbeck' },
-  { id: 'albachten',    x: 185, y: 608, text: 'Albachten' },
+  // Ehemals graue Viertel (jetzt interaktiv)
+  { id: 'haeger',         x: 198, y: 88,  lines: ['Häger'],             size: 10 },
+  { id: 'sprakel',        x: 382, y: 68,  lines: ['Sprakel'],           size: 10 },
+  { id: 'gelmer',         x: 528, y: 78,  lines: ['Gelmer'],            size: 10 },
+  { id: 'geist',          x: 392, y: 422, lines: ['Geist'],             size: 9 },
+  { id: 'schuetzenhof',   x: 492, y: 438, lines: ['Schützen-', 'hof'], size: 8 },
+  { id: 'berg-fidel',     x: 415, y: 498, lines: ['Berg', 'Fidel'],    size: 8 },
+  { id: 'mecklenbeck',    x: 282, y: 498, lines: ['Mecklen-', 'beck'], size: 9 },
+  { id: 'albachten',      x: 185, y: 608, lines: ['Albachten'],         size: 10 },
 ]
 
 /** Einzelner klickbarer Bezirk-Pfad. React.memo verhindert Re-Renders bei Hover anderer Viertel. */
@@ -301,50 +299,9 @@ export function MuensterSVG({
       {/* SCHICHT 1: Stadtgrenze als Hintergrund-Fang */}
       <path d={CITY_BOUNDARY} fill="#E8E4E0" stroke="#B8B4B0" strokeWidth="2" strokeLinejoin="round" />
 
-      {/* SCHICHT 2: Graue Viertel (klickbar, kein Heatmap) */}
-      <g className="gray-districts" role="list">
-        {PATHS.filter(p => !p.interactive).map(({ id, path: d }) => {
-          const si = STAGGER_ORDER.indexOf(id)
-          const label = GRAY_LABELS.find(l => l.id === id)
-          const isHovered = hoveredId === id
-          const isSelected = selectedId === id
-          const isDimmed = selectedId && !isSelected
-
-          return (
-            <path
-              key={id}
-              id={id}
-              role="listitem"
-              tabIndex={0}
-              aria-label={`Stadtteil ${label?.text || id}`}
-              d={d}
-              fill="#E8E4E0"
-              stroke="#D1CDC9"
-              strokeWidth="1"
-              strokeLinejoin="round"
-              style={{
-                cursor: 'pointer',
-                outline: 'none',
-                opacity: loaded ? (isDimmed ? 0.6 : (isHovered ? 0.85 : 1)) : 0,
-                transition: loaded
-                  ? 'opacity 150ms ease, filter 150ms ease'
-                  : `opacity 400ms ease ${si * 30}ms`,
-                filter: isHovered ? 'brightness(0.95)' : undefined,
-              }}
-              onClick={() => onDistrictClick?.(id)}
-              onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onDistrictClick?.(id) } }}
-              onMouseEnter={() => handleMouseEnter(id)}
-              onMouseLeave={() => onDistrictLeave?.()}
-              onFocus={() => handleMouseEnter(id)}
-              onBlur={() => onDistrictLeave?.()}
-            />
-          )
-        })}
-      </g>
-
-      {/* SCHICHT 3: Interaktive farbige Viertel */}
+      {/* SCHICHT 2: Alle 26 interaktive Viertel */}
       <g className="interactive-districts" role="list">
-        {PATHS.filter(p => p.interactive).map(({ id, path: d }) => (
+        {PATHS.map(({ id, path: d }) => (
           <DistrictPath
             key={id}
             id={id}
@@ -363,21 +320,14 @@ export function MuensterSVG({
         ))}
       </g>
 
-      {/* SCHICHT 4: Labels graue Viertel */}
-      <g fontFamily="'DM Sans', system-ui, sans-serif" style={{ pointerEvents: 'none', opacity: loaded ? 1 : 0, transition: 'opacity 400ms ease 600ms' }}>
-        {GRAY_LABELS.map(({ id, x, y, text }) => (
-          <text key={id} x={x} y={y} textAnchor="middle" fontSize="9" fontWeight="400" fill="#999">{text}</text>
-        ))}
-      </g>
-
-      {/* SCHICHT 5: Führungslinien */}
+      {/* SCHICHT 3: Führungslinien */}
       <g style={{ pointerEvents: 'none', opacity: loaded ? 1 : 0, transition: 'opacity 400ms ease 500ms' }}>
         {INTERACTIVE_LABELS.filter(l => l.leader).map(({ id, x, y, leader }) => (
           <line key={`l-${id}`} x1={x + 38} y1={y} x2={leader[0]} y2={leader[1]} stroke="#999" strokeWidth="1" />
         ))}
       </g>
 
-      {/* SCHICHT 6: Labels interaktive Viertel */}
+      {/* SCHICHT 4: Labels */}
       <g fontFamily="'DM Sans', system-ui, sans-serif" style={{ pointerEvents: 'none', opacity: loaded ? 1 : 0, transition: 'opacity 400ms ease 500ms' }}>
         {INTERACTIVE_LABELS.map(({ id, x, y, lines, size }) => (
           <text key={id} textAnchor="middle" fontSize={size} fontWeight="500" fill={DARK_DISTRICTS.has(id) ? '#F5F2F0' : '#333'}>
