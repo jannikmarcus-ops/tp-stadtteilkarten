@@ -1,17 +1,16 @@
 import { useState, useMemo } from 'react'
 import { SortControls } from './SortControls'
 import { DistrictCard } from './DistrictCard'
-import districts from '../../data/districts.json'
 
 /**
- * Mobile Card-Ansicht: Alle 18 Viertel als sortierbare, expandierbare Cards.
+ * Mobile Card-Ansicht: Sortierbare, expandierbare Cards pro Viertel.
  */
-export function CardView() {
+export function CardView({ districts, colorScale }) {
   const [sort, setSort] = useState('price')
   const [expandedId, setExpandedId] = useState(null)
 
   const sorted = useMemo(() => {
-    const items = [...districts.districts]
+    const items = [...districts]
     switch (sort) {
       case 'price':
         return items.sort((a, b) => b.prices.etwPerSqm - a.prices.etwPerSqm)
@@ -22,7 +21,7 @@ export function CardView() {
       default:
         return items
     }
-  }, [sort])
+  }, [sort, districts])
 
   return (
     <div>
@@ -36,6 +35,7 @@ export function CardView() {
             onToggle={() => setExpandedId(
               expandedId === district.id ? null : district.id
             )}
+            colorScale={colorScale}
           />
         ))}
       </div>

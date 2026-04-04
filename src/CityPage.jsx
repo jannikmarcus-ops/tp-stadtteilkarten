@@ -1,16 +1,22 @@
 import { useState, useRef, useCallback, useEffect } from 'react'
 import { useDistrict } from './hooks/useDistrict'
 import { useMediaQuery } from './hooks/useMediaQuery'
-import { MuensterSVG } from './components/Map/MuensterSVG'
 import { MapTooltip } from './components/Map/MapTooltip'
 import { DetailPanel } from './components/Map/DetailPanel'
 import { MapLegend } from './components/Map/MapLegend'
 import { ViewToggle } from './components/Mobile/ViewToggle'
 import { CardView } from './components/Mobile/CardView'
 import { Footer } from './components/shared/Footer'
-import districts from './data/districts.json'
 
-function App() {
+/**
+ * Generische Stadt-Seite. Wird für Münster und Hamburg mit verschiedenen
+ * Daten und SVG-Komponenten verwendet.
+ *
+ * @param {object} data - Komplettes JSON (meta + districts)
+ * @param {React.ComponentType} MapComponent - MuensterSVG oder HamburgSVG
+ */
+// eslint-disable-next-line no-unused-vars -- MapComponent wird in JSX verwendet
+export function CityPage({ data, MapComponent }) {
   const { selectedId, hoveredId, select, clearSelection, setHoveredId } = useDistrict()
   const isDesktop = useMediaQuery('(min-width: 768px)')
   const isWide = useMediaQuery('(min-width: 1024px)')
@@ -43,11 +49,11 @@ function App() {
   }, [])
 
   const hoveredDistrict = hoveredId
-    ? districts.districts.find(d => d.id === hoveredId)
+    ? data.districts.find(d => d.id === hoveredId)
     : null
 
   const selectedDistrict = selectedId
-    ? districts.districts.find(d => d.id === selectedId)
+    ? data.districts.find(d => d.id === selectedId)
     : null
 
   const handleDistrictRect = useCallback((rect) => {
@@ -65,10 +71,10 @@ function App() {
       <div ref={rootRef} className="min-h-svh bg-background text-text font-sans">
         <header className="px-4 py-6 text-center">
           <h1 className="text-2xl font-bold text-primary">
-            Immobilienpreise {districts.meta.cityLabel}
+            Immobilienpreise {data.meta.cityLabel}
           </h1>
           <p className="text-sm mt-1 text-text/75">
-            Datenstand: {districts.meta.quarter}
+            Datenstand: {data.meta.quarter}
           </p>
         </header>
 
@@ -78,7 +84,8 @@ function App() {
               ref={containerRef}
               className={`relative ${isWide && selectedDistrict ? 'flex-1' : 'max-w-2xl mx-auto'}`}
             >
-              <MuensterSVG
+              <MapComponent
+                data={data}
                 selectedId={selectedId}
                 hoveredId={hoveredId}
                 onDistrictClick={select}
@@ -91,6 +98,7 @@ function App() {
                 <MapTooltip
                   district={hoveredDistrict}
                   anchorRect={anchorRect}
+                  // eslint-disable-next-line react-hooks/refs -- Ref-Zugriff für Tooltip-Positionierung ist beabsichtigt
                   containerRect={containerRef.current?.getBoundingClientRect()}
                 />
               )}
@@ -103,14 +111,14 @@ function App() {
             )}
           </div>
 
-          <MapLegend />
+          <MapLegend colorScale={data.meta.colorScale} />
         </main>
 
         {!isWide && selectedDistrict && (
           <DetailPanel district={selectedDistrict} onClose={clearSelection} />
         )}
 
-        <Footer />
+        <Footer meta={data.meta} />
       </div>
     )
   }
@@ -120,10 +128,10 @@ function App() {
     <div ref={rootRef} className="min-h-svh bg-background text-text font-sans">
       <header className="px-4 pt-4 pb-2 text-center">
         <h1 className="text-xl font-bold text-primary">
-          Immobilienpreise {districts.meta.cityLabel}
+          Immobilienpreise {data.meta.cityLabel}
         </h1>
         <p className="text-xs mt-0.5 text-text/75">
-          Datenstand: {districts.meta.quarter}
+          Datenstand: {data.meta.quarter}
         </p>
       </header>
 
@@ -133,10 +141,11 @@ function App() {
 
       <main className="px-4 pb-6">
         {mobileView === 'liste' ? (
-          <CardView />
+          <CardView districts={data.districts} colorScale={data.meta.colorScale} />
         ) : (
           <div className="relative">
-            <MuensterSVG
+            <MapComponent
+              data={data}
               selectedId={selectedId}
               hoveredId={null}
               onDistrictClick={select}
@@ -150,12 +159,10 @@ function App() {
           </div>
         )}
 
-        {mobileView === 'liste' && <MapLegend />}
+        {mobileView === 'liste' && <MapLegend colorScale={data.meta.colorScale} />}
       </main>
 
-      <Footer />
+      <Footer meta={data.meta} />
     </div>
   )
 }
-
-export default App

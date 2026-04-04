@@ -1,10 +1,8 @@
 import { useState, useEffect, useCallback, useRef, memo } from 'react'
-import districts from '../../data/districts.json'
 
-const { colorScale } = districts.meta
-
-function getDistrictColor(districtId) {
-  const district = districts.districts.find(d => d.id === districtId)
+function getDistrictColor(districtId, data) {
+  const { colorScale } = data.meta
+  const district = data.districts.find(d => d.id === districtId)
   if (!district) return '#E8E4E0'
   const price = district.prices.etwPerSqm
   const scale = colorScale.find(s => price >= s.min && price <= s.max)
@@ -263,6 +261,7 @@ const STAGGER_ORDER = [
 ]
 
 export function MuensterSVG({
+  data,
   selectedId = null,
   hoveredId = null,
   onDistrictClick,
@@ -306,8 +305,8 @@ export function MuensterSVG({
             key={id}
             id={id}
             d={d}
-            fill={getDistrictColor(id)}
-            label={districts.districts.find(dd => dd.id === id)?.name || id}
+            fill={getDistrictColor(id, data)}
+            label={data.districts.find(dd => dd.id === id)?.name || id}
             isSelected={selectedId === id}
             isHovered={hoveredId === id}
             isDimmed={!!(selectedId && selectedId !== id)}
@@ -341,4 +340,4 @@ export function MuensterSVG({
   )
 }
 
-export { PATHS as DISTRICT_PATHS, INTERACTIVE_LABELS as DISTRICT_LABELS, CITY_BOUNDARY, getDistrictColor }
+export { PATHS as DISTRICT_PATHS, INTERACTIVE_LABELS as DISTRICT_LABELS, CITY_BOUNDARY }

@@ -1,10 +1,7 @@
 import { formatPrice, formatRent } from '../shared/PriceFormatter'
 import { TrendArrow } from '../shared/TrendArrow'
-import districts from '../../data/districts.json'
 
-const { colorScale } = districts.meta
-
-function getColor(price) {
+function getColor(price, colorScale) {
   const s = colorScale.find(s => price >= s.min && price <= s.max)
   return s ? s.color : '#E8E4E0'
 }
@@ -14,9 +11,9 @@ function getColor(price) {
  * Collapsed: Name, Farbpunkt, ETW-Preis, Trend
  * Expanded: Alle Preise, Demographics, Profil, CTA
  */
-export function DistrictCard({ district, expanded, onToggle }) {
-  const { id, name, bezirk, prices, demographics, character, cta } = district
-  const color = getColor(prices.etwPerSqm)
+export function DistrictCard({ district, expanded, onToggle, colorScale }) {
+  const { name, bezirk, prices, demographics, character, cta } = district
+  const color = getColor(prices.etwPerSqm, colorScale)
 
   return (
     <div className="bg-white rounded-lg border border-border overflow-hidden">
@@ -69,6 +66,11 @@ export function DistrictCard({ district, expanded, onToggle }) {
             )}
             <StatBox label="zur City" value={demographics.distanceCityKm === 0 ? 'Zentrum' : `${demographics.distanceCityKm} km`} />
           </div>
+
+          {/* ÖPNV (nur Hamburg) */}
+          {character.oepnv && (
+            <p className="text-xs text-text/70">ÖPNV: <span className="text-text font-medium">{character.oepnv}</span></p>
+          )}
 
           {/* Kurzprofil */}
           <p className="text-xs text-text leading-relaxed">{character.shortProfile}</p>

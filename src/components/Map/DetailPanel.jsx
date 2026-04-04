@@ -80,6 +80,14 @@ export function DetailPanel({ district, onClose }) {
             />
           </div>
 
+          {/* ÖPNV (nur Hamburg) */}
+          {character.oepnv && (
+            <div className="flex items-center gap-2 text-sm">
+              <span className="text-text/75">ÖPNV:</span>
+              <span className="font-medium text-text">{character.oepnv}</span>
+            </div>
+          )}
+
           {/* Kurzprofil */}
           <div>
             <h3 className="text-xs font-bold text-text/70 uppercase tracking-wider mb-1.5">Profil</h3>

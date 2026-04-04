@@ -1,12 +1,8 @@
-import districts from '../../data/districts.json'
-
-const { colorScale } = districts.meta
-
 /**
  * Preisstufen-Legende unter der Karte.
  * 5 farbige Quadrate mit Labels.
  */
-export function MapLegend() {
+export function MapLegend({ colorScale }) {
   return (
     <div className="flex flex-wrap justify-center gap-x-4 gap-y-2 mt-4 px-4">
       {colorScale.map((level) => (
