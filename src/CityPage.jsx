@@ -35,18 +35,18 @@ export function CityPage({ data, MapComponent }) {
 
   // postMessage für Iframe-Höhenanpassung (ResizeObserver)
   useEffect(() => {
-    if (!rootRef.current) return
-    const observer = new ResizeObserver((entries) => {
-      for (const entry of entries) {
-        window.parent?.postMessage(
-          { type: 'resize', height: entry.contentRect.height },
-          '*'
-        )
-      }
-    })
-    observer.observe(rootRef.current)
+    const sendHeight = () => {
+      const height = document.documentElement.scrollHeight
+      window.parent?.postMessage({ type: 'resize', height }, '*')
+    }
+
+    const observer = new ResizeObserver(sendHeight)
+    observer.observe(document.body)
+
+    setTimeout(sendHeight, 100)
+
     return () => observer.disconnect()
-  }, [])
+  }, [mobileView])
 
   const hoveredDistrict = hoveredId
     ? data.districts.find(d => d.id === hoveredId)
@@ -68,7 +68,7 @@ export function CityPage({ data, MapComponent }) {
   // ─── DESKTOP ───
   if (isDesktop) {
     return (
-      <div ref={rootRef} className="min-h-svh bg-background text-text font-sans">
+      <div ref={rootRef} className="bg-background text-text font-sans">
         <header className="px-4 py-6 text-center">
           <h1 className="text-2xl font-bold text-primary">
             Immobilienpreise {data.meta.cityLabel}
@@ -125,7 +125,7 @@ export function CityPage({ data, MapComponent }) {
 
   // ─── MOBILE (< 768px) ───
   return (
-    <div ref={rootRef} className="min-h-svh bg-background text-text font-sans">
+    <div ref={rootRef} className="bg-background text-text font-sans">
       <header className="px-4 pt-4 pb-2 text-center">
         <h1 className="text-xl font-bold text-primary">
           Immobilienpreise {data.meta.cityLabel}
