@@ -8,17 +8,54 @@
     "priceUnit": "€/m²",
     "rentUnit": "€/m²",
     "colorScale": [
-      { "min": 9000, "max": 99999, "color": "#052E26", "label": "9.000+ €/m²" },
-      { "min": 7000, "max": 8999, "color": "#1A5C4A", "label": "7.000–8.999 €/m²" },
-      { "min": 5000, "max": 6999, "color": "#3D8B6E", "label": "5.000–6.999 €/m²" },
-      { "min": 3000, "max": 4999, "color": "#7CB89E", "label": "3.000–4.999 €/m²" },
-      { "min": 0, "max": 2999, "color": "#C5DDD1", "label": "unter 3.000 €/m²" }
+      {
+        "min": 9000,
+        "max": 99999,
+        "color": "#052E26",
+        "label": "9.000+ €/m²"
+      },
+      {
+        "min": 7000,
+        "max": 8999,
+        "color": "#1A5C4A",
+        "label": "7.000–8.999 €/m²"
+      },
+      {
+        "min": 5000,
+        "max": 6999,
+        "color": "#3D8B6E",
+        "label": "5.000–6.999 €/m²"
+      },
+      {
+        "min": 3000,
+        "max": 4999,
+        "color": "#7CB89E",
+        "label": "3.000–4.999 €/m²"
+      },
+      {
+        "min": 0,
+        "max": 2999,
+        "color": "#C5DDD1",
+        "label": "unter 3.000 €/m²"
+      }
     ]
   },
   "waterBodies": [
-    { "id": "elbe", "name": "Elbe", "color": "#B8D4E3" },
-    { "id": "binnenalster", "name": "Binnenalster", "color": "#B8D4E3" },
-    { "id": "aussenalster", "name": "Außenalster", "color": "#B8D4E3" }
+    {
+      "id": "elbe",
+      "name": "Elbe",
+      "color": "#B8D4E3"
+    },
+    {
+      "id": "binnenalster",
+      "name": "Binnenalster",
+      "color": "#B8D4E3"
+    },
+    {
+      "id": "aussenalster",
+      "name": "Außenalster",
+      "color": "#B8D4E3"
+    }
   ],
   "districts": [
     {
@@ -30,7 +67,7 @@
       "prices": {
         "etwPerSqm": 9500,
         "housePerSqm": 12000,
-        "rentPerSqm": 20.00,
+        "rentPerSqm": 20.0,
         "trend": "stabil",
         "trendPercent": 0.5
       },
@@ -42,7 +79,11 @@
       },
       "character": {
         "typicalBuildings": "Altbau-Villen, MFH, Jugendstil",
-        "targetGroups": ["gehobenes Klientel", "Akademiker", "Familien"],
+        "targetGroups": [
+          "gehobenes Klientel",
+          "Akademiker",
+          "Familien"
+        ],
         "oepnv": "U1 Hallerstraße/Klosterstern",
         "shortProfile": "Hamburgs teuerste Wohnlage. Alster-Ufer, Grindelviertel, Rothenbaumchaussee. Spitzenpreise bis 15.000 €/m² bei Neubau. Kaum Preiskorrektur trotz Zinswende.",
         "detailPageUrl": null
@@ -61,7 +102,7 @@
       "prices": {
         "etwPerSqm": 8800,
         "housePerSqm": 9500,
-        "rentPerSqm": 18.00,
+        "rentPerSqm": 18.0,
         "trend": "stabil",
         "trendPercent": 0.5
       },
@@ -73,7 +114,11 @@
       },
       "character": {
         "typicalBuildings": "Altbau-Villen, MFH, Jugendstil",
-        "targetGroups": ["gehobenes Klientel", "Berufstätige", "Paare"],
+        "targetGroups": [
+          "gehobenes Klientel",
+          "Berufstätige",
+          "Paare"
+        ],
         "oepnv": "U3 Mundsburg",
         "shortProfile": "Alster-Premiumlage. Elegante Altbauten und Villen zwischen Außen- und Binnenalster. Alsterdampfer im Sommer. Eines der teuersten Viertel der Stadt.",
         "detailPageUrl": null
@@ -92,7 +137,7 @@
       "prices": {
         "etwPerSqm": 8500,
         "housePerSqm": 9000,
-        "rentPerSqm": 18.00,
+        "rentPerSqm": 18.0,
         "trend": "stabil",
         "trendPercent": 0.5
       },
@@ -104,7 +149,11 @@
       },
       "character": {
         "typicalBuildings": "Gründerzeit-Altbau, MFH",
-        "targetGroups": ["Singles", "Paare", "Akademiker"],
+        "targetGroups": [
+          "Singles",
+          "Paare",
+          "Akademiker"
+        ],
         "oepnv": "U3 Hoheluftbrücke",
         "shortProfile": "Kompakt, urban, teuer. Nur 0,6 km² mit 9.800 Einwohnern. Eine der höchsten Dichten Hamburgs. Fast ausschließlich Gründerzeit-Altbau.",
         "detailPageUrl": null
@@ -123,7 +172,7 @@
       "prices": {
         "etwPerSqm": 8000,
         "housePerSqm": 10000,
-        "rentPerSqm": 18.00,
+        "rentPerSqm": 18.0,
         "trend": "stabil",
         "trendPercent": 0.8
       },
@@ -135,7 +184,11 @@
       },
       "character": {
         "typicalBuildings": "Jugendstil, Altbau-MFH, Villen",
-        "targetGroups": ["Akademiker", "Ärzte", "Familien"],
+        "targetGroups": [
+          "Akademiker",
+          "Ärzte",
+          "Familien"
+        ],
         "oepnv": "U1, U3 Kellinghusenstraße",
         "shortProfile": "Gehobene Toplage zwischen Alster und UKE. Jugendstil-Architektur, exklusive Boutiquen an der Eppendorfer Landstraße. Beliebte Ärzte- und Akademikerlage.",
         "detailPageUrl": null
@@ -154,7 +207,7 @@
       "prices": {
         "etwPerSqm": 8000,
         "housePerSqm": 10000,
-        "rentPerSqm": 17.50,
+        "rentPerSqm": 17.5,
         "trend": "stabil",
         "trendPercent": 0.5
       },
@@ -166,7 +219,11 @@
       },
       "character": {
         "typicalBuildings": "Villen, Altbau-MFH, Jarrestadt",
-        "targetGroups": ["Familien", "Berufstätige", "gehobenes Klientel"],
+        "targetGroups": [
+          "Familien",
+          "Berufstätige",
+          "gehobenes Klientel"
+        ],
         "oepnv": "U1, U3, S1",
         "shortProfile": "Hamburgs vielfältigstes Premiumviertel. Von Alster-Villen über die Jarrestadt bis zum Stadtpark. 61.000 Einwohner, größter innenstädtischer Stadtteil.",
         "detailPageUrl": null
@@ -186,7 +243,7 @@
       "prices": {
         "etwPerSqm": 8000,
         "housePerSqm": 9000,
-        "rentPerSqm": 17.50,
+        "rentPerSqm": 17.5,
         "trend": "stabil",
         "trendPercent": 0.5
       },
@@ -198,7 +255,11 @@
       },
       "character": {
         "typicalBuildings": "Altbau-MFH, Villen, Universität",
-        "targetGroups": ["Akademiker", "Studenten", "Berufstätige"],
+        "targetGroups": [
+          "Akademiker",
+          "Studenten",
+          "Berufstätige"
+        ],
         "oepnv": "U1 Stephansplatz/Hallerstraße",
         "shortProfile": "Universitätsviertel zwischen Harvestehude und Innenstadt. Grindelviertel, Rothenbaumchaussee und Hamburgs Campus. Gehobene Lage mit internationalem Flair.",
         "detailPageUrl": null
@@ -217,7 +278,7 @@
       "prices": {
         "etwPerSqm": 7500,
         "housePerSqm": 8000,
-        "rentPerSqm": 17.00,
+        "rentPerSqm": 17.0,
         "trend": "steigend",
         "trendPercent": 3.0
       },
@@ -229,7 +290,11 @@
       },
       "character": {
         "typicalBuildings": "Altbau-MFH, kleinteile Struktur",
-        "targetGroups": ["Kreative", "Familien", "junge Berufstätige"],
+        "targetGroups": [
+          "Kreative",
+          "Familien",
+          "junge Berufstätige"
+        ],
         "oepnv": "S1, S3 Altona + Ottensen",
         "shortProfile": "Urban, kreativ, familienfreundlich. Kleinteilige Altbaustruktur mit Kneipen, Galerien und Wochenmärkten. S-Bahn-Knoten Altona plus neue Station Ottensen seit 2023.",
         "detailPageUrl": null
@@ -248,7 +313,7 @@
       "prices": {
         "etwPerSqm": 7500,
         "housePerSqm": 9000,
-        "rentPerSqm": 18.00,
+        "rentPerSqm": 18.0,
         "trend": "stabil",
         "trendPercent": 0.5
       },
@@ -260,7 +325,10 @@
       },
       "character": {
         "typicalBuildings": "Villen, EFH, großzügige Grundstücke",
-        "targetGroups": ["Familien", "gehobenes Klientel"],
+        "targetGroups": [
+          "Familien",
+          "gehobenes Klientel"
+        ],
         "oepnv": "S1 Othmarschen",
         "shortProfile": "Gehobene Elbvorort-Lage zwischen Blankenese und Altona. Villen und großzügige EFH dominieren. Nähe Jenischpark. Stabile Spitzenpreise.",
         "detailPageUrl": null
@@ -279,7 +347,7 @@
       "prices": {
         "etwPerSqm": 7300,
         "housePerSqm": 8000,
-        "rentPerSqm": 17.00,
+        "rentPerSqm": 17.0,
         "trend": "stabil",
         "trendPercent": 0.5
       },
@@ -291,7 +359,11 @@
       },
       "character": {
         "typicalBuildings": "Gründerzeit-Altbau, MFH",
-        "targetGroups": ["junge Berufstätige", "Paare", "Studenten"],
+        "targetGroups": [
+          "junge Berufstätige",
+          "Paare",
+          "Studenten"
+        ],
         "oepnv": "U3 Hoheluftbrücke, Metrobus 5",
         "shortProfile": "Deutschlands am dichtesten besiedelter Stadtteil. 19.500 EW/km². Nähe UKE. Altbauwohnungen werden oft off-market vermittelt.",
         "detailPageUrl": null
@@ -310,7 +382,7 @@
       "prices": {
         "etwPerSqm": 7200,
         "housePerSqm": 8500,
-        "rentPerSqm": 18.00,
+        "rentPerSqm": 18.0,
         "trend": "stabil",
         "trendPercent": 0.5
       },
@@ -322,7 +394,10 @@
       },
       "character": {
         "typicalBuildings": "Villen, Landhäuser, Treppenviertel",
-        "targetGroups": ["Familien", "gehobenes Klientel"],
+        "targetGroups": [
+          "Familien",
+          "gehobenes Klientel"
+        ],
         "oepnv": "S1 Blankenese",
         "shortProfile": "Hamburgs Elbvorort-Ikone. Treppenviertel, Elbstrand und S1-Anbindung. Villen, Landhäuser und ein kompakter Ortskern. Premiumlage mit selektivem Markt.",
         "detailPageUrl": null
@@ -341,7 +416,7 @@
       "prices": {
         "etwPerSqm": 7200,
         "housePerSqm": 8000,
-        "rentPerSqm": 17.50,
+        "rentPerSqm": 17.5,
         "trend": "steigend",
         "trendPercent": 2.0
       },
@@ -353,7 +428,11 @@
       },
       "character": {
         "typicalBuildings": "Altbau-MFH, Blockrand, Gründerzeit",
-        "targetGroups": ["Berufstätige", "Singles", "Kreative"],
+        "targetGroups": [
+          "Berufstätige",
+          "Singles",
+          "Kreative"
+        ],
         "oepnv": "U1-4, S1-3 Hauptbahnhof",
         "shortProfile": "Urbanstes Viertel mit Hauptbahnhof-Nähe (alle U/S-Linien). Lange Reihe als Flaniermeile. Mischung aus Szeneviertel und Geschäftslage.",
         "detailPageUrl": null
@@ -372,7 +451,7 @@
       "prices": {
         "etwPerSqm": 7000,
         "housePerSqm": 7500,
-        "rentPerSqm": 16.00,
+        "rentPerSqm": 16.0,
         "trend": "steigend",
         "trendPercent": 3.0
       },
@@ -384,7 +463,11 @@
       },
       "character": {
         "typicalBuildings": "Gründerzeit-Altbau, MFH",
-        "targetGroups": ["junge Berufstätige", "Familien", "Akademiker"],
+        "targetGroups": [
+          "junge Berufstätige",
+          "Familien",
+          "Akademiker"
+        ],
         "oepnv": "U2, U3",
         "shortProfile": "Hamburgs beliebtester Stadtteil. Gründerzeit-Altbauten, die Osterstraße als Lebensader und U2-Anbindung in 10 Min. zum Jungfernstieg. Höchste Kita-Dichte der Stadt.",
         "detailPageUrl": null
@@ -404,7 +487,7 @@
       "prices": {
         "etwPerSqm": 7000,
         "housePerSqm": 7500,
-        "rentPerSqm": 16.50,
+        "rentPerSqm": 16.5,
         "trend": "steigend",
         "trendPercent": 2.5
       },
@@ -416,7 +499,11 @@
       },
       "character": {
         "typicalBuildings": "Altbau-MFH, Gründerzeit, Blockrand",
-        "targetGroups": ["Kreative", "junge Berufstätige", "Gastronomen"],
+        "targetGroups": [
+          "Kreative",
+          "junge Berufstätige",
+          "Gastronomen"
+        ],
         "oepnv": "U3, S11/S21/S31 Sternschanze",
         "shortProfile": "Hamburgs Szeneviertel. Schanzenviertel mit Cafés, Bars und dem Schanzenpark. Kompakt (0,5 km²), lebendig und stark nachgefragt. Gentrifizierung nahezu abgeschlossen.",
         "detailPageUrl": null
@@ -435,7 +522,7 @@
       "prices": {
         "etwPerSqm": 6500,
         "housePerSqm": 7000,
-        "rentPerSqm": 16.00,
+        "rentPerSqm": 16.0,
         "trend": "stabil",
         "trendPercent": 0.8
       },
@@ -447,7 +534,11 @@
       },
       "character": {
         "typicalBuildings": "Gründerzeit-Altbau, MFH, Neubau",
-        "targetGroups": ["junge Berufstätige", "Familien", "Kreative"],
+        "targetGroups": [
+          "junge Berufstätige",
+          "Familien",
+          "Kreative"
+        ],
         "oepnv": "U3, S1 Barmbek",
         "shortProfile": "Gentrifizierung in vollem Gang. Gründerzeit-Charme trifft auf Szenelokale. U3 und S1 am Knoten Barmbek. Stärkster Preisanstieg unter den Kernvierteln.",
         "detailPageUrl": null
@@ -466,7 +557,7 @@
       "prices": {
         "etwPerSqm": 6000,
         "housePerSqm": 7000,
-        "rentPerSqm": 15.00,
+        "rentPerSqm": 15.0,
         "trend": "steigend",
         "trendPercent": 1.5
       },
@@ -478,7 +569,10 @@
       },
       "character": {
         "typicalBuildings": "EFH, DHH, MFH, Neubau",
-        "targetGroups": ["Familien", "Berufstätige"],
+        "targetGroups": [
+          "Familien",
+          "Berufstätige"
+        ],
         "oepnv": "U2 Hagendeel",
         "shortProfile": "Familienfreundlich zwischen Eppendorf und Volkspark. NDR-Standort, geplante U5-Anbindung. Solides Mittelfeld mit moderatem Aufwärtstrend.",
         "detailPageUrl": null
@@ -497,7 +591,7 @@
       "prices": {
         "etwPerSqm": 5900,
         "housePerSqm": 6500,
-        "rentPerSqm": 15.50,
+        "rentPerSqm": 15.5,
         "trend": "steigend",
         "trendPercent": 3.0
       },
@@ -509,7 +603,11 @@
       },
       "character": {
         "typicalBuildings": "EFH, MFH, Neubau (Science City)",
-        "targetGroups": ["Familien", "Berufstätige", "Wissenschaftler"],
+        "targetGroups": [
+          "Familien",
+          "Berufstätige",
+          "Wissenschaftler"
+        ],
         "oepnv": "S1, S3",
         "shortProfile": "Hamburgs ambitionierteste Transformation. Science City (DESY, 3.800 Wohnungen), neuer Fernbahnhof Diebsteich, A7-Deckel. Größtes Aufwertungspotenzial.",
         "detailPageUrl": null
@@ -528,7 +626,7 @@
       "prices": {
         "etwPerSqm": 5800,
         "housePerSqm": 5500,
-        "rentPerSqm": 14.50,
+        "rentPerSqm": 14.5,
         "trend": "steigend",
         "trendPercent": 2.0
       },
@@ -540,7 +638,10 @@
       },
       "character": {
         "typicalBuildings": "MFH, Neubau (Pergolenviertel)",
-        "targetGroups": ["junge Berufstätige", "Familien"],
+        "targetGroups": [
+          "junge Berufstätige",
+          "Familien"
+        ],
         "oepnv": "U3, S1",
         "shortProfile": "Aufsteiger mit U5-Perspektive. Pergolenviertel und Quartier 21 bringen tausende neue Wohnungen. +13% Bevölkerungswachstum seit 2012. Noch deutlich günstiger als Barmbek-Süd.",
         "detailPageUrl": null
@@ -559,7 +660,7 @@
       "prices": {
         "etwPerSqm": 5700,
         "housePerSqm": 5500,
-        "rentPerSqm": 15.50,
+        "rentPerSqm": 15.5,
         "trend": "stabil",
         "trendPercent": 0.5
       },
@@ -571,7 +672,10 @@
       },
       "character": {
         "typicalBuildings": "Altbau-MFH, Blockrand",
-        "targetGroups": ["Berufstätige", "Paare"],
+        "targetGroups": [
+          "Berufstätige",
+          "Paare"
+        ],
         "oepnv": "U1 Wartenau, S1 Wandsbeker Chaussee",
         "shortProfile": "Innenstadtnaher Bestandsmarkt zwischen Wandsbek und Barmbek. Kompakt (1,7 km²), dicht besiedelt, stabile Preise bei begrenztem Angebot.",
         "detailPageUrl": null
@@ -590,7 +694,7 @@
       "prices": {
         "etwPerSqm": 5500,
         "housePerSqm": 5500,
-        "rentPerSqm": 14.00,
+        "rentPerSqm": 14.0,
         "trend": "steigend",
         "trendPercent": 4.0
       },
@@ -602,7 +706,10 @@
       },
       "character": {
         "typicalBuildings": "EFH, RH, MFH, Neubau",
-        "targetGroups": ["Familien", "Berufstätige"],
+        "targetGroups": [
+          "Familien",
+          "Berufstätige"
+        ],
         "oepnv": "U2, S3/S21",
         "shortProfile": "Im Wandel durch Neue Mitte Stellingen und U5-Planung. Hagenbecks Tierpark als Wahrzeichen. Einer der stärksten Preisanstiege (+4-10%).",
         "detailPageUrl": null
@@ -621,7 +728,7 @@
       "prices": {
         "etwPerSqm": 5000,
         "housePerSqm": 4800,
-        "rentPerSqm": 13.00,
+        "rentPerSqm": 13.0,
         "trend": "stabil",
         "trendPercent": 0.5
       },
@@ -633,7 +740,10 @@
       },
       "character": {
         "typicalBuildings": "MFH, EFH, Neubau",
-        "targetGroups": ["Familien", "Berufstätige"],
+        "targetGroups": [
+          "Familien",
+          "Berufstätige"
+        ],
         "oepnv": "U1 Wandsbek Markt, S1",
         "shortProfile": "Hamburgs bezahlbare Mitte. Eigenes Einkaufszentrum, gute Infrastruktur. S4-Ausbau bringt zusätzliche Anbindung. 37.000 Einwohner.",
         "detailPageUrl": null
@@ -652,7 +762,7 @@
       "prices": {
         "etwPerSqm": 4700,
         "housePerSqm": 5000,
-        "rentPerSqm": 13.50,
+        "rentPerSqm": 13.5,
         "trend": "steigend",
         "trendPercent": 1.5
       },
@@ -664,7 +774,10 @@
       },
       "character": {
         "typicalBuildings": "EFH, RH, MFH",
-        "targetGroups": ["Familien", "Erstbezieher"],
+        "targetGroups": [
+          "Familien",
+          "Erstbezieher"
+        ],
         "oepnv": "U5 (geplant ~2033)",
         "shortProfile": "U5-Endstation kommt (~2033). 40-Mio.-Euro-Umbau Dorfplatz. 54.000 Einwohner, aktuell noch ohne Schnellbahn. Größtes U5-Aufwertungspotenzial.",
         "detailPageUrl": null
@@ -683,7 +796,7 @@
       "prices": {
         "etwPerSqm": 4300,
         "housePerSqm": 4800,
-        "rentPerSqm": 13.00,
+        "rentPerSqm": 13.0,
         "trend": "stabil",
         "trendPercent": 0.3
       },
@@ -695,13 +808,835 @@
       },
       "character": {
         "typicalBuildings": "EFH, RH, DHH, Großsiedlungen",
-        "targetGroups": ["Familien", "Pendler"],
+        "targetGroups": [
+          "Familien",
+          "Pendler"
+        ],
         "oepnv": "RB (S4 geplant 2027-2029)",
         "shortProfile": "Hamburgs einwohnerstärkster Stadtteil (92.000). S4-Anschluss ans S-Bahn-Netz kommt 2027-2029. Günstigstes Preisniveau unter den 22 Stadtteilen.",
         "detailPageUrl": null
       },
       "cta": {
         "text": "Was ist Ihre Immobilie in Rahlstedt wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-hamburg/"
+      }
+    },
+    {
+      "id": "altona",
+      "name": "Altona",
+      "slug": "altona",
+      "bezirk": "Altona",
+      "priority": "erweitert",
+      "prices": {
+        "etwPerSqm": 6800,
+        "housePerSqm": 7000,
+        "rentPerSqm": 15.0,
+        "trend": "steigend",
+        "trendPercent": 1.5
+      },
+      "demographics": {
+        "population": 50000,
+        "areaSqKm": 2.8,
+        "distanceCityKm": 4,
+        "distanceCityMin": 12
+      },
+      "character": {
+        "typicalBuildings": "Altbau-MFH, Gründerzeit, Neubau",
+        "targetGroups": [
+          "junge Berufstätige",
+          "Kreative",
+          "Familien"
+        ],
+        "oepnv": "S1/S3",
+        "shortProfile": "Urbaner Innenstadtbezirk mit lebendiger Szene rund um Ottensen und Altona-Altstadt. S-Bahn-Knoten Altona plus künftiger Fernbahnhof Diebsteich. Vielfältige Altbaustruktur von Hinterhofbebauung bis Gründerzeit.",
+        "detailPageUrl": null
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Altona wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-hamburg/"
+      }
+    },
+    {
+      "id": "nienstedten",
+      "name": "Nienstedten",
+      "slug": "nienstedten",
+      "bezirk": "Altona",
+      "priority": "erweitert",
+      "prices": {
+        "etwPerSqm": 7150,
+        "housePerSqm": 8900,
+        "rentPerSqm": 17.0,
+        "trend": "stabil",
+        "trendPercent": 0.3
+      },
+      "demographics": {
+        "population": 7062,
+        "areaSqKm": 4.3,
+        "distanceCityKm": 10,
+        "distanceCityMin": 20
+      },
+      "character": {
+        "typicalBuildings": "Villen, Landhäuser, EFH",
+        "targetGroups": [
+          "gehobenes Klientel",
+          "Familien"
+        ],
+        "oepnv": "S1 (Hochkamp)",
+        "shortProfile": "Exklusiver Elbvorort mit villenartiger Bebauung, großen Grundstücken und direkter Elblage. Hirschpark und Elbstrand vor der Haustür. Eines der höchsten Preisniveaus westlich der Alster.",
+        "detailPageUrl": null
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Nienstedten wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-hamburg/"
+      }
+    },
+    {
+      "id": "gross-flottbek",
+      "name": "Groß Flottbek",
+      "slug": "gross-flottbek",
+      "bezirk": "Altona",
+      "priority": "erweitert",
+      "prices": {
+        "etwPerSqm": 6450,
+        "housePerSqm": 8200,
+        "rentPerSqm": 17.0,
+        "trend": "stabil",
+        "trendPercent": 0.3
+      },
+      "demographics": {
+        "population": 11319,
+        "areaSqKm": 2.8,
+        "distanceCityKm": 8,
+        "distanceCityMin": 18
+      },
+      "character": {
+        "typicalBuildings": "Villen, EFH, Altbau-MFH",
+        "targetGroups": [
+          "Familien",
+          "gehobenes Klientel"
+        ],
+        "oepnv": "S1 (Kl. Flottbek)",
+        "shortProfile": "Beschaulicher Elbvorort mit hanseatischem Understatement und hohem Durchschnittseinkommen. Waitzstraße als gehobene Einkaufsadresse, Loki-Schmidt-Garten für Naturerlebnis.",
+        "detailPageUrl": null
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Groß Flottbek wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-hamburg/"
+      }
+    },
+    {
+      "id": "osdorf",
+      "name": "Osdorf",
+      "slug": "osdorf",
+      "bezirk": "Altona",
+      "priority": "erweitert",
+      "prices": {
+        "etwPerSqm": 5200,
+        "housePerSqm": 5750,
+        "rentPerSqm": 13.5,
+        "trend": "stabil",
+        "trendPercent": 0.3
+      },
+      "demographics": {
+        "population": 26601,
+        "areaSqKm": 7.2,
+        "distanceCityKm": 10,
+        "distanceCityMin": 25
+      },
+      "character": {
+        "typicalBuildings": "MFH, Großsiedlung, Villen",
+        "targetGroups": [
+          "Familien",
+          "Berufstätige"
+        ],
+        "oepnv": "Bus",
+        "shortProfile": "Stadtteil der Kontraste. Villenviertel Hochkamp im Süden, Großwohnsiedlung Osdorfer Born im Norden. Botanischer Garten und grüne Feldmark dazwischen.",
+        "detailPageUrl": null
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Osdorf wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-hamburg/"
+      }
+    },
+    {
+      "id": "lurup",
+      "name": "Lurup",
+      "slug": "lurup",
+      "bezirk": "Altona",
+      "priority": "erweitert",
+      "prices": {
+        "etwPerSqm": 4200,
+        "housePerSqm": 4500,
+        "rentPerSqm": 12.0,
+        "trend": "stabil",
+        "trendPercent": 0.5
+      },
+      "demographics": {
+        "population": 37755,
+        "areaSqKm": 6.4,
+        "distanceCityKm": 10,
+        "distanceCityMin": 25
+      },
+      "character": {
+        "typicalBuildings": "MFH, RH, Neubau",
+        "targetGroups": [
+          "Familien",
+          "Erstbezieher"
+        ],
+        "oepnv": "Bus (S3 nah)",
+        "shortProfile": "Günstigster Stadtteil im Bezirk Altona. Lebendige, bunte Nachbarschaft mit starkem Gemeinschaftssinn. Grüne Oasen wie der Böverstpark.",
+        "detailPageUrl": null
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Lurup wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-hamburg/"
+      }
+    },
+    {
+      "id": "iserbrook",
+      "name": "Iserbrook",
+      "slug": "iserbrook",
+      "bezirk": "Altona",
+      "priority": "erweitert",
+      "prices": {
+        "etwPerSqm": 5000,
+        "housePerSqm": 5500,
+        "rentPerSqm": 14.0,
+        "trend": "stabil",
+        "trendPercent": 0.3
+      },
+      "demographics": {
+        "population": 11523,
+        "areaSqKm": 2.7,
+        "distanceCityKm": 12,
+        "distanceCityMin": 25
+      },
+      "character": {
+        "typicalBuildings": "EFH, DHH, RH",
+        "targetGroups": [
+          "Familien",
+          "Berufstätige"
+        ],
+        "oepnv": "S1",
+        "shortProfile": "Ruhiger, grüner Familienstadtteil mit S1-Anbindung und Osdorfer Feldmark nebenan. Moderates Preisniveau zwischen Elbvororten und Randlagen.",
+        "detailPageUrl": null
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Iserbrook wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-hamburg/"
+      }
+    },
+    {
+      "id": "suelldorf",
+      "name": "Sülldorf",
+      "slug": "suelldorf",
+      "bezirk": "Altona",
+      "priority": "erweitert",
+      "prices": {
+        "etwPerSqm": 5200,
+        "housePerSqm": 5500,
+        "rentPerSqm": 14.5,
+        "trend": "stabil",
+        "trendPercent": 0.3
+      },
+      "demographics": {
+        "population": 9330,
+        "areaSqKm": 5.7,
+        "distanceCityKm": 14,
+        "distanceCityMin": 30
+      },
+      "character": {
+        "typicalBuildings": "EFH, Bauernhöfe, RH",
+        "targetGroups": [
+          "Familien",
+          "Naturliebhaber"
+        ],
+        "oepnv": "S1",
+        "shortProfile": "Das Dorf in der Großstadt. Fachwerkscheunen, aktive Bauernhöfe und Reiterhöfe geben ländlichen Charme. Freibad Marienhöhe im Sommer.",
+        "detailPageUrl": null
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Sülldorf wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-hamburg/"
+      }
+    },
+    {
+      "id": "rissen",
+      "name": "Rissen",
+      "slug": "rissen",
+      "bezirk": "Altona",
+      "priority": "erweitert",
+      "prices": {
+        "etwPerSqm": 5000,
+        "housePerSqm": 5700,
+        "rentPerSqm": 14.0,
+        "trend": "stabil",
+        "trendPercent": 0.3
+      },
+      "demographics": {
+        "population": 16429,
+        "areaSqKm": 16.6,
+        "distanceCityKm": 16,
+        "distanceCityMin": 35
+      },
+      "character": {
+        "typicalBuildings": "EFH, Villen, Landhäuser",
+        "targetGroups": [
+          "Familien",
+          "gehobenes Klientel"
+        ],
+        "oepnv": "S1",
+        "shortProfile": "Hamburgs westlichster Stadtteil mit vier Naturschutzgebieten, Klövensteener Forst und Elbstrand Wittenbergen. Großzügige Grundstücke, gehobenes Wohnen im Grünen.",
+        "detailPageUrl": null
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Rissen wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-hamburg/"
+      }
+    },
+    {
+      "id": "eidelstedt",
+      "name": "Eidelstedt",
+      "slug": "eidelstedt",
+      "bezirk": "Eimsbüttel",
+      "priority": "erweitert",
+      "prices": {
+        "etwPerSqm": 4350,
+        "housePerSqm": 4500,
+        "rentPerSqm": 14.0,
+        "trend": "stabil",
+        "trendPercent": 0.5
+      },
+      "demographics": {
+        "population": 36705,
+        "areaSqKm": 8.7,
+        "distanceCityKm": 8,
+        "distanceCityMin": 20
+      },
+      "character": {
+        "typicalBuildings": "EFH, RH, MFH",
+        "targetGroups": [
+          "Familien",
+          "Berufstätige",
+          "Pendler"
+        ],
+        "oepnv": "S3/S21, AKN",
+        "shortProfile": "Grüner Stadtteil am Nordwestrand mit sehr guter Verkehrsanbindung (S3/S21, AKN). Eidelstedter Feldmark und Niendorfer Gehege bieten Naturerlebnis. Geplante S5 bringt zusätzliche Aufwertung.",
+        "detailPageUrl": null
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Eidelstedt wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-hamburg/"
+      }
+    },
+    {
+      "id": "schnelsen",
+      "name": "Schnelsen",
+      "slug": "schnelsen",
+      "bezirk": "Eimsbüttel",
+      "priority": "erweitert",
+      "prices": {
+        "etwPerSqm": 4300,
+        "housePerSqm": 4700,
+        "rentPerSqm": 14.0,
+        "trend": "stabil",
+        "trendPercent": 0.3
+      },
+      "demographics": {
+        "population": 31323,
+        "areaSqKm": 9.0,
+        "distanceCityKm": 10,
+        "distanceCityMin": 25
+      },
+      "character": {
+        "typicalBuildings": "EFH, DHH, MFH",
+        "targetGroups": [
+          "Familien",
+          "Pendler"
+        ],
+        "oepnv": "AKN, M5",
+        "shortProfile": "Familienfreundlicher Stadtteil an der Landesgrenze mit A7-Deckel-Parks und guter Autobahnanbindung. Vergleichsweise günstige Eigenheime auf großen Grundstücken.",
+        "detailPageUrl": null
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Schnelsen wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-hamburg/"
+      }
+    },
+    {
+      "id": "niendorf",
+      "name": "Niendorf",
+      "slug": "niendorf",
+      "bezirk": "Eimsbüttel",
+      "priority": "erweitert",
+      "prices": {
+        "etwPerSqm": 4800,
+        "housePerSqm": 5300,
+        "rentPerSqm": 15.0,
+        "trend": "stabil",
+        "trendPercent": 0.5
+      },
+      "demographics": {
+        "population": 42496,
+        "areaSqKm": 12.4,
+        "distanceCityKm": 8,
+        "distanceCityMin": 20
+      },
+      "character": {
+        "typicalBuildings": "EFH, MFH, Neubau",
+        "targetGroups": [
+          "Familien",
+          "Berufstätige"
+        ],
+        "oepnv": "U2, M5",
+        "shortProfile": "Grüne Lunge Eimsbüttels mit dem Stadtwald Niendorfer Gehege und der Fußgängerzone Tibarg. U2 direkt in die City. Ausgewogene Sozialstruktur und vielfältiges Wohnungsangebot.",
+        "detailPageUrl": null
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Niendorf wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-hamburg/"
+      }
+    },
+    {
+      "id": "gross-borstel",
+      "name": "Groß Borstel",
+      "slug": "gross-borstel",
+      "bezirk": "Hamburg-Nord",
+      "priority": "erweitert",
+      "prices": {
+        "etwPerSqm": 5500,
+        "housePerSqm": 6000,
+        "rentPerSqm": 15.0,
+        "trend": "stabil",
+        "trendPercent": 0.3
+      },
+      "demographics": {
+        "population": 10939,
+        "areaSqKm": 4.0,
+        "distanceCityKm": 6,
+        "distanceCityMin": 15
+      },
+      "character": {
+        "typicalBuildings": "EFH, MFH, Altbau",
+        "targetGroups": [
+          "Familien",
+          "Berufstätige"
+        ],
+        "oepnv": "Bus",
+        "shortProfile": "Grüner, familiärer Stadtteil südlich des Flughafens mit dörflichem Charakter und Eppendorfer Moor. Attraktives Preis-Leistungs-Verhältnis als Alternative zu Eppendorf.",
+        "detailPageUrl": null
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Groß Borstel wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-hamburg/"
+      }
+    },
+    {
+      "id": "fuhlsbuettel",
+      "name": "Fuhlsbüttel",
+      "slug": "fuhlsbuettel",
+      "bezirk": "Hamburg-Nord",
+      "priority": "erweitert",
+      "prices": {
+        "etwPerSqm": 5000,
+        "housePerSqm": 5500,
+        "rentPerSqm": 14.0,
+        "trend": "stabil",
+        "trendPercent": 0.3
+      },
+      "demographics": {
+        "population": 13984,
+        "areaSqKm": 6.6,
+        "distanceCityKm": 8,
+        "distanceCityMin": 18
+      },
+      "character": {
+        "typicalBuildings": "EFH, MFH, Siedlungshäuser",
+        "targetGroups": [
+          "Familien",
+          "Berufstätige"
+        ],
+        "oepnv": "U1, S1",
+        "shortProfile": "Stadtteil am Hamburger Flughafen mit geschlossenen Wohnsiedlungen und dörflichem Flair an der Alster. U1 Fuhlsbüttel plus S1 Airport.",
+        "detailPageUrl": null
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Fuhlsbüttel wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-hamburg/"
+      }
+    },
+    {
+      "id": "langenhorn",
+      "name": "Langenhorn",
+      "slug": "langenhorn",
+      "bezirk": "Hamburg-Nord",
+      "priority": "erweitert",
+      "prices": {
+        "etwPerSqm": 4500,
+        "housePerSqm": 4300,
+        "rentPerSqm": 13.0,
+        "trend": "stabil",
+        "trendPercent": 0.3
+      },
+      "demographics": {
+        "population": 48901,
+        "areaSqKm": 13.8,
+        "distanceCityKm": 12,
+        "distanceCityMin": 25
+      },
+      "character": {
+        "typicalBuildings": "EFH, Siedlungshäuser, MFH",
+        "targetGroups": [
+          "Familien",
+          "Erstbezieher"
+        ],
+        "oepnv": "U1 (4 Stationen)",
+        "shortProfile": "Hamburgs nördlichster Großstadtteil. Grün, familienfreundlich und erschwinglich. Historische Fritz-Schumacher-Siedlungen neben moderner Bebauung. 49.000 Einwohner.",
+        "detailPageUrl": null
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Langenhorn wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-hamburg/"
+      }
+    },
+    {
+      "id": "ohlsdorf",
+      "name": "Ohlsdorf",
+      "slug": "ohlsdorf",
+      "bezirk": "Hamburg-Nord",
+      "priority": "erweitert",
+      "prices": {
+        "etwPerSqm": 5500,
+        "housePerSqm": 6000,
+        "rentPerSqm": 14.5,
+        "trend": "stabil",
+        "trendPercent": 0.3
+      },
+      "demographics": {
+        "population": 17813,
+        "areaSqKm": 7.2,
+        "distanceCityKm": 8,
+        "distanceCityMin": 18
+      },
+      "character": {
+        "typicalBuildings": "MFH, Villen, EFH",
+        "targetGroups": [
+          "Familien",
+          "Berufstätige"
+        ],
+        "oepnv": "U1+S1",
+        "shortProfile": "ÖPNV-Knotenpunkt (U1+S1) und Heimat des weltberühmten Ohlsdorfer Friedhofs. Ortsteil Klein Borstel bietet gehobenes Villenwohnen.",
+        "detailPageUrl": null
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Ohlsdorf wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-hamburg/"
+      }
+    },
+    {
+      "id": "alsterdorf",
+      "name": "Alsterdorf",
+      "slug": "alsterdorf",
+      "bezirk": "Hamburg-Nord",
+      "priority": "erweitert",
+      "prices": {
+        "etwPerSqm": 6300,
+        "housePerSqm": 7000,
+        "rentPerSqm": 15.5,
+        "trend": "stabil",
+        "trendPercent": 0.5
+      },
+      "demographics": {
+        "population": 15644,
+        "areaSqKm": 3.1,
+        "distanceCityKm": 5,
+        "distanceCityMin": 12
+      },
+      "character": {
+        "typicalBuildings": "MFH, Altbau, Neubau",
+        "targetGroups": [
+          "Berufstätige",
+          "Familien",
+          "Akademiker"
+        ],
+        "oepnv": "U1 (3 Stationen)",
+        "shortProfile": "Urbanes Wohnen an der Alster mit grünem Umfeld. Evangelische Stiftung Alsterdorf als inklusives Quartier. Nähe City Nord, Eppendorf und Winterhude.",
+        "detailPageUrl": null
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Alsterdorf wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-hamburg/"
+      }
+    },
+    {
+      "id": "hummelsbuettel",
+      "name": "Hummelsbüttel",
+      "slug": "hummelsbuettel",
+      "bezirk": "Wandsbek",
+      "priority": "erweitert",
+      "prices": {
+        "etwPerSqm": 4800,
+        "housePerSqm": 5300,
+        "rentPerSqm": 14.0,
+        "trend": "stabil",
+        "trendPercent": 0.3
+      },
+      "demographics": {
+        "population": 18731,
+        "areaSqKm": 9.1,
+        "distanceCityKm": 12,
+        "distanceCityMin": 25
+      },
+      "character": {
+        "typicalBuildings": "EFH, MFH, RH",
+        "targetGroups": [
+          "Familien",
+          "Erstbezieher"
+        ],
+        "oepnv": "Bus",
+        "shortProfile": "Bezahlbarer Wohnraum in ruhiger, grüner Umgebung zwischen Langenhorn und Poppenbüttel. Ideal für Familien die Platz suchen.",
+        "detailPageUrl": null
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Hummelsbüttel wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-hamburg/"
+      }
+    },
+    {
+      "id": "poppenbuettel",
+      "name": "Poppenbüttel",
+      "slug": "poppenbuettel",
+      "bezirk": "Wandsbek",
+      "priority": "erweitert",
+      "prices": {
+        "etwPerSqm": 5250,
+        "housePerSqm": 5100,
+        "rentPerSqm": 14.0,
+        "trend": "stabil",
+        "trendPercent": 0.0
+      },
+      "demographics": {
+        "population": 24598,
+        "areaSqKm": 8.1,
+        "distanceCityKm": 15,
+        "distanceCityMin": 30
+      },
+      "character": {
+        "typicalBuildings": "EFH, DHH, MFH",
+        "targetGroups": [
+          "Familien",
+          "Berufstätige"
+        ],
+        "oepnv": "S1",
+        "shortProfile": "Bevölkerungsreichster Stadtteil im Alstertal mit Alstertal-Einkaufszentrum (AEZ) und viel Grün an der Oberalster. S1 Endstation.",
+        "detailPageUrl": null
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Poppenbüttel wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-hamburg/"
+      }
+    },
+    {
+      "id": "wellingbuettel",
+      "name": "Wellingsbüttel",
+      "slug": "wellingbuettel",
+      "bezirk": "Wandsbek",
+      "priority": "erweitert",
+      "prices": {
+        "etwPerSqm": 5500,
+        "housePerSqm": 6500,
+        "rentPerSqm": 15.0,
+        "trend": "stabil",
+        "trendPercent": 0.3
+      },
+      "demographics": {
+        "population": 11168,
+        "areaSqKm": 4.0,
+        "distanceCityKm": 10,
+        "distanceCityMin": 22
+      },
+      "character": {
+        "typicalBuildings": "Villen, Landhäuser, EFH",
+        "targetGroups": [
+          "gehobenes Klientel",
+          "Familien"
+        ],
+        "oepnv": "S1",
+        "shortProfile": "Einer der exklusivsten Wohnstadtteile mit großzügigen Villen und Landhäusern entlang der Alster. Ruhige, wohlhabende Atmosphäre.",
+        "detailPageUrl": null
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Wellingsbüttel wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-hamburg/"
+      }
+    },
+    {
+      "id": "sasel",
+      "name": "Sasel",
+      "slug": "sasel",
+      "bezirk": "Wandsbek",
+      "priority": "erweitert",
+      "prices": {
+        "etwPerSqm": 5200,
+        "housePerSqm": 5500,
+        "rentPerSqm": 14.0,
+        "trend": "stabil",
+        "trendPercent": 0.3
+      },
+      "demographics": {
+        "population": 24287,
+        "areaSqKm": 8.4,
+        "distanceCityKm": 14,
+        "distanceCityMin": 30
+      },
+      "character": {
+        "typicalBuildings": "EFH, DHH, RH",
+        "targetGroups": [
+          "Familien",
+          "Berufstätige"
+        ],
+        "oepnv": "Bus",
+        "shortProfile": "Grüner, familienfreundlicher Stadtteil zwischen Alstertal und Walddörfern. Einfamilienhäuser und ruhige Wohnstraßen.",
+        "detailPageUrl": null
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Sasel wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-hamburg/"
+      }
+    },
+    {
+      "id": "volksdorf",
+      "name": "Volksdorf",
+      "slug": "volksdorf",
+      "bezirk": "Wandsbek",
+      "priority": "erweitert",
+      "prices": {
+        "etwPerSqm": 5200,
+        "housePerSqm": 5800,
+        "rentPerSqm": 14.0,
+        "trend": "stabil",
+        "trendPercent": 0.3
+      },
+      "demographics": {
+        "population": 20608,
+        "areaSqKm": 11.6,
+        "distanceCityKm": 16,
+        "distanceCityMin": 35
+      },
+      "character": {
+        "typicalBuildings": "EFH, DHH, Villen",
+        "targetGroups": [
+          "Familien",
+          "Naturliebhaber"
+        ],
+        "oepnv": "U1",
+        "shortProfile": "Herz der Walddörfer mit dörflichem Ortskern, Museumsdorf und Bauernmarkt. U1 Volksdorf (~35 Min. in die City). Wald und Naturschutzgebiete vor der Tür.",
+        "detailPageUrl": null
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Volksdorf wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-hamburg/"
+      }
+    },
+    {
+      "id": "bergstedt",
+      "name": "Bergstedt",
+      "slug": "bergstedt",
+      "bezirk": "Wandsbek",
+      "priority": "erweitert",
+      "prices": {
+        "etwPerSqm": 4800,
+        "housePerSqm": 5100,
+        "rentPerSqm": 13.0,
+        "trend": "stabil",
+        "trendPercent": 0.3
+      },
+      "demographics": {
+        "population": 10822,
+        "areaSqKm": 7.0,
+        "distanceCityKm": 16,
+        "distanceCityMin": 35
+      },
+      "character": {
+        "typicalBuildings": "EFH, DHH, RH",
+        "targetGroups": [
+          "Familien",
+          "Naturliebhaber"
+        ],
+        "oepnv": "Bus",
+        "shortProfile": "Beschaulicher Walddörfer-Stadtteil mit einer der ältesten Kirchen Hamburgs. Rodenbeker Quellental als Naturschutzgebiet. Deutlich günstiger als Volksdorf.",
+        "detailPageUrl": null
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Bergstedt wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-hamburg/"
+      }
+    },
+    {
+      "id": "lemsahl-mellingstedt",
+      "name": "Lemsahl-Mellingstedt",
+      "slug": "lemsahl-mellingstedt",
+      "bezirk": "Wandsbek",
+      "priority": "erweitert",
+      "prices": {
+        "etwPerSqm": 4600,
+        "housePerSqm": 5100,
+        "rentPerSqm": 13.5,
+        "trend": "stabil",
+        "trendPercent": 0.0
+      },
+      "demographics": {
+        "population": 7031,
+        "areaSqKm": 7.8,
+        "distanceCityKm": 18,
+        "distanceCityMin": 40
+      },
+      "character": {
+        "typicalBuildings": "EFH, Reetdach, Landhäuser",
+        "targetGroups": [
+          "Familien",
+          "Naturliebhaber"
+        ],
+        "oepnv": "Bus",
+        "shortProfile": "Fast ländliches Wohnen am Oberlauf der Alster. Naturschutzgebiete, Reiterhöfe und ausgedehnte Wanderwege. Großzügige Grundstücke.",
+        "detailPageUrl": null
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Lemsahl-Mellingstedt wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-hamburg/"
+      }
+    },
+    {
+      "id": "duvenstedt",
+      "name": "Duvenstedt",
+      "slug": "duvenstedt",
+      "bezirk": "Wandsbek",
+      "priority": "erweitert",
+      "prices": {
+        "etwPerSqm": 4600,
+        "housePerSqm": 5000,
+        "rentPerSqm": 13.5,
+        "trend": "stabil",
+        "trendPercent": 0.3
+      },
+      "demographics": {
+        "population": 5940,
+        "areaSqKm": 6.8,
+        "distanceCityKm": 20,
+        "distanceCityMin": 42
+      },
+      "character": {
+        "typicalBuildings": "EFH, Reetdach, Bauernhäuser",
+        "targetGroups": [
+          "Familien",
+          "Naturliebhaber"
+        ],
+        "oepnv": "Bus",
+        "shortProfile": "Nördlichster Walddörfer-Stadtteil am Duvenstedter Brook (785 ha, Hamburgs größtes Naturschutzgebiet). Wöchentlicher Bauernmarkt, Reetdachhäuser, Dorfatmosphäre.",
+        "detailPageUrl": null
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Duvenstedt wert?",
         "url": "https://teigelerundpartner.de/immobilienbewertung-hamburg/"
       }
     }
