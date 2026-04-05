@@ -105,7 +105,13 @@ const OTHER_WATER_PATHS = [
 const CITY_BOUNDARY = ALL_DISTRICTS.map(d => d.path).join(' ')
 
 const DARK_DISTRICTS = new Set([
-  'harvestehude', 'uhlenhorst', 'hoheluft-ost', 'eppendorf', 'winterhude', 'rotherbaum', 'ottensen', 'othmarschen', 'hoheluft-west', 'blankenese', 'st-georg', 'eimsbuettel', 'sternschanze', 'barmbek-sued', 'lokstedt', 'bahrenfeld', 'barmbek-nord', 'eilbek', 'stellingen', 'wandsbek',
+  'harvestehude', 'uhlenhorst', 'hoheluft-ost', 'eppendorf', 'winterhude', 'rotherbaum', 'ottensen', 'othmarschen', 'hoheluft-west', 'blankenese', 'st-georg', 'eimsbuettel', 'barmbek-sued', 'lokstedt', 'bahrenfeld', 'barmbek-nord', 'eilbek', 'stellingen', 'wandsbek',
+])
+
+// Elbe-angrenzende graue Stadtteile (werden über den Wasserflächen gerendert)
+const ELBE_ADJACENT = new Set([
+  'hafencity', 'hammerbrook', 'rothenburgsort', 'billbrook',
+  'hamburg-altstadt', 'neustadt', 'altona',
 ])
 
 // Interaktive Labels (font-weight 600, Farbe nach Heatmap)
@@ -123,7 +129,7 @@ const LABELS = [
   { id: 'eppendorf',     x: 478, y: 393, lines: ['Eppendorf'],           size: 9 },
   { id: 'harvestehude',  x: 480, y: 445, lines: ['Harveste-', 'hude'],   size: 9 },
   { id: 'uhlenhorst',    x: 563, y: 455, lines: ['Uhlenhorst'],          size: 9 },
-  { id: 'barmbek-nord',  x: 625, y: 372, lines: ['Barmbek-', 'Nord'],    size: 9 },
+  { id: 'barmbek-nord',  x: 625, y: 382, lines: ['Barmbek-', 'Nord'],    size: 9 },
   { id: 'barmbek-sued',  x: 599, y: 434, lines: ['Barmbek-', 'Süd'],     size: 9 },
   { id: 'wandsbek',      x: 687, y: 416, lines: ['Wandsbek'],            size: 9 },
   { id: 'othmarschen',   x: 293, y: 538, lines: ['Othmarschen'],         size: 9 },
@@ -134,52 +140,52 @@ const LABELS = [
   { id: 'rotherbaum',    x: 498, y: 487, lines: ['Rother-', 'baum'],     size: 7 },
   { id: 'hoheluft-west', x: 450, y: 430, lines: ['Hoheluft-W'],          size: 6 },
   { id: 'hoheluft-ost',  x: 470, y: 421, lines: ['Hoheluft-O'],          size: 6 },
-  { id: 'sternschanze',  x: 449, y: 498, lines: ['Stern-', 'schanze'],   size: 6 },
+  { id: 'sternschanze',  x: 432, y: 458, lines: ['Stern-', 'schanze'],   size: 6 },
 ]
 
 // Graue Labels (font-weight 400, fill #999)
 const GREY_LABELS = [
   // Norden
-  { id: 'langenhorn',      x: 505, y: 151, lines: ['Langenhorn'],           size: 9 },
-  { id: 'fuhlsbuettel',    x: 490, y: 267, lines: ['Fuhlsbüttel'],          size: 8 },
+  { id: 'langenhorn',      x: 536, y: 177, lines: ['Langenhorn'],           size: 9 },
+  { id: 'fuhlsbuettel',    x: 516, y: 258, lines: ['Fuhlsbüttel'],          size: 8 },
   { id: 'ohlsdorf',        x: 617, y: 287, lines: ['Ohlsdorf'],             size: 9 },
   { id: 'alsterdorf',      x: 536, y: 325, lines: ['Alsterdorf'],           size: 8 },
   { id: 'gross-borstel',   x: 492, y: 323, lines: ['Groß', 'Borstel'],     size: 8 },
   // Nordwesten
   { id: 'schnelsen',       x: 347, y: 237, lines: ['Schnelsen'],            size: 8 },
-  { id: 'niendorf',        x: 426, y: 270, lines: ['Niendorf'],             size: 9 },
-  { id: 'eidelstedt',      x: 275, y: 333, lines: ['Eidelstedt'],           size: 8 },
+  { id: 'niendorf',        x: 406, y: 273, lines: ['Niendorf'],             size: 9 },
+  { id: 'eidelstedt',      x: 333, y: 327, lines: ['Eidelstedt'],           size: 8 },
   // Westen
   { id: 'lurup',           x: 254, y: 380, lines: ['Lurup'],                size: 8 },
   { id: 'osdorf',          x: 201, y: 453, lines: ['Osdorf'],               size: 8 },
-  { id: 'gross-flottbek',  x: 248, y: 489, lines: ['Groß', 'Flottbek'],    size: 8 },
+  { id: 'gross-flottbek',  x: 268, y: 489, lines: ['Groß', 'Flottbek'],    size: 8 },
   { id: 'nienstedten',     x: 193, y: 528, lines: ['Nienstedten'],          size: 8 },
   // Zentrum-Sued (Altona-Altstadt + Altona-Nord zusammengelegt)
   { id: 'altona',          x: 404, y: 517, lines: ['Altona'],               size: 9 },
-  { id: 'st-pauli',        x: 463, y: 526, lines: ['St. Pauli'],            size: 8 },
-  { id: 'neustadt',        x: 486, y: 536, lines: ['Neustadt'],             size: 8 },
-  { id: 'hamburg-altstadt', x: 520, y: 545, lines: ['Altstadt'],            size: 7 },
-  { id: 'hafencity',       x: 533, y: 570, lines: ['HafenCity'],            size: 7 },
+  { id: 'st-pauli',        x: 400, y: 497, lines: ['St. Pauli'],            size: 8 },
+  { id: 'neustadt',        x: 457, y: 523, lines: ['Neustadt'],             size: 7 },
+  { id: 'hamburg-altstadt', x: 482, y: 531, lines: ['Altstadt'],            size: 7 },
+  { id: 'hafencity',       x: 524, y: 568, lines: ['HafenCity'],            size: 7 },
   // Zentrum-Ost
-  { id: 'hohenfelde',      x: 565, y: 497, lines: ['Hohenfelde'],           size: 6 },
-  { id: 'borgfelde',       x: 584, y: 523, lines: ['Borgfelde'],            size: 6 },
-  { id: 'hammerbrook',     x: 546, y: 559, lines: ['Hammerbrook'],          size: 8 },
-  { id: 'rothenburgsort',  x: 598, y: 595, lines: ['Rothenburgsort'],       size: 7 },
-  { id: 'billbrook',       x: 683, y: 629, lines: ['Billbrook'],            size: 7 },
-  { id: 'billstedt',       x: 758, y: 561, lines: ['Billstedt'],            size: 8 },
+  { id: 'hohenfelde',      x: 575, y: 490, lines: ['Hohenfelde'],           size: 6 },
+  { id: 'borgfelde',       x: 585, y: 523, lines: ['Borgfelde'],            size: 6 },
+  { id: 'hammerbrook',     x: 515, y: 541, lines: ['Hammer-', 'brook'],     size: 7 },
+  { id: 'rothenburgsort',  x: 631, y: 535, lines: ['Rothenbgs.'],           size: 7 },
+  { id: 'billbrook',       x: 630, y: 604, lines: ['Billbrook'],            size: 7 },
+  { id: 'billstedt',       x: 719, y: 580, lines: ['Billstedt'],            size: 8 },
   // Osten
   { id: 'dulsberg',        x: 652, y: 422, lines: ['Dulsberg'],             size: 8 },
   { id: 'marienthal',      x: 693, y: 476, lines: ['Marienthal'],           size: 8 },
-  { id: 'hamm',            x: 633, y: 532, lines: ['Hamm'],                 size: 8 },
+  { id: 'hamm',            x: 580, y: 502, lines: ['Hamm'],                 size: 8 },
   { id: 'horn',            x: 702, y: 534, lines: ['Horn'],                 size: 8 },
   // Nordosten
   { id: 'steilshoop',      x: 639, y: 323, lines: ['Steilshoop'],           size: 8 },
-  { id: 'wellingbuettel',  x: 690, y: 225, lines: ['Wellings-', 'büttel'], size: 8 },
-  { id: 'sasel',           x: 758, y: 184, lines: ['Sasel'],                size: 8 },
-  { id: 'poppenbuettel',   x: 674, y: 155, lines: ['Poppenbüttel'],         size: 8 },
-  { id: 'farmsen-berne',   x: 772, y: 305, lines: ['Farmsen-', 'Berne'],   size: 8 },
-  { id: 'tonndorf',        x: 769, y: 408, lines: ['Tonndorf'],             size: 8 },
-  { id: 'jenfeld',         x: 784, y: 445, lines: ['Jenfeld'],              size: 8 },
+  { id: 'wellingbuettel',  x: 667, y: 221, lines: ['Wellings-', 'büttel'], size: 8 },
+  { id: 'sasel',           x: 748, y: 165, lines: ['Sasel'],                size: 8 },
+  { id: 'poppenbuettel',   x: 680, y: 151, lines: ['Poppenbüttel'],         size: 8 },
+  { id: 'farmsen-berne',   x: 762, y: 326, lines: ['Farmsen-', 'Berne'],   size: 8 },
+  { id: 'tonndorf',        x: 764, y: 395, lines: ['Tonndorf'],             size: 8 },
+  { id: 'jenfeld',         x: 804, y: 443, lines: ['Jenfeld'],              size: 8 },
 ]
 
 const STAGGER_ORDER = [
@@ -317,6 +323,21 @@ export function HamburgSVG({
         <ellipse cx={BINNEN_ALSTER_CX} cy={BINNEN_ALSTER_CY} rx={BINNEN_ALSTER_RX} ry={BINNEN_ALSTER_RY} fill="#B8D4E3" stroke="#9BC4D8" strokeWidth="0.8" />
         {OTHER_WATER_PATHS.map((d, i) => (
           <path key={i} d={d} fill="#B8D4E3" stroke="#9BC4D8" strokeWidth="0.5" clipPath="url(#elbe-clip)" />
+        ))}
+      </g>
+
+      {/* SCHICHT 4.5: Elbe-angrenzende Stadtteile ÜBER den Wasserflächen (damit HafenCity etc. nicht im Wasser verschwinden) */}
+      <g className="elbe-districts" style={{ pointerEvents: 'none' }}>
+        {ALL_DISTRICTS.filter(d => ELBE_ADJACENT.has(d.id)).map(({ id, path: d }) => (
+          <path
+            key={id}
+            d={d}
+            fill="#E8E4E0"
+            stroke="#D1CDC9"
+            strokeWidth="1"
+            strokeLinejoin="round"
+            style={{ opacity: loaded ? 1 : 0, transition: 'opacity 400ms ease 200ms' }}
+          />
         ))}
       </g>
 
