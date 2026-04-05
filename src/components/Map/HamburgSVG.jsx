@@ -105,29 +105,75 @@ const DARK_DISTRICTS = new Set([
   'harvestehude', 'uhlenhorst', 'hoheluft-ost', 'eppendorf', 'winterhude', 'rotherbaum', 'ottensen', 'othmarschen', 'hoheluft-west', 'blankenese', 'st-georg', 'eimsbuettel', 'sternschanze', 'barmbek-sued', 'lokstedt', 'bahrenfeld', 'barmbek-nord', 'eilbek', 'stellingen', 'wandsbek',
 ])
 
+// Interaktive Labels (font-weight 600, Farbe nach Heatmap)
 const LABELS = [
-  { id: 'harvestehude', x: 489.6, y: 442.8, lines: ['Harveste-', 'hude'], size: 7 },
-  { id: 'uhlenhorst', x: 561.5, y: 458.9, lines: ['Uhlen-', 'horst'], size: 8 },
-  { id: 'hoheluft-ost', x: 488.4, y: 388.2, lines: ['HO-O'], size: 6, leader: [478.4, 418.2] },
-  { id: 'eppendorf', x: 487.6, y: 393.3, lines: ['Eppendorf'], size: 8 },
-  { id: 'winterhude', x: 541.3, y: 394.7, lines: ['Winter-', 'hude'], size: 9 },
-  { id: 'rotherbaum', x: 487.3, y: 504.8, lines: ['Rother-', 'baum'], size: 8, leader: [487.3, 479.8] },
-  { id: 'ottensen', x: 357.8, y: 540.6, lines: ['Ottensen'], size: 7 },
-  { id: 'othmarschen', x: 301.6, y: 538.6, lines: ['Oth-', 'marschen'], size: 8 },
-  { id: 'hoheluft-west', x: 427.9, y: 402.5, lines: ['HO-W'], size: 6, leader: [447.9, 432.5] },
-  { id: 'blankenese', x: 106.1, y: 490.7, lines: ['Blanke-', 'nese'], size: 9 },
-  { id: 'st-georg', x: 549.5, y: 517.6, lines: ['St. Georg'], size: 7 },
-  { id: 'eimsbuettel', x: 432.0, y: 455.4, lines: ['Eims-', 'büttel'], size: 8 },
-  { id: 'sternschanze', x: 438.3, y: 510.6, lines: ['Stern-', 'schanze'], size: 7, leader: [453.3, 495.6] },
-  { id: 'barmbek-sued', x: 598.8, y: 437.4, lines: ['Barmbek-', 'Süd'], size: 8 },
-  { id: 'lokstedt', x: 418.0, y: 383.0, lines: ['Lokstedt'], size: 8 },
-  { id: 'bahrenfeld', x: 316.8, y: 447.1, lines: ['Bahrenfeld'], size: 10 },
-  { id: 'barmbek-nord', x: 625.4, y: 378.8, lines: ['Barmbek-', 'Nord'], size: 8 },
-  { id: 'eilbek', x: 628.3, y: 465.7, lines: ['Eilbek'], size: 7 },
-  { id: 'stellingen', x: 379.2, y: 395.0, lines: ['Stellingen'], size: 9 },
-  { id: 'wandsbek', x: 686.9, y: 411.2, lines: ['Wandsbek'], size: 9 },
-  { id: 'bramfeld', x: 692.7, y: 319.7, lines: ['Bramfeld'], size: 10 },
-  { id: 'rahlstedt', x: 875.3, y: 335.8, lines: ['Rahlstedt'], size: 10 },
+  // Große Stadtteile: size 10
+  { id: 'rahlstedt',     x: 875, y: 336, lines: ['Rahlstedt'],           size: 10 },
+  { id: 'bramfeld',      x: 703, y: 320, lines: ['Bramfeld'],            size: 10 },
+  { id: 'bahrenfeld',    x: 313, y: 452, lines: ['Bahrenfeld'],          size: 10 },
+  { id: 'winterhude',    x: 560, y: 380, lines: ['Winterhude'],          size: 10 },
+  // Normale Stadtteile: size 9
+  { id: 'blankenese',    x: 92,  y: 496, lines: ['Blankenese'],          size: 9 },
+  { id: 'stellingen',    x: 367, y: 403, lines: ['Stellingen'],          size: 9 },
+  { id: 'lokstedt',      x: 425, y: 384, lines: ['Lokstedt'],            size: 9 },
+  { id: 'eimsbuettel',   x: 429, y: 459, lines: ['Eimsbüttel'],          size: 9 },
+  { id: 'eppendorf',     x: 478, y: 393, lines: ['Eppendorf'],           size: 9 },
+  { id: 'harvestehude',  x: 480, y: 445, lines: ['Harveste-', 'hude'],   size: 9 },
+  { id: 'uhlenhorst',    x: 563, y: 455, lines: ['Uhlenhorst'],          size: 9 },
+  { id: 'barmbek-nord',  x: 625, y: 379, lines: ['Barmbek-N.'],          size: 9 },
+  { id: 'barmbek-sued',  x: 599, y: 441, lines: ['Barmbek-S.'],          size: 9 },
+  { id: 'wandsbek',      x: 687, y: 416, lines: ['Wandsbek'],            size: 9 },
+  { id: 'othmarschen',   x: 293, y: 538, lines: ['Othmarschen'],         size: 9 },
+  { id: 'ottensen',      x: 358, y: 541, lines: ['Ottensen'],            size: 9 },
+  { id: 'eilbek',        x: 618, y: 472, lines: ['Eilbek'],              size: 9 },
+  { id: 'st-georg',      x: 545, y: 515, lines: ['St. Georg'],           size: 9 },
+  { id: 'rotherbaum',    x: 498, y: 487, lines: ['Rotherbaum'],          size: 9 },
+  // Kleine Stadtteile: size 7
+  { id: 'hoheluft-west', x: 450, y: 430, lines: ['Hoheluft-W'],          size: 7 },
+  { id: 'hoheluft-ost',  x: 470, y: 421, lines: ['Hoheluft-O'],          size: 7 },
+  { id: 'sternschanze',  x: 449, y: 498, lines: ['Sternschanze'],        size: 7 },
+]
+
+// Graue Labels (font-weight 400, fill #999)
+const GREY_LABELS = [
+  // Norden
+  { id: 'langenhorn',     x: 505, y: 155, lines: ['Langenhorn'],          size: 9 },
+  { id: 'fuhlsbuettel',   x: 490, y: 267, lines: ['Fuhlsbüttel'],        size: 8 },
+  { id: 'ohlsdorf',       x: 617, y: 287, lines: ['Ohlsdorf'],           size: 9 },
+  { id: 'alsterdorf',     x: 536, y: 325, lines: ['Alsterdorf'],         size: 8 },
+  { id: 'gross-borstel',  x: 492, y: 323, lines: ['Gr. Borstel'],        size: 8 },
+  // Nordwesten
+  { id: 'schnelsen',      x: 347, y: 237, lines: ['Schnelsen'],          size: 8 },
+  { id: 'niendorf',       x: 426, y: 270, lines: ['Niendorf'],           size: 9 },
+  { id: 'eidelstedt',     x: 275, y: 336, lines: ['Eidelstedt'],         size: 8 },
+  // Westen
+  { id: 'lurup',          x: 254, y: 380, lines: ['Lurup'],              size: 8 },
+  { id: 'osdorf',         x: 201, y: 453, lines: ['Osdorf'],             size: 8 },
+  { id: 'gross-flottbek', x: 248, y: 495, lines: ['Gr. Flottbek'],       size: 8 },
+  { id: 'nienstedten',    x: 193, y: 528, lines: ['Nienstedten'],        size: 8 },
+  // Zentrum-Süd
+  { id: 'altona-nord',    x: 409, y: 502, lines: ['Altona-N.'],          size: 8 },
+  { id: 'altona-altstadt', x: 404, y: 536, lines: ['Altona-Altst.'],     size: 8 },
+  { id: 'st-pauli',       x: 463, y: 529, lines: ['St. Pauli'],          size: 8 },
+  { id: 'neustadt',       x: 486, y: 540, lines: ['Neustadt'],           size: 8 },
+  { id: 'hamburg-altstadt', x: 520, y: 545, lines: ['Altstadt'],         size: 8 },
+  { id: 'hafencity',      x: 533, y: 578, lines: ['HafenCity'],          size: 8 },
+  // Zentrum-Ost
+  { id: 'hohenfelde',     x: 565, y: 497, lines: ['Hohenfelde'],         size: 8 },
+  { id: 'borgfelde',      x: 584, y: 523, lines: ['Borgfelde'],          size: 8 },
+  // Osten
+  { id: 'dulsberg',       x: 652, y: 422, lines: ['Dulsberg'],           size: 8 },
+  { id: 'marienthal',     x: 693, y: 476, lines: ['Marienthal'],         size: 8 },
+  { id: 'hamm',           x: 633, y: 532, lines: ['Hamm'],               size: 8 },
+  { id: 'horn',           x: 702, y: 534, lines: ['Horn'],               size: 8 },
+  // Nordosten
+  { id: 'steilshoop',     x: 639, y: 326, lines: ['Steilshoop'],         size: 8 },
+  { id: 'wellingbuettel', x: 690, y: 232, lines: ['Wellingsbüttel'],     size: 8 },
+  { id: 'sasel',          x: 758, y: 184, lines: ['Sasel'],              size: 8 },
+  { id: 'poppenbuettel',  x: 674, y: 155, lines: ['Poppenbüttel'],       size: 8 },
+  { id: 'farmsen-berne',  x: 772, y: 311, lines: ['Farmsen-B.'],         size: 8 },
+  { id: 'tonndorf',       x: 769, y: 408, lines: ['Tonndorf'],           size: 8 },
+  { id: 'jenfeld',        x: 784, y: 445, lines: ['Jenfeld'],            size: 8 },
 ]
 
 const STAGGER_ORDER = [
@@ -268,27 +314,22 @@ export function HamburgSVG({
         ))}
       </g>
 
-      {/* SCHICHT 5: Labels mit Leader Lines */}
+      {/* SCHICHT 5: Labels */}
       <g
         fontFamily="'DM Sans', system-ui, sans-serif"
         style={{ pointerEvents: 'none', opacity: loaded ? 1 : 0, transition: 'opacity 400ms ease 500ms' }}
       >
-        {/* Leader Lines fuer externe Labels */}
-        {LABELS.filter(l => l.leader).map(({ id, x, y, leader }) => (
-          <line
-            key={`leader-${id}`}
-            x1={x}
-            y1={y + 2}
-            x2={leader[0]}
-            y2={leader[1]}
-            stroke="#999"
-            strokeWidth="0.5"
-            strokeDasharray="2,2"
-          />
+        {/* Graue Stadtteil-Labels (Hintergrund, dezent) */}
+        {GREY_LABELS.map(({ id, x, y, lines, size }) => (
+          <text key={id} textAnchor="middle" fontSize={size} fontWeight="400" fill="#999">
+            {lines.map((line, i) => (
+              <tspan key={i} x={x} y={y + i * (size * 1.2)}>{line}</tspan>
+            ))}
+          </text>
         ))}
-        {/* Label-Texte */}
+        {/* Interaktive Stadtteil-Labels (farbig, prominent) */}
         {LABELS.map(({ id, x, y, lines, size }) => (
-          <text key={id} textAnchor="middle" fontSize={size} fontWeight="500" fill={DARK_DISTRICTS.has(id) ? '#F5F2F0' : '#333'}>
+          <text key={id} textAnchor="middle" fontSize={size} fontWeight="600" fill={DARK_DISTRICTS.has(id) ? '#F5F2F0' : '#333'}>
             {lines.map((line, i) => (
               <tspan key={i} x={x} y={y + i * (size * 1.2)}>{line}</tspan>
             ))}
