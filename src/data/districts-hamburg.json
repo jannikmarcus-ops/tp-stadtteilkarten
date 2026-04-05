@@ -1639,6 +1639,790 @@
         "text": "Was ist Ihre Immobilie in Duvenstedt wert?",
         "url": "https://teigelerundpartner.de/immobilienbewertung-hamburg/"
       }
+    },
+    {
+      "id": "wohldorf-ohlstedt",
+      "name": "Wohldorf-Ohlstedt",
+      "slug": "wohldorf-ohlstedt",
+      "bezirk": "Wandsbek",
+      "priority": "erweitert",
+      "prices": {
+        "etwPerSqm": 5400,
+        "housePerSqm": 5600,
+        "rentPerSqm": 13.5,
+        "trend": "stabil",
+        "trendPercent": 0.3
+      },
+      "demographics": {
+        "population": 4839,
+        "areaSqKm": 17.3,
+        "distanceCityKm": 22,
+        "distanceCityMin": 45
+      },
+      "character": {
+        "typicalBuildings": "EFH, Villen, Landhäuser",
+        "targetGroups": [
+          "Familien",
+          "gehobenes Klientel"
+        ],
+        "oepnv": "U1 (Ohlstedt)",
+        "shortProfile": "Nördlichster Stadtteil der Walddörfer mit dem Naturschutzgebiet Wohldorfer Wald. U1 Endstation Ohlstedt. Exklusive Einfamilienhäuser und Villen auf großen Grundstücken.",
+        "detailPageUrl": null
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Wohldorf-Ohlstedt wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-hamburg/"
+      }
+    },
+    {
+      "id": "steilshoop",
+      "name": "Steilshoop",
+      "slug": "steilshoop",
+      "bezirk": "Wandsbek",
+      "priority": "erweitert",
+      "prices": {
+        "etwPerSqm": 4300,
+        "housePerSqm": 4800,
+        "rentPerSqm": 11.5,
+        "trend": "stabil",
+        "trendPercent": 0.3
+      },
+      "demographics": {
+        "population": 19856,
+        "areaSqKm": 2.5,
+        "distanceCityKm": 8,
+        "distanceCityMin": 20
+      },
+      "character": {
+        "typicalBuildings": "Großsiedlung, MFH",
+        "targetGroups": [
+          "Familien",
+          "Erstbezieher"
+        ],
+        "oepnv": "Bus (U5 geplant)",
+        "shortProfile": "Großsiedlung der 1960er/70er mit den günstigsten Preisen nördlich der Innenstadt. Geplante U5-Anbindung als Aufwertungsperspektive.",
+        "detailPageUrl": null
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Steilshoop wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-hamburg/"
+      }
+    },
+    {
+      "id": "dulsberg",
+      "name": "Dulsberg",
+      "slug": "dulsberg",
+      "bezirk": "Hamburg-Nord",
+      "priority": "erweitert",
+      "prices": {
+        "etwPerSqm": 5200,
+        "housePerSqm": 5200,
+        "rentPerSqm": 13.0,
+        "trend": "stabil",
+        "trendPercent": 0.3
+      },
+      "demographics": {
+        "population": 17230,
+        "areaSqKm": 1.2,
+        "distanceCityKm": 5,
+        "distanceCityMin": 12
+      },
+      "character": {
+        "typicalBuildings": "Altbau-MFH, Nachkriegsbauten",
+        "targetGroups": [
+          "junge Berufstätige",
+          "Familien"
+        ],
+        "oepnv": "U1",
+        "shortProfile": "Urbaner Stadtteil zwischen Barmbek und Wandsbek mit Mix aus Altbau und Nachkriegsbauten. U1 direkt vor der Tür. Preislich deutlich unter Barmbek-Süd.",
+        "detailPageUrl": null
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Dulsberg wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-hamburg/"
+      }
+    },
+    {
+      "id": "marienthal",
+      "name": "Marienthal",
+      "slug": "marienthal",
+      "bezirk": "Wandsbek",
+      "priority": "erweitert",
+      "prices": {
+        "etwPerSqm": 5200,
+        "housePerSqm": 5800,
+        "rentPerSqm": 14.0,
+        "trend": "steigend",
+        "trendPercent": 1.2
+      },
+      "demographics": {
+        "population": 13879,
+        "areaSqKm": 3.3,
+        "distanceCityKm": 7,
+        "distanceCityMin": 15
+      },
+      "character": {
+        "typicalBuildings": "Villen, EFH, MFH",
+        "targetGroups": [
+          "Familien",
+          "gehobenes Klientel"
+        ],
+        "oepnv": "U1, S1",
+        "shortProfile": "Grüne, bürgerliche Villenlage östlich von Wandsbek. Gehobenes Preisniveau mit vielen Einfamilienhäusern und Villen. U1 und S1 in der Nähe.",
+        "detailPageUrl": null
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Marienthal wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-hamburg/"
+      }
+    },
+    {
+      "id": "jenfeld",
+      "name": "Jenfeld",
+      "slug": "jenfeld",
+      "bezirk": "Wandsbek",
+      "priority": "erweitert",
+      "prices": {
+        "etwPerSqm": 4350,
+        "housePerSqm": 4400,
+        "rentPerSqm": 12.0,
+        "trend": "stabil",
+        "trendPercent": 0.0
+      },
+      "demographics": {
+        "population": 29391,
+        "areaSqKm": 5.0,
+        "distanceCityKm": 10,
+        "distanceCityMin": 22
+      },
+      "character": {
+        "typicalBuildings": "MFH, Großsiedlung, Neubau",
+        "targetGroups": [
+          "Familien",
+          "Erstbezieher"
+        ],
+        "oepnv": "Bus",
+        "shortProfile": "Weitläufiger Stadtteil mit Großwohnsiedlungen und grüner Jenfelder Au. Günstiger Einstieg im Osten Hamburgs. Neubauprojekte bringen frischen Wohnraum.",
+        "detailPageUrl": null
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Jenfeld wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-hamburg/"
+      }
+    },
+    {
+      "id": "tonndorf",
+      "name": "Tonndorf",
+      "slug": "tonndorf",
+      "bezirk": "Wandsbek",
+      "priority": "erweitert",
+      "prices": {
+        "etwPerSqm": 4500,
+        "housePerSqm": 4500,
+        "rentPerSqm": 13.0,
+        "trend": "stabil",
+        "trendPercent": 0.3
+      },
+      "demographics": {
+        "population": 15580,
+        "areaSqKm": 3.9,
+        "distanceCityKm": 10,
+        "distanceCityMin": 20
+      },
+      "character": {
+        "typicalBuildings": "EFH, MFH",
+        "targetGroups": [
+          "Familien",
+          "Berufstätige"
+        ],
+        "oepnv": "S1",
+        "shortProfile": "Ruhiges Wohngebiet mit Ein- und Mehrfamilienhäusern entlang der Bahntrasse. S-Bahn Tonndorf, Nähe A24. Preislich zwischen Jenfeld und Rahlstedt.",
+        "detailPageUrl": null
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Tonndorf wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-hamburg/"
+      }
+    },
+    {
+      "id": "farmsen-berne",
+      "name": "Farmsen-Berne",
+      "slug": "farmsen-berne",
+      "bezirk": "Wandsbek",
+      "priority": "erweitert",
+      "prices": {
+        "etwPerSqm": 4400,
+        "housePerSqm": 4600,
+        "rentPerSqm": 12.0,
+        "trend": "stabil",
+        "trendPercent": 0.3
+      },
+      "demographics": {
+        "population": 39266,
+        "areaSqKm": 8.3,
+        "distanceCityKm": 12,
+        "distanceCityMin": 25
+      },
+      "character": {
+        "typicalBuildings": "RH, EFH, MFH",
+        "targetGroups": [
+          "Familien",
+          "Berufstätige"
+        ],
+        "oepnv": "U1",
+        "shortProfile": "Großer, familienfreundlicher Stadtteil mit U1-Anbindung (Farmsen, Berne). Farmsener Heide als Naherholung. Mix aus Reihen-, Einfamilienhäusern und Geschosswohnungsbau.",
+        "detailPageUrl": null
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Farmsen-Berne wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-hamburg/"
+      }
+    },
+    {
+      "id": "altstadt",
+      "name": "Altstadt",
+      "slug": "altstadt",
+      "bezirk": "Hamburg-Mitte",
+      "priority": "erweitert",
+      "prices": {
+        "etwPerSqm": 7400,
+        "housePerSqm": 6000,
+        "rentPerSqm": 18.5,
+        "trend": "stabil",
+        "trendPercent": 0.3
+      },
+      "demographics": {
+        "population": 2549,
+        "areaSqKm": 1.3,
+        "distanceCityKm": 0,
+        "distanceCityMin": 0
+      },
+      "character": {
+        "typicalBuildings": "Geschäftshäuser, MFH",
+        "targetGroups": [
+          "Berufstätige",
+          "Investoren"
+        ],
+        "oepnv": "U1-4, S1-3",
+        "shortProfile": "Historisches Herz Hamburgs mit Rathaus und Mönckebergstraße. Fast ausschließlich Gewerbe. Extrem wenige Wohnimmobilien zu sehr hohen Preisen.",
+        "detailPageUrl": null
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in der Altstadt wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-hamburg/"
+      }
+    },
+    {
+      "id": "neustadt",
+      "name": "Neustadt",
+      "slug": "neustadt",
+      "bezirk": "Hamburg-Mitte",
+      "priority": "erweitert",
+      "prices": {
+        "etwPerSqm": 7200,
+        "housePerSqm": 6000,
+        "rentPerSqm": 18.0,
+        "trend": "stabil",
+        "trendPercent": 0.3
+      },
+      "demographics": {
+        "population": 12710,
+        "areaSqKm": 2.4,
+        "distanceCityKm": 1,
+        "distanceCityMin": 5
+      },
+      "character": {
+        "typicalBuildings": "Altbau-MFH, Geschäftshäuser",
+        "targetGroups": [
+          "Berufstätige",
+          "gehobenes Klientel"
+        ],
+        "oepnv": "U1-3, S1-3",
+        "shortProfile": "Zentrale Innenstadtlage zwischen Alster und Elbe mit Michel, Gänsemarkt und Colonnaden. Gehobene Altbauwohnungen und Geschäftshäuser.",
+        "detailPageUrl": null
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in der Neustadt wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-hamburg/"
+      }
+    },
+    {
+      "id": "st-pauli",
+      "name": "St. Pauli",
+      "slug": "st-pauli",
+      "bezirk": "Hamburg-Mitte",
+      "priority": "erweitert",
+      "prices": {
+        "etwPerSqm": 7000,
+        "housePerSqm": 5800,
+        "rentPerSqm": 17.5,
+        "trend": "steigend",
+        "trendPercent": 1.5
+      },
+      "demographics": {
+        "population": 22377,
+        "areaSqKm": 2.7,
+        "distanceCityKm": 2,
+        "distanceCityMin": 8
+      },
+      "character": {
+        "typicalBuildings": "Altbau-MFH, Gründerzeit",
+        "targetGroups": [
+          "Kreative",
+          "junge Berufstätige",
+          "Singles"
+        ],
+        "oepnv": "U3, S1/S3",
+        "shortProfile": "Hamburgs legendäres Szene-Viertel rund um die Reeperbahn. Kulturell vielfältig, stark gentrifiziert. Steigende Preise bei hoher Nachfrage.",
+        "detailPageUrl": null
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in St. Pauli wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-hamburg/"
+      }
+    },
+    {
+      "id": "hafencity",
+      "name": "HafenCity",
+      "slug": "hafencity",
+      "bezirk": "Hamburg-Mitte",
+      "priority": "erweitert",
+      "prices": {
+        "etwPerSqm": 8500,
+        "housePerSqm": 7000,
+        "rentPerSqm": 20.0,
+        "trend": "steigend",
+        "trendPercent": 2.0
+      },
+      "demographics": {
+        "population": 8062,
+        "areaSqKm": 2.4,
+        "distanceCityKm": 2,
+        "distanceCityMin": 8
+      },
+      "character": {
+        "typicalBuildings": "Neubau, Luxuswohnungen",
+        "targetGroups": [
+          "gehobenes Klientel",
+          "Investoren",
+          "Berufstätige"
+        ],
+        "oepnv": "U4",
+        "shortProfile": "Europas größtes innerstädtisches Stadtentwicklungsprojekt mit Elbphilharmonie. Modernes Luxuswohnen am Wasser. Neubau-dominiert, Spitzenpreise bis 13.500 €/m².",
+        "detailPageUrl": null
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in der HafenCity wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-hamburg/"
+      }
+    },
+    {
+      "id": "hammerbrook",
+      "name": "Hammerbrook",
+      "slug": "hammerbrook",
+      "bezirk": "Hamburg-Mitte",
+      "priority": "erweitert",
+      "prices": {
+        "etwPerSqm": 5800,
+        "housePerSqm": 5000,
+        "rentPerSqm": 15.0,
+        "trend": "steigend",
+        "trendPercent": 1.5
+      },
+      "demographics": {
+        "population": 6943,
+        "areaSqKm": 3.6,
+        "distanceCityKm": 3,
+        "distanceCityMin": 10
+      },
+      "character": {
+        "typicalBuildings": "Neubau, MFH, Bürogebäude",
+        "targetGroups": [
+          "junge Berufstätige",
+          "Investoren"
+        ],
+        "oepnv": "S3/S31",
+        "shortProfile": "Im Wandel von Bürostadt (City Süd) zum urbanen Wohn-/Arbeitsviertel. Einwohnerzahl seit 2007 vervierfacht. Noch günstig für innerstädtische Lage.",
+        "detailPageUrl": null
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Hammerbrook wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-hamburg/"
+      }
+    },
+    {
+      "id": "borgfelde",
+      "name": "Borgfelde",
+      "slug": "borgfelde",
+      "bezirk": "Hamburg-Mitte",
+      "priority": "erweitert",
+      "prices": {
+        "etwPerSqm": 5700,
+        "housePerSqm": 5000,
+        "rentPerSqm": 14.0,
+        "trend": "stabil",
+        "trendPercent": 0.3
+      },
+      "demographics": {
+        "population": 8880,
+        "areaSqKm": 0.9,
+        "distanceCityKm": 3,
+        "distanceCityMin": 8
+      },
+      "character": {
+        "typicalBuildings": "MFH, Blockrand",
+        "targetGroups": [
+          "Berufstätige",
+          "Paare"
+        ],
+        "oepnv": "U2/U4, S1",
+        "shortProfile": "Kompakter Stadtteil zwischen City und Hamm. Zentrumsnah, ruhiger und günstiger als die Innenstadt. U2/U4 (Burgstraße), S1 (Berliner Tor).",
+        "detailPageUrl": null
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Borgfelde wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-hamburg/"
+      }
+    },
+    {
+      "id": "hamm",
+      "name": "Hamm",
+      "slug": "hamm",
+      "bezirk": "Hamburg-Mitte",
+      "priority": "erweitert",
+      "prices": {
+        "etwPerSqm": 5200,
+        "housePerSqm": 4800,
+        "rentPerSqm": 13.5,
+        "trend": "stabil",
+        "trendPercent": 0.5
+      },
+      "demographics": {
+        "population": 40580,
+        "areaSqKm": 3.7,
+        "distanceCityKm": 4,
+        "distanceCityMin": 12
+      },
+      "character": {
+        "typicalBuildings": "MFH, Altbau, Neubau",
+        "targetGroups": [
+          "Familien",
+          "Berufstätige"
+        ],
+        "oepnv": "U2/U4",
+        "shortProfile": "Dicht besiedeltes, innenstadtnahes Wohnviertel mit 40.000 Einwohnern. Preislich moderat für die zentrale Lage. Gentrifizierungstendenzen Richtung City.",
+        "detailPageUrl": null
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Hamm wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-hamburg/"
+      }
+    },
+    {
+      "id": "horn",
+      "name": "Horn",
+      "slug": "horn",
+      "bezirk": "Hamburg-Mitte",
+      "priority": "erweitert",
+      "prices": {
+        "etwPerSqm": 4700,
+        "housePerSqm": 4500,
+        "rentPerSqm": 12.5,
+        "trend": "stabil",
+        "trendPercent": 0.3
+      },
+      "demographics": {
+        "population": 39050,
+        "areaSqKm": 5.9,
+        "distanceCityKm": 6,
+        "distanceCityMin": 15
+      },
+      "character": {
+        "typicalBuildings": "MFH, EFH, Siedlungshäuser",
+        "targetGroups": [
+          "Familien",
+          "Berufstätige"
+        ],
+        "oepnv": "U2/U4",
+        "shortProfile": "Traditionsreicher Stadtteil mit der ehemaligen Horner Rennbahn. Unteres Mittelfeld preislich. U2/U4, geplante U4-Verlängerung.",
+        "detailPageUrl": null
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Horn wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-hamburg/"
+      }
+    },
+    {
+      "id": "billstedt",
+      "name": "Billstedt",
+      "slug": "billstedt",
+      "bezirk": "Hamburg-Mitte",
+      "priority": "erweitert",
+      "prices": {
+        "etwPerSqm": 3800,
+        "housePerSqm": 4000,
+        "rentPerSqm": 11.0,
+        "trend": "stabil",
+        "trendPercent": 0.3
+      },
+      "demographics": {
+        "population": 70950,
+        "areaSqKm": 15.4,
+        "distanceCityKm": 8,
+        "distanceCityMin": 20
+      },
+      "character": {
+        "typicalBuildings": "MFH, Großsiedlung, EFH",
+        "targetGroups": [
+          "Familien",
+          "Erstbezieher"
+        ],
+        "oepnv": "U2/U4",
+        "shortProfile": "71.000 Einwohner, einer der bevölkerungsreichsten Stadtteile. Von Mümmelmannsberg bis Einfamilienhäuser. Eines der günstigsten Pflaster der Stadt.",
+        "detailPageUrl": null
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Billstedt wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-hamburg/"
+      }
+    },
+    {
+      "id": "rothenburgsort",
+      "name": "Rothenburgsort",
+      "slug": "rothenburgsort",
+      "bezirk": "Hamburg-Mitte",
+      "priority": "erweitert",
+      "prices": {
+        "etwPerSqm": 5600,
+        "housePerSqm": 5000,
+        "rentPerSqm": 14.0,
+        "trend": "steigend",
+        "trendPercent": 1.5
+      },
+      "demographics": {
+        "population": 10180,
+        "areaSqKm": 3.6,
+        "distanceCityKm": 4,
+        "distanceCityMin": 12
+      },
+      "character": {
+        "typicalBuildings": "Neubau, MFH",
+        "targetGroups": [
+          "junge Berufstätige",
+          "Investoren"
+        ],
+        "oepnv": "S2/S21",
+        "shortProfile": "Aufstrebend an der Bille-Mündung zwischen HafenCity und Billbrook. Einwohnerzahl verfünffacht seit 2007. Neubauprojekte und HafenCity-Effekt.",
+        "detailPageUrl": null
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Rothenburgsort wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-hamburg/"
+      }
+    },
+    {
+      "id": "lohbruegge",
+      "name": "Lohbrügge",
+      "slug": "lohbruegge",
+      "bezirk": "Bergedorf",
+      "priority": "erweitert",
+      "prices": {
+        "etwPerSqm": 4100,
+        "housePerSqm": 4200,
+        "rentPerSqm": 11.5,
+        "trend": "stabil",
+        "trendPercent": 0.3
+      },
+      "demographics": {
+        "population": 41400,
+        "areaSqKm": 13.0,
+        "distanceCityKm": 15,
+        "distanceCityMin": 30
+      },
+      "character": {
+        "typicalBuildings": "EFH, MFH, Großsiedlung",
+        "targetGroups": [
+          "Familien",
+          "Erstbezieher"
+        ],
+        "oepnv": "Bus (S Bergedorf)",
+        "shortProfile": "Einwohnerreichster Stadtteil in Bergedorf. Einfamilienhäuser und Großsiedlungen. Boberger Düne als Naherholung. Günstige Alternative zur Innenstadt.",
+        "detailPageUrl": null
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Lohbrügge wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-hamburg/"
+      }
+    },
+    {
+      "id": "bergedorf",
+      "name": "Bergedorf",
+      "slug": "bergedorf",
+      "bezirk": "Bergedorf",
+      "priority": "erweitert",
+      "prices": {
+        "etwPerSqm": 4700,
+        "housePerSqm": 4500,
+        "rentPerSqm": 12.5,
+        "trend": "stabil",
+        "trendPercent": 0.3
+      },
+      "demographics": {
+        "population": 37560,
+        "areaSqKm": 11.9,
+        "distanceCityKm": 18,
+        "distanceCityMin": 35
+      },
+      "character": {
+        "typicalBuildings": "MFH, EFH, Fachwerk",
+        "targetGroups": [
+          "Familien",
+          "Berufstätige"
+        ],
+        "oepnv": "S21",
+        "shortProfile": "Eigene kleine Stadt im Osten mit Schloss, Theater und Fußgängerzone. Urbanes Bezirkszentrum. Solide mittlere Preislage.",
+        "detailPageUrl": null
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Bergedorf wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-hamburg/"
+      }
+    },
+    {
+      "id": "allermoehe",
+      "name": "Allermöhe",
+      "slug": "allermoehe",
+      "bezirk": "Bergedorf",
+      "priority": "erweitert",
+      "prices": {
+        "etwPerSqm": 4100,
+        "housePerSqm": 4200,
+        "rentPerSqm": 11.5,
+        "trend": "stabil",
+        "trendPercent": 0.0
+      },
+      "demographics": {
+        "population": 1411,
+        "areaSqKm": 8.6,
+        "distanceCityKm": 16,
+        "distanceCityMin": 32
+      },
+      "character": {
+        "typicalBuildings": "EFH, Reetdach",
+        "targetGroups": [
+          "Familien",
+          "Naturliebhaber"
+        ],
+        "oepnv": "S21",
+        "shortProfile": "Ländlich an der Dove-Elbe. Historische Reetdachhäuser. Seit Abtrennung von Neuallermöhe nur ~1.400 Einwohner. Ruhige Dorfidylle.",
+        "detailPageUrl": null
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Allermöhe wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-hamburg/"
+      }
+    },
+    {
+      "id": "neuallermöhe",
+      "name": "Neuallermöhe",
+      "slug": "neuallermöhe",
+      "bezirk": "Bergedorf",
+      "priority": "erweitert",
+      "prices": {
+        "etwPerSqm": 4500,
+        "housePerSqm": 4200,
+        "rentPerSqm": 11.5,
+        "trend": "stabil",
+        "trendPercent": 0.3
+      },
+      "demographics": {
+        "population": 12841,
+        "areaSqKm": 4.4,
+        "distanceCityKm": 16,
+        "distanceCityMin": 32
+      },
+      "character": {
+        "typicalBuildings": "RH, ETW, Neubau",
+        "targetGroups": [
+          "Familien",
+          "Erstbezieher"
+        ],
+        "oepnv": "S21",
+        "shortProfile": "Neubaugebiet der 1990er/2000er mit Fleetsystem nach Amsterdamer Vorbild. Reihenhäuser und ETW unter Innenstadt-Niveau. Für junge Familien.",
+        "detailPageUrl": null
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Neuallermöhe wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-hamburg/"
+      }
+    },
+    {
+      "id": "billwerder",
+      "name": "Billwerder",
+      "slug": "billwerder",
+      "bezirk": "Bergedorf",
+      "priority": "erweitert",
+      "prices": {
+        "etwPerSqm": 3700,
+        "housePerSqm": 3800,
+        "rentPerSqm": 11.0,
+        "trend": "stabil",
+        "trendPercent": 0.0
+      },
+      "demographics": {
+        "population": 1400,
+        "areaSqKm": 9.5,
+        "distanceCityKm": 14,
+        "distanceCityMin": 28
+      },
+      "character": {
+        "typicalBuildings": "EFH, Bauernhöfe",
+        "targetGroups": [
+          "Familien",
+          "Naturliebhaber"
+        ],
+        "oepnv": "S21",
+        "shortProfile": "Dünn besiedeltes Marschland östlich der A1. Reiterhochburg. Bauernhöfe und JVA. Kaum Geschosswohnungsbau.",
+        "detailPageUrl": null
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Billwerder wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-hamburg/"
+      }
+    },
+    {
+      "id": "moorfleet",
+      "name": "Moorfleet",
+      "slug": "moorfleet",
+      "bezirk": "Bergedorf",
+      "priority": "erweitert",
+      "prices": {
+        "etwPerSqm": 3500,
+        "housePerSqm": 3800,
+        "rentPerSqm": 11.0,
+        "trend": "stabil",
+        "trendPercent": 0.0
+      },
+      "demographics": {
+        "population": 1203,
+        "areaSqKm": 4.3,
+        "distanceCityKm": 12,
+        "distanceCityMin": 25
+      },
+      "character": {
+        "typicalBuildings": "EFH, historische Bauten",
+        "targetGroups": [
+          "Familien",
+          "Naturliebhaber"
+        ],
+        "oepnv": "Bus",
+        "shortProfile": "Kleines Marschdorf an der Dove-Elbe. Historische St.-Nikolai-Kirche (1681). Äußerst geringe Datenbasis. S21 (Mittlerer Landweg).",
+        "detailPageUrl": null
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Moorfleet wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-hamburg/"
+      }
     }
   ]
 }
