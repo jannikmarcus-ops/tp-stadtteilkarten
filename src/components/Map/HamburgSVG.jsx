@@ -140,7 +140,7 @@ const LABELS = [
   { id: 'rotherbaum',    x: 498, y: 487, lines: ['Rother-', 'baum'],     size: 7 },
   { id: 'hoheluft-west', x: 450, y: 430, lines: ['Hoheluft-W'],          size: 6 },
   { id: 'hoheluft-ost',  x: 470, y: 421, lines: ['Hoheluft-O'],          size: 6 },
-  { id: 'sternschanze',  x: 432, y: 458, lines: ['Stern-', 'schanze'],   size: 6 },
+  { id: 'sternschanze',  x: 432, y: 458, lines: ['Stern-', 'schanze'],   size: 7 },
 ]
 
 // Graue Labels (font-weight 400, fill #999)
@@ -161,11 +161,11 @@ const GREY_LABELS = [
   { id: 'gross-flottbek',  x: 268, y: 489, lines: ['Groß', 'Flottbek'],    size: 8 },
   { id: 'nienstedten',     x: 193, y: 528, lines: ['Nienstedten'],          size: 8 },
   // Zentrum-Sued (Altona-Altstadt + Altona-Nord zusammengelegt)
-  { id: 'altona',          x: 404, y: 517, lines: ['Altona'],               size: 9 },
-  { id: 'st-pauli',        x: 400, y: 497, lines: ['St. Pauli'],            size: 8 },
-  { id: 'neustadt',        x: 457, y: 523, lines: ['Neustadt'],             size: 7 },
-  { id: 'hamburg-altstadt', x: 482, y: 531, lines: ['Altstadt'],            size: 7 },
-  { id: 'hafencity',       x: 524, y: 568, lines: ['HafenCity'],            size: 7 },
+  { id: 'altona',          x: 404, y: 510, lines: ['Altona'],               size: 9 },
+  { id: 'neustadt',        x: 457, y: 523, lines: ['St. Pauli'],            size: 7 },
+  { id: 'hamburg-altstadt', x: 482, y: 535, lines: ['Neustadt'],            size: 7 },
+  { id: 'altstadt-label',  x: 520, y: 550, lines: ['Altstadt'],             size: 7 },
+  { id: 'hafencity',       x: 524, y: 572, lines: ['HafenCity'],            size: 7 },
   // Zentrum-Ost
   { id: 'hohenfelde',      x: 577.5, y: 498.5, lines: ['Hohenfelde'],           size: 6 },
   { id: 'borgfelde',       x: 585, y: 523, lines: ['Borgfelde'],            size: 6 },
@@ -356,7 +356,7 @@ export function HamburgSVG({
         ))}
         {/* Interaktive Stadtteil-Labels (farbig, prominent) */}
         {LABELS.map(({ id, x, y, lines, size }) => (
-          <text key={id} textAnchor="middle" fontSize={size} fontWeight="600" fill={DARK_DISTRICTS.has(id) ? '#F5F2F0' : '#333'}>
+          <text key={id} textAnchor="middle" fontSize={size} fontWeight={id === 'sternschanze' ? '400' : '600'} fill={DARK_DISTRICTS.has(id) ? '#F5F2F0' : id === 'sternschanze' ? '#666' : '#333'}>
             {lines.map((line, i) => (
               <tspan key={i} x={x} y={y + i * (size * 1.2)}>{line}</tspan>
             ))}
