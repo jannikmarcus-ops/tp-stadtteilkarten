@@ -209,7 +209,7 @@ const LABELS = [
   { id: 'neuallermöhe', x: 833, y: 788, lines: ['Neualler-', 'möhe'], size: 7 },
   { id: 'billwerder',      x: 817, y: 686, lines: ['Billwerder'],          size: 7 },
   { id: 'moorfleet',       x: 682, y: 744, lines: ['Moorfleet'],           size: 7 },
-  { id: 'hohenfelde',     x: 515, y: 538, lines: ['Hohenfelde'],         size: 7 },
+  { id: 'hohenfelde',     x: 573, y: 499, lines: ['Hohenfelde'],         size: 6 },
 ]
 
 // Graue Labels (font-weight 400, fill #999)
