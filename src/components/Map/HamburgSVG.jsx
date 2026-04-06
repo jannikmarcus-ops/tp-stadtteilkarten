@@ -115,7 +115,6 @@ const OTHER_WATER_PATHS = [
   'M518.8,581.5c0.0,0.0 9.2,-9.8 20.1,-7.2c9.7,2.3 28.3,9.4 28.3,9.4',
   'M651.5,627.3l7.2,-4.8l4.5,0.7l8.1,-0.2c0.0,0.0 5.5,1.2 10.0,5.2s21.3,20.1 21.3,20.1',
   'M669.5,622.1l19.2,-16.1c0.0,0.0 7.3,-3.0 13.1,-1.5s42.0,12.5 42.0,12.5',
-  'M584.9,602.1l-12.0,-24.0c-0.9,-1.8 -2.2,-3.1 -4.1,-4.0c-3.1,-1.0 -21.9,-7.9 -22.2,-7.8c-0.4,-0.2 -1.0,-0.4 -0.9,-0.5c-2.4,-1.4 -5.1,-8.4 -7.4,-9.3l-3.6,-1.9c-2.8,-2.7 -6.1,-3.6 -9.2,-5.7c-0.3,0.0 -1.4,-0.2 -1.4,-0.2c-5.7,1.8 -7.3,2.3 -8.7,3.0c-1.3,0.6 -2.4,1.5 -6.1,3.6c-1.2,0.7 -2.5,1.5 -3.6,2.1l-0.5,0.4c-0.4,-0.1 -0.7,0.2 -1.0,0.2c-1.7,-0.0 -3.4,-0.6 -4.8,-0.5c-2.2,0.2 -10.8,2.0 -12.3,1.7',
   'M643.2,618.5l7.1,-7.1c16.6,4.7 17.9,-12.1 22.1,-23.8c0.6,-1.8 1.3,-3.5 1.7,-5.3',
 ]
 
@@ -130,7 +129,7 @@ const DARK_DISTRICTS = new Set([
 
 // Elbe-angrenzende graue Stadtteile (werden über den Wasserflächen gerendert)
 const ELBE_ADJACENT = new Set([
-  'billbrook',
+  'billbrook', 'hafencity', 'altstadt', 'neustadt', 'hammerbrook', 'rothenburgsort',
 ])
 
 // Interaktive Labels (font-weight 600, Farbe nach Heatmap)
@@ -349,28 +348,33 @@ export function HamburgSVG({
         ))}
       </g>
 
-      {/* SCHICHT 4: Alster-Gewaesser (UEBER den Stadtteilen, blockt Klicks im Wasser) */}
-      <g className="water-bodies" style={{ pointerEvents: 'all' }}>
+      {/* SCHICHT 4: Alster (blockt Klicks im Wasser) + Elbe-Details (nur visuell) */}
+      <g className="water-alster" style={{ pointerEvents: 'all' }}>
         <path d={AUSSEN_ALSTER_PATH} fill="#B8D4E3" stroke="#9BC4D8" strokeWidth="1" />
         <ellipse cx={BINNEN_ALSTER_CX} cy={BINNEN_ALSTER_CY} rx={BINNEN_ALSTER_RX} ry={BINNEN_ALSTER_RY} fill="#B8D4E3" stroke="#9BC4D8" strokeWidth="0.8" />
+      </g>
+      <g className="water-elbe-details" style={{ pointerEvents: 'none' }}>
         {OTHER_WATER_PATHS.map((d, i) => (
           <path key={i} d={d} fill="#B8D4E3" stroke="#9BC4D8" strokeWidth="0.5" clipPath="url(#elbe-clip)" />
         ))}
       </g>
 
-      {/* SCHICHT 4.5: Elbe-angrenzende Stadtteile ÜBER den Wasserflächen (damit HafenCity etc. nicht im Wasser verschwinden) */}
-      <g className="elbe-districts" style={{ pointerEvents: 'none' }}>
-        {ALL_DISTRICTS.filter(d => ELBE_ADJACENT.has(d.id)).map(({ id, path: d }) => (
-          <path
-            key={id}
-            d={d}
-            fill="#E8E4E0"
-            stroke="#D1CDC9"
-            strokeWidth="1"
-            strokeLinejoin="round"
-            style={{ opacity: loaded ? 1 : 0, transition: 'opacity 400ms ease 200ms' }}
-          />
-        ))}
+      {/* SCHICHT 4.5: Elbe-angrenzende Stadtteile ÜBER den Wasserflächen */}
+      <g className="elbe-districts">
+        {ALL_DISTRICTS.filter(d => ELBE_ADJACENT.has(d.id)).map(({ id, path: d }) => {
+          const isInteractive = INTERACTIVE_IDS.has(id)
+          return (
+            <path
+              key={`elbe-${id}`}
+              d={d}
+              fill={isInteractive ? getDistrictColor(id, data) : '#E8E4E0'}
+              stroke="#D1CDC9"
+              strokeWidth="1"
+              strokeLinejoin="round"
+              style={{ pointerEvents: 'none', opacity: loaded ? 1 : 0, transition: 'opacity 400ms ease 200ms' }}
+            />
+          )
+        })}
       </g>
 
       {/* SCHICHT 5: Labels */}
