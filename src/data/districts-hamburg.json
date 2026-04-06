@@ -2423,6 +2423,40 @@
         "text": "Was ist Ihre Immobilie in Moorfleet wert?",
         "url": "https://teigelerundpartner.de/immobilienbewertung-hamburg/"
       }
+    },
+    {
+      "id": "hohenfelde",
+      "name": "Hohenfelde",
+      "slug": "hohenfelde",
+      "bezirk": "Hamburg-Nord",
+      "priority": "erweitert",
+      "prices": {
+        "etwPerSqm": 5500,
+        "housePerSqm": 5500,
+        "rentPerSqm": 14.5,
+        "trend": "stabil",
+        "trendPercent": 0.3
+      },
+      "demographics": {
+        "population": 10000,
+        "areaSqKm": 0.8,
+        "distanceCityKm": 3,
+        "distanceCityMin": 8
+      },
+      "character": {
+        "typicalBuildings": "MFH, Altbau",
+        "targetGroups": [
+          "Berufstätige",
+          "Paare"
+        ],
+        "oepnv": "U1",
+        "shortProfile": "Ruhiges Wohnviertel zwischen Uhlenhorst und Borgfelde mit Alsternähe.",
+        "detailPageUrl": null
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Hohenfelde wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-hamburg/"
+      }
     }
   ]
 }
