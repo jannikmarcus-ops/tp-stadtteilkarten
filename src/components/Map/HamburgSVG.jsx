@@ -207,7 +207,7 @@ const LABELS = [
   { id: 'allermoehe',      x: 658, y: 742, lines: ['Allerm\u00f6he'],     size: 7 },
   { id: 'neuallermöhe', x: 833, y: 788, lines: ['Neualler-', 'möhe'], size: 7 },
   { id: 'billwerder',      x: 817, y: 686, lines: ['Billwerder'],          size: 7 },
-  { id: 'moorfleet',       x: 682, y: 744, lines: ['Moorfleet'],           size: 7 },
+  { id: 'moorfleet',       x: 700, y: 768, lines: ['Moorfleet'],           size: 7 },
   { id: 'hohenfelde',     x: 573, y: 499, lines: ['Hohenfelde'],         size: 6 },
 ]
 
