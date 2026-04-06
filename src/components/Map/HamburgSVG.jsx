@@ -204,7 +204,7 @@ const LABELS = [
   { id: 'wohldorf-ohlstedt', x: 790, y: 40, lines: ['Wohldorf-', 'Ohlstedt'], size: 7 },
   { id: 'lohbruegge',      x: 900, y: 694, lines: ['Lohbr\u00fcgge'],     size: 8 },
   { id: 'bergedorf',       x: 967, y: 748, lines: ['Bergedorf'],           size: 8 },
-  { id: 'allermoehe',      x: 658, y: 742, lines: ['Allerm\u00f6he'],     size: 7 },
+  { id: 'allermoehe',      x: 880, y: 769, lines: ['Allerm\u00f6he'],     size: 7 },
   { id: 'neuallermöhe', x: 878, y: 750, lines: ['Neualler-', 'möhe'], size: 7 },
   { id: 'billwerder',      x: 780, y: 670, lines: ['Billwerder'],          size: 7 },
   { id: 'moorfleet',       x: 710, y: 690, lines: ['Moorfleet'],           size: 7 },
