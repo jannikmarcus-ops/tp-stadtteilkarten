@@ -304,7 +304,7 @@ export function HamburgSVG({
       </g>
 
       {/* SCHICHT 1: Stadtgrenze / Hintergrund */}
-      <path d={CITY_BOUNDARY} fill="#E8E4E0" stroke="#B8B4B0" strokeWidth="2" strokeLinejoin="round" />
+      <path d={CITY_BOUNDARY} fill="#E8E4E0" stroke="none" />
 
       {/* SCHICHT 2: Graue Hintergrund-Stadtteile (nicht interaktiv) */}
       <g className="background-districts" style={{ pointerEvents: 'none' }}>
