@@ -1,0 +1,709 @@
+{
+  "meta": {
+    "city": "hamburg",
+    "cityLabel": "Hamburg",
+    "lastUpdated": "2026-04-01",
+    "quarter": "Q1/2026",
+    "source": "Cross-validierte Daten aus ImmoScout24, immowelt, Gutachterausschuss Hamburg (4 Reports)",
+    "priceUnit": "€/m²",
+    "rentUnit": "€/m²",
+    "colorScale": [
+      { "min": 9000, "max": 99999, "color": "#052E26", "label": "9.000+ €/m²" },
+      { "min": 7000, "max": 8999, "color": "#1A5C4A", "label": "7.000–8.999 €/m²" },
+      { "min": 5000, "max": 6999, "color": "#3D8B6E", "label": "5.000–6.999 €/m²" },
+      { "min": 3000, "max": 4999, "color": "#7CB89E", "label": "3.000–4.999 €/m²" },
+      { "min": 0, "max": 2999, "color": "#C5DDD1", "label": "unter 3.000 €/m²" }
+    ]
+  },
+  "waterBodies": [
+    { "id": "elbe", "name": "Elbe", "color": "#B8D4E3" },
+    { "id": "binnenalster", "name": "Binnenalster", "color": "#B8D4E3" },
+    { "id": "aussenalster", "name": "Außenalster", "color": "#B8D4E3" }
+  ],
+  "districts": [
+    {
+      "id": "harvestehude",
+      "name": "Harvestehude",
+      "slug": "harvestehude",
+      "bezirk": "Eimsbüttel",
+      "priority": "kern",
+      "prices": {
+        "etwPerSqm": 9500,
+        "housePerSqm": 12000,
+        "rentPerSqm": 20.00,
+        "trend": "stabil",
+        "trendPercent": 0.5
+      },
+      "demographics": {
+        "population": 17000,
+        "areaSqKm": 2.0,
+        "distanceCityKm": 2,
+        "distanceCityMin": 8
+      },
+      "character": {
+        "typicalBuildings": "Altbau-Villen, MFH, Jugendstil",
+        "targetGroups": ["gehobenes Klientel", "Akademiker", "Familien"],
+        "oepnv": "U1 Hallerstraße/Klosterstern",
+        "shortProfile": "Hamburgs teuerste Wohnlage. Alster-Ufer, Grindelviertel, Rothenbaumchaussee. Spitzenpreise bis 15.000 €/m² bei Neubau. Kaum Preiskorrektur trotz Zinswende.",
+        "detailPageUrl": null
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Harvestehude wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-hamburg/"
+      }
+    },
+    {
+      "id": "uhlenhorst",
+      "name": "Uhlenhorst",
+      "slug": "uhlenhorst",
+      "bezirk": "Hamburg-Nord",
+      "priority": "kern",
+      "prices": {
+        "etwPerSqm": 8800,
+        "housePerSqm": 9500,
+        "rentPerSqm": 18.00,
+        "trend": "stabil",
+        "trendPercent": 0.5
+      },
+      "demographics": {
+        "population": 17000,
+        "areaSqKm": 2.2,
+        "distanceCityKm": 3,
+        "distanceCityMin": 10
+      },
+      "character": {
+        "typicalBuildings": "Altbau-Villen, MFH, Jugendstil",
+        "targetGroups": ["gehobenes Klientel", "Berufstätige", "Paare"],
+        "oepnv": "U3 Mundsburg",
+        "shortProfile": "Alster-Premiumlage. Elegante Altbauten und Villen zwischen Außen- und Binnenalster. Alsterdampfer im Sommer. Eines der teuersten Viertel der Stadt.",
+        "detailPageUrl": null
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Uhlenhorst wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-hamburg/"
+      }
+    },
+    {
+      "id": "hoheluft-ost",
+      "name": "Hoheluft-Ost",
+      "slug": "hoheluft-ost",
+      "bezirk": "Hamburg-Nord",
+      "priority": "kern",
+      "prices": {
+        "etwPerSqm": 8500,
+        "housePerSqm": 9000,
+        "rentPerSqm": 18.00,
+        "trend": "stabil",
+        "trendPercent": 0.5
+      },
+      "demographics": {
+        "population": 9800,
+        "areaSqKm": 0.6,
+        "distanceCityKm": 3,
+        "distanceCityMin": 10
+      },
+      "character": {
+        "typicalBuildings": "Gründerzeit-Altbau, MFH",
+        "targetGroups": ["Singles", "Paare", "Akademiker"],
+        "oepnv": "U3 Hoheluftbrücke",
+        "shortProfile": "Kompakt, urban, teuer. Nur 0,6 km² mit 9.800 Einwohnern. Eine der höchsten Dichten Hamburgs. Fast ausschließlich Gründerzeit-Altbau.",
+        "detailPageUrl": null
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Hoheluft-Ost wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-hamburg/"
+      }
+    },
+    {
+      "id": "eppendorf",
+      "name": "Eppendorf",
+      "slug": "eppendorf",
+      "bezirk": "Hamburg-Nord",
+      "priority": "kern",
+      "prices": {
+        "etwPerSqm": 8000,
+        "housePerSqm": 10000,
+        "rentPerSqm": 18.00,
+        "trend": "stabil",
+        "trendPercent": 0.8
+      },
+      "demographics": {
+        "population": 25250,
+        "areaSqKm": 2.7,
+        "distanceCityKm": 4,
+        "distanceCityMin": 12
+      },
+      "character": {
+        "typicalBuildings": "Jugendstil, Altbau-MFH, Villen",
+        "targetGroups": ["Akademiker", "Ärzte", "Familien"],
+        "oepnv": "U1, U3 Kellinghusenstraße",
+        "shortProfile": "Gehobene Toplage zwischen Alster und UKE. Jugendstil-Architektur, exklusive Boutiquen an der Eppendorfer Landstraße. Beliebte Ärzte- und Akademikerlage.",
+        "detailPageUrl": null
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Eppendorf wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-hamburg/"
+      }
+    },
+    {
+      "id": "winterhude",
+      "name": "Winterhude",
+      "slug": "winterhude",
+      "bezirk": "Hamburg-Nord",
+      "priority": "kern",
+      "prices": {
+        "etwPerSqm": 8000,
+        "housePerSqm": 10000,
+        "rentPerSqm": 17.50,
+        "trend": "stabil",
+        "trendPercent": 0.5
+      },
+      "demographics": {
+        "population": 61000,
+        "areaSqKm": 7.6,
+        "distanceCityKm": 4,
+        "distanceCityMin": 12
+      },
+      "character": {
+        "typicalBuildings": "Villen, Altbau-MFH, Jarrestadt",
+        "targetGroups": ["Familien", "Berufstätige", "gehobenes Klientel"],
+        "oepnv": "U1, U3, S1",
+        "shortProfile": "Hamburgs vielfältigstes Premiumviertel. Von Alster-Villen über die Jarrestadt bis zum Stadtpark. 61.000 Einwohner, größter innenstädtischer Stadtteil.",
+        "detailPageUrl": null
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Winterhude wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-hamburg/"
+      }
+    },
+    {
+      "id": "rotherbaum",
+      "name": "Rotherbaum",
+      "slug": "rotherbaum",
+      "bezirk": "Eimsbüttel",
+      "priority": "ergaenzend",
+      "dataEstimated": true,
+      "prices": {
+        "etwPerSqm": 8000,
+        "housePerSqm": 9000,
+        "rentPerSqm": 17.50,
+        "trend": "stabil",
+        "trendPercent": 0.5
+      },
+      "demographics": {
+        "population": 18000,
+        "areaSqKm": 1.8,
+        "distanceCityKm": 1.5,
+        "distanceCityMin": 5
+      },
+      "character": {
+        "typicalBuildings": "Altbau-MFH, Villen, Universität",
+        "targetGroups": ["Akademiker", "Studenten", "Berufstätige"],
+        "oepnv": "U1 Stephansplatz/Hallerstraße",
+        "shortProfile": "Universitätsviertel zwischen Harvestehude und Innenstadt. Grindelviertel, Rothenbaumchaussee und Hamburgs Campus. Gehobene Lage mit internationalem Flair.",
+        "detailPageUrl": null
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Rotherbaum wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-hamburg/"
+      }
+    },
+    {
+      "id": "ottensen",
+      "name": "Ottensen",
+      "slug": "ottensen",
+      "bezirk": "Altona",
+      "priority": "kern",
+      "prices": {
+        "etwPerSqm": 7500,
+        "housePerSqm": 8000,
+        "rentPerSqm": 17.00,
+        "trend": "steigend",
+        "trendPercent": 3.0
+      },
+      "demographics": {
+        "population": 35000,
+        "areaSqKm": 2.9,
+        "distanceCityKm": 4,
+        "distanceCityMin": 12
+      },
+      "character": {
+        "typicalBuildings": "Altbau-MFH, kleinteile Struktur",
+        "targetGroups": ["Kreative", "Familien", "junge Berufstätige"],
+        "oepnv": "S1, S3 Altona + Ottensen",
+        "shortProfile": "Urban, kreativ, familienfreundlich. Kleinteilige Altbaustruktur mit Kneipen, Galerien und Wochenmärkten. S-Bahn-Knoten Altona plus neue Station Ottensen seit 2023.",
+        "detailPageUrl": null
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Ottensen wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-hamburg/"
+      }
+    },
+    {
+      "id": "othmarschen",
+      "name": "Othmarschen",
+      "slug": "othmarschen",
+      "bezirk": "Altona",
+      "priority": "erweitert",
+      "prices": {
+        "etwPerSqm": 7500,
+        "housePerSqm": 9000,
+        "rentPerSqm": 18.00,
+        "trend": "stabil",
+        "trendPercent": 0.5
+      },
+      "demographics": {
+        "population": 16500,
+        "areaSqKm": 5.9,
+        "distanceCityKm": 6,
+        "distanceCityMin": 15
+      },
+      "character": {
+        "typicalBuildings": "Villen, EFH, großzügige Grundstücke",
+        "targetGroups": ["Familien", "gehobenes Klientel"],
+        "oepnv": "S1 Othmarschen",
+        "shortProfile": "Gehobene Elbvorort-Lage zwischen Blankenese und Altona. Villen und großzügige EFH dominieren. Nähe Jenischpark. Stabile Spitzenpreise.",
+        "detailPageUrl": null
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Othmarschen wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-hamburg/"
+      }
+    },
+    {
+      "id": "hoheluft-west",
+      "name": "Hoheluft-West",
+      "slug": "hoheluft-west",
+      "bezirk": "Eimsbüttel",
+      "priority": "kern",
+      "prices": {
+        "etwPerSqm": 7300,
+        "housePerSqm": 8000,
+        "rentPerSqm": 17.00,
+        "trend": "stabil",
+        "trendPercent": 0.5
+      },
+      "demographics": {
+        "population": 13600,
+        "areaSqKm": 0.7,
+        "distanceCityKm": 3,
+        "distanceCityMin": 10
+      },
+      "character": {
+        "typicalBuildings": "Gründerzeit-Altbau, MFH",
+        "targetGroups": ["junge Berufstätige", "Paare", "Studenten"],
+        "oepnv": "U3 Hoheluftbrücke, Metrobus 5",
+        "shortProfile": "Deutschlands am dichtesten besiedelter Stadtteil. 19.500 EW/km². Nähe UKE. Altbauwohnungen werden oft off-market vermittelt.",
+        "detailPageUrl": null
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Hoheluft-West wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-hamburg/"
+      }
+    },
+    {
+      "id": "blankenese",
+      "name": "Blankenese",
+      "slug": "blankenese",
+      "bezirk": "Altona",
+      "priority": "erweitert",
+      "prices": {
+        "etwPerSqm": 7200,
+        "housePerSqm": 8500,
+        "rentPerSqm": 18.00,
+        "trend": "stabil",
+        "trendPercent": 0.5
+      },
+      "demographics": {
+        "population": 13500,
+        "areaSqKm": 8.3,
+        "distanceCityKm": 12,
+        "distanceCityMin": 25
+      },
+      "character": {
+        "typicalBuildings": "Villen, Landhäuser, Treppenviertel",
+        "targetGroups": ["Familien", "gehobenes Klientel"],
+        "oepnv": "S1 Blankenese",
+        "shortProfile": "Hamburgs Elbvorort-Ikone. Treppenviertel, Elbstrand und S1-Anbindung. Villen, Landhäuser und ein kompakter Ortskern. Premiumlage mit selektivem Markt.",
+        "detailPageUrl": null
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Blankenese wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-hamburg/"
+      }
+    },
+    {
+      "id": "st-georg",
+      "name": "St. Georg",
+      "slug": "st-georg",
+      "bezirk": "Hamburg-Mitte",
+      "priority": "erweitert",
+      "prices": {
+        "etwPerSqm": 7200,
+        "housePerSqm": 8000,
+        "rentPerSqm": 17.50,
+        "trend": "steigend",
+        "trendPercent": 2.0
+      },
+      "demographics": {
+        "population": 13000,
+        "areaSqKm": 1.8,
+        "distanceCityKm": 1,
+        "distanceCityMin": 3
+      },
+      "character": {
+        "typicalBuildings": "Altbau-MFH, Blockrand, Gründerzeit",
+        "targetGroups": ["Berufstätige", "Singles", "Kreative"],
+        "oepnv": "U1-4, S1-3 Hauptbahnhof",
+        "shortProfile": "Urbanstes Viertel mit Hauptbahnhof-Nähe (alle U/S-Linien). Lange Reihe als Flaniermeile. Mischung aus Szeneviertel und Geschäftslage.",
+        "detailPageUrl": null
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in St. Georg wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-hamburg/"
+      }
+    },
+    {
+      "id": "eimsbuettel",
+      "name": "Eimsbüttel",
+      "slug": "eimsbuettel",
+      "bezirk": "Eimsbüttel",
+      "priority": "kern",
+      "prices": {
+        "etwPerSqm": 7000,
+        "housePerSqm": 7500,
+        "rentPerSqm": 16.00,
+        "trend": "steigend",
+        "trendPercent": 3.0
+      },
+      "demographics": {
+        "population": 57800,
+        "areaSqKm": 3.2,
+        "distanceCityKm": 3,
+        "distanceCityMin": 10
+      },
+      "character": {
+        "typicalBuildings": "Gründerzeit-Altbau, MFH",
+        "targetGroups": ["junge Berufstätige", "Familien", "Akademiker"],
+        "oepnv": "U2, U3",
+        "shortProfile": "Hamburgs beliebtester Stadtteil. Gründerzeit-Altbauten, die Osterstraße als Lebensader und U2-Anbindung in 10 Min. zum Jungfernstieg. Höchste Kita-Dichte der Stadt.",
+        "detailPageUrl": null
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Eimsbüttel wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-hamburg/"
+      }
+    },
+    {
+      "id": "sternschanze",
+      "name": "Sternschanze",
+      "slug": "sternschanze",
+      "bezirk": "Altona",
+      "priority": "ergaenzend",
+      "dataEstimated": true,
+      "prices": {
+        "etwPerSqm": 7000,
+        "housePerSqm": 7500,
+        "rentPerSqm": 16.50,
+        "trend": "steigend",
+        "trendPercent": 2.5
+      },
+      "demographics": {
+        "population": 9000,
+        "areaSqKm": 0.5,
+        "distanceCityKm": 2,
+        "distanceCityMin": 5
+      },
+      "character": {
+        "typicalBuildings": "Altbau-MFH, Gründerzeit, Blockrand",
+        "targetGroups": ["Kreative", "junge Berufstätige", "Gastronomen"],
+        "oepnv": "U3, S11/S21/S31 Sternschanze",
+        "shortProfile": "Hamburgs Szeneviertel. Schanzenviertel mit Cafés, Bars und dem Schanzenpark. Kompakt (0,5 km²), lebendig und stark nachgefragt. Gentrifizierung nahezu abgeschlossen.",
+        "detailPageUrl": null
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in der Sternschanze wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-hamburg/"
+      }
+    },
+    {
+      "id": "barmbek-sued",
+      "name": "Barmbek-Süd",
+      "slug": "barmbek-sued",
+      "bezirk": "Hamburg-Nord",
+      "priority": "kern",
+      "prices": {
+        "etwPerSqm": 6500,
+        "housePerSqm": 7000,
+        "rentPerSqm": 16.00,
+        "trend": "stabil",
+        "trendPercent": 0.8
+      },
+      "demographics": {
+        "population": 40000,
+        "areaSqKm": 3.1,
+        "distanceCityKm": 4,
+        "distanceCityMin": 12
+      },
+      "character": {
+        "typicalBuildings": "Gründerzeit-Altbau, MFH, Neubau",
+        "targetGroups": ["junge Berufstätige", "Familien", "Kreative"],
+        "oepnv": "U3, S1 Barmbek",
+        "shortProfile": "Gentrifizierung in vollem Gang. Gründerzeit-Charme trifft auf Szenelokale. U3 und S1 am Knoten Barmbek. Stärkster Preisanstieg unter den Kernvierteln.",
+        "detailPageUrl": null
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Barmbek-Süd wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-hamburg/"
+      }
+    },
+    {
+      "id": "lokstedt",
+      "name": "Lokstedt",
+      "slug": "lokstedt",
+      "bezirk": "Eimsbüttel",
+      "priority": "erweitert",
+      "prices": {
+        "etwPerSqm": 6000,
+        "housePerSqm": 7000,
+        "rentPerSqm": 15.00,
+        "trend": "steigend",
+        "trendPercent": 1.5
+      },
+      "demographics": {
+        "population": 31000,
+        "areaSqKm": 4.9,
+        "distanceCityKm": 5,
+        "distanceCityMin": 15
+      },
+      "character": {
+        "typicalBuildings": "EFH, DHH, MFH, Neubau",
+        "targetGroups": ["Familien", "Berufstätige"],
+        "oepnv": "U2 Hagendeel",
+        "shortProfile": "Familienfreundlich zwischen Eppendorf und Volkspark. NDR-Standort, geplante U5-Anbindung. Solides Mittelfeld mit moderatem Aufwärtstrend.",
+        "detailPageUrl": null
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Lokstedt wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-hamburg/"
+      }
+    },
+    {
+      "id": "bahrenfeld",
+      "name": "Bahrenfeld",
+      "slug": "bahrenfeld",
+      "bezirk": "Altona",
+      "priority": "erweitert",
+      "prices": {
+        "etwPerSqm": 5900,
+        "housePerSqm": 6500,
+        "rentPerSqm": 15.50,
+        "trend": "steigend",
+        "trendPercent": 3.0
+      },
+      "demographics": {
+        "population": 30000,
+        "areaSqKm": 10.9,
+        "distanceCityKm": 6,
+        "distanceCityMin": 15
+      },
+      "character": {
+        "typicalBuildings": "EFH, MFH, Neubau (Science City)",
+        "targetGroups": ["Familien", "Berufstätige", "Wissenschaftler"],
+        "oepnv": "S1, S3",
+        "shortProfile": "Hamburgs ambitionierteste Transformation. Science City (DESY, 3.800 Wohnungen), neuer Fernbahnhof Diebsteich, A7-Deckel. Größtes Aufwertungspotenzial.",
+        "detailPageUrl": null
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Bahrenfeld wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-hamburg/"
+      }
+    },
+    {
+      "id": "barmbek-nord",
+      "name": "Barmbek-Nord",
+      "slug": "barmbek-nord",
+      "bezirk": "Hamburg-Nord",
+      "priority": "erweitert",
+      "prices": {
+        "etwPerSqm": 5800,
+        "housePerSqm": 5500,
+        "rentPerSqm": 14.50,
+        "trend": "steigend",
+        "trendPercent": 2.0
+      },
+      "demographics": {
+        "population": 13600,
+        "areaSqKm": 3.2,
+        "distanceCityKm": 5,
+        "distanceCityMin": 15
+      },
+      "character": {
+        "typicalBuildings": "MFH, Neubau (Pergolenviertel)",
+        "targetGroups": ["junge Berufstätige", "Familien"],
+        "oepnv": "U3, S1",
+        "shortProfile": "Aufsteiger mit U5-Perspektive. Pergolenviertel und Quartier 21 bringen tausende neue Wohnungen. +13% Bevölkerungswachstum seit 2012. Noch deutlich günstiger als Barmbek-Süd.",
+        "detailPageUrl": null
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Barmbek-Nord wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-hamburg/"
+      }
+    },
+    {
+      "id": "eilbek",
+      "name": "Eilbek",
+      "slug": "eilbek",
+      "bezirk": "Wandsbek",
+      "priority": "erweitert",
+      "prices": {
+        "etwPerSqm": 5700,
+        "housePerSqm": 5500,
+        "rentPerSqm": 15.50,
+        "trend": "stabil",
+        "trendPercent": 0.5
+      },
+      "demographics": {
+        "population": 22000,
+        "areaSqKm": 1.7,
+        "distanceCityKm": 3,
+        "distanceCityMin": 10
+      },
+      "character": {
+        "typicalBuildings": "Altbau-MFH, Blockrand",
+        "targetGroups": ["Berufstätige", "Paare"],
+        "oepnv": "U1 Wartenau, S1 Wandsbeker Chaussee",
+        "shortProfile": "Innenstadtnaher Bestandsmarkt zwischen Wandsbek und Barmbek. Kompakt (1,7 km²), dicht besiedelt, stabile Preise bei begrenztem Angebot.",
+        "detailPageUrl": null
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Eilbek wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-hamburg/"
+      }
+    },
+    {
+      "id": "stellingen",
+      "name": "Stellingen",
+      "slug": "stellingen",
+      "bezirk": "Eimsbüttel",
+      "priority": "kern",
+      "prices": {
+        "etwPerSqm": 5500,
+        "housePerSqm": 5500,
+        "rentPerSqm": 14.00,
+        "trend": "steigend",
+        "trendPercent": 4.0
+      },
+      "demographics": {
+        "population": 28800,
+        "areaSqKm": 6.1,
+        "distanceCityKm": 5,
+        "distanceCityMin": 15
+      },
+      "character": {
+        "typicalBuildings": "EFH, RH, MFH, Neubau",
+        "targetGroups": ["Familien", "Berufstätige"],
+        "oepnv": "U2, S3/S21",
+        "shortProfile": "Im Wandel durch Neue Mitte Stellingen und U5-Planung. Hagenbecks Tierpark als Wahrzeichen. Einer der stärksten Preisanstiege (+4-10%).",
+        "detailPageUrl": null
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Stellingen wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-hamburg/"
+      }
+    },
+    {
+      "id": "wandsbek",
+      "name": "Wandsbek",
+      "slug": "wandsbek",
+      "bezirk": "Wandsbek",
+      "priority": "erweitert",
+      "prices": {
+        "etwPerSqm": 5000,
+        "housePerSqm": 4800,
+        "rentPerSqm": 13.00,
+        "trend": "stabil",
+        "trendPercent": 0.5
+      },
+      "demographics": {
+        "population": 37000,
+        "areaSqKm": 6.4,
+        "distanceCityKm": 6,
+        "distanceCityMin": 15
+      },
+      "character": {
+        "typicalBuildings": "MFH, EFH, Neubau",
+        "targetGroups": ["Familien", "Berufstätige"],
+        "oepnv": "U1 Wandsbek Markt, S1",
+        "shortProfile": "Hamburgs bezahlbare Mitte. Eigenes Einkaufszentrum, gute Infrastruktur. S4-Ausbau bringt zusätzliche Anbindung. 37.000 Einwohner.",
+        "detailPageUrl": null
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Wandsbek wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-hamburg/"
+      }
+    },
+    {
+      "id": "bramfeld",
+      "name": "Bramfeld",
+      "slug": "bramfeld",
+      "bezirk": "Wandsbek",
+      "priority": "erweitert",
+      "prices": {
+        "etwPerSqm": 4700,
+        "housePerSqm": 5000,
+        "rentPerSqm": 13.50,
+        "trend": "steigend",
+        "trendPercent": 1.5
+      },
+      "demographics": {
+        "population": 54000,
+        "areaSqKm": 10.3,
+        "distanceCityKm": 8,
+        "distanceCityMin": 25
+      },
+      "character": {
+        "typicalBuildings": "EFH, RH, MFH",
+        "targetGroups": ["Familien", "Erstbezieher"],
+        "oepnv": "U5 (geplant ~2033)",
+        "shortProfile": "U5-Endstation kommt (~2033). 40-Mio.-Euro-Umbau Dorfplatz. 54.000 Einwohner, aktuell noch ohne Schnellbahn. Größtes U5-Aufwertungspotenzial.",
+        "detailPageUrl": null
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Bramfeld wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-hamburg/"
+      }
+    },
+    {
+      "id": "rahlstedt",
+      "name": "Rahlstedt",
+      "slug": "rahlstedt",
+      "bezirk": "Wandsbek",
+      "priority": "erweitert",
+      "prices": {
+        "etwPerSqm": 4300,
+        "housePerSqm": 4800,
+        "rentPerSqm": 13.00,
+        "trend": "stabil",
+        "trendPercent": 0.3
+      },
+      "demographics": {
+        "population": 92000,
+        "areaSqKm": 27.2,
+        "distanceCityKm": 12,
+        "distanceCityMin": 30
+      },
+      "character": {
+        "typicalBuildings": "EFH, RH, DHH, Großsiedlungen",
+        "targetGroups": ["Familien", "Pendler"],
+        "oepnv": "RB (S4 geplant 2027-2029)",
+        "shortProfile": "Hamburgs einwohnerstärkster Stadtteil (92.000). S4-Anschluss ans S-Bahn-Netz kommt 2027-2029. Günstigstes Preisniveau unter den 22 Stadtteilen.",
+        "detailPageUrl": null
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Rahlstedt wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-hamburg/"
+      }
+    }
+  ]
+}
