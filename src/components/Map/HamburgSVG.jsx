@@ -106,11 +106,8 @@ const ELBE_PATH = 'M1195.4,932.5c9.7,1.2 32.9,7.3 32.9,7.3l24.5,6.7v-5.2c0.0,0.0
 // Aussenalster (transformiert aus district-paths.json water.lakes[0])
 const AUSSEN_ALSTER_PATH = 'M511.53,508.57l2.43,-15.22c0,0,0.91,-3.35,3.04,-5.17s4.87,-10.65,5.17,-14 1.52,-13.39,1.52,-15.83 -2.74,-10.04,-3.04,-11.57 -5.17,-10.35,-5.17,-10.35l3.65,-3.04 4.26,-1.22 1.83,7.3c0,0,2.74,5.78,5.78,3.96s6.09,-2.13,7.91,-2.74 3.96,-0.61,3.96,-0.61 -1.22,3.65,-2.74,4.57 -8.22,4.26,-8.22,4.26 0.3,5.17,2.13,7.3 3.04,4.87,3.35,6.09 0.91,5.78,0.91,5.78 2.74,2.43,4.26,2.43 7.3,3.65,8.22,5.78 2.43,8.52,1.22,11.87 -6.09,9.13,-6.09,9.13l-8.52,4.87c0,0,-8.22,5.48,-9.44,6.09s-3.35,1.22,-5.17,1.22 -5.17,0.61,-5.17,0.61L511.53,508.57z'
 
-// Binnenalster (Ellipse, manuell positioniert)
-const BINNEN_ALSTER_CX = 529.35
-const BINNEN_ALSTER_CY = 519.87
-const BINNEN_ALSTER_RX = 19.48
-const BINNEN_ALSTER_RY = 12.17
+// Binnenalster (kleines Rechteck, klar getrennt von Außenalster durch Brücken-Engstelle)
+const BINNEN_ALSTER_PATH = 'M524,512 L532,512 Q537,515 537,519 L536,526 Q535,530 528,530 Q521,530 520,526 L520,519 Q520,515 524,512z'
 
 // Weitere Wasserflaechen (Kanaele, Bassins)
 const OTHER_WATER_PATHS = [
@@ -355,7 +352,7 @@ export function HamburgSVG({
       {/* SCHICHT 4: Alster (blockt Klicks im Wasser) + Elbe-Details (nur visuell) */}
       <g className="water-alster" style={{ pointerEvents: 'all' }}>
         <path d={AUSSEN_ALSTER_PATH} fill="#B8D4E3" stroke="#9BC4D8" strokeWidth="1" />
-        <ellipse cx={BINNEN_ALSTER_CX} cy={BINNEN_ALSTER_CY} rx={BINNEN_ALSTER_RX} ry={BINNEN_ALSTER_RY} fill="#B8D4E3" stroke="#9BC4D8" strokeWidth="0.8" />
+        <path d={BINNEN_ALSTER_PATH} fill="#B8D4E3" stroke="#9BC4D8" strokeWidth="0.8" />
       </g>
       <g className="water-elbe-details" style={{ pointerEvents: 'none' }}>
         {OTHER_WATER_PATHS.map((d, i) => (
