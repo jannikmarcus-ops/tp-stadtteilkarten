@@ -1,9 +1,11 @@
 import { useState, useEffect, useCallback, useRef, memo } from 'react'
 
+// altona-ext ist der obere Teil von Altona, nutzt dieselben Daten
+const normalizeId = (id) => id === 'altona-ext' ? 'altona' : id
+
 function getDistrictColor(districtId, data) {
   const { colorScale } = data.meta
-  const lookupId = districtId === 'altona-ext' ? 'altona' : districtId
-  const district = data.districts.find(d => d.id === lookupId)
+  const district = data.districts.find(d => d.id === normalizeId(districtId))
   if (!district) return '#E8E4E0'
   const price = district.prices.etwPerSqm
   const scale = colorScale.find(s => price >= s.min && price <= s.max)
@@ -272,8 +274,12 @@ export function HamburgSVG({
     return () => clearTimeout(t)
   }, [])
 
+  const handleClick = useCallback((id) => {
+    onDistrictClick?.(normalizeId(id))
+  }, [onDistrictClick])
+
   const handleMouseEnter = useCallback((id) => {
-    onDistrictHover?.(id)
+    onDistrictHover?.(normalizeId(id))
     if (onDistrictRect && svgRef.current) {
       const el = svgRef.current.querySelector(`#${CSS.escape(id)}`)
       if (el) onDistrictRect(el.getBoundingClientRect())
@@ -326,23 +332,24 @@ export function HamburgSVG({
 
       {/* SCHICHT 3: Interaktive Stadtteile (farbig) */}
       <g className="interactive-districts" role="list">
-        {ALL_DISTRICTS.filter(d => INTERACTIVE_IDS.has(d.id)).map(({ id, path: d }) => (
-          <DistrictPath
+        {ALL_DISTRICTS.filter(d => INTERACTIVE_IDS.has(d.id)).map(({ id, path: d }) => {
+          const nid = normalizeId(id)
+          return <DistrictPath
             key={id}
             id={id}
             d={d}
             fill={getDistrictColor(id, data)}
-            label={data.districts.find(dd => dd.id === id)?.name || id}
-            isSelected={selectedId === id}
-            isHovered={hoveredId === id}
-            isDimmed={!!(selectedId && selectedId !== id)}
+            label={data.districts.find(dd => dd.id === nid)?.name || id}
+            isSelected={selectedId === nid}
+            isHovered={hoveredId === nid}
+            isDimmed={!!(selectedId && selectedId !== nid)}
             loaded={loaded}
             staggerDelay={STAGGER_ORDER.indexOf(id) * 30}
-            onClick={onDistrictClick}
+            onClick={handleClick}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={onDistrictLeave}
           />
-        ))}
+        })}
       </g>
 
       {/* SCHICHT 4: Alster (blockt Klicks im Wasser) + Elbe-Details (nur visuell) */}
