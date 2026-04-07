@@ -352,7 +352,6 @@ export function HamburgSVG({
       {/* SCHICHT 4: Alster (blockt Klicks im Wasser) + Elbe-Details (nur visuell) */}
       <g className="water-alster" style={{ pointerEvents: 'all' }}>
         <path d={AUSSEN_ALSTER_PATH} fill="#B8D4E3" stroke="#9BC4D8" strokeWidth="1" />
-        <path d={BINNEN_ALSTER_PATH} fill="#B8D4E3" stroke="#9BC4D8" strokeWidth="0.8" />
       </g>
       <g className="water-elbe-details" style={{ pointerEvents: 'none' }}>
         {OTHER_WATER_PATHS.map((d, i) => (
@@ -377,6 +376,9 @@ export function HamburgSVG({
           )
         })}
       </g>
+
+      {/* SCHICHT 4.6: Binnenalster ÜBER den Elbe-Stadtteilen (damit Altstadt sie nicht überdeckt) */}
+      <path d={BINNEN_ALSTER_PATH} fill="#B8D4E3" stroke="#9BC4D8" strokeWidth="0.8" style={{ pointerEvents: 'all' }} />
 
       {/* SCHICHT 5: Labels */}
       <g
