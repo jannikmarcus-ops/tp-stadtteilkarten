@@ -49,6 +49,10 @@ NAME_TO_ID = {
     'Gievenbeck': 'gievenbeck',
     'Sentruper Höhe': 'sentrup',
 
+    # Hintergrund-Fuellbezirke (schliessen Luecken zwischen Level-10 und Level-11)
+    'Mitte-Nordost': 'kinderhaus-bg',
+    'Mitte-Süd': 'sentrup-bg',
+
     # admin_level=11 Unter-Stadtteile (feinere Aufteilung der Innenstadt)
     'Kreuzviertel': 'kreuzviertel',
     'Pluggendorf': 'pluggendorf',
@@ -73,7 +77,7 @@ SKIP_NAMES = {
     'Münster-Ost', 'Münster-Südost', 'Münster-Mitte', 'Münster-Hiltrup',
     'Münster-Nord', 'Münster-West',  # admin_level=9 Sammel-Bezirke
     'Altstadt',  # Duplikat, wir nutzen Innenstadtring stattdessen
-    'Mitte-Nordost', 'Mitte-Süd',  # Enthalten Unter-Viertel die wir einzeln holen
+    # 'Mitte-Nordost', 'Mitte-Süd' werden jetzt als Hintergrund-Fuellung genutzt
     # level=11 Unter-Viertel die wir nicht als eigene Bezirke brauchen:
     'Buddenturm', 'Aegidii', 'Dom', 'Überwasser', 'Martini',  # Teile von Innenstadtring
     'Neutor', 'Schloss', 'Bahnhof',  # Teile der Innenstadt

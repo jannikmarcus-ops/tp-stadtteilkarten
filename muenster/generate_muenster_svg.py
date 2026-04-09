@@ -64,6 +64,13 @@ DISPLAY_NAMES = {
     'albachten': ['Albachten'],
 }
 
+# Hintergrund-Fuellbezirke: Schliessen Luecken zwischen Level-10 und Level-11 Grenzen.
+# Mapping: bg-ID -> interaktiver Eltern-Bezirk (uebernimmt dessen Farbe)
+BACKGROUND_FILLS = {
+    'kinderhaus-bg': 'kinderhaus',
+    'sentrup-bg': 'sentrup',
+}
+
 # Label-Offset-Overrides fuer kleine oder ungluecklich geformte Bezirke
 # Format: { 'id': { 'offset': (dx, dy) } }
 # Wenn leer, wird der Zentroid verwendet
@@ -215,9 +222,20 @@ def main():
 
         labels.append(label_entry)
 
-    # District-Eintraege fuer JSX
+    # Background-Fill-Eintraege fuer JSX
+    bg_fill_entries = []
+    for bg_id, parent_id in BACKGROUND_FILLS.items():
+        if bg_id in districts:
+            path = districts[bg_id]['d']
+            bg_fill_entries.append(f"  {{ id: '{bg_id}', parentId: '{parent_id}', path: '{path}' }}")
+        else:
+            print(f"WARNUNG: Hintergrund-Fuellbezirk {bg_id} fehlt in district-paths.json!")
+
+    # District-Eintraege fuer JSX (nur interaktive, keine bg-Fills)
     district_entries = []
     for dist_id in sorted(districts.keys()):
+        if dist_id in BACKGROUND_FILLS:
+            continue  # Hintergrund-Fills separat
         path = districts[dist_id]['d']
         district_entries.append(f"  {{ id: '{dist_id}', path: '{path}' }}")
 
@@ -249,6 +267,10 @@ function getDistrictColor(districtId, data) {{
 // Muenster SVG Karte (26 Stadtteile, alle interaktiv)
 // Generiert aus district-paths.json (OSM-Geodaten)
 // ═══════════════════════════════════════════
+
+const BACKGROUND_FILLS = [
+{chr(10).join(b + "," for b in bg_fill_entries)}
+]
 
 const INTERACTIVE_IDS = new Set([
   {", ".join(f"'{d}'" for d in INTERACTIVE_IDS)},
@@ -351,6 +373,21 @@ export function MuensterSVG({{
     >
       {{/* SCHICHT 1: Stadtgrenze als Hintergrund-Fang */}}
       <path d={{CITY_BOUNDARY}} fill="#E8E4E0" stroke="#B8B4B0" strokeWidth="2" strokeLinejoin="round" />
+
+      {{/* SCHICHT 1b: Hintergrund-Fuellbezirke (nicht interaktiv, Farbe vom Eltern-Bezirk) */}}
+      <g className="background-fills" style={{{{ pointerEvents: 'none' }}}}>
+        {{BACKGROUND_FILLS.map(({{ id, parentId, path: d }}) => (
+          <path
+            key={{id}}
+            d={{d}}
+            fill={{getDistrictColor(parentId, data)}}
+            stroke="#D1CDC9"
+            strokeWidth="1"
+            strokeLinejoin="round"
+            style={{{{ opacity: loaded ? 1 : 0, transition: 'opacity 400ms ease 200ms' }}}}
+          />
+        ))}}
+      </g>
 
       {{/* SCHICHT 2: Alle 26 interaktive Viertel */}}
       <g className="interactive-districts" role="list">

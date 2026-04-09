@@ -14,6 +14,11 @@ function getDistrictColor(districtId, data) {
 // Generiert aus district-paths.json (OSM-Geodaten)
 // ═══════════════════════════════════════════
 
+const BACKGROUND_FILLS = [
+  { id: 'kinderhaus-bg', parentId: 'kinderhaus', path: 'M444.98,371.75L448.19,363.07L448.5,347.73L443.59,328.63L434.83,318.93L398.84,307.01L370.8,308.7L363.98,310.67L328.71,277.09L343.63,268.09L373.88,266.18L413.09,256.73L420.71,256.56L437.69,268.69L443.57,270.39L464.38,269.98L475.4,266.55L484.37,345.62L482.99,354.95L444.12,398.52L435.01,411.28L429.32,426.2L417.73,431.11L424.44,380.66L440.01,379.2L444.98,371.75Z' },
+  { id: 'sentrup-bg', parentId: 'sentrup', path: 'M395.01,391.49L404.25,391.16L418.28,387.3L416.84,397.02L422.09,396.96L417.73,431.11L411.96,441.17L374.14,476.97L367.1,489.25L356.49,483.37L358.06,477.23L339.16,474.8L346.6,454.36L354.01,440.11L350.35,440.79L344.61,436.8L332.11,423.51L336.47,420.31L350.09,400.5L361.07,388.75L365.76,394.16L380.69,390.81L395.01,391.49Z' },
+]
+
 const INTERACTIVE_IDS = new Set([
   'altstadt-dom', 'kreuzviertel', 'pluggendorf', 'hafen-zentrum', 'aaseestadt', 'sentrup', 'mauritz', 'gievenbeck', 'nienberge', 'kinderhaus', 'coerde', 'handorf', 'gremmendorf', 'wolbeck', 'angelmodde', 'hiltrup', 'amelsbueren', 'roxel', 'sprakel', 'gelmer', 'haeger', 'geist', 'schuetzenhof', 'berg-fidel', 'mecklenbeck', 'albachten',
 ])
@@ -165,6 +170,21 @@ export function MuensterSVG({
     >
       {/* SCHICHT 1: Stadtgrenze als Hintergrund-Fang */}
       <path d={CITY_BOUNDARY} fill="#E8E4E0" stroke="#B8B4B0" strokeWidth="2" strokeLinejoin="round" />
+
+      {/* SCHICHT 1b: Hintergrund-Fuellbezirke (nicht interaktiv, Farbe vom Eltern-Bezirk) */}
+      <g className="background-fills" style={{ pointerEvents: 'none' }}>
+        {BACKGROUND_FILLS.map(({ id, parentId, path: d }) => (
+          <path
+            key={id}
+            d={d}
+            fill={getDistrictColor(parentId, data)}
+            stroke="#D1CDC9"
+            strokeWidth="1"
+            strokeLinejoin="round"
+            style={{ opacity: loaded ? 1 : 0, transition: 'opacity 400ms ease 200ms' }}
+          />
+        ))}
+      </g>
 
       {/* SCHICHT 2: Alle 26 interaktive Viertel */}
       <g className="interactive-districts" role="list">
