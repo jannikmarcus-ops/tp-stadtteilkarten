@@ -222,21 +222,28 @@ def main():
 
         labels.append(label_entry)
 
-    # Background-Fill-Eintraege fuer JSX
-    bg_fill_entries = []
+    # Hintergrund-Fills in Eltern-Bezirke mergen (kombinierter SVG-Pfad)
+    merged_paths = {}
     for bg_id, parent_id in BACKGROUND_FILLS.items():
         if bg_id in districts:
-            path = districts[bg_id]['d']
-            bg_fill_entries.append(f"  {{ id: '{bg_id}', parentId: '{parent_id}', path: '{path}' }}")
+            bg_path = districts[bg_id]['d']
+            if parent_id not in merged_paths:
+                merged_paths[parent_id] = []
+            merged_paths[parent_id].append(bg_path)
+            print(f"  Merge {bg_id} -> {parent_id}")
         else:
             print(f"WARNUNG: Hintergrund-Fuellbezirk {bg_id} fehlt in district-paths.json!")
 
-    # District-Eintraege fuer JSX (nur interaktive, keine bg-Fills)
+    # District-Eintraege fuer JSX (bg-Fills in Eltern-Pfad integriert)
     district_entries = []
     for dist_id in sorted(districts.keys()):
         if dist_id in BACKGROUND_FILLS:
-            continue  # Hintergrund-Fills separat
+            continue  # Bereits in Eltern-Bezirk gemergt
         path = districts[dist_id]['d']
+        # Zusaetzliche bg-Pfade anhaengen falls vorhanden
+        if dist_id in merged_paths:
+            for extra_path in merged_paths[dist_id]:
+                path = path + ' ' + extra_path
         district_entries.append(f"  {{ id: '{dist_id}', path: '{path}' }}")
 
     # Label-Eintraege fuer JSX
@@ -267,10 +274,6 @@ function getDistrictColor(districtId, data) {{
 // Muenster SVG Karte (26 Stadtteile, alle interaktiv)
 // Generiert aus district-paths.json (OSM-Geodaten)
 // ═══════════════════════════════════════════
-
-const BACKGROUND_FILLS = [
-{chr(10).join(b + "," for b in bg_fill_entries)}
-]
 
 const INTERACTIVE_IDS = new Set([
   {", ".join(f"'{d}'" for d in INTERACTIVE_IDS)},
