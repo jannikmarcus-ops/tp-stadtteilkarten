@@ -10,102 +10,10 @@ function getDistrictColor(districtId, data) {
 }
 
 /*
- * V6: Lückenloses Mosaik aller 26 Münsteraner Stadtteile.
- * 18 interaktive (farbig) + 8 graue (nicht-klickbar).
- * Kante an Kante, keine Lücken.
+ * V7: Bezier-Redesign aller 26 Muensteraner Stadtteile.
+ * Cubic Bezier Curves (C-Kommandos) fuer natuerliche Grenzen.
+ * Gemeinsame Grenzen nutzen identische Kontrollpunkte (reversed).
  */
-
-// Hilfsfunktion: Punkt-Array → SVG-Pfad
-function pts2path(points) {
-  return points.map(([x, y], i) => `${i === 0 ? 'M' : 'L'}${x},${y}`).join(' ') + ' Z'
-}
-
-// ═══════════════════════════════════════════
-// GEMEINSAME KNOTENPUNKTE
-// Jeder Punkt wird von 2-4 Vierteln geteilt.
-// ═══════════════════════════════════════════
-
-// Stadtgrenze (clockwise von NW)
-const B = {
-  // NW → N (Häger)
-  a1: [130,128], a2: [148,78], a3: [128,48], a4: [192,28], a5: [262,22],
-  // N (Sprakel)
-  b1: [338,18], b2: [400,22], b3: [455,28],
-  // NE (Gelmer)
-  c1: [518,42], c2: [572,65], c3: [608,92],
-  // E (Handorf Protrusion)
-  d1: [645,125], d2: [682,162], d3: [712,212], d4: [725,268], d5: [722,318],
-  d6: [708,358], d7: [688,388], d8: [668,412],
-  // SE (Gremmendorf)
-  e1: [658,445], e2: [662,488], e3: [660,528],
-  // S-SE (Wolbeck)
-  f1: [648,568], f2: [632,618], f3: [608,655],
-  // S (Hiltrup)
-  g1: [572,682], g2: [528,702], g3: [478,718], g4: [432,725],
-  // S-SW (Amelsbüren)
-  h1: [388,728], h2: [348,732], h3: [308,735], h4: [272,728],
-  // SW (Albachten)
-  i1: [238,712], i2: [205,688], i3: [175,655], i4: [148,618], i5: [125,575],
-  // W (Roxel)
-  j1: [105,528], j2: [82,478], j3: [65,428], j4: [55,378], j5: [50,328],
-  // NW (Nienberge/Roxel)
-  k1: [52,278], k2: [58,238], k3: [72,198], k4: [92,162],
-}
-
-// Interne Knoten (wo 3+ Viertel aufeinandertreffen)
-// N-Zone: Trennung Häger/Sprakel/Gelmer von Nienberge/Kinderhaus/Coerde
-const N1 = [110, 145]   // Häger-Nienberge-Roxel (auf Stadtgrenze zwischen B.a1 und B.k4)
-const N2 = [248, 135]   // Häger-Nienberge-Kinderhaus
-const N3 = [325, 112]   // Häger-Sprakel-Kinderhaus
-const N4 = [438, 108]   // Sprakel-Gelmer-Kinderhaus-Coerde
-const N5 = [558, 118]   // Gelmer-Coerde-Handorf
-
-// Innerer Ring
-const K1 = [255, 195]   // Nienberge-Gievenbeck-Kinderhaus
-const K2 = [292, 238]   // Gievenbeck-Kinderhaus-Aaseestadt
-const K3 = [468, 238]   // Kinderhaus-Coerde-Mauritz
-const K4 = [548, 238]   // Coerde-Mauritz-Handorf
-
-// Zentrum-Block
-const C1 = [328, 275]   // Pluggendorf NW
-const C2 = [382, 262]   // Pluggendorf-Hafen
-const C3 = [430, 272]   // Hafen NE
-const C4 = [440, 325]   // Hafen-Altstadt E
-const C5 = [425, 378]   // Altstadt SE
-const C6 = [370, 390]   // Altstadt-Kreuzviertel S
-const C7 = [322, 372]   // Kreuzviertel SW
-const C8 = [312, 325]   // Pluggendorf-Kreuzviertel W
-const CX = [375, 325]   // Zentrum-Kreuz (4-way)
-const SG = [348, 382]   // Sentrup-Geist Grenze auf Kreuzviertel-S-Kante
-
-// Aaseestadt
-const AA1 = [292, 278]  // Aaseestadt NW
-const AA2 = [288, 322]  // Aaseestadt W
-const AA3 = [298, 362]  // Aaseestadt SW
-
-// Süd-Zone: Geist, Schützenhof, Berg Fidel, Mecklenbeck
-const S1 = [395, 395]   // Sentrup-Geist auf Zentrum-S-Kante
-const S2 = [268, 415]   // Gievenbeck-Sentrup-Mecklenbeck
-const S3 = [345, 448]   // Sentrup-Mecklenbeck-Berg Fidel
-const S4 = [388, 448]   // Sentrup-Geist-Berg Fidel
-const S5 = [435, 408]   // Geist-Schützenhof auf Mauritz-S-Kante
-const S6 = [432, 455]   // Geist-Schützenhof-Berg Fidel
-const S7 = [488, 418]   // Mauritz-Schützenhof-Handorf
-const S8 = [548, 425]   // Handorf-Schützenhof-Gremmendorf
-const S9 = [498, 462]   // Schützenhof-Berg Fidel-Gremmendorf-Angelmodde
-const S10 = [348, 535]  // Mecklenbeck-Berg Fidel-Hiltrup
-const S11 = [445, 545]  // Berg Fidel-Angelmodde-Hiltrup
-const S12 = [542, 535]  // Gremmendorf-Angelmodde-Wolbeck
-const S13 = [538, 625]  // Wolbeck-Angelmodde-Hiltrup
-const S14 = [295, 538]  // Mecklenbeck-Albachten-Amelsbüren
-const S15 = [362, 618]  // Mecklenbeck-Hiltrup-Amelsbüren
-const S16 = [228, 475]  // Mecklenbeck-Roxel-Gievenbeck
-const S17 = [178, 545]  // Roxel-Albachten-Mecklenbeck
-const S18 = [215, 632]  // Albachten-Amelsbüren
-
-// ═══════════════════════════════════════════
-// ALLE 26 STADTTEILE
-// ═══════════════════════════════════════════
 
 const INTERACTIVE_IDS = new Set([
   'altstadt-dom', 'kreuzviertel', 'pluggendorf', 'hafen-zentrum',
@@ -115,67 +23,234 @@ const INTERACTIVE_IDS = new Set([
   'sprakel', 'gelmer', 'haeger', 'geist', 'schuetzenhof', 'berg-fidel', 'mecklenbeck', 'albachten',
 ])
 
+// ═══════════════════════════════════════════
+// JUNCTION POINTS (wo 3+ Bezirke aufeinandertreffen)
+// Benannt nach angrenzenden Bezirken
+// ═══════════════════════════════════════════
+
+// Stadtgrenze-Knotenpunkte (im Uhrzeigersinn von NW)
+const BNW  = [95,155]    // NW-Ecke (Haeger/Nienberge/Roxel auf Grenze)
+const BN1  = [138,92]    // N-Grenze Haeger West
+const BN2  = [125,48]    // N-Grenze Haeger Spitze
+const BN3  = [188,25]    // N-Grenze Haeger/Sprakel
+const BN4  = [262,18]    // N-Grenze Haeger/Sprakel Uebergang
+const BN5  = [340,14]    // N-Grenze Sprakel Mitte
+const BN6  = [408,20]    // N-Grenze Sprakel/Gelmer
+const BN7  = [458,30]    // N-Grenze Gelmer West
+const BNE1 = [522,45]    // NE-Grenze Gelmer
+const BNE2 = [578,72]    // NE-Grenze Gelmer/Handorf
+const BNE3 = [618,105]   // NE-Ecke Gelmer/Handorf
+const BE1  = [655,140]   // E-Grenze Handorf Nord
+const BE2  = [692,180]   // E-Grenze Handorf Nase oben
+const BE3  = [722,225]   // E-Grenze Handorf Nase Spitze
+const BE4  = [735,278]   // E-Grenze Handorf Nase breiteste Stelle
+const BE5  = [730,325]   // E-Grenze Handorf
+const BE6  = [715,365]   // E-Grenze Handorf Sued
+const BE7  = [695,398]   // E-Grenze Handorf/Gremmendorf
+const BE8  = [672,425]   // E-Grenze Gremmendorf
+const BSE1 = [662,458]   // SE-Grenze Gremmendorf
+const BSE2 = [665,498]   // SE-Grenze Gremmendorf/Wolbeck
+const BSE3 = [662,538]   // SE-Grenze Wolbeck Nord
+const BSE4 = [650,578]   // SE-Grenze Wolbeck
+const BSE5 = [632,625]   // SE-Grenze Wolbeck Sued
+const BSE6 = [608,662]   // S-Grenze Wolbeck/Hiltrup
+const BS1  = [575,692]   // S-Grenze Hiltrup Ost
+const BS2  = [530,710]   // S-Grenze Hiltrup
+const BS3  = [480,724]   // S-Grenze Hiltrup
+const BS4  = [435,730]   // S-Grenze Hiltrup/Amelsbüren
+const BS5  = [390,734]   // S-Grenze Amelsbüren
+const BS6  = [348,736]   // S-Grenze Amelsbüren Mitte
+const BS7  = [305,738]   // S-Grenze Amelsbüren
+const BS8  = [268,730]   // S-Grenze Amelsbüren/Albachten
+const BSW1 = [235,715]   // SW-Grenze Albachten
+const BSW2 = [200,692]   // SW-Grenze Albachten
+const BSW3 = [170,660]   // SW-Grenze Albachten
+const BSW4 = [145,622]   // SW-Grenze Albachten/Roxel
+const BSW5 = [122,578]   // W-Grenze Roxel Sued
+const BW1  = [102,532]   // W-Grenze Roxel
+const BW2  = [80,480]    // W-Grenze Roxel
+const BW3  = [62,430]    // W-Grenze Roxel
+const BW4  = [52,378]    // W-Grenze Roxel
+const BW5  = [48,328]    // W-Grenze Roxel/Nienberge
+const BW6  = [50,278]    // W-Grenze Nienberge
+const BW7  = [56,238]    // W-Grenze Nienberge
+const BW8  = [68,198]    // NW-Grenze Nienberge
+
+// Innere Knotenpunkte (wo Bezirke intern aufeinandertreffen)
+const J_HNS  = [250,128]   // Haeger-Nienberge-Sprakel (intern)
+const J_HSK  = [322,105]   // Haeger-Sprakel-Kinderhaus
+const J_SGK  = [440,102]   // Sprakel-Gelmer-Kinderhaus-Coerde
+const J_GCH  = [562,125]   // Gelmer-Coerde-Handorf
+const J_NGK  = [248,192]   // Nienberge-Gievenbeck-Kinderhaus
+const J_GKA  = [295,245]   // Gievenbeck-Kinderhaus-Aaseestadt
+const J_KCM  = [472,242]   // Kinderhaus-Coerde-Mauritz
+const J_CMH  = [552,245]   // Coerde-Mauritz-Handorf
+
+// Zentrum-Block Knotenpunkte
+const J_PKA  = [310,282]   // Pluggendorf-Kinderhaus-Aaseestadt (Pluggendorf NW)
+const J_PKH  = [365,268]   // Pluggendorf-Kinderhaus-Hafen (Pluggendorf NE / Hafen NW)
+const J_HKM  = [430,265]   // Hafen-Kinderhaus-Mauritz (Hafen NE)
+const J_HMA  = [438,322]   // Hafen-Mauritz-Altstadt (Hafen SE / Altstadt NE)
+const J_AMG  = [428,382]   // Altstadt-Mauritz-Geist (Altstadt SE)
+const J_AKG  = [372,395]   // Altstadt-Kreuzviertel-Geist (Altstadt SW)
+const J_KAS  = [318,378]   // Kreuzviertel-Aaseestadt-Sentrup (Kreuzviertel SW)
+const J_PAK  = [305,328]   // Pluggendorf-Aaseestadt-Kreuzviertel (Pluggendorf SW)
+const J_CEN  = [372,328]   // Zentrum-Kreuz (Pluggendorf-Hafen-Altstadt-Kreuzviertel)
+const J_SKG  = [348,388]   // Sentrup-Kreuzviertel-Geist Grenzpunkt
+
+// Aaseestadt Ecken
+const J_AAW  = [282,285]   // Aaseestadt NW (Gievenbeck-Aaseestadt-Kinderhaus)
+const J_AAS  = [278,328]   // Aaseestadt W (Gievenbeck-Aaseestadt)
+const J_AASW = [290,368]   // Aaseestadt SW (Gievenbeck-Aaseestadt-Sentrup)
+
+// Sued-Zone Knotenpunkte
+const J_GSM  = [262,420]   // Gievenbeck-Sentrup-Mecklenbeck
+const J_SMB  = [340,455]   // Sentrup-Mecklenbeck-Berg Fidel
+const J_SGB  = [385,452]   // Sentrup-Geist-Berg Fidel
+const J_MGS  = [435,412]   // Mauritz-Geist-Schuetzenhof
+const J_GSB  = [432,460]   // Geist-Schuetzenhof-Berg Fidel
+const J_MSH  = [492,422]   // Mauritz-Schuetzenhof-Handorf
+const J_HSG  = [552,430]   // Handorf-Schuetzenhof-Gremmendorf
+const J_SBA  = [500,468]   // Schuetzenhof-Berg Fidel-Gremmendorf-Angelmodde
+const J_MBH  = [345,540]   // Mecklenbeck-Berg Fidel-Hiltrup
+const J_BAH  = [448,550]   // Berg Fidel-Angelmodde-Hiltrup
+const J_GAW  = [545,540]   // Gremmendorf-Angelmodde-Wolbeck
+const J_WAH  = [540,632]   // Wolbeck-Angelmodde-Hiltrup
+const J_MAM  = [290,542]   // Mecklenbeck-Albachten-Amelsbüren
+const J_MHA  = [358,625]   // Mecklenbeck-Hiltrup-Amelsbüren
+const J_MRG  = [222,478]   // Mecklenbeck-Roxel-Gievenbeck
+const J_RAM  = [175,548]   // Roxel-Albachten-Mecklenbeck
+const J_AAB  = [212,638]   // Albachten-Amelsbüren
+
+// ═══════════════════════════════════════════
+// ALLE 26 STADTTEILE als Bezier-Pfade
+// ═══════════════════════════════════════════
+
 const ALL_DISTRICTS = [
-  // ── ZENTRUM ──
-  { id: 'pluggendorf',  pts: [C1, C2, CX, C8] },
-  { id: 'hafen-zentrum', pts: [C2, C3, C4, CX] },
-  { id: 'altstadt-dom',  pts: [CX, C4, C5, C6] },
-  { id: 'kreuzviertel',  pts: [C8, CX, C6, SG, C7] },
+  // ── ZENTRUM (4 kleine Bezirke) ──
+  {
+    id: 'pluggendorf',
+    path: `M${J_PKA[0]},${J_PKA[1]} C320,272 340,265 ${J_PKH[0]},${J_PKH[1]} C370,310 374,318 ${J_CEN[0]},${J_CEN[1]} C350,330 325,332 ${J_PAK[0]},${J_PAK[1]} C305,310 308,292 ${J_PKA[0]},${J_PKA[1]} Z`
+  },
+  {
+    id: 'hafen-zentrum',
+    path: `M${J_PKH[0]},${J_PKH[1]} C385,262 410,260 ${J_HKM[0]},${J_HKM[1]} C435,285 438,305 ${J_HMA[0]},${J_HMA[1]} C420,325 395,328 ${J_CEN[0]},${J_CEN[1]} C374,318 370,310 ${J_PKH[0]},${J_PKH[1]} Z`
+  },
+  {
+    id: 'altstadt-dom',
+    path: `M${J_CEN[0]},${J_CEN[1]} C395,328 420,325 ${J_HMA[0]},${J_HMA[1]} C440,345 435,368 ${J_AMG[0]},${J_AMG[1]} C410,390 390,395 ${J_AKG[0]},${J_AKG[1]} C372,380 372,355 ${J_CEN[0]},${J_CEN[1]} Z`
+  },
+  {
+    id: 'kreuzviertel',
+    path: `M${J_PAK[0]},${J_PAK[1]} C325,332 350,330 ${J_CEN[0]},${J_CEN[1]} C372,355 372,380 ${J_AKG[0]},${J_AKG[1]} C365,392 355,390 ${J_SKG[0]},${J_SKG[1]} C338,385 325,382 ${J_KAS[0]},${J_KAS[1]} C310,360 305,345 ${J_PAK[0]},${J_PAK[1]} Z`
+  },
 
   // ── INNERER RING ──
-  { id: 'aaseestadt', pts: [AA1, C1, C8, C7, AA3, AA2] },
-  { id: 'sentrup',    pts: [AA3, C7, SG, S3, [308,438], S2, [268,398]] },
-  { id: 'mauritz',    pts: [C3, K3, K4, [555,322], [555,388], S7, S5, C5, C4] },
-  { id: 'gievenbeck', pts: [K1, K2, AA1, AA2, AA3, [268,398], S2, S16, [188,388], [175,348], [168,298], [172,248]] },
+  {
+    id: 'aaseestadt',
+    path: `M${J_AAW[0]},${J_AAW[1]} C288,282 300,280 ${J_PKA[0]},${J_PKA[1]} C308,292 305,310 ${J_PAK[0]},${J_PAK[1]} C310,360 305,345 ${J_KAS[0]},${J_KAS[1]} C308,372 295,370 ${J_AASW[0]},${J_AASW[1]} C282,350 278,335 ${J_AAS[0]},${J_AAS[1]} C280,308 280,295 ${J_AAW[0]},${J_AAW[1]} Z`
+  },
+  {
+    id: 'sentrup',
+    path: `M${J_AASW[0]},${J_AASW[1]} C295,370 308,372 ${J_KAS[0]},${J_KAS[1]} C325,382 338,385 ${J_SKG[0]},${J_SKG[1]} C355,395 365,420 ${J_SGB[0]},${J_SGB[1]} C370,455 355,458 ${J_SMB[0]},${J_SMB[1]} C320,445 300,438 ${J_GSM[0]},${J_GSM[1]} C268,405 275,390 ${J_AASW[0]},${J_AASW[1]} Z`
+  },
+  {
+    id: 'mauritz',
+    path: `M${J_HKM[0]},${J_HKM[1]} C445,258 458,248 ${J_KCM[0]},${J_KCM[1]} C495,242 525,242 ${J_CMH[0]},${J_CMH[1]} C555,280 558,320 558,360 C558,385 555,400 ${J_MSH[0]},${J_MSH[1]} C480,418 460,415 ${J_MGS[0]},${J_MGS[1]} C432,400 430,388 ${J_AMG[0]},${J_AMG[1]} C435,368 440,345 ${J_HMA[0]},${J_HMA[1]} C438,305 435,285 ${J_HKM[0]},${J_HKM[1]} Z`
+  },
+  {
+    id: 'gievenbeck',
+    path: `M${J_NGK[0]},${J_NGK[1]} C260,210 275,225 ${J_GKA[0]},${J_GKA[1]} C292,255 288,270 ${J_AAW[0]},${J_AAW[1]} C280,295 280,308 ${J_AAS[0]},${J_AAS[1]} C282,350 278,335 ${J_AASW[0]},${J_AASW[1]} C275,390 268,405 ${J_GSM[0]},${J_GSM[1]} C248,435 235,455 ${J_MRG[0]},${J_MRG[1]} C205,410 192,380 185,348 C178,318 175,288 172,258 C170,230 175,210 ${J_NGK[0]},${J_NGK[1]} Z`
+  },
 
-  // ── GRAUE VIERTEL (füllen Lücken) ──
-  { id: 'geist',        pts: [SG, C6, C5, S5, S6, S4, S3] },
-  { id: 'schuetzenhof', pts: [S5, S7, S8, S9, S6] },
-  { id: 'berg-fidel',   pts: [S3, S4, S6, S9, S11, S10] },
-  { id: 'mecklenbeck',  pts: [S16, S2, [308,438], S3, S10, S15, S14, S17] },
-  { id: 'haeger',       pts: [B.a1, B.a2, B.a3, B.a4, B.a5, N3, N2, N1] },
-  { id: 'sprakel',      pts: [N3, B.a5, B.b1, B.b2, B.b3, N4] },
-  { id: 'gelmer',       pts: [N4, B.b3, B.c1, B.c2, B.c3, N5] },
-  { id: 'albachten',    pts: [S17, S14, S18, B.i1, B.i2, B.i3, B.i4, B.i5, [112,542]] },
+  // ── GEIST / SCHUETZENHOF / BERG FIDEL / MECKLENBECK ──
+  {
+    id: 'geist',
+    path: `M${J_SKG[0]},${J_SKG[1]} C355,390 365,392 ${J_AKG[0]},${J_AKG[1]} C390,395 410,390 ${J_AMG[0]},${J_AMG[1]} C430,388 432,400 ${J_MGS[0]},${J_MGS[1]} C435,425 434,445 ${J_GSB[0]},${J_GSB[1]} C418,455 400,455 ${J_SGB[0]},${J_SGB[1]} C365,420 355,395 ${J_SKG[0]},${J_SKG[1]} Z`
+  },
+  {
+    id: 'schuetzenhof',
+    path: `M${J_MGS[0]},${J_MGS[1]} C460,415 480,418 ${J_MSH[0]},${J_MSH[1]} C510,425 535,428 ${J_HSG[0]},${J_HSG[1]} C540,445 520,460 ${J_SBA[0]},${J_SBA[1]} C480,465 455,462 ${J_GSB[0]},${J_GSB[1]} C434,445 435,425 ${J_MGS[0]},${J_MGS[1]} Z`
+  },
+  {
+    id: 'berg-fidel',
+    path: `M${J_SMB[0]},${J_SMB[1]} C355,458 370,455 ${J_SGB[0]},${J_SGB[1]} C400,455 418,455 ${J_GSB[0]},${J_GSB[1]} C455,462 480,465 ${J_SBA[0]},${J_SBA[1]} C502,490 490,520 ${J_BAH[0]},${J_BAH[1]} C420,548 380,542 ${J_MBH[0]},${J_MBH[1]} C340,535 340,510 ${J_SMB[0]},${J_SMB[1]} Z`
+  },
+  {
+    id: 'mecklenbeck',
+    path: `M${J_MRG[0]},${J_MRG[1]} C235,455 248,435 ${J_GSM[0]},${J_GSM[1]} C300,438 320,445 ${J_SMB[0]},${J_SMB[1]} C340,510 340,535 ${J_MBH[0]},${J_MBH[1]} C345,580 340,600 ${J_MHA[0]},${J_MHA[1]} C330,610 310,570 ${J_MAM[0]},${J_MAM[1]} C270,538 245,530 ${J_RAM[0]},${J_RAM[1]} C185,520 200,498 ${J_MRG[0]},${J_MRG[1]} Z`
+  },
 
-  // ── ÄUSSERER RING ──
-  { id: 'nienberge',  pts: [N1, N2, K1, [172,248], [172,218], B.k3, B.k2, B.k4] },
+  // ── AEUSSERE BEZIRKE (Nord) ──
+  {
+    id: 'haeger',
+    path: `M${BNW[0]},${BNW[1]} C100,140 115,115 ${BN1[0]},${BN1[1]} C145,72 130,52 ${BN2[0]},${BN2[1]} C140,35 160,28 ${BN3[0]},${BN3[1]} C210,22 238,18 ${BN4[0]},${BN4[1]} C285,30 305,60 ${J_HSK[0]},${J_HSK[1]} C300,115 275,125 ${J_HNS[0]},${J_HNS[1]} C210,140 155,150 ${BNW[0]},${BNW[1]} Z`
+  },
+  {
+    id: 'sprakel',
+    path: `M${J_HSK[0]},${J_HSK[1]} C305,60 285,30 ${BN4[0]},${BN4[1]} C290,16 315,14 ${BN5[0]},${BN5[1]} C365,14 390,18 ${BN6[0]},${BN6[1]} C425,22 442,26 ${BN7[0]},${BN7[1]} C452,50 448,78 ${J_SGK[0]},${J_SGK[1]} C420,100 370,105 ${J_HSK[0]},${J_HSK[1]} Z`
+  },
+  {
+    id: 'gelmer',
+    path: `M${J_SGK[0]},${J_SGK[1]} C448,78 452,50 ${BN7[0]},${BN7[1]} C478,35 500,40 ${BNE1[0]},${BNE1[1]} C545,50 562,62 ${BNE2[0]},${BNE2[1]} C595,82 610,98 ${BNE3[0]},${BNE3[1]} C612,112 590,122 ${J_GCH[0]},${J_GCH[1]} C535,120 490,108 ${J_SGK[0]},${J_SGK[1]} Z`
+  },
+  {
+    id: 'albachten',
+    path: `M${J_RAM[0]},${J_RAM[1]} C245,530 270,538 ${J_MAM[0]},${J_MAM[1]} C295,570 280,610 ${J_AAB[0]},${J_AAB[1]} C220,660 235,710 ${BSW1[0]},${BSW1[1]} C218,705 205,695 ${BSW2[0]},${BSW2[1]} C185,675 175,665 ${BSW3[0]},${BSW3[1]} C158,645 150,630 ${BSW4[0]},${BSW4[1]} C135,600 128,582 ${BSW5[0]},${BSW5[1]} C118,562 115,548 ${J_RAM[0]},${J_RAM[1]} Z`
+  },
 
-  { id: 'kinderhaus', pts: [N2, N3, N4, K3, C3, C2, C1, AA1, K2, K1] },
-
-  { id: 'coerde', pts: [N4, N5, K4, K3] },
-
-  { id: 'handorf', pts: [N5, B.c3, B.d1, B.d2, B.d3, B.d4, B.d5, B.d6, B.d7, B.d8, B.e1, S8, S7, [555,388], [555,322], K4] },
-
-  { id: 'gremmendorf', pts: [S8, B.e1, B.e2, B.e3, S12, S9] },
-
-  { id: 'wolbeck', pts: [S12, B.e3, B.f1, B.f2, B.f3, B.g1, S13] },
-
-  { id: 'angelmodde', pts: [S9, S12, S13, S11] },
-
-  { id: 'hiltrup', pts: [S10, S11, S13, B.g1, B.g2, B.g3, B.g4, B.h1, S15] },
-
-  { id: 'amelsbueren', pts: [S15, B.h1, B.h2, B.h3, B.h4, B.i1, S18, S14] },
-
-  { id: 'roxel', pts: [B.k3, [172,218], [172,248], [168,298], [175,348], [188,388], S16, S17, [112,542], B.j1, B.j2, B.j3, B.j4, B.j5, B.k1] },
+  // ── AEUSSERER RING ──
+  {
+    id: 'nienberge',
+    path: `M${BNW[0]},${BNW[1]} C155,150 210,140 ${J_HNS[0]},${J_HNS[1]} C255,145 252,170 ${J_NGK[0]},${J_NGK[1]} C175,210 170,230 172,258 C170,248 115,225 ${BW8[0]},${BW8[1]} C78,172 88,162 ${BNW[0]},${BNW[1]} Z`
+  },
+  {
+    id: 'kinderhaus',
+    path: `M${J_HNS[0]},${J_HNS[1]} C275,125 300,115 ${J_HSK[0]},${J_HSK[1]} C370,105 420,100 ${J_SGK[0]},${J_SGK[1]} C460,115 468,145 ${J_KCM[0]},${J_KCM[1]} C465,255 450,262 ${J_HKM[0]},${J_HKM[1]} C410,260 385,262 ${J_PKH[0]},${J_PKH[1]} C340,265 320,272 ${J_PKA[0]},${J_PKA[1]} C300,280 288,282 ${J_AAW[0]},${J_AAW[1]} C288,270 292,255 ${J_GKA[0]},${J_GKA[1]} C275,225 260,210 ${J_NGK[0]},${J_NGK[1]} C252,170 255,145 ${J_HNS[0]},${J_HNS[1]} Z`
+  },
+  {
+    id: 'coerde',
+    path: `M${J_SGK[0]},${J_SGK[1]} C490,108 535,120 ${J_GCH[0]},${J_GCH[1]} C568,145 558,185 ${J_CMH[0]},${J_CMH[1]} C525,242 495,242 ${J_KCM[0]},${J_KCM[1]} C468,145 460,115 ${J_SGK[0]},${J_SGK[1]} Z`
+  },
+  {
+    id: 'handorf',
+    path: `M${J_GCH[0]},${J_GCH[1]} C590,122 612,112 ${BNE3[0]},${BNE3[1]} C628,115 642,128 ${BE1[0]},${BE1[1]} C668,155 685,172 ${BE2[0]},${BE2[1]} C705,195 718,215 ${BE3[0]},${BE3[1]} C732,245 736,268 ${BE4[0]},${BE4[1]} C735,298 732,315 ${BE5[0]},${BE5[1]} C725,345 720,358 ${BE6[0]},${BE6[1]} C708,382 700,392 ${BE7[0]},${BE7[1]} C688,410 678,420 ${BE8[0]},${BE8[1]} C668,430 660,432 ${J_HSG[0]},${J_HSG[1]} C535,428 510,425 ${J_MSH[0]},${J_MSH[1]} C555,400 558,385 558,360 C558,320 555,280 ${J_CMH[0]},${J_CMH[1]} C558,185 568,145 ${J_GCH[0]},${J_GCH[1]} Z`
+  },
+  {
+    id: 'gremmendorf',
+    path: `M${J_HSG[0]},${J_HSG[1]} C660,432 668,430 ${BE8[0]},${BE8[1]} C672,440 668,452 ${BSE1[0]},${BSE1[1]} C664,475 666,492 ${BSE2[0]},${BSE2[1]} C666,518 664,532 ${BSE3[0]},${BSE3[1]} C658,535 555,538 ${J_GAW[0]},${J_GAW[1]} C530,515 520,490 ${J_SBA[0]},${J_SBA[1]} C520,460 540,445 ${J_HSG[0]},${J_HSG[1]} Z`
+  },
+  {
+    id: 'wolbeck',
+    path: `M${J_GAW[0]},${J_GAW[1]} C555,538 658,535 ${BSE3[0]},${BSE3[1]} C660,555 655,572 ${BSE4[0]},${BSE4[1]} C642,605 638,618 ${BSE5[0]},${BSE5[1]} C622,645 615,655 ${BSE6[0]},${BSE6[1]} C600,672 585,685 ${BS1[0]},${BS1[1]} C565,692 555,665 ${J_WAH[0]},${J_WAH[1]} C542,610 545,575 ${J_GAW[0]},${J_GAW[1]} Z`
+  },
+  {
+    id: 'angelmodde',
+    path: `M${J_SBA[0]},${J_SBA[1]} C520,490 530,515 ${J_GAW[0]},${J_GAW[1]} C545,575 542,610 ${J_WAH[0]},${J_WAH[1]} C525,618 490,570 ${J_BAH[0]},${J_BAH[1]} C490,520 502,490 ${J_SBA[0]},${J_SBA[1]} Z`
+  },
+  {
+    id: 'hiltrup',
+    path: `M${J_MBH[0]},${J_MBH[1]} C380,542 420,548 ${J_BAH[0]},${J_BAH[1]} C490,570 525,618 ${J_WAH[0]},${J_WAH[1]} C555,665 565,692 ${BS1[0]},${BS1[1]} C555,700 540,708 ${BS2[0]},${BS2[1]} C510,718 495,722 ${BS3[0]},${BS3[1]} C462,728 448,730 ${BS4[0]},${BS4[1]} C418,732 405,734 ${BS5[0]},${BS5[1]} C378,730 368,650 ${J_MHA[0]},${J_MHA[1]} C340,600 345,580 ${J_MBH[0]},${J_MBH[1]} Z`
+  },
+  {
+    id: 'amelsbueren',
+    path: `M${J_MHA[0]},${J_MHA[1]} C368,650 378,730 ${BS5[0]},${BS5[1]} C375,736 362,736 ${BS6[0]},${BS6[1]} C332,738 318,738 ${BS7[0]},${BS7[1]} C290,735 278,732 ${BS8[0]},${BS8[1]} C255,725 242,718 ${BSW1[0]},${BSW1[1]} C235,710 220,660 ${J_AAB[0]},${J_AAB[1]} C280,610 295,570 ${J_MAM[0]},${J_MAM[1]} C310,570 330,610 ${J_MHA[0]},${J_MHA[1]} Z`
+  },
+  {
+    id: 'roxel',
+    path: `M${BW8[0]},${BW8[1]} C115,225 170,248 172,258 C175,288 178,318 185,348 C192,380 205,410 ${J_MRG[0]},${J_MRG[1]} C200,498 185,520 ${J_RAM[0]},${J_RAM[1]} C115,548 118,562 ${BSW5[0]},${BSW5[1]} C115,555 108,538 ${BW1[0]},${BW1[1]} C92,510 85,492 ${BW2[0]},${BW2[1]} C72,458 65,438 ${BW3[0]},${BW3[1]} C58,408 54,388 ${BW4[0]},${BW4[1]} C50,358 48,338 ${BW5[0]},${BW5[1]} C50,310 50,290 ${BW6[0]},${BW6[1]} C52,265 54,250 ${BW7[0]},${BW7[1]} C58,225 62,210 ${BW8[0]},${BW8[1]} Z`
+  },
 ]
 
-// Pfade generieren
+// Pfade direkt aus den path-Strings
 const PATHS = ALL_DISTRICTS.map(d => ({
   id: d.id,
-  path: pts2path(d.pts),
+  path: d.path,
   interactive: INTERACTIVE_IDS.has(d.id),
 }))
 
-// Stadtgrenze = äußere Kante aller Rand-Viertel
-const BOUNDARY_PTS = [
-  B.a1, B.a2, B.a3, B.a4, B.a5, B.b1, B.b2, B.b3,
-  B.c1, B.c2, B.c3, B.d1, B.d2, B.d3, B.d4, B.d5, B.d6, B.d7, B.d8,
-  B.e1, B.e2, B.e3, B.f1, B.f2, B.f3, B.g1, B.g2, B.g3, B.g4,
-  B.h1, B.h2, B.h3, B.h4, B.i1, B.i2, B.i3, B.i4, B.i5,
-  B.j1, B.j2, B.j3, B.j4, B.j5, B.k1, B.k2, B.k3, B.k4,
-]
-const CITY_BOUNDARY = pts2path(BOUNDARY_PTS)
+// Stadtgrenze als Bezier-Pfad (Aussenkante aller Randbezirke)
+const CITY_BOUNDARY = `M${BNW[0]},${BNW[1]} C100,140 115,115 ${BN1[0]},${BN1[1]} C145,72 130,52 ${BN2[0]},${BN2[1]} C140,35 160,28 ${BN3[0]},${BN3[1]} C210,22 238,18 ${BN4[0]},${BN4[1]} C290,16 315,14 ${BN5[0]},${BN5[1]} C365,14 390,18 ${BN6[0]},${BN6[1]} C425,22 442,26 ${BN7[0]},${BN7[1]} C478,35 500,40 ${BNE1[0]},${BNE1[1]} C545,50 562,62 ${BNE2[0]},${BNE2[1]} C595,82 610,98 ${BNE3[0]},${BNE3[1]} C628,115 642,128 ${BE1[0]},${BE1[1]} C668,155 685,172 ${BE2[0]},${BE2[1]} C705,195 718,215 ${BE3[0]},${BE3[1]} C732,245 736,268 ${BE4[0]},${BE4[1]} C735,298 732,315 ${BE5[0]},${BE5[1]} C725,345 720,358 ${BE6[0]},${BE6[1]} C708,382 700,392 ${BE7[0]},${BE7[1]} C688,410 678,420 ${BE8[0]},${BE8[1]} C672,440 668,452 ${BSE1[0]},${BSE1[1]} C664,475 666,492 ${BSE2[0]},${BSE2[1]} C666,518 664,532 ${BSE3[0]},${BSE3[1]} C660,555 655,572 ${BSE4[0]},${BSE4[1]} C642,605 638,618 ${BSE5[0]},${BSE5[1]} C622,645 615,655 ${BSE6[0]},${BSE6[1]} C600,672 585,685 ${BS1[0]},${BS1[1]} C555,700 540,708 ${BS2[0]},${BS2[1]} C510,718 495,722 ${BS3[0]},${BS3[1]} C462,728 448,730 ${BS4[0]},${BS4[1]} C418,732 405,734 ${BS5[0]},${BS5[1]} C375,736 362,736 ${BS6[0]},${BS6[1]} C332,738 318,738 ${BS7[0]},${BS7[1]} C290,735 278,732 ${BS8[0]},${BS8[1]} C255,725 242,718 ${BSW1[0]},${BSW1[1]} C218,705 205,695 ${BSW2[0]},${BSW2[1]} C185,675 175,665 ${BSW3[0]},${BSW3[1]} C158,645 150,630 ${BSW4[0]},${BSW4[1]} C135,600 128,582 ${BSW5[0]},${BSW5[1]} C115,555 108,538 ${BW1[0]},${BW1[1]} C92,510 85,492 ${BW2[0]},${BW2[1]} C72,458 65,438 ${BW3[0]},${BW3[1]} C58,408 54,388 ${BW4[0]},${BW4[1]} C50,358 48,338 ${BW5[0]},${BW5[1]} C50,310 50,290 ${BW6[0]},${BW6[1]} C52,265 54,250 ${BW7[0]},${BW7[1]} C58,225 62,210 ${BW8[0]},${BW8[1]} C78,172 88,162 ${BNW[0]},${BNW[1]} Z`
 
 const DARK_DISTRICTS = new Set([
   'altstadt-dom', 'kreuzviertel', 'pluggendorf', 'hafen-zentrum',
@@ -184,33 +259,33 @@ const DARK_DISTRICTS = new Set([
 
 // Labels für interaktive Viertel
 const INTERACTIVE_LABELS = [
-  { id: 'pluggendorf',   x: 350, y: 298, lines: ['Pluggen-', 'dorf'],   size: 8 },
-  { id: 'hafen-zentrum',  x: 405, y: 296, lines: ['Hafen'],             size: 8 },
-  { id: 'altstadt-dom',   x: 402, y: 355, lines: ['Altstadt'],          size: 9 },
-  { id: 'kreuzviertel',   x: 345, y: 352, lines: ['Kreuz-', 'viertel'],size: 7 },
-  { id: 'aaseestadt',     x: 232, y: 295, lines: ['Aaseestadt'],        size: 9, leader: [292, 322] },
-  { id: 'sentrup',        x: 312, y: 412, lines: ['Sentrup'],           size: 10 },
+  { id: 'pluggendorf',   x: 340, y: 300, lines: ['Pluggen-', 'dorf'],   size: 7 },
+  { id: 'hafen-zentrum',  x: 400, y: 292, lines: ['Hafen'],             size: 7 },
+  { id: 'altstadt-dom',   x: 400, y: 358, lines: ['Altstadt'],          size: 8 },
+  { id: 'kreuzviertel',   x: 340, y: 358, lines: ['Kreuz-', 'viertel'],size: 7 },
+  { id: 'aaseestadt',     x: 232, y: 310, lines: ['Aasee-', 'stadt'],  size: 8, leader: [282, 328] },
+  { id: 'sentrup',        x: 325, y: 418, lines: ['Sentrup'],           size: 10 },
   { id: 'mauritz',        x: 498, y: 328, lines: ['Mauritz'],           size: 11 },
-  { id: 'gievenbeck',     x: 222, y: 328, lines: ['Gieven-', 'beck'],  size: 10 },
-  { id: 'nienberge',      x: 165, y: 198, lines: ['Nienberge'],        size: 11 },
-  { id: 'kinderhaus',     x: 370, y: 185, lines: ['Kinderhaus'],        size: 10 },
-  { id: 'coerde',         x: 498, y: 172, lines: ['Coerde'],            size: 10 },
-  { id: 'handorf',        x: 658, y: 278, lines: ['Handorf'],           size: 14 },
-  { id: 'gremmendorf',    x: 595, y: 488, lines: ['Gremmen-', 'dorf'], size: 10 },
-  { id: 'wolbeck',        x: 600, y: 608, lines: ['Wolbeck'],           size: 11 },
-  { id: 'angelmodde',     x: 505, y: 568, lines: ['Angel-', 'modde'],  size: 8 },
-  { id: 'hiltrup',        x: 462, y: 668, lines: ['Hiltrup'],           size: 13 },
-  { id: 'amelsbueren',    x: 332, y: 688, lines: ['Amels-', 'büren'],  size: 10 },
-  { id: 'roxel',          x: 118, y: 418, lines: ['Roxel'],             size: 11 },
+  { id: 'gievenbeck',     x: 218, y: 345, lines: ['Gieven-', 'beck'],  size: 10 },
+  { id: 'nienberge',      x: 168, y: 195, lines: ['Nienberge'],         size: 10 },
+  { id: 'kinderhaus',     x: 365, y: 188, lines: ['Kinderhaus'],        size: 10 },
+  { id: 'coerde',         x: 502, y: 178, lines: ['Coerde'],            size: 10 },
+  { id: 'handorf',        x: 655, y: 285, lines: ['Handorf'],           size: 14 },
+  { id: 'gremmendorf',    x: 598, y: 492, lines: ['Gremmen-', 'dorf'], size: 10 },
+  { id: 'wolbeck',        x: 602, y: 612, lines: ['Wolbeck'],           size: 11 },
+  { id: 'angelmodde',     x: 510, y: 565, lines: ['Angel-', 'modde'],  size: 8 },
+  { id: 'hiltrup',        x: 462, y: 665, lines: ['Hiltrup'],           size: 13 },
+  { id: 'amelsbueren',    x: 328, y: 688, lines: ['Amels-', 'büren'],  size: 10 },
+  { id: 'roxel',          x: 115, y: 418, lines: ['Roxel'],             size: 11 },
   // Ehemals graue Viertel (jetzt interaktiv)
-  { id: 'haeger',         x: 198, y: 88,  lines: ['Häger'],             size: 10 },
-  { id: 'sprakel',        x: 382, y: 68,  lines: ['Sprakel'],           size: 10 },
-  { id: 'gelmer',         x: 528, y: 78,  lines: ['Gelmer'],            size: 10 },
-  { id: 'geist',          x: 392, y: 422, lines: ['Geist'],             size: 9 },
-  { id: 'schuetzenhof',   x: 492, y: 438, lines: ['Schützen-', 'hof'], size: 8 },
-  { id: 'berg-fidel',     x: 415, y: 498, lines: ['Berg', 'Fidel'],    size: 8 },
-  { id: 'mecklenbeck',    x: 282, y: 498, lines: ['Mecklen-', 'beck'], size: 9 },
-  { id: 'albachten',      x: 185, y: 608, lines: ['Albachten'],         size: 10 },
+  { id: 'haeger',         x: 200, y: 85,  lines: ['Häger'],             size: 10 },
+  { id: 'sprakel',        x: 382, y: 65,  lines: ['Sprakel'],           size: 10 },
+  { id: 'gelmer',         x: 530, y: 82,  lines: ['Gelmer'],            size: 10 },
+  { id: 'geist',          x: 398, y: 425, lines: ['Geist'],             size: 9 },
+  { id: 'schuetzenhof',   x: 492, y: 442, lines: ['Schützen-', 'hof'], size: 8 },
+  { id: 'berg-fidel',     x: 422, y: 502, lines: ['Berg', 'Fidel'],    size: 8 },
+  { id: 'mecklenbeck',    x: 278, y: 498, lines: ['Mecklen-', 'beck'], size: 9 },
+  { id: 'albachten',      x: 188, y: 618, lines: ['Albachten'],         size: 10 },
 ]
 
 /** Einzelner klickbarer Bezirk-Pfad. React.memo verhindert Re-Renders bei Hover anderer Viertel. */
