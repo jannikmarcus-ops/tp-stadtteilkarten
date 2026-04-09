@@ -9,290 +9,88 @@ function getDistrictColor(districtId, data) {
   return scale ? scale.color : '#E8E4E0'
 }
 
-/*
- * V7: Bezier-Redesign aller 26 Muensteraner Stadtteile.
- * Cubic Bezier Curves (C-Kommandos) fuer natuerliche Grenzen.
- * Gemeinsame Grenzen nutzen identische Kontrollpunkte (reversed).
- */
+// ═══════════════════════════════════════════
+// Muenster SVG Karte (26 Stadtteile, alle interaktiv)
+// Generiert aus district-paths.json (OSM-Geodaten)
+// ═══════════════════════════════════════════
 
 const INTERACTIVE_IDS = new Set([
-  'altstadt-dom', 'kreuzviertel', 'pluggendorf', 'hafen-zentrum',
-  'aaseestadt', 'sentrup', 'mauritz', 'gievenbeck',
-  'nienberge', 'kinderhaus', 'coerde', 'handorf',
-  'gremmendorf', 'wolbeck', 'angelmodde', 'hiltrup', 'amelsbueren', 'roxel',
-  'sprakel', 'gelmer', 'haeger', 'geist', 'schuetzenhof', 'berg-fidel', 'mecklenbeck', 'albachten',
+  'altstadt-dom', 'kreuzviertel', 'pluggendorf', 'hafen-zentrum', 'aaseestadt', 'sentrup', 'mauritz', 'gievenbeck', 'nienberge', 'kinderhaus', 'coerde', 'handorf', 'gremmendorf', 'wolbeck', 'angelmodde', 'hiltrup', 'amelsbueren', 'roxel', 'sprakel', 'gelmer', 'haeger', 'geist', 'schuetzenhof', 'berg-fidel', 'mecklenbeck', 'albachten',
 ])
 
-// ═══════════════════════════════════════════
-// JUNCTION POINTS (wo 3+ Bezirke aufeinandertreffen)
-// Benannt nach angrenzenden Bezirken
-// ═══════════════════════════════════════════
-
-// Stadtgrenze-Knotenpunkte (im Uhrzeigersinn von NW)
-const BNW  = [95,155]    // NW-Ecke (Haeger/Nienberge/Roxel auf Grenze)
-const BN1  = [138,92]    // N-Grenze Haeger West
-const BN2  = [125,48]    // N-Grenze Haeger Spitze
-const BN3  = [188,25]    // N-Grenze Haeger/Sprakel
-const BN4  = [262,18]    // N-Grenze Haeger/Sprakel Uebergang
-const BN5  = [340,14]    // N-Grenze Sprakel Mitte
-const BN6  = [408,20]    // N-Grenze Sprakel/Gelmer
-const BN7  = [458,30]    // N-Grenze Gelmer West
-const BNE1 = [522,45]    // NE-Grenze Gelmer
-const BNE2 = [578,72]    // NE-Grenze Gelmer/Handorf
-const BNE3 = [618,105]   // NE-Ecke Gelmer/Handorf
-const BE1  = [655,140]   // E-Grenze Handorf Nord
-const BE2  = [692,180]   // E-Grenze Handorf Nase oben
-const BE3  = [722,225]   // E-Grenze Handorf Nase Spitze
-const BE4  = [735,278]   // E-Grenze Handorf Nase breiteste Stelle
-const BE5  = [730,325]   // E-Grenze Handorf
-const BE6  = [715,365]   // E-Grenze Handorf Sued
-const BE7  = [695,398]   // E-Grenze Handorf/Gremmendorf
-const BE8  = [672,425]   // E-Grenze Gremmendorf
-const BSE1 = [662,458]   // SE-Grenze Gremmendorf
-const BSE2 = [665,498]   // SE-Grenze Gremmendorf/Wolbeck
-const BSE3 = [662,538]   // SE-Grenze Wolbeck Nord
-const BSE4 = [650,578]   // SE-Grenze Wolbeck
-const BSE5 = [632,625]   // SE-Grenze Wolbeck Sued
-const BSE6 = [608,662]   // S-Grenze Wolbeck/Hiltrup
-const BS1  = [575,692]   // S-Grenze Hiltrup Ost
-const BS2  = [530,710]   // S-Grenze Hiltrup
-const BS3  = [480,724]   // S-Grenze Hiltrup
-const BS4  = [435,730]   // S-Grenze Hiltrup/Amelsbüren
-const BS5  = [390,734]   // S-Grenze Amelsbüren
-const BS6  = [348,736]   // S-Grenze Amelsbüren Mitte
-const BS7  = [305,738]   // S-Grenze Amelsbüren
-const BS8  = [268,730]   // S-Grenze Amelsbüren/Albachten
-const BSW1 = [235,715]   // SW-Grenze Albachten
-const BSW2 = [200,692]   // SW-Grenze Albachten
-const BSW3 = [170,660]   // SW-Grenze Albachten
-const BSW4 = [145,622]   // SW-Grenze Albachten/Roxel
-const BSW5 = [122,578]   // W-Grenze Roxel Sued
-const BW1  = [102,532]   // W-Grenze Roxel
-const BW2  = [80,480]    // W-Grenze Roxel
-const BW3  = [62,430]    // W-Grenze Roxel
-const BW4  = [52,378]    // W-Grenze Roxel
-const BW5  = [48,328]    // W-Grenze Roxel/Nienberge
-const BW6  = [50,278]    // W-Grenze Nienberge
-const BW7  = [56,238]    // W-Grenze Nienberge
-const BW8  = [68,198]    // NW-Grenze Nienberge
-
-// Innere Knotenpunkte (wo Bezirke intern aufeinandertreffen)
-const J_HNS  = [250,128]   // Haeger-Nienberge-Sprakel (intern)
-const J_HSK  = [322,105]   // Haeger-Sprakel-Kinderhaus
-const J_SGK  = [440,102]   // Sprakel-Gelmer-Kinderhaus-Coerde
-const J_GCH  = [562,125]   // Gelmer-Coerde-Handorf
-const J_NGK  = [248,192]   // Nienberge-Gievenbeck-Kinderhaus
-const J_GKA  = [295,245]   // Gievenbeck-Kinderhaus-Aaseestadt
-const J_KCM  = [472,242]   // Kinderhaus-Coerde-Mauritz
-const J_CMH  = [552,245]   // Coerde-Mauritz-Handorf
-
-// Zentrum-Block Knotenpunkte
-const J_PKA  = [310,282]   // Pluggendorf-Kinderhaus-Aaseestadt (Pluggendorf NW)
-const J_PKH  = [365,268]   // Pluggendorf-Kinderhaus-Hafen (Pluggendorf NE / Hafen NW)
-const J_HKM  = [430,265]   // Hafen-Kinderhaus-Mauritz (Hafen NE)
-const J_HMA  = [438,322]   // Hafen-Mauritz-Altstadt (Hafen SE / Altstadt NE)
-const J_AMG  = [428,382]   // Altstadt-Mauritz-Geist (Altstadt SE)
-const J_AKG  = [372,395]   // Altstadt-Kreuzviertel-Geist (Altstadt SW)
-const J_KAS  = [318,378]   // Kreuzviertel-Aaseestadt-Sentrup (Kreuzviertel SW)
-const J_PAK  = [305,328]   // Pluggendorf-Aaseestadt-Kreuzviertel (Pluggendorf SW)
-const J_CEN  = [372,328]   // Zentrum-Kreuz (Pluggendorf-Hafen-Altstadt-Kreuzviertel)
-const J_SKG  = [348,388]   // Sentrup-Kreuzviertel-Geist Grenzpunkt
-
-// Aaseestadt Ecken
-const J_AAW  = [282,285]   // Aaseestadt NW (Gievenbeck-Aaseestadt-Kinderhaus)
-const J_AAS  = [278,328]   // Aaseestadt W (Gievenbeck-Aaseestadt)
-const J_AASW = [290,368]   // Aaseestadt SW (Gievenbeck-Aaseestadt-Sentrup)
-
-// Sued-Zone Knotenpunkte
-const J_GSM  = [262,420]   // Gievenbeck-Sentrup-Mecklenbeck
-const J_SMB  = [340,455]   // Sentrup-Mecklenbeck-Berg Fidel
-const J_SGB  = [385,452]   // Sentrup-Geist-Berg Fidel
-const J_MGS  = [435,412]   // Mauritz-Geist-Schuetzenhof
-const J_GSB  = [432,460]   // Geist-Schuetzenhof-Berg Fidel
-const J_MSH  = [492,422]   // Mauritz-Schuetzenhof-Handorf
-const J_HSG  = [552,430]   // Handorf-Schuetzenhof-Gremmendorf
-const J_SBA  = [500,468]   // Schuetzenhof-Berg Fidel-Gremmendorf-Angelmodde
-const J_MBH  = [345,540]   // Mecklenbeck-Berg Fidel-Hiltrup
-const J_BAH  = [448,550]   // Berg Fidel-Angelmodde-Hiltrup
-const J_GAW  = [545,540]   // Gremmendorf-Angelmodde-Wolbeck
-const J_WAH  = [540,632]   // Wolbeck-Angelmodde-Hiltrup
-const J_MAM  = [290,542]   // Mecklenbeck-Albachten-Amelsbüren
-const J_MHA  = [358,625]   // Mecklenbeck-Hiltrup-Amelsbüren
-const J_MRG  = [222,478]   // Mecklenbeck-Roxel-Gievenbeck
-const J_RAM  = [175,548]   // Roxel-Albachten-Mecklenbeck
-const J_AAB  = [212,638]   // Albachten-Amelsbüren
-
-// Weitere gemeinsame Grenzpunkte (von 2-3 Bezirken geteilt)
-const J_NGR  = [172,258]   // Nienberge-Gievenbeck-Roxel Dreieck
-const J_GRB  = [185,348]   // Gievenbeck-Roxel Südgrenze
-const J_MHI  = [558,360]   // Mauritz-Handorf innere Grenze
-const J_KAA  = [305,345]   // Kreuzviertel-Aaseestadt Grenze
-const J_AAG  = [278,335]   // Aaseestadt-Gievenbeck Westgrenze
-
-// ═══════════════════════════════════════════
-// ALLE 26 STADTTEILE als Bezier-Pfade
-// ═══════════════════════════════════════════
-
 const ALL_DISTRICTS = [
-  // ── ZENTRUM (4 kleine Bezirke) ──
-  {
-    id: 'pluggendorf',
-    path: `M${J_PKA[0]},${J_PKA[1]} C320,272 340,265 ${J_PKH[0]},${J_PKH[1]} C370,310 374,318 ${J_CEN[0]},${J_CEN[1]} C350,330 325,332 ${J_PAK[0]},${J_PAK[1]} C305,310 308,292 ${J_PKA[0]},${J_PKA[1]} Z`
-  },
-  {
-    id: 'hafen-zentrum',
-    path: `M${J_PKH[0]},${J_PKH[1]} C385,262 410,260 ${J_HKM[0]},${J_HKM[1]} C435,285 438,305 ${J_HMA[0]},${J_HMA[1]} C420,325 395,328 ${J_CEN[0]},${J_CEN[1]} C374,318 370,310 ${J_PKH[0]},${J_PKH[1]} Z`
-  },
-  {
-    id: 'altstadt-dom',
-    path: `M${J_CEN[0]},${J_CEN[1]} C395,328 420,325 ${J_HMA[0]},${J_HMA[1]} C440,345 435,368 ${J_AMG[0]},${J_AMG[1]} C410,390 390,395 ${J_AKG[0]},${J_AKG[1]} C372,380 372,355 ${J_CEN[0]},${J_CEN[1]} Z`
-  },
-  {
-    id: 'kreuzviertel',
-    path: `M${J_PAK[0]},${J_PAK[1]} C325,332 350,330 ${J_CEN[0]},${J_CEN[1]} C372,355 372,380 ${J_AKG[0]},${J_AKG[1]} C365,392 355,390 ${J_SKG[0]},${J_SKG[1]} C338,385 325,382 ${J_KAS[0]},${J_KAS[1]} C310,360 ${J_KAA[0]},${J_KAA[1]} ${J_PAK[0]},${J_PAK[1]} Z`
-  },
-
-  // ── INNERER RING ──
-  {
-    id: 'aaseestadt',
-    path: `M${J_AAW[0]},${J_AAW[1]} C288,282 300,280 ${J_PKA[0]},${J_PKA[1]} C308,292 305,310 ${J_PAK[0]},${J_PAK[1]} C310,360 ${J_KAA[0]},${J_KAA[1]} ${J_KAS[0]},${J_KAS[1]} C308,372 295,370 ${J_AASW[0]},${J_AASW[1]} C282,350 ${J_AAG[0]},${J_AAG[1]} ${J_AAS[0]},${J_AAS[1]} C280,308 280,295 ${J_AAW[0]},${J_AAW[1]} Z`
-  },
-  {
-    id: 'sentrup',
-    path: `M${J_AASW[0]},${J_AASW[1]} C295,370 308,372 ${J_KAS[0]},${J_KAS[1]} C325,382 338,385 ${J_SKG[0]},${J_SKG[1]} C355,395 365,420 ${J_SGB[0]},${J_SGB[1]} C370,455 355,458 ${J_SMB[0]},${J_SMB[1]} C320,445 300,438 ${J_GSM[0]},${J_GSM[1]} C268,405 275,390 ${J_AASW[0]},${J_AASW[1]} Z`
-  },
-  {
-    id: 'mauritz',
-    path: `M${J_HKM[0]},${J_HKM[1]} C445,258 458,248 ${J_KCM[0]},${J_KCM[1]} C495,242 525,242 ${J_CMH[0]},${J_CMH[1]} C555,280 558,320 ${J_MHI[0]},${J_MHI[1]} C${J_MHI[0]},385 555,400 ${J_MSH[0]},${J_MSH[1]} C480,418 460,415 ${J_MGS[0]},${J_MGS[1]} C432,400 430,388 ${J_AMG[0]},${J_AMG[1]} C435,368 440,345 ${J_HMA[0]},${J_HMA[1]} C438,305 435,285 ${J_HKM[0]},${J_HKM[1]} Z`
-  },
-  {
-    id: 'gievenbeck',
-    path: `M${J_NGK[0]},${J_NGK[1]} C260,210 275,225 ${J_GKA[0]},${J_GKA[1]} C292,255 288,270 ${J_AAW[0]},${J_AAW[1]} C280,295 280,308 ${J_AAS[0]},${J_AAS[1]} C282,350 ${J_AAG[0]},${J_AAG[1]} ${J_AASW[0]},${J_AASW[1]} C275,390 268,405 ${J_GSM[0]},${J_GSM[1]} C248,435 235,455 ${J_MRG[0]},${J_MRG[1]} C205,410 192,380 ${J_GRB[0]},${J_GRB[1]} C178,318 175,288 ${J_NGR[0]},${J_NGR[1]} C170,230 175,210 ${J_NGK[0]},${J_NGK[1]} Z`
-  },
-
-  // ── GEIST / SCHUETZENHOF / BERG FIDEL / MECKLENBECK ──
-  {
-    id: 'geist',
-    path: `M${J_SKG[0]},${J_SKG[1]} C355,390 365,392 ${J_AKG[0]},${J_AKG[1]} C390,395 410,390 ${J_AMG[0]},${J_AMG[1]} C430,388 432,400 ${J_MGS[0]},${J_MGS[1]} C435,425 434,445 ${J_GSB[0]},${J_GSB[1]} C418,455 400,455 ${J_SGB[0]},${J_SGB[1]} C365,420 355,395 ${J_SKG[0]},${J_SKG[1]} Z`
-  },
-  {
-    id: 'schuetzenhof',
-    path: `M${J_MGS[0]},${J_MGS[1]} C460,415 480,418 ${J_MSH[0]},${J_MSH[1]} C510,425 535,428 ${J_HSG[0]},${J_HSG[1]} C540,445 520,460 ${J_SBA[0]},${J_SBA[1]} C480,465 455,462 ${J_GSB[0]},${J_GSB[1]} C434,445 435,425 ${J_MGS[0]},${J_MGS[1]} Z`
-  },
-  {
-    id: 'berg-fidel',
-    path: `M${J_SMB[0]},${J_SMB[1]} C355,458 370,455 ${J_SGB[0]},${J_SGB[1]} C400,455 418,455 ${J_GSB[0]},${J_GSB[1]} C455,462 480,465 ${J_SBA[0]},${J_SBA[1]} C502,490 490,520 ${J_BAH[0]},${J_BAH[1]} C420,548 380,542 ${J_MBH[0]},${J_MBH[1]} C340,535 340,510 ${J_SMB[0]},${J_SMB[1]} Z`
-  },
-  {
-    id: 'mecklenbeck',
-    path: `M${J_MRG[0]},${J_MRG[1]} C235,455 248,435 ${J_GSM[0]},${J_GSM[1]} C300,438 320,445 ${J_SMB[0]},${J_SMB[1]} C340,510 340,535 ${J_MBH[0]},${J_MBH[1]} C345,580 340,600 ${J_MHA[0]},${J_MHA[1]} C330,610 310,570 ${J_MAM[0]},${J_MAM[1]} C270,538 245,530 ${J_RAM[0]},${J_RAM[1]} C185,520 200,498 ${J_MRG[0]},${J_MRG[1]} Z`
-  },
-
-  // ── AEUSSERE BEZIRKE (Nord) ──
-  {
-    id: 'haeger',
-    path: `M${BNW[0]},${BNW[1]} C100,140 115,115 ${BN1[0]},${BN1[1]} C145,72 130,52 ${BN2[0]},${BN2[1]} C140,35 160,28 ${BN3[0]},${BN3[1]} C210,22 238,18 ${BN4[0]},${BN4[1]} C285,30 305,60 ${J_HSK[0]},${J_HSK[1]} C300,115 275,125 ${J_HNS[0]},${J_HNS[1]} C210,140 155,150 ${BNW[0]},${BNW[1]} Z`
-  },
-  {
-    id: 'sprakel',
-    path: `M${J_HSK[0]},${J_HSK[1]} C305,60 285,30 ${BN4[0]},${BN4[1]} C290,16 315,14 ${BN5[0]},${BN5[1]} C365,14 390,18 ${BN6[0]},${BN6[1]} C425,22 442,26 ${BN7[0]},${BN7[1]} C452,50 448,78 ${J_SGK[0]},${J_SGK[1]} C420,100 370,105 ${J_HSK[0]},${J_HSK[1]} Z`
-  },
-  {
-    id: 'gelmer',
-    path: `M${J_SGK[0]},${J_SGK[1]} C448,78 452,50 ${BN7[0]},${BN7[1]} C478,35 500,40 ${BNE1[0]},${BNE1[1]} C545,50 562,62 ${BNE2[0]},${BNE2[1]} C595,82 610,98 ${BNE3[0]},${BNE3[1]} C612,112 590,122 ${J_GCH[0]},${J_GCH[1]} C535,120 490,108 ${J_SGK[0]},${J_SGK[1]} Z`
-  },
-  {
-    id: 'albachten',
-    path: `M${J_RAM[0]},${J_RAM[1]} C245,530 270,538 ${J_MAM[0]},${J_MAM[1]} C295,570 280,610 ${J_AAB[0]},${J_AAB[1]} C220,660 235,710 ${BSW1[0]},${BSW1[1]} C218,705 205,695 ${BSW2[0]},${BSW2[1]} C185,675 175,665 ${BSW3[0]},${BSW3[1]} C158,645 150,630 ${BSW4[0]},${BSW4[1]} C135,600 128,582 ${BSW5[0]},${BSW5[1]} C118,562 115,548 ${J_RAM[0]},${J_RAM[1]} Z`
-  },
-
-  // ── AEUSSERER RING ──
-  {
-    id: 'nienberge',
-    path: `M${BNW[0]},${BNW[1]} C155,150 210,140 ${J_HNS[0]},${J_HNS[1]} C255,145 252,170 ${J_NGK[0]},${J_NGK[1]} C175,210 170,230 ${J_NGR[0]},${J_NGR[1]} C170,248 115,225 ${BW8[0]},${BW8[1]} C78,172 88,162 ${BNW[0]},${BNW[1]} Z`
-  },
-  {
-    id: 'kinderhaus',
-    path: `M${J_HNS[0]},${J_HNS[1]} C275,125 300,115 ${J_HSK[0]},${J_HSK[1]} C370,105 420,100 ${J_SGK[0]},${J_SGK[1]} C460,115 468,145 ${J_KCM[0]},${J_KCM[1]} C465,255 450,262 ${J_HKM[0]},${J_HKM[1]} C410,260 385,262 ${J_PKH[0]},${J_PKH[1]} C340,265 320,272 ${J_PKA[0]},${J_PKA[1]} C300,280 288,282 ${J_AAW[0]},${J_AAW[1]} C288,270 292,255 ${J_GKA[0]},${J_GKA[1]} C275,225 260,210 ${J_NGK[0]},${J_NGK[1]} C252,170 255,145 ${J_HNS[0]},${J_HNS[1]} Z`
-  },
-  {
-    id: 'coerde',
-    path: `M${J_SGK[0]},${J_SGK[1]} C490,108 535,120 ${J_GCH[0]},${J_GCH[1]} C568,145 558,185 ${J_CMH[0]},${J_CMH[1]} C525,242 495,242 ${J_KCM[0]},${J_KCM[1]} C468,145 460,115 ${J_SGK[0]},${J_SGK[1]} Z`
-  },
-  {
-    id: 'handorf',
-    path: `M${J_GCH[0]},${J_GCH[1]} C590,122 612,112 ${BNE3[0]},${BNE3[1]} C628,115 642,128 ${BE1[0]},${BE1[1]} C668,155 685,172 ${BE2[0]},${BE2[1]} C705,195 718,215 ${BE3[0]},${BE3[1]} C732,245 736,268 ${BE4[0]},${BE4[1]} C735,298 732,315 ${BE5[0]},${BE5[1]} C725,345 720,358 ${BE6[0]},${BE6[1]} C708,382 700,392 ${BE7[0]},${BE7[1]} C688,410 678,420 ${BE8[0]},${BE8[1]} C668,430 660,432 ${J_HSG[0]},${J_HSG[1]} C535,428 510,425 ${J_MSH[0]},${J_MSH[1]} C555,400 ${J_MHI[0]},385 ${J_MHI[0]},${J_MHI[1]} C${J_MHI[0]},320 555,280 ${J_CMH[0]},${J_CMH[1]} C558,185 568,145 ${J_GCH[0]},${J_GCH[1]} Z`
-  },
-  {
-    id: 'gremmendorf',
-    path: `M${J_HSG[0]},${J_HSG[1]} C660,432 668,430 ${BE8[0]},${BE8[1]} C672,440 668,452 ${BSE1[0]},${BSE1[1]} C664,475 666,492 ${BSE2[0]},${BSE2[1]} C666,518 664,532 ${BSE3[0]},${BSE3[1]} C658,535 555,538 ${J_GAW[0]},${J_GAW[1]} C530,515 520,490 ${J_SBA[0]},${J_SBA[1]} C520,460 540,445 ${J_HSG[0]},${J_HSG[1]} Z`
-  },
-  {
-    id: 'wolbeck',
-    path: `M${J_GAW[0]},${J_GAW[1]} C555,538 658,535 ${BSE3[0]},${BSE3[1]} C660,555 655,572 ${BSE4[0]},${BSE4[1]} C642,605 638,618 ${BSE5[0]},${BSE5[1]} C622,645 615,655 ${BSE6[0]},${BSE6[1]} C600,672 585,685 ${BS1[0]},${BS1[1]} C565,692 555,665 ${J_WAH[0]},${J_WAH[1]} C542,610 545,575 ${J_GAW[0]},${J_GAW[1]} Z`
-  },
-  {
-    id: 'angelmodde',
-    path: `M${J_SBA[0]},${J_SBA[1]} C520,490 530,515 ${J_GAW[0]},${J_GAW[1]} C545,575 542,610 ${J_WAH[0]},${J_WAH[1]} C525,618 490,570 ${J_BAH[0]},${J_BAH[1]} C490,520 502,490 ${J_SBA[0]},${J_SBA[1]} Z`
-  },
-  {
-    id: 'hiltrup',
-    path: `M${J_MBH[0]},${J_MBH[1]} C380,542 420,548 ${J_BAH[0]},${J_BAH[1]} C490,570 525,618 ${J_WAH[0]},${J_WAH[1]} C555,665 565,692 ${BS1[0]},${BS1[1]} C555,700 540,708 ${BS2[0]},${BS2[1]} C510,718 495,722 ${BS3[0]},${BS3[1]} C462,728 448,730 ${BS4[0]},${BS4[1]} C418,732 405,734 ${BS5[0]},${BS5[1]} C378,730 368,650 ${J_MHA[0]},${J_MHA[1]} C340,600 345,580 ${J_MBH[0]},${J_MBH[1]} Z`
-  },
-  {
-    id: 'amelsbueren',
-    path: `M${J_MHA[0]},${J_MHA[1]} C368,650 378,730 ${BS5[0]},${BS5[1]} C375,736 362,736 ${BS6[0]},${BS6[1]} C332,738 318,738 ${BS7[0]},${BS7[1]} C290,735 278,732 ${BS8[0]},${BS8[1]} C255,725 242,718 ${BSW1[0]},${BSW1[1]} C235,710 220,660 ${J_AAB[0]},${J_AAB[1]} C280,610 295,570 ${J_MAM[0]},${J_MAM[1]} C310,570 330,610 ${J_MHA[0]},${J_MHA[1]} Z`
-  },
-  {
-    id: 'roxel',
-    path: `M${BW8[0]},${BW8[1]} C115,225 170,248 ${J_NGR[0]},${J_NGR[1]} C175,288 178,318 ${J_GRB[0]},${J_GRB[1]} C192,380 205,410 ${J_MRG[0]},${J_MRG[1]} C200,498 185,520 ${J_RAM[0]},${J_RAM[1]} C115,548 118,562 ${BSW5[0]},${BSW5[1]} C115,555 108,538 ${BW1[0]},${BW1[1]} C92,510 85,492 ${BW2[0]},${BW2[1]} C72,458 65,438 ${BW3[0]},${BW3[1]} C58,408 54,388 ${BW4[0]},${BW4[1]} C50,358 48,338 ${BW5[0]},${BW5[1]} C50,310 50,290 ${BW6[0]},${BW6[1]} C52,265 54,250 ${BW7[0]},${BW7[1]} C58,225 62,210 ${BW8[0]},${BW8[1]} Z`
-  },
+  { id: 'aaseestadt', path: 'M333.69,425.39L332.11,423.51L336.47,420.31L350.09,400.5L361.07,388.75L365.76,394.16L385.01,390.83L367.23,425.43L354.01,440.11L350.65,440.87L347.81,439.2L333.69,425.39Z' },
+  { id: 'albachten', path: 'M267.88,506.51L243.01,509.95L244.85,519.08L247.95,523.2L226.78,541.44L213.1,544.34L215.87,555.13L210.68,556.77L210.45,555.12L200.05,555.49L193.98,560.48L170.42,571.31L163.01,577.83L160.07,568.14L160.67,551.35L167.96,540.83L168.12,537.05L165.18,529L166.12,521L164.77,516.79L161.39,511.51L158.04,513.64L153.75,511.36L153.02,500.97L158.52,483.05L156.63,483.8L149.26,466.73L161.48,467.9L158.71,452.99L167.75,449.47L167.9,436.16L195.7,428.63L198.49,428.34L198.84,430.56L235.34,419.65L238.05,424.39L247.96,426.65L267.88,506.51Z' },
+  { id: 'altstadt-dom', path: 'M444.98,371.75L448.19,363.07L448.5,347.73L443.59,328.63L434.83,318.93L398.84,307.01L368.14,309.03L361.77,313.67L355.01,329.9L353.75,341.82L356.63,377.71L358.62,385.07L364.41,393.49L380.69,390.81L400.93,391.7L416.69,387.14L418.28,387.3L416.84,397.02L422.09,396.96L424.44,380.66L440.01,379.2L444.98,371.75Z' },
+  { id: 'amelsbueren', path: 'M446.03,596.89L448.66,595.49L415.6,589.63L392.26,590.03L383.35,592.27L374.01,572.03L370.04,556.23L371.48,553.38L366.75,542.45L358.29,533.65L367.1,489.25L356.49,483.37L358.06,477.23L339.16,474.8L334.95,483.91L328.15,492.55L319.8,498.55L308.24,503.12L243.01,509.95L244.85,519.08L247.95,523.2L226.78,541.44L213.1,544.34L215.98,553.1L213.93,566.19L215.23,566.31L216.36,578.28L214.35,586.48L215.84,602.24L220.96,612.86L228.81,610.59L232.66,623.65L238.91,622.03L235.22,632.6L238.58,638.74L236.69,639.54L237.62,642.28L239.62,641.57L239.68,660.17L245.53,662.34L245.33,664.7L258.08,658.23L258.46,665.26L264.7,675.12L266.61,676.52L268.88,675.43L270.86,671.76L276.56,677.63L268.48,686.28L275.59,692.68L261.98,707.85L267.15,713.08L292.16,712.93L291.09,722.67L286.97,725.51L286.01,730.49L288.66,733.86L296.51,721.79L304.27,737.33L310.18,737.32L319.1,741.22L318.79,745.66L332.74,740.42L331.96,737.92L338.05,735.82L342.3,731.74L350.31,734.45L352.78,735.76L353.12,739.12L346.98,751.52L363.89,753.71L362.93,757.2L371.5,759.91L377.14,758.29L384.74,750.72L382.52,746.21L376.45,746.38L381.77,725.51L383.37,703.95L395.53,702.85L407.1,711.73L413.57,713.91L433.21,702.76L434.11,692.14L440.57,694.29L442.46,691.82L447.95,690.28L448.24,678.38L427.24,667.57L445.42,651.35L455.62,631.14L450.68,622.11L448.82,607.04L442.71,603.33L447.2,602.12L446.03,596.89Z' },
+  { id: 'angelmodde', path: 'M497.21,473.38L507.79,489.22L503.82,490.42L504.96,497.62L503.02,497.67L512.04,511.56L528.39,530.49L535.35,524.24L544.66,533.69L548.53,543.22L567.16,531.55L566.66,537.28L570.1,536.89L570.4,540.14L575.77,540.52L577.1,537.4L599.45,542.25L595.54,531.94L582.7,525.96L583.24,518.24L589.8,502.54L583.55,497.06L581.24,498.21L581.22,494.7L579.36,495.83L577.15,493.66L580.39,482.29L579.58,477.08L575.41,477.64L575.16,475.56L571.1,474.06L567.79,477.02L565.77,472.98L562.5,472.05L562.38,468.96L558.97,468.34L558.33,470.96L555.76,470.89L553.5,477.72L547.91,482.22L532.56,472.01L515.73,465.57L497.21,473.38Z' },
+  { id: 'berg-fidel', path: 'M363.48,506.49L367.1,489.25L374.14,476.97L411.96,441.17L417.73,431.11L429.32,426.2L429.03,437.53L431.35,445.92L452.03,503.46L435.49,510.1L424.77,511.02L388.79,510.13L363.48,506.49Z' },
+  { id: 'coerde', path: 'M428.09,260.89L422.59,247.08L391.5,216.47L402.29,209.62L403.06,199.64L398.82,190.9L401.09,189L405.68,194.29L414.15,190.74L420.64,192.12L425.42,187.88L428.47,177.17L458,177.68L462.39,183.99L466.59,185.23L475.25,192.91L472.71,209.28L475.4,266.55L464.38,269.98L443.57,270.39L437.69,268.69L428.09,260.89Z' },
+  { id: 'geist', path: 'M385.01,390.83L367.23,425.43L358.8,434.13L361.99,439.02L378.13,441.47L402.28,435.33L395.01,391.49L385.01,390.83Z' },
+  { id: 'gelmer', path: 'M519.24,317.66L503.35,273.59L504.03,265.83L508.74,258.19L478.13,288.86L474.09,251.14L472.71,209.28L485.22,149.29L482.39,148L482.24,144.33L466.72,122.84L464.98,125.35L442.21,88.67L448.72,87.84L447.13,81.87L449.32,61.35L454.08,52.11L451.54,44.12L457.6,45.34L461.05,49.11L472.59,50.87L475.49,53.93L493.29,62.31L519.09,89.42L521.98,104.83L518.88,109.94L525.87,118.5L522.66,123.29L528.17,123.93L533.26,127.31L534,139.85L531.32,143.89L534.88,145.63L529.73,149.13L524.72,162.47L524.38,171.73L525.66,173.16L529.42,171.8L532.44,175.87L537.16,170.43L540.29,178.32L545.78,177.69L545.91,181.93L553.98,187.38L554.58,195.89L544.64,211.44L555.16,216.54L557.22,225.27L552.79,225.33L543.94,230.05L542.76,234.19L552.71,239.09L564.76,235.09L567.05,239.25L571.81,241.05L570.56,243.15L559.31,245.84L561.1,248.64L559.47,250.54L554.44,247.84L552.38,248.54L551.14,250.72L553.18,252.27L546.26,263.25L546.32,271.87L537.36,274.73L541.81,280.47L541.25,285.47L542.92,286.95L551.26,286.4L549.78,292.32L557.74,296.39L557.74,299.73L552.22,303.71L553.78,309.57L519.24,317.66Z' },
+  { id: 'gievenbeck', path: 'M273.13,377.32L251.3,348.15L247.74,345.8L246.58,334.06L239.62,329.91L243.98,308.46L254.6,279.4L280.9,236.31L299.5,251.15L299.83,249.74L346.02,293.75L325.78,316.54L326.84,342.44L323.95,348.14L315.58,353.97L303.75,356.72L273.13,377.32Z' },
+  { id: 'gremmendorf', path: 'M555.76,470.89L553.5,477.72L547.91,482.22L532.56,472.01L515.73,465.57L497.21,473.38L507.79,489.22L503.82,490.42L504.7,497.91L493.84,499.82L493.03,492.06L452.03,503.46L429.03,437.53L430.55,420.21L439.47,404.94L454.96,385.81L464.74,385.11L463.46,389.27L464.6,395.32L473.36,395.53L475.07,406.75L477.76,404.09L487.38,404.35L488.59,408.38L496.62,407.32L502.06,412.64L512.45,412.44L519.32,410.21L520.49,408.01L529.91,406.64L528.07,404.75L532.75,403.71L534.61,407.35L531.98,414.12L534.29,415.97L538.83,414.68L542.1,415.87L548.33,426.06L554.98,431.62L557.69,447.24L555.07,453.12L549.75,455.59L548.88,458.17L549.81,462.79L555.76,470.89Z' },
+  { id: 'haeger', path: 'M173.29,185L171.69,180.93L186.93,176.06L186.43,172.02L192.44,171.77L191.39,163.98L199.02,165.27L204.07,163.79L210.1,160.67L213.9,155.6L209.02,143.25L213.44,137.67L211.44,130.75L216.47,128.29L213.82,118.99L207.61,109.63L223.81,103.08L229.69,99.28L229.44,97.52L243.99,91.89L251.57,83.88L265.54,76.31L264.83,73.82L273.62,68.35L297.18,70.8L297.17,69.56L308.66,80.49L319.53,84.91L325.65,101.64L335.15,118.02L336.14,138.19L330.83,151.58L330.82,159.99L328.46,163.05L329.78,185Z' },
+  { id: 'hafen-zentrum', path: 'M422.09,396.96L424.44,380.66L440.01,379.2L443.34,374.97L454.96,385.81L435.01,411.28L429.32,426.2L417.73,431.11L422.09,396.96Z' },
+  { id: 'handorf', path: 'M624.53,257.71L617.94,280.7L624.38,287.55L625.14,309.65L628.4,309.66L628.74,313.38L630.14,313.54L628.01,328.78L633.08,335.09L639.53,334.67L650.57,337.7L650.31,358.63L653.43,358.84L648.96,375.76L630.09,379.08L630.21,381.34L634.11,380.87L634.22,383.15L620.46,387.58L618.72,383.56L612.58,386.09L611.87,383.05L609.39,385.15L607.54,384.15L606.68,406.43L603.22,421L588.66,417.58L578.29,421.9L578.41,424.45L570.26,424.05L551.9,411.53L532.62,401.33L532.75,403.71L527.89,404.97L529.91,406.64L520.49,408.01L519.32,410.21L512.88,412.41L504.99,412.53L516.75,381.53L524.25,348.18L524.54,334.22L519.24,317.66L553.78,309.57L552.22,303.71L557.74,299.73L557.74,296.39L549.78,292.32L551.26,286.4L542.92,286.95L541.25,285.47L541.81,280.47L537.36,274.73L546.32,271.87L546.26,263.25L553.18,252.27L551.14,250.72L552.38,248.54L554.44,247.84L559.47,250.54L561.1,248.64L559.31,245.84L571.99,241.93L567.05,239.25L564.76,235.09L552.71,239.09L542.76,234.19L543.94,230.05L552.79,225.33L557.22,225.27L555.16,216.54L544.64,211.44L554.58,195.89L553.98,187.38L545.91,181.93L545.78,177.69L540.29,178.32L537.16,170.43L532.44,175.87L529.42,171.8L525.66,173.16L524.38,171.73L524.72,162.47L529.73,149.13L534.88,145.63L531.32,143.89L534,139.85L533.26,127.31L528.17,123.93L522.66,123.29L525.99,120.22L518.88,109.94L521.69,105.01L528.01,110.53L534.31,112.38L541.61,110.98L553.84,103.28L566.33,105.8L570.53,108.68L571.24,112.01L580.44,109.54L583.95,106.16L589.8,111.93L595.5,110.6L600.81,113.65L600.59,117.84L597.31,120.67L596.45,124.68L600.24,135.09L607.46,140.93L611.17,150.57L616.13,156.33L615.23,159.9L619.77,163.29L623.27,178.17L631.4,179.56L635.59,183L632.38,182.81L630,188.1L628.56,187.11L625.64,196.64L630.1,202.15L631.54,209.14L636.54,217.28L639.69,217.31L642.36,226.08L649.06,227.84L649.55,226.44L655.88,229.24L647.23,242.23L636.58,267.24L624.53,257.71Z' },
+  { id: 'hiltrup', path: 'M452.03,503.46L435.49,510.1L424.77,511.02L388.79,510.13L363.48,506.49L358.29,533.65L366.75,542.45L371.48,553.38L370.04,556.23L374.01,572.03L383.35,592.27L392.26,590.03L415.6,589.63L448.66,595.49L446.03,596.89L447.2,602.12L442.71,603.33L448.82,607.04L450.97,622.99L460.43,637.44L469.1,631.05L493.15,637.4L506.68,638.24L516.02,635.36L543.77,651.68L556.84,662.65L574.04,642.03L578.08,641.23L571.68,621.37L550.52,601.18L548.57,600.04L546.14,602.83L547.13,605.45L543.62,607.81L534.06,597.5L537.96,590.89L538.96,582.63L540.56,582.04L535.45,570.12L536.25,554.07L533.01,554.75L532.5,552.18L530.14,552.2L530.6,550.48L548.44,543.43L544.66,533.69L535.35,524.24L528.39,530.49L512.04,511.56L503.02,497.67L493.84,499.82L493.03,492.06L452.03,503.46Z' },
+  { id: 'kinderhaus', path: 'M380.2,213.18L374.62,207.38L369.78,205.81L360.14,205.44L345.31,199.25L331.15,200.23L330.87,197.41L293.58,211.4L280.9,236.31L299.5,251.15L299.83,249.74L328.71,277.09L343.63,268.09L373.88,266.18L402.51,258.34L420.71,256.56L428.09,260.89L426.34,253.48L417.38,241.25L391.5,216.47L382.41,212.29L380.2,213.18Z' },
+  { id: 'kreuzviertel', path: 'M394.37,332.96L398.59,333.68L412.25,330.07L418.21,312.54L398.84,307.01L375.7,308.49L376.08,325.54L377.77,327.85L384.61,334.42L394.37,332.96Z' },
+  { id: 'mauritz', path: 'M504.99,412.53L501.79,412.48L496.62,407.32L488.59,408.38L487.38,404.35L477.76,404.09L475.07,406.75L473.36,395.53L464.6,395.32L463.46,389.27L464.74,385.11L454.96,385.81L480.76,358.52L484.41,347.06L465.86,348.71L452.85,345.67L448.5,347.73L448.36,359.9L442.42,360.64L433.9,365.1L425.98,359.49L430.51,349.83L456.76,311.27L508.74,258.19L504.03,265.83L503.35,273.59L523.41,329.36L524.96,341.35L516.75,381.53L504.99,412.53Z' },
+  { id: 'mecklenbeck', path: 'M250.42,438.06L256.84,436.43L261.77,443.07L270.42,446.99L277.07,441.93L284.19,442.55L284.67,438.21L291.27,436.17L289.09,426.72L292.91,425.57L294.91,429.2L301.99,427.34L300.75,424.53L303.83,424.04L308.62,428.65L321.84,429.44L332.11,423.51L344.61,436.8L350.35,440.79L354.01,440.11L346.6,454.36L336.83,480.68L332.18,488.13L322.74,496.84L303.45,504.12L267.88,506.51L250.42,438.06Z' },
+  { id: 'nienberge', path: 'M239.62,329.91L237.05,326.61L231.28,326.94L225.25,323.12L210.14,321.77L203.62,316.46L197.99,299.66L195.71,297L185.98,295.16L183.31,281.23L174.41,270.74L174,267.89L180.55,264.98L175.42,245.92L170.81,237.82L173.56,234.63L170.32,226.08L185.09,224.54L170.29,192.47L175.64,191L173.29,185L329.78,185L330.55,197.74L293.58,211.4L280.9,236.31L254.6,279.4L243.98,308.46L239.62,329.91Z' },
+  { id: 'pluggendorf', path: 'M361.07,388.75L374.1,373.92L390.76,366.15L390.79,378.58L385.01,390.83L365.76,394.16L361.07,388.75Z' },
+  { id: 'roxel', path: 'M284.67,438.21L291.27,436.17L289.09,426.72L292.91,425.57L294.91,429.2L301.99,427.34L300.75,424.53L303.83,424.04L298.24,412.27L293.92,409.21L293.66,406.24L291.69,406.4L290.43,400.53L279.37,391.69L270.41,373.07L266.03,369.59L251.3,348.15L247.74,345.8L246.41,333.85L241.2,331.5L237.05,326.61L231.28,326.94L222.25,322.43L210.14,321.77L203.35,316.21L198.38,300.34L195.71,297L189.62,295.9L167.59,312.49L160.7,326.09L151.87,324.26L141.95,325.96L142.57,328.1L139.41,328.07L136.25,333.36L131.97,335.48L130.62,342.81L128.53,343.48L128.66,346.21L124.31,347.53L123.7,351.54L114.5,352.54L118.32,359.05L116.16,358.52L115.37,360.38L102.47,365.15L103.77,370.86L96.32,373.3L101.93,384.52L100.7,391.06L98.55,390.99L98.99,406.47L97.12,406.47L99.78,413.39L89.3,416.49L88.3,418.7L91.74,425.41L94.25,424.83L96.3,421.16L106.02,418.77L111.99,420.67L113.18,425.46L115.75,427.73L130.95,424.33L167.31,438.21L167.9,436.16L186.44,430.53L198.49,428.34L198.84,430.56L235.34,419.65L238.05,424.39L247.96,426.65L250.42,438.06L256.84,436.43L264.27,444.73L270.42,446.99L277.07,441.93L284.19,442.55L284.67,438.21Z' },
+  { id: 'schuetzenhof', path: 'M395.01,391.49L402.28,435.33L417.73,431.11L422.09,396.96L416.84,397.02L418.28,387.3L404.25,391.16L395.01,391.49Z' },
+  { id: 'sentrup', path: 'M273.13,377.32L303.75,356.72L315.58,353.97L323.95,348.14L326.84,342.44L325.78,316.54L346.02,293.75L363.98,310.67L357.09,323.23L353.74,339.42L356.44,376.69L361.07,388.75L350.09,400.5L336.47,420.31L328.64,426.36L321.84,429.44L305.25,427.06L298.24,412.27L293.92,409.21L293.66,406.24L291.69,406.4L290.43,400.53L278.85,390.93L273.13,377.32Z' },
+  { id: 'sprakel', path: 'M475.25,192.91L466.59,185.23L462.39,183.99L458,177.68L428.47,177.17L425.42,187.88L420.64,192.12L414.15,190.74L405.68,194.29L399.81,189.39L399.66,193.78L403.24,200.86L402.29,209.62L391.19,216.68L382.41,212.29L380.2,213.18L374.62,207.38L369.78,205.81L360.14,205.44L345.31,199.25L331.15,200.23L328.46,163.05L330.82,159.99L330.83,151.58L336.14,138.19L335,117.61L325.65,101.64L319.24,84.62L308.66,80.49L297.17,69.56L297.18,70.8L274.96,67.68L285.55,61.1L287.8,57.13L293.19,62.15L295.7,67.42L297.6,67.6L312.41,63.8L319.81,58.97L326.18,54.79L320.79,36.01L322.58,32.01L325.74,29.53L333.33,28.25L347.69,20L362.59,29.4L372.64,33.27L380.77,41.71L386.29,44.3L385.28,47.06L387.41,54.24L392.02,55.42L404.14,69.32L411.04,73.68L414.57,83.95L420.52,78.65L416.61,70.82L426.93,68.66L428.04,71.49L435.02,63.94L436.62,67.76L448.48,67.57L447.13,81.87L448.72,87.84L442.21,88.67L443.36,91.48L464.98,125.35L466.72,122.84L482.24,144.33L482.39,148L485.22,149.29L475.25,192.91Z' },
+  { id: 'wolbeck', path: 'M583.23,525.05L595.74,532.18L601.92,549.5L645.75,569.65L648.01,558.54L663.03,565.82L677.28,566.34L680.6,562.35L682.5,555.85L681.07,548.72L684.46,542.41L682.63,535.97L684.95,530.58L679.54,527.63L675.1,519.68L689.41,522.43L689.78,512.04L693.55,512.47L694.46,505.76L698.66,506.96L697.92,494.37L700.93,493.82L701.05,492.16L708.89,492.58L708.42,490.81L710.75,490.58L709.57,486.92L711.74,483.94L709.77,478.67L711.6,477.06L701.68,463.73L694.06,436.51L677.31,430.98L678.06,424.24L681.06,421.44L679.36,418.19L667.8,421.68L667.34,426.07L658.75,424.54L661.39,422.41L661.53,416.99L663.53,416.46L663.28,409.18L658.52,409.47L657.41,405.21L652.73,403.41L651.09,396.84L658.43,375.1L656.9,367.41L651.1,367.43L648.96,375.76L630.09,379.08L630.21,381.34L634.11,380.87L634.22,383.15L620.46,387.58L618.72,383.56L612.58,386.09L611.87,383.05L609.39,385.15L607.54,384.15L606.68,406.43L603.22,421L588.66,417.58L578.29,421.9L578.41,424.45L570.26,424.05L551.9,411.53L531.65,401.26L534.61,407.35L531.98,414.12L534.29,415.97L538.83,414.68L542.1,415.87L548.33,426.06L554.98,431.62L557.69,447.24L555.07,453.12L549.16,456.48L550.05,463.19L555.76,470.89L558.33,470.96L558.97,468.34L562.38,468.96L562.5,472.05L565.77,472.98L567.79,477.02L571.1,474.06L575.16,475.56L575.41,477.64L579.67,477.17L580.39,482.29L577.15,493.66L579.36,495.83L581.22,494.7L581.24,498.21L583.55,497.06L589.8,502.54L583.24,518.24L583.23,525.05Z' },
 ]
 
-// Pfade direkt aus den path-Strings
 const PATHS = ALL_DISTRICTS.map(d => ({
   id: d.id,
   path: d.path,
   interactive: INTERACTIVE_IDS.has(d.id),
 }))
 
-// Stadtgrenze als Bezier-Pfad (Aussenkante aller Randbezirke)
-const CITY_BOUNDARY = `M${BNW[0]},${BNW[1]} C100,140 115,115 ${BN1[0]},${BN1[1]} C145,72 130,52 ${BN2[0]},${BN2[1]} C140,35 160,28 ${BN3[0]},${BN3[1]} C210,22 238,18 ${BN4[0]},${BN4[1]} C290,16 315,14 ${BN5[0]},${BN5[1]} C365,14 390,18 ${BN6[0]},${BN6[1]} C425,22 442,26 ${BN7[0]},${BN7[1]} C478,35 500,40 ${BNE1[0]},${BNE1[1]} C545,50 562,62 ${BNE2[0]},${BNE2[1]} C595,82 610,98 ${BNE3[0]},${BNE3[1]} C628,115 642,128 ${BE1[0]},${BE1[1]} C668,155 685,172 ${BE2[0]},${BE2[1]} C705,195 718,215 ${BE3[0]},${BE3[1]} C732,245 736,268 ${BE4[0]},${BE4[1]} C735,298 732,315 ${BE5[0]},${BE5[1]} C725,345 720,358 ${BE6[0]},${BE6[1]} C708,382 700,392 ${BE7[0]},${BE7[1]} C688,410 678,420 ${BE8[0]},${BE8[1]} C672,440 668,452 ${BSE1[0]},${BSE1[1]} C664,475 666,492 ${BSE2[0]},${BSE2[1]} C666,518 664,532 ${BSE3[0]},${BSE3[1]} C660,555 655,572 ${BSE4[0]},${BSE4[1]} C642,605 638,618 ${BSE5[0]},${BSE5[1]} C622,645 615,655 ${BSE6[0]},${BSE6[1]} C600,672 585,685 ${BS1[0]},${BS1[1]} C555,700 540,708 ${BS2[0]},${BS2[1]} C510,718 495,722 ${BS3[0]},${BS3[1]} C462,728 448,730 ${BS4[0]},${BS4[1]} C418,732 405,734 ${BS5[0]},${BS5[1]} C375,736 362,736 ${BS6[0]},${BS6[1]} C332,738 318,738 ${BS7[0]},${BS7[1]} C290,735 278,732 ${BS8[0]},${BS8[1]} C255,725 242,718 ${BSW1[0]},${BSW1[1]} C218,705 205,695 ${BSW2[0]},${BSW2[1]} C185,675 175,665 ${BSW3[0]},${BSW3[1]} C158,645 150,630 ${BSW4[0]},${BSW4[1]} C135,600 128,582 ${BSW5[0]},${BSW5[1]} C115,555 108,538 ${BW1[0]},${BW1[1]} C92,510 85,492 ${BW2[0]},${BW2[1]} C72,458 65,438 ${BW3[0]},${BW3[1]} C58,408 54,388 ${BW4[0]},${BW4[1]} C50,358 48,338 ${BW5[0]},${BW5[1]} C50,310 50,290 ${BW6[0]},${BW6[1]} C52,265 54,250 ${BW7[0]},${BW7[1]} C58,225 62,210 ${BW8[0]},${BW8[1]} C78,172 88,162 ${BNW[0]},${BNW[1]} Z`
+// Stadtgrenze (Kombination aller Bezirkspfade als Hintergrund)
+const CITY_BOUNDARY = ALL_DISTRICTS.map(d => d.path).join(' ')
 
 const DARK_DISTRICTS = new Set([
-  'altstadt-dom', 'kreuzviertel', 'pluggendorf', 'hafen-zentrum',
-  'sentrup', 'mauritz', 'geist', 'schuetzenhof',
+  'altstadt-dom', 'kreuzviertel', 'pluggendorf', 'hafen-zentrum', 'sentrup', 'mauritz', 'geist', 'schuetzenhof',
 ])
 
-// Labels für interaktive Viertel
 const INTERACTIVE_LABELS = [
-  { id: 'pluggendorf',   x: 340, y: 300, lines: ['Pluggen-', 'dorf'],   size: 7 },
-  { id: 'hafen-zentrum',  x: 400, y: 292, lines: ['Hafen'],             size: 7 },
-  { id: 'altstadt-dom',   x: 400, y: 358, lines: ['Altstadt'],          size: 8 },
-  { id: 'kreuzviertel',   x: 340, y: 358, lines: ['Kreuz-', 'viertel'],size: 7 },
-  { id: 'aaseestadt',     x: 232, y: 310, lines: ['Aasee-', 'stadt'],  size: 8, leader: [282, 328] },
-  { id: 'sentrup',        x: 325, y: 418, lines: ['Sentrup'],           size: 10 },
-  { id: 'mauritz',        x: 498, y: 328, lines: ['Mauritz'],           size: 11 },
-  { id: 'gievenbeck',     x: 218, y: 345, lines: ['Gieven-', 'beck'],  size: 10 },
-  { id: 'nienberge',      x: 168, y: 195, lines: ['Nienberge'],         size: 10 },
-  { id: 'kinderhaus',     x: 365, y: 188, lines: ['Kinderhaus'],        size: 10 },
-  { id: 'coerde',         x: 502, y: 178, lines: ['Coerde'],            size: 10 },
-  { id: 'handorf',        x: 655, y: 285, lines: ['Handorf'],           size: 14 },
-  { id: 'gremmendorf',    x: 598, y: 492, lines: ['Gremmen-', 'dorf'], size: 10 },
-  { id: 'wolbeck',        x: 602, y: 612, lines: ['Wolbeck'],           size: 11 },
-  { id: 'angelmodde',     x: 510, y: 565, lines: ['Angel-', 'modde'],  size: 8 },
-  { id: 'hiltrup',        x: 462, y: 665, lines: ['Hiltrup'],           size: 13 },
-  { id: 'amelsbueren',    x: 328, y: 688, lines: ['Amels-', 'büren'],  size: 10 },
-  { id: 'roxel',          x: 115, y: 418, lines: ['Roxel'],             size: 11 },
-  // Ehemals graue Viertel (jetzt interaktiv)
-  { id: 'haeger',         x: 200, y: 85,  lines: ['Häger'],             size: 10 },
-  { id: 'sprakel',        x: 382, y: 65,  lines: ['Sprakel'],           size: 10 },
-  { id: 'gelmer',         x: 530, y: 82,  lines: ['Gelmer'],            size: 10 },
-  { id: 'geist',          x: 398, y: 425, lines: ['Geist'],             size: 9 },
-  { id: 'schuetzenhof',   x: 492, y: 442, lines: ['Schützen-', 'hof'], size: 8 },
-  { id: 'berg-fidel',     x: 422, y: 502, lines: ['Berg', 'Fidel'],    size: 8 },
-  { id: 'mecklenbeck',    x: 278, y: 498, lines: ['Mecklen-', 'beck'], size: 9 },
-  { id: 'albachten',      x: 188, y: 618, lines: ['Albachten'],         size: 10 },
+  { id: 'altstadt-dom', x: 398.6, y: 350.5, lines: ['Altstadt'], size: 10 },
+  { id: 'kreuzviertel', x: 395.3, y: 320.1, lines: ['Kreuz-', 'viertel'], size: 6 },
+  { id: 'pluggendorf', x: 378.1, y: 382.0, lines: ['Pluggen-', 'dorf'], size: 6 },
+  { id: 'hafen-zentrum', x: 433.1, y: 399.3, lines: ['Hafen'], size: 7 },
+  { id: 'aaseestadt', x: 357.8, y: 414.1, lines: ['Aasee-', 'stadt'], size: 7 },
+  { id: 'sentrup', x: 325.8, y: 371.3, lines: ['Sentrup'], size: 11 },
+  { id: 'mauritz', x: 486.9, y: 342.6, lines: ['Mauritz'], size: 11 },
+  { id: 'gievenbeck', x: 288.5, y: 308.7, lines: ['Gieven-', 'beck'], size: 11 },
+  { id: 'nienberge', x: 232.0, y: 239.4, lines: ['Nienberge'], size: 12 },
+  { id: 'kinderhaus', x: 348.8, y: 236.2, lines: ['Kinderhaus'], size: 10 },
+  { id: 'coerde', x: 441.7, y: 222.4, lines: ['Coerde'], size: 9 },
+  { id: 'handorf', x: 581.6, y: 273.1, lines: ['Handorf'], size: 14 },
+  { id: 'gremmendorf', x: 487.4, y: 445.3, lines: ['Gremmen-', 'dorf'], size: 11 },
+  { id: 'wolbeck', x: 632.5, y: 473.8, lines: ['Wolbeck'], size: 14 },
+  { id: 'angelmodde', x: 547.5, y: 503.2, lines: ['Angel-', 'modde'], size: 9 },
+  { id: 'hiltrup', x: 469.9, y: 568.1, lines: ['Hiltrup'], size: 14 },
+  { id: 'amelsbueren', x: 329.3, y: 619.5, lines: ['Amels-', 'büren'], size: 14 },
+  { id: 'roxel', x: 193.1, y: 380.9, lines: ['Roxel'], size: 12 },
+  { id: 'sprakel', x: 387.9, y: 122.9, lines: ['Sprakel'], size: 14 },
+  { id: 'gelmer', x: 504.8, y: 183.3, lines: ['Gelmer'], size: 14 },
+  { id: 'haeger', x: 270.3, y: 135.8, lines: ['Häger'], size: 11 },
+  { id: 'geist', x: 384.0, y: 420.3, lines: ['Geist'], size: 7 },
+  { id: 'schuetzenhof', x: 408.9, y: 410.2, lines: ['Schützen-', 'hof'], size: 6 },
+  { id: 'berg-fidel', x: 410.2, y: 480.4, lines: ['Berg', 'Fidel'], size: 9 },
+  { id: 'mecklenbeck', x: 301.2, y: 464.9, lines: ['Mecklen-', 'beck'], size: 10 },
+  { id: 'albachten', x: 205.5, y: 490.5, lines: ['Albachten'], size: 11 },
+]
+
+const STAGGER_ORDER = [
+  'altstadt-dom', 'kreuzviertel', 'pluggendorf', 'hafen-zentrum', 'aaseestadt', 'sentrup', 'mauritz', 'gievenbeck', 'geist', 'schuetzenhof', 'kinderhaus', 'coerde', 'nienberge', 'berg-fidel', 'mecklenbeck', 'handorf', 'gremmendorf', 'angelmodde', 'wolbeck', 'hiltrup', 'amelsbueren', 'roxel', 'haeger', 'sprakel', 'gelmer', 'albachten',
 ]
 
 /** Einzelner klickbarer Bezirk-Pfad. React.memo verhindert Re-Renders bei Hover anderer Viertel. */
@@ -329,18 +127,6 @@ const DistrictPath = memo(function DistrictPath({
     />
   )
 })
-
-// Stagger: Zentrum zuerst, dann Ring für Ring
-const STAGGER_ORDER = [
-  'altstadt-dom', 'kreuzviertel', 'pluggendorf', 'hafen-zentrum',
-  'aaseestadt', 'sentrup', 'mauritz', 'gievenbeck',
-  'geist', 'schuetzenhof',
-  'kinderhaus', 'coerde', 'nienberge',
-  'berg-fidel', 'mecklenbeck',
-  'handorf', 'gremmendorf', 'angelmodde', 'wolbeck',
-  'hiltrup', 'amelsbueren', 'roxel',
-  'haeger', 'sprakel', 'gelmer', 'albachten',
-]
 
 export function MuensterSVG({
   data,
@@ -401,7 +187,7 @@ export function MuensterSVG({
         ))}
       </g>
 
-      {/* SCHICHT 3: Führungslinien */}
+      {/* SCHICHT 3: Fuehrungslinien */}
       <g style={{ pointerEvents: 'none', opacity: loaded ? 1 : 0, transition: 'opacity 400ms ease 500ms' }}>
         {INTERACTIVE_LABELS.filter(l => l.leader).map(({ id, x, y, leader }) => (
           <line key={`l-${id}`} x1={x + 38} y1={y} x2={leader[0]} y2={leader[1]} stroke="#999" strokeWidth="1" />
