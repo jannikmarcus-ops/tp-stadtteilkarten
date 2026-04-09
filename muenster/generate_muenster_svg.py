@@ -235,7 +235,10 @@ def main():
             print(f"WARNUNG: Hintergrund-Fuellbezirk {bg_id} fehlt in district-paths.json!")
 
     # District-Eintraege fuer JSX (bg-Fills in Eltern-Pfad integriert)
-    district_entries = []
+    # Renderreihenfolge: Bezirke mit gemergte Flaechen zuerst (unten),
+    # damit kleinere Innenstadtviertel obendrauf liegen und klickbar bleiben.
+    district_entries_merged = []
+    district_entries_normal = []
     for dist_id in sorted(districts.keys()):
         if dist_id in BACKGROUND_FILLS:
             continue  # Bereits in Eltern-Bezirk gemergt
@@ -244,7 +247,11 @@ def main():
         if dist_id in merged_paths:
             for extra_path in merged_paths[dist_id]:
                 path = path + ' ' + extra_path
-        district_entries.append(f"  {{ id: '{dist_id}', path: '{path}' }}")
+            district_entries_merged.append(f"  {{ id: '{dist_id}', path: '{path}' }}")
+        else:
+            district_entries_normal.append(f"  {{ id: '{dist_id}', path: '{path}' }}")
+    # Gemergte zuerst, dann normale (normale liegen obendrauf in SVG)
+    district_entries = district_entries_merged + district_entries_normal
 
     # Label-Eintraege fuer JSX
     label_entries = []
