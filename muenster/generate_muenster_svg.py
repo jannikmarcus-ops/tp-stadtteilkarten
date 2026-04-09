@@ -377,21 +377,6 @@ export function MuensterSVG({{
       {{/* SCHICHT 1: Stadtgrenze als Hintergrund-Fang */}}
       <path d={{CITY_BOUNDARY}} fill="#E8E4E0" stroke="#B8B4B0" strokeWidth="2" strokeLinejoin="round" />
 
-      {{/* SCHICHT 1b: Hintergrund-Fuellbezirke (nicht interaktiv, Farbe vom Eltern-Bezirk) */}}
-      <g className="background-fills" style={{{{ pointerEvents: 'none' }}}}>
-        {{BACKGROUND_FILLS.map(({{ id, parentId, path: d }}) => (
-          <path
-            key={{id}}
-            d={{d}}
-            fill={{getDistrictColor(parentId, data)}}
-            stroke="#D1CDC9"
-            strokeWidth="1"
-            strokeLinejoin="round"
-            style={{{{ opacity: loaded ? 1 : 0, transition: 'opacity 400ms ease 200ms' }}}}
-          />
-        ))}}
-      </g>
-
       {{/* SCHICHT 2: Alle 26 interaktive Viertel */}}
       <g className="interactive-districts" role="list">
         {{PATHS.map(({{ id, path: d }}) => (
