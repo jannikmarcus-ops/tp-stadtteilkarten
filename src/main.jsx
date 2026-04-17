@@ -5,8 +5,10 @@ import './index.css'
 import { CityPage } from './CityPage.jsx'
 import { MuensterSVG } from './components/Map/MuensterSVG.jsx'
 import { HamburgSVG } from './components/Map/HamburgSVG.jsx'
+import { KreisSteinfurtSVG } from './components/Map/KreisSteinfurtSVG.jsx'
 import muensterData from './data/districts.json'
 import hamburgData from './data/districts-hamburg.json'
+import kreisSteinfurtData from './data/kreis-steinfurt-gemeinden.json'
 
 function Home() {
   return (
@@ -33,6 +35,13 @@ function Home() {
           >
             Münster
           </Link>
+          <Link
+            to="/kreis-steinfurt"
+            className="px-6 py-3 rounded-lg font-bold text-white text-sm transition-all hover:brightness-110"
+            style={{ backgroundColor: '#052E26' }}
+          >
+            Kreis Steinfurt
+          </Link>
         </div>
       </div>
     </div>
@@ -47,6 +56,10 @@ function HamburgPage() {
   return <CityPage data={hamburgData} MapComponent={HamburgSVG} />
 }
 
+function KreisSteinfurtPage() {
+  return <CityPage data={kreisSteinfurtData} MapComponent={KreisSteinfurtSVG} />
+}
+
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
@@ -54,6 +67,7 @@ createRoot(document.getElementById('root')).render(
         <Route path="/" element={<Home />} />
         <Route path="/muenster" element={<MuensterPage />} />
         <Route path="/hamburg" element={<HamburgPage />} />
+        <Route path="/kreis-steinfurt" element={<KreisSteinfurtPage />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>

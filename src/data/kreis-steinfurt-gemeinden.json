@@ -56,9 +56,11 @@
         "id": "rheine-norden",
         "label": "Rheine & Norden"
       }
-    ]
+    ],
+    "cityLabel": "Kreis Steinfurt",
+    "city": "kreis-steinfurt"
   },
-  "gemeinden": [
+  "districts": [
     {
       "id": "greven",
       "name": "Greven",
