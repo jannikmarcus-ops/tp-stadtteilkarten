@@ -33,7 +33,7 @@ export function DistrictCard({ district, expanded, onToggle, colorScale }) {
           {formatPrice(prices.etwPerSqm)}
         </span>
         <span className="text-xs whitespace-nowrap">
-          <TrendArrow trend={prices.trend} percent={prices.trendPercent} />
+          <TrendArrow trend={prices.trend} />
         </span>
         <svg
           className={`w-4 h-4 text-text/30 transition-transform ${expanded ? 'rotate-180' : ''}`}

@@ -71,8 +71,7 @@
         "etwPerSqm": 2800,
         "housePerSqm": 3100,
         "rentPerSqm": 10.0,
-        "trend": "steigend",
-        "trendPercent": 1.5
+        "trend": "steigend"
       },
       "demographics": {
         "population": 38212,
@@ -100,8 +99,7 @@
         "etwPerSqm": 2400,
         "housePerSqm": 2500,
         "rentPerSqm": 8.2,
-        "trend": "steigend",
-        "trendPercent": 2.0
+        "trend": "steigend"
       },
       "demographics": {
         "population": 6906,
@@ -129,8 +127,7 @@
         "etwPerSqm": 2650,
         "housePerSqm": 2700,
         "rentPerSqm": 8.5,
-        "trend": "steigend",
-        "trendPercent": 1.5
+        "trend": "steigend"
       },
       "demographics": {
         "population": 7149,
@@ -158,8 +155,7 @@
         "etwPerSqm": 2800,
         "housePerSqm": 3000,
         "rentPerSqm": 9.5,
-        "trend": "steigend",
-        "trendPercent": 2.0
+        "trend": "steigend"
       },
       "demographics": {
         "population": 10278,
@@ -187,8 +183,7 @@
         "etwPerSqm": 2200,
         "housePerSqm": 2700,
         "rentPerSqm": 8.5,
-        "trend": "steigend",
-        "trendPercent": 1.5
+        "trend": "steigend"
       },
       "demographics": {
         "population": 10024,
@@ -216,8 +211,7 @@
         "etwPerSqm": 2550,
         "housePerSqm": 2600,
         "rentPerSqm": 9.0,
-        "trend": "stabil",
-        "trendPercent": 0.5
+        "trend": "stabil"
       },
       "demographics": {
         "population": 34860,
@@ -245,8 +239,7 @@
         "etwPerSqm": 2700,
         "housePerSqm": 2800,
         "rentPerSqm": 9.5,
-        "trend": "stabil",
-        "trendPercent": 0.5
+        "trend": "stabil"
       },
       "demographics": {
         "population": 36159,
@@ -274,8 +267,7 @@
         "etwPerSqm": 2750,
         "housePerSqm": 2600,
         "rentPerSqm": 8.3,
-        "trend": "stabil",
-        "trendPercent": 0.5
+        "trend": "stabil"
       },
       "demographics": {
         "population": 6993,
@@ -303,8 +295,7 @@
         "etwPerSqm": 2150,
         "housePerSqm": 2200,
         "rentPerSqm": 7.7,
-        "trend": "steigend",
-        "trendPercent": 1.5
+        "trend": "steigend"
       },
       "demographics": {
         "population": 7528,
@@ -332,8 +323,7 @@
         "etwPerSqm": 2100,
         "housePerSqm": 2100,
         "rentPerSqm": 7.7,
-        "trend": "stabil",
-        "trendPercent": 0.5
+        "trend": "stabil"
       },
       "demographics": {
         "population": 6539,
@@ -361,8 +351,7 @@
         "etwPerSqm": 2150,
         "housePerSqm": 2300,
         "rentPerSqm": 8.4,
-        "trend": "stabil",
-        "trendPercent": 0.0
+        "trend": "stabil"
       },
       "demographics": {
         "population": 8295,
@@ -390,8 +379,7 @@
         "etwPerSqm": 2800,
         "housePerSqm": 2600,
         "rentPerSqm": 9.4,
-        "trend": "steigend",
-        "trendPercent": 2.0
+        "trend": "steigend"
       },
       "demographics": {
         "population": 20394,
@@ -419,8 +407,7 @@
         "etwPerSqm": 2550,
         "housePerSqm": 2550,
         "rentPerSqm": 9.0,
-        "trend": "steigend",
-        "trendPercent": 1.5
+        "trend": "steigend"
       },
       "demographics": {
         "population": 51803,
@@ -448,8 +435,7 @@
         "etwPerSqm": 2500,
         "housePerSqm": 2400,
         "rentPerSqm": 8.5,
-        "trend": "steigend",
-        "trendPercent": 1.5
+        "trend": "steigend"
       },
       "demographics": {
         "population": 22557,
@@ -477,8 +463,7 @@
         "etwPerSqm": 2450,
         "housePerSqm": 2700,
         "rentPerSqm": 8.0,
-        "trend": "steigend",
-        "trendPercent": 1.5
+        "trend": "steigend"
       },
       "demographics": {
         "population": 9098,
@@ -506,8 +491,7 @@
         "etwPerSqm": 2300,
         "housePerSqm": 2300,
         "rentPerSqm": 8.0,
-        "trend": "steigend",
-        "trendPercent": 1.5
+        "trend": "steigend"
       },
       "demographics": {
         "population": 8512,
@@ -535,8 +519,7 @@
         "etwPerSqm": 2500,
         "housePerSqm": 2400,
         "rentPerSqm": 8.2,
-        "trend": "steigend",
-        "trendPercent": 1.5
+        "trend": "steigend"
       },
       "demographics": {
         "population": 11654,
@@ -564,8 +547,7 @@
         "etwPerSqm": 2400,
         "housePerSqm": 2400,
         "rentPerSqm": 8.4,
-        "trend": "steigend",
-        "trendPercent": 1.5
+        "trend": "steigend"
       },
       "demographics": {
         "population": 10876,
@@ -593,8 +575,7 @@
         "etwPerSqm": 2400,
         "housePerSqm": 2500,
         "rentPerSqm": 8.7,
-        "trend": "fallend",
-        "trendPercent": -1.0
+        "trend": "fallend"
       },
       "demographics": {
         "population": 13770,
@@ -622,8 +603,7 @@
         "etwPerSqm": 2250,
         "housePerSqm": 2250,
         "rentPerSqm": 7.5,
-        "trend": "stabil",
-        "trendPercent": 0.5
+        "trend": "stabil"
       },
       "demographics": {
         "population": 11341,
@@ -651,8 +631,7 @@
         "etwPerSqm": 2500,
         "housePerSqm": 2400,
         "rentPerSqm": 9.0,
-        "trend": "steigend",
-        "trendPercent": 1.5
+        "trend": "steigend"
       },
       "demographics": {
         "population": 77209,
@@ -680,8 +659,7 @@
         "etwPerSqm": 2700,
         "housePerSqm": 2500,
         "rentPerSqm": 8.4,
-        "trend": "steigend",
-        "trendPercent": 2.0
+        "trend": "steigend"
       },
       "demographics": {
         "population": 20166,
@@ -709,8 +687,7 @@
         "etwPerSqm": 2350,
         "housePerSqm": 2300,
         "rentPerSqm": 8.5,
-        "trend": "stabil",
-        "trendPercent": 0.5
+        "trend": "stabil"
       },
       "demographics": {
         "population": 13915,
@@ -738,8 +715,7 @@
         "etwPerSqm": 2100,
         "housePerSqm": 2100,
         "rentPerSqm": 7.5,
-        "trend": "steigend",
-        "trendPercent": 1.5
+        "trend": "steigend"
       },
       "demographics": {
         "population": 7717,

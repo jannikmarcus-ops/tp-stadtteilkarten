@@ -56,7 +56,7 @@ export function DetailPanel({ district, onClose }) {
           {/* Trend */}
           <div className="flex items-center gap-2 text-sm">
             <span className="text-text/75">Preistrend:</span>
-            <TrendArrow trend={prices.trend} percent={prices.trendPercent} />
+            <TrendArrow trend={prices.trend} />
           </div>
 
           {/* Demographics */}
