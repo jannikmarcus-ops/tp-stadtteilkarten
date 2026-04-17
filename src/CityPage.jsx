@@ -1,20 +1,21 @@
-import { useState, useRef, useCallback, useEffect } from 'react'
+import { useState, useRef, useCallback, useEffect, useMemo } from 'react'
 import { useDistrict } from './hooks/useDistrict'
 import { useMediaQuery } from './hooks/useMediaQuery'
 import { MapTooltip } from './components/Map/MapTooltip'
 import { DetailPanel } from './components/Map/DetailPanel'
 import { MapLegend } from './components/Map/MapLegend'
+import { PriceTable } from './components/Map/PriceTable'
 import { ViewToggle } from './components/Mobile/ViewToggle'
 import { CardView } from './components/Mobile/CardView'
-import { PriceTable } from './components/Map/PriceTable'
+import { SearchBar } from './components/shared/SearchBar'
 import { Footer } from './components/shared/Footer'
 
 /**
- * Generische Stadt-Seite. Wird für Münster und Hamburg mit verschiedenen
- * Daten und SVG-Komponenten verwendet.
+ * Generische Stadt-Seite. Wird für Münster, Hamburg und Kreis Steinfurt
+ * mit verschiedenen Daten und SVG-Komponenten verwendet.
  *
  * @param {object} data - Komplettes JSON (meta + districts)
- * @param {React.ComponentType} MapComponent - MuensterSVG oder HamburgSVG
+ * @param {React.ComponentType} MapComponent - MuensterSVG, HamburgSVG oder KreisSteinfurtSVG
  */
 // eslint-disable-next-line no-unused-vars -- MapComponent wird in JSX verwendet
 export function CityPage({ data, MapComponent }) {
@@ -23,9 +24,23 @@ export function CityPage({ data, MapComponent }) {
   const isWide = useMediaQuery('(min-width: 1024px)')
 
   const [mobileView, setMobileView] = useState('liste')
+  const [searchQuery, setSearchQuery] = useState('')
   const containerRef = useRef(null)
   const rootRef = useRef(null)
   const [anchorRect, setAnchorRect] = useState(null)
+
+  // Suche: IDs die zum Query passen
+  const searchMatchIds = useMemo(() => {
+    if (!searchQuery.trim()) return null
+    const q = searchQuery.trim().toLowerCase()
+    return new Set(data.districts.filter(d => d.name.toLowerCase().includes(q)).map(d => d.id))
+  }, [searchQuery, data.districts])
+
+  // Gefilterte Districts für Mobile Cards und Tabelle
+  const filteredDistricts = useMemo(() => {
+    if (!searchMatchIds) return data.districts
+    return data.districts.filter(d => searchMatchIds.has(d.id))
+  }, [searchMatchIds, data.districts])
 
   // Escape schließt Panel
   useEffect(() => {
@@ -80,6 +95,8 @@ export function CityPage({ data, MapComponent }) {
         </header>
 
         <main className="px-4 pb-6">
+          <SearchBar value={searchQuery} onChange={setSearchQuery} />
+
           <div className={`max-w-5xl mx-auto ${isWide && selectedDistrict ? 'flex gap-6 items-start' : ''}`}>
             <div
               ref={containerRef}
@@ -89,6 +106,7 @@ export function CityPage({ data, MapComponent }) {
                 data={data}
                 selectedId={selectedId}
                 hoveredId={hoveredId}
+                searchDimmedIds={searchMatchIds}
                 onDistrictClick={select}
                 onDistrictHover={setHoveredId}
                 onDistrictLeave={handleLeave}
@@ -113,7 +131,7 @@ export function CityPage({ data, MapComponent }) {
           </div>
 
           <MapLegend colorScale={data.meta.colorScale} />
-          <PriceTable districts={data.districts} />
+          <PriceTable districts={filteredDistricts} />
         </main>
 
         {!isWide && selectedDistrict && (
@@ -138,18 +156,20 @@ export function CityPage({ data, MapComponent }) {
       </header>
 
       <div className="px-4">
+        <SearchBar value={searchQuery} onChange={setSearchQuery} />
         <ViewToggle view={mobileView} onChange={setMobileView} />
       </div>
 
       <main className="px-4 pb-6">
         {mobileView === 'liste' ? (
-          <CardView districts={data.districts} colorScale={data.meta.colorScale} />
+          <CardView districts={filteredDistricts} colorScale={data.meta.colorScale} />
         ) : (
           <div className="relative">
             <MapComponent
               data={data}
               selectedId={selectedId}
               hoveredId={null}
+              searchDimmedIds={searchMatchIds}
               onDistrictClick={select}
               onDistrictHover={() => {}}
               onDistrictLeave={() => {}}

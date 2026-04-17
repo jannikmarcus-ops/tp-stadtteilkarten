@@ -116,6 +116,7 @@ export function KreisSteinfurtSVG({
   data,
   selectedId = null,
   hoveredId = null,
+  searchDimmedIds = null,
   onDistrictClick,
   onDistrictHover,
   onDistrictLeave,
@@ -163,7 +164,7 @@ export function KreisSteinfurtSVG({
             label={data.districts.find(dd => dd.id === id)?.name || id}
             isSelected={selectedId === id}
             isHovered={hoveredId === id}
-            isDimmed={!!(selectedId && selectedId !== id)}
+            isDimmed={!!(selectedId && selectedId !== id) || !!(searchDimmedIds && !searchDimmedIds.has(id))}
             loaded={loaded}
             staggerDelay={STAGGER_ORDER.indexOf(id) * 30}
             onClick={onDistrictClick}

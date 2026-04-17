@@ -258,6 +258,7 @@ export function HamburgSVG({
   data,
   selectedId = null,
   hoveredId = null,
+  searchDimmedIds = null,
   onDistrictClick,
   onDistrictHover,
   onDistrictLeave,
@@ -339,7 +340,7 @@ export function HamburgSVG({
             label={data.districts.find(dd => dd.id === nid)?.name || id}
             isSelected={selectedId === nid}
             isHovered={hoveredId === nid}
-            isDimmed={!!(selectedId && selectedId !== nid)}
+            isDimmed={!!(selectedId && selectedId !== nid) || !!(searchDimmedIds && !searchDimmedIds.has(nid))}
             loaded={loaded}
             staggerDelay={STAGGER_ORDER.indexOf(id) * 30}
             onClick={handleClick}
