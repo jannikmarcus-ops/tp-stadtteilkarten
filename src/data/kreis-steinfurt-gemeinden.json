@@ -17,25 +17,25 @@
       {
         "min": 2500,
         "max": 2699,
-        "color": "#3D7866",
+        "color": "#357560",
         "label": "2.500–2.699 €/m²"
       },
       {
         "min": 2300,
         "max": 2499,
-        "color": "#619481",
+        "color": "#6BA58C",
         "label": "2.300–2.499 €/m²"
       },
       {
         "min": 2100,
         "max": 2299,
-        "color": "#84B09C",
+        "color": "#9AC3B0",
         "label": "2.100–2.299 €/m²"
       },
       {
         "min": 0,
         "max": 2099,
-        "color": "#A8CCB8",
+        "color": "#C5DDD1",
         "label": "unter 2.100 €/m²"
       }
     ],
