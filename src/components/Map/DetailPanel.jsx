@@ -94,11 +94,13 @@ export function DetailPanel({ district, onClose }) {
             <p className="text-sm text-text leading-relaxed">{character.shortProfile}</p>
           </div>
 
-          {/* Typische Gebäude */}
-          <div>
-            <h3 className="text-xs font-bold text-text/70 uppercase tracking-wider mb-1.5">Typische Objekte</h3>
-            <p className="text-sm text-text">{character.typicalBuildings}</p>
-          </div>
+          {/* Typische Gebäude (nur wenn vorhanden) */}
+          {character.typicalBuildings && (
+            <div>
+              <h3 className="text-xs font-bold text-text/70 uppercase tracking-wider mb-1.5">Typische Objekte</h3>
+              <p className="text-sm text-text">{character.typicalBuildings}</p>
+            </div>
+          )}
 
           {/* CTA Button */}
           <a
