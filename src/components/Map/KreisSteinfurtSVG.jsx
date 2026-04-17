@@ -45,9 +45,6 @@ const DARK_DISTRICTS = new Set([
   'altenberge', 'emsdetten', 'greven', 'hoerstel', 'ibbenbueren', 'ladbergen', 'laer', 'lengerich', 'lienen', 'lotte', 'mettingen', 'neuenkirchen', 'ochtrup', 'rheine', 'saerbeck', 'steinfurt', 'tecklenburg', 'westerkappeln',
 ])
 
-const HAUPTMARKT_DISTRICTS = new Set([
-  'greven', 'saerbeck',
-])
 
 const LABELS = [
   { id: 'lienen', x: 705.1, y: 457.6, lines: ['Lienen'], size: 11 },
@@ -82,7 +79,7 @@ const STAGGER_ORDER = [
 
 /** Einzelner klickbarer Gemeinde-Pfad. React.memo verhindert Re-Renders bei Hover anderer Gemeinden. */
 const DistrictPath = memo(function DistrictPath({
-  id, d, fill, label, isSelected, isHovered, isDimmed, isHauptmarkt, loaded, staggerDelay,
+  id, d, fill, label, isSelected, isHovered, isDimmed, loaded, staggerDelay,
   onClick, onMouseEnter, onMouseLeave,
 }) {
   return (
@@ -93,8 +90,8 @@ const DistrictPath = memo(function DistrictPath({
       aria-label={`Gemeinde ${label}`}
       d={d}
       fill={fill}
-      stroke={isHauptmarkt ? '#B8860B' : '#D1CDC9'}
-      strokeWidth={isHauptmarkt ? '2.5' : '1.5'}
+      stroke="#D1CDC9"
+      strokeWidth="1.5"
       strokeLinejoin="round"
       style={{
         cursor: 'pointer',
@@ -167,7 +164,6 @@ export function KreisSteinfurtSVG({
             isSelected={selectedId === id}
             isHovered={hoveredId === id}
             isDimmed={!!(selectedId && selectedId !== id)}
-            isHauptmarkt={HAUPTMARKT_DISTRICTS.has(id)}
             loaded={loaded}
             staggerDelay={STAGGER_ORDER.indexOf(id) * 30}
             onClick={onDistrictClick}
