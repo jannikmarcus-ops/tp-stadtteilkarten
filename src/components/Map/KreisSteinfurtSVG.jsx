@@ -42,7 +42,7 @@ const ALL_DISTRICTS = [
 ]
 
 const DARK_DISTRICTS = new Set([
-  'altenberge', 'emsdetten', 'greven', 'hoerstel', 'ibbenbueren', 'ladbergen', 'laer', 'lengerich', 'mettingen', 'ochtrup', 'rheine', 'steinfurt',
+  'altenberge', 'emsdetten', 'greven', 'hoerstel', 'ibbenbueren', 'ladbergen', 'laer', 'lengerich', 'lienen', 'lotte', 'mettingen', 'neuenkirchen', 'ochtrup', 'rheine', 'saerbeck', 'steinfurt', 'tecklenburg', 'westerkappeln',
 ])
 
 const HAUPTMARKT_DISTRICTS = new Set([
