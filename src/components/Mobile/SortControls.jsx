@@ -1,11 +1,11 @@
 /**
- * Sortier-Buttons: Preis ↓ (default), A-Z, Trend
+ * Sortier-Buttons: Cluster (default bei Regionen), Preis ↓, A-Z
  */
-export function SortControls({ sort, onChange }) {
+export function SortControls({ sort, onChange, hasCluster = false }) {
   const options = [
+    ...(hasCluster ? [{ key: 'cluster', label: 'Region' }] : []),
     { key: 'price', label: 'Preis ↓' },
     { key: 'az', label: 'A–Z' },
-    { key: 'trend', label: 'Trend' },
   ]
 
   return (
