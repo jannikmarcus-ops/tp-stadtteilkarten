@@ -1,0 +1,759 @@
+{
+  "meta": {
+    "region": "kreis-steinfurt",
+    "regionLabel": "Kreis Steinfurt",
+    "lastUpdated": "2026-04-01",
+    "quarter": "Q1/2026",
+    "source": "Angebotspreise auf Portalbasis (ImmoScout24, Immowelt, Immoportal), Stand Q1/2026",
+    "priceUnit": "€/m²",
+    "rentUnit": "€/m²",
+    "colorScale": [
+      {
+        "min": 2700,
+        "max": 99999,
+        "color": "#052E26",
+        "label": "2.700+ €/m²"
+      },
+      {
+        "min": 2500,
+        "max": 2699,
+        "color": "#1A5C4A",
+        "label": "2.500–2.699 €/m²"
+      },
+      {
+        "min": 2300,
+        "max": 2499,
+        "color": "#3D8B6E",
+        "label": "2.300–2.499 €/m²"
+      },
+      {
+        "min": 2100,
+        "max": 2299,
+        "color": "#7CB89E",
+        "label": "2.100–2.299 €/m²"
+      },
+      {
+        "min": 0,
+        "max": 2099,
+        "color": "#C5DDD1",
+        "label": "unter 2.100 €/m²"
+      }
+    ],
+    "clusters": [
+      {
+        "id": "muenster-nah",
+        "label": "Münster-nah"
+      },
+      {
+        "id": "steinfurt-emsdetten",
+        "label": "Steinfurt & Emsdetten"
+      },
+      {
+        "id": "tecklenburger-land",
+        "label": "Tecklenburger Land"
+      },
+      {
+        "id": "rheine-norden",
+        "label": "Rheine & Norden"
+      }
+    ]
+  },
+  "gemeinden": [
+    {
+      "id": "greven",
+      "name": "Greven",
+      "slug": "greven",
+      "cluster": "muenster-nah",
+      "isHauptmarkt": true,
+      "prices": {
+        "etwPerSqm": 2800,
+        "housePerSqm": 3100,
+        "rentPerSqm": 10.0,
+        "trend": "steigend",
+        "trendPercent": 1.5
+      },
+      "demographics": {
+        "population": 38212,
+        "areaSqKm": 140.3,
+        "distanceCityKm": 17,
+        "distanceCityMin": 25
+      },
+      "character": {
+        "shortProfile": "Grösste Münster-nahe Stadt im Kreis mit eigenem Bahnhof (10 Min. RE nach Münster Hbf), Anschluss an A1 und Nähe zum FMO. Starker Einfamilienhaus-Bestand mit Ortsteilen Reckenfeld und Gimbte. Preise unter Münster, aber über den ländlichen Kreisgemeinden. Typischer Pendlerstandort für Familien mit solider Infrastruktur.",
+        "datenqualitaet": "hoch"
+      },
+      "heatmapStufe": "sehr_hoch",
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Greven wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-muenster/"
+      }
+    },
+    {
+      "id": "saerbeck",
+      "name": "Saerbeck",
+      "slug": "saerbeck",
+      "cluster": "muenster-nah",
+      "isHauptmarkt": true,
+      "prices": {
+        "etwPerSqm": 2400,
+        "housePerSqm": 2500,
+        "rentPerSqm": 8.2,
+        "trend": "steigend",
+        "trendPercent": 2.0
+      },
+      "demographics": {
+        "population": 6906,
+        "areaSqKm": 59.0,
+        "distanceCityKm": 27,
+        "distanceCityMin": 30
+      },
+      "character": {
+        "shortProfile": "Als 'NRW-Klimakommune' überregional bekannte Landgemeinde mit Bioenergiepark. Dominiert von Einfamilien- und Doppelhäusern in ruhigen Wohngebieten. Preisniveau unter Greven, Anbindung an Münster via Bus und über A1 (Auffahrt Greven). Attraktiv für klimaaffine Haushalte und preisbewusste Pendler.",
+        "datenqualitaet": "mittel"
+      },
+      "heatmapStufe": "mittel",
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Saerbeck wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-muenster/"
+      }
+    },
+    {
+      "id": "ladbergen",
+      "name": "Ladbergen",
+      "slug": "ladbergen",
+      "cluster": "muenster-nah",
+      "isHauptmarkt": false,
+      "prices": {
+        "etwPerSqm": 2650,
+        "housePerSqm": 2700,
+        "rentPerSqm": 8.5,
+        "trend": "steigend",
+        "trendPercent": 1.5
+      },
+      "demographics": {
+        "population": 7149,
+        "areaSqKm": 52.4,
+        "distanceCityKm": 28,
+        "distanceCityMin": 25
+      },
+      "character": {
+        "shortProfile": "Zwischen Münster und Osnabrück gelegen am Autobahnkreuz A1/A30, direkt neben dem Flughafen Münster/Osnabrück. Überwiegend Einfamilienhaus-Bestand mit ländlichem Charakter. Gutes Pendlerumfeld mit schneller Anbindung an beide Oberzentren.",
+        "datenqualitaet": "hoch"
+      },
+      "heatmapStufe": "hoch",
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Ladbergen wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-muenster/"
+      }
+    },
+    {
+      "id": "altenberge",
+      "name": "Altenberge",
+      "slug": "altenberge",
+      "cluster": "muenster-nah",
+      "isHauptmarkt": false,
+      "prices": {
+        "etwPerSqm": 2800,
+        "housePerSqm": 3000,
+        "rentPerSqm": 9.5,
+        "trend": "steigend",
+        "trendPercent": 2.0
+      },
+      "demographics": {
+        "population": 10278,
+        "areaSqKm": 63.0,
+        "distanceCityKm": 15,
+        "distanceCityMin": 20
+      },
+      "character": {
+        "shortProfile": "Grössere Kleinstadt direkt nördlich von Münster mit hoher Pendlerquote und starker Eigenheimquote. Sehr gute Verkehrsanbindung über die B54 nach Münster in 20 Minuten, plus regionale Buslinien. Breites Schul- und Freizeitangebot, attraktiv für Familien mit Münster-Arbeitsplatz.",
+        "datenqualitaet": "hoch"
+      },
+      "heatmapStufe": "sehr_hoch",
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Altenberge wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-muenster/"
+      }
+    },
+    {
+      "id": "nordwalde",
+      "name": "Nordwalde",
+      "slug": "nordwalde",
+      "cluster": "muenster-nah",
+      "isHauptmarkt": false,
+      "prices": {
+        "etwPerSqm": 2200,
+        "housePerSqm": 2700,
+        "rentPerSqm": 8.5,
+        "trend": "steigend",
+        "trendPercent": 1.5
+      },
+      "demographics": {
+        "population": 10024,
+        "areaSqKm": 51.6,
+        "distanceCityKm": 20,
+        "distanceCityMin": 25
+      },
+      "character": {
+        "shortProfile": "Typische Pendlergemeinde zwischen Münster und Steinfurt mit ländlichem Charakter. Überwiegend Einfamilienhäuser in ruhigen Lagen. Moderate Preise unter dem Münster-nahen Durchschnitt, über die B54 und Buslinien gut an Münster und Greven angebunden.",
+        "datenqualitaet": "hoch"
+      },
+      "heatmapStufe": "niedrig",
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Nordwalde wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-muenster/"
+      }
+    },
+    {
+      "id": "steinfurt",
+      "name": "Steinfurt",
+      "slug": "steinfurt",
+      "cluster": "steinfurt-emsdetten",
+      "isHauptmarkt": false,
+      "prices": {
+        "etwPerSqm": 2550,
+        "housePerSqm": 2600,
+        "rentPerSqm": 9.0,
+        "trend": "stabil",
+        "trendPercent": 0.5
+      },
+      "demographics": {
+        "population": 34860,
+        "areaSqKm": 111.7,
+        "distanceCityKm": 33,
+        "distanceCityMin": 35
+      },
+      "character": {
+        "shortProfile": "Kreisstadt bestehend aus den Ortsteilen Borghorst (urbaner) und Burgsteinfurt (historisch). Hochschul- und Verwaltungsstandort mit solider Infrastruktur. Gute Bahnverbindung (RB) nach Münster und Enschede, B54-Anbindung. Preise im mittleren Bereich des Kreises.",
+        "datenqualitaet": "hoch"
+      },
+      "heatmapStufe": "hoch",
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Steinfurt wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-muenster/"
+      }
+    },
+    {
+      "id": "emsdetten",
+      "name": "Emsdetten",
+      "slug": "emsdetten",
+      "cluster": "steinfurt-emsdetten",
+      "isHauptmarkt": false,
+      "prices": {
+        "etwPerSqm": 2700,
+        "housePerSqm": 2800,
+        "rentPerSqm": 9.5,
+        "trend": "stabil",
+        "trendPercent": 0.5
+      },
+      "demographics": {
+        "population": 36159,
+        "areaSqKm": 72.1,
+        "distanceCityKm": 30,
+        "distanceCityMin": 35
+      },
+      "character": {
+        "shortProfile": "Industriell geprägtes Mittelzentrum an der Ems mit starken lokalen Arbeitgebern. Ausgeprägter Einfamilien- und Reihenhausbestand, zunehmend moderne Innenstadtentwicklung. RE7-Anbindung nach Münster und Rheine, Nähe zur A1.",
+        "datenqualitaet": "hoch"
+      },
+      "heatmapStufe": "sehr_hoch",
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Emsdetten wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-muenster/"
+      }
+    },
+    {
+      "id": "laer",
+      "name": "Laer",
+      "slug": "laer",
+      "cluster": "steinfurt-emsdetten",
+      "isHauptmarkt": false,
+      "prices": {
+        "etwPerSqm": 2750,
+        "housePerSqm": 2600,
+        "rentPerSqm": 8.3,
+        "trend": "stabil",
+        "trendPercent": 0.5
+      },
+      "demographics": {
+        "population": 6993,
+        "areaSqKm": 35.3,
+        "distanceCityKm": 26,
+        "distanceCityMin": 25
+      },
+      "character": {
+        "shortProfile": "Kleine ländliche Gemeinde zwischen Steinfurt und Münster. Stark nachgefragtes Neubausegment hebt das Preisniveau über vergleichbare Randgemeinden. Überwiegend Einfamilienhäuser, attraktiv für Familien mit Wunsch nach Dorfcharakter und Pendelbarkeit.",
+        "datenqualitaet": "mittel"
+      },
+      "heatmapStufe": "sehr_hoch",
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Laer wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-muenster/"
+      }
+    },
+    {
+      "id": "horstmar",
+      "name": "Horstmar",
+      "slug": "horstmar",
+      "cluster": "steinfurt-emsdetten",
+      "isHauptmarkt": false,
+      "prices": {
+        "etwPerSqm": 2150,
+        "housePerSqm": 2200,
+        "rentPerSqm": 7.7,
+        "trend": "steigend",
+        "trendPercent": 1.5
+      },
+      "demographics": {
+        "population": 7528,
+        "areaSqKm": 44.8,
+        "distanceCityKm": 33,
+        "distanceCityMin": 35
+      },
+      "character": {
+        "shortProfile": "Kleine Stadt mit historischem Kern ('Stadt der Burgmannshöfe'). Starker Einfamilienhausfokus mit günstigem Preisniveau. Markt zeigt deutliche Spreizung zwischen sanierten Liebhaberobjekten und unrenovierten Bestandshäusern im Aussenbereich.",
+        "datenqualitaet": "mittel"
+      },
+      "heatmapStufe": "niedrig",
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Horstmar wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-muenster/"
+      }
+    },
+    {
+      "id": "metelen",
+      "name": "Metelen",
+      "slug": "metelen",
+      "cluster": "steinfurt-emsdetten",
+      "isHauptmarkt": false,
+      "prices": {
+        "etwPerSqm": 2100,
+        "housePerSqm": 2100,
+        "rentPerSqm": 7.7,
+        "trend": "stabil",
+        "trendPercent": 0.5
+      },
+      "demographics": {
+        "population": 6539,
+        "areaSqKm": 40.3,
+        "distanceCityKm": 42,
+        "distanceCityMin": 45
+      },
+      "character": {
+        "shortProfile": "Ländlich-agrarisch geprägte Gemeinde im nördlichen Münsterland zwischen Steinfurt und Ochtrup. Dünner Wohnimmobilienmarkt mit überwiegend älteren Einfamilienhäusern und Hofanlagen. Preislich zu den günstigsten Standorten im Kreis. Bahnhof Metelen Land Richtung Münster-Gronau.",
+        "datenqualitaet": "niedrig"
+      },
+      "heatmapStufe": "niedrig",
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Metelen wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-muenster/"
+      }
+    },
+    {
+      "id": "wettringen",
+      "name": "Wettringen",
+      "slug": "wettringen",
+      "cluster": "steinfurt-emsdetten",
+      "isHauptmarkt": false,
+      "prices": {
+        "etwPerSqm": 2150,
+        "housePerSqm": 2300,
+        "rentPerSqm": 8.4,
+        "trend": "stabil",
+        "trendPercent": 0.0
+      },
+      "demographics": {
+        "population": 8295,
+        "areaSqKm": 57.7,
+        "distanceCityKm": 40,
+        "distanceCityMin": 40
+      },
+      "character": {
+        "shortProfile": "Ländliche Gemeinde zwischen Steinfurt und Ochtrup mit dörflichem Charakter. Überwiegend Einfamilienhäuser, Hauspreise zuletzt unter Druck. B70-Anbindung, Nähe zu A31/A30. Für Familien attraktiv, die ländliches Wohnen mit Anbindung an Ochtrup, Rheine und die Niederlande suchen.",
+        "datenqualitaet": "mittel"
+      },
+      "heatmapStufe": "niedrig",
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Wettringen wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-muenster/"
+      }
+    },
+    {
+      "id": "ochtrup",
+      "name": "Ochtrup",
+      "slug": "ochtrup",
+      "cluster": "steinfurt-emsdetten",
+      "isHauptmarkt": false,
+      "prices": {
+        "etwPerSqm": 2800,
+        "housePerSqm": 2600,
+        "rentPerSqm": 9.4,
+        "trend": "steigend",
+        "trendPercent": 2.0
+      },
+      "demographics": {
+        "population": 20394,
+        "areaSqKm": 105.6,
+        "distanceCityKm": 46,
+        "distanceCityMin": 45
+      },
+      "character": {
+        "shortProfile": "An der niederländischen Grenze gelegene Stadt mit Factory-Outlet (FOC) und touristischer Strahlkraft. Breites Spektrum von Einfamilien- bis Mehrfamilienhäusern. Kaufpreise über dem ländlichen Durchschnitt wegen Infrastruktur und Lagequalität. A31-Anschluss, Bahnanbindung Richtung Enschede und Rheine.",
+        "datenqualitaet": "hoch"
+      },
+      "heatmapStufe": "sehr_hoch",
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Ochtrup wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-muenster/"
+      }
+    },
+    {
+      "id": "ibbenbueren",
+      "name": "Ibbenbüren",
+      "slug": "ibbenbueren",
+      "cluster": "tecklenburger-land",
+      "isHauptmarkt": false,
+      "prices": {
+        "etwPerSqm": 2550,
+        "housePerSqm": 2550,
+        "rentPerSqm": 9.0,
+        "trend": "steigend",
+        "trendPercent": 1.5
+      },
+      "demographics": {
+        "population": 51803,
+        "areaSqKm": 108.9,
+        "distanceCityKm": 45,
+        "distanceCityMin": 40
+      },
+      "character": {
+        "shortProfile": "Zweitgrösste Stadt im Kreis und wirtschaftliches Zentrum des Tecklenburger Landes. Vielfältiger Wohnungsbestand von urbanen Quartieren bis zu Zechen-Siedlungen mit Bergbau-Historie. A30-Anbindung und Bahnstrecke Münster-Osnabrück. Typischer Wohn- und Arbeitsstandort mit regionaler Bedeutung.",
+        "datenqualitaet": "hoch"
+      },
+      "heatmapStufe": "hoch",
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Ibbenbüren wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-muenster/"
+      }
+    },
+    {
+      "id": "lengerich",
+      "name": "Lengerich",
+      "slug": "lengerich",
+      "cluster": "tecklenburger-land",
+      "isHauptmarkt": false,
+      "prices": {
+        "etwPerSqm": 2500,
+        "housePerSqm": 2400,
+        "rentPerSqm": 8.5,
+        "trend": "steigend",
+        "trendPercent": 1.5
+      },
+      "demographics": {
+        "population": 22557,
+        "areaSqKm": 90.8,
+        "distanceCityKm": 38,
+        "distanceCityMin": 35
+      },
+      "character": {
+        "shortProfile": "Industriestandort und grüner Wohnort am Rand des Teutoburger Waldes. Kombiniert solide Arbeitsplatzstruktur mit naturnahen Wohnlagen. A1/A30-Kreuz, Bahnanschluss RE2 nach Münster und Osnabrück. Preisniveau moderat, über ländlichen Gemeinden aber unter Münster-nahen Orten.",
+        "datenqualitaet": "hoch"
+      },
+      "heatmapStufe": "hoch",
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Lengerich wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-muenster/"
+      }
+    },
+    {
+      "id": "tecklenburg",
+      "name": "Tecklenburg",
+      "slug": "tecklenburg",
+      "cluster": "tecklenburger-land",
+      "isHauptmarkt": false,
+      "prices": {
+        "etwPerSqm": 2450,
+        "housePerSqm": 2700,
+        "rentPerSqm": 8.0,
+        "trend": "steigend",
+        "trendPercent": 1.5
+      },
+      "demographics": {
+        "population": 9098,
+        "areaSqKm": 70.4,
+        "distanceCityKm": 40,
+        "distanceCityMin": 40
+      },
+      "character": {
+        "shortProfile": "Historische Burg- und Festspielstadt in Hanglage des Teutoburger Waldes. Touristisch geprägt mit individueller, oft denkmalgeschützter Wohnbebauung. Streng begrenzte Neubauaktivitäten machen den Markt eng. Attraktiv für anspruchsvolle Eigennutzer und Zweitwohnsitze.",
+        "datenqualitaet": "mittel"
+      },
+      "heatmapStufe": "mittel",
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Tecklenburg wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-muenster/"
+      }
+    },
+    {
+      "id": "lienen",
+      "name": "Lienen",
+      "slug": "lienen",
+      "cluster": "tecklenburger-land",
+      "isHauptmarkt": false,
+      "prices": {
+        "etwPerSqm": 2300,
+        "housePerSqm": 2300,
+        "rentPerSqm": 8.0,
+        "trend": "steigend",
+        "trendPercent": 1.5
+      },
+      "demographics": {
+        "population": 8512,
+        "areaSqKm": 73.4,
+        "distanceCityKm": 45,
+        "distanceCityMin": 45
+      },
+      "character": {
+        "shortProfile": "Am Südhang des Teutoburger Waldes mit Ortsteilen wie Kattenvenne. Stark ländlicher Charakter, überwiegend Einfamilienhäuser. Nähe zu A1/A30 und Busverbindungen nach Münster und Osnabrück. Für Natur- und Pferdefreunde sowie ruhesuchende Familien attraktiv.",
+        "datenqualitaet": "mittel"
+      },
+      "heatmapStufe": "mittel",
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Lienen wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-muenster/"
+      }
+    },
+    {
+      "id": "mettingen",
+      "name": "Mettingen",
+      "slug": "mettingen",
+      "cluster": "tecklenburger-land",
+      "isHauptmarkt": false,
+      "prices": {
+        "etwPerSqm": 2500,
+        "housePerSqm": 2400,
+        "rentPerSqm": 8.2,
+        "trend": "steigend",
+        "trendPercent": 1.5
+      },
+      "demographics": {
+        "population": 11654,
+        "areaSqKm": 40.8,
+        "distanceCityKm": 50,
+        "distanceCityMin": 45
+      },
+      "character": {
+        "shortProfile": "Tecklenburger Land, traditionelle Heimatstadt der 'Tüötten'-Wanderhändler. Mischung aus Einfamilienhäusern und kleineren Mehrfamilienhäusern. Bekannt durch einen grossen Süsswaren-Arbeitgeber. A30-Anbindung, Pendlerorientierung eher Richtung Osnabrück als Münster.",
+        "datenqualitaet": "mittel"
+      },
+      "heatmapStufe": "hoch",
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Mettingen wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-muenster/"
+      }
+    },
+    {
+      "id": "westerkappeln",
+      "name": "Westerkappeln",
+      "slug": "westerkappeln",
+      "cluster": "tecklenburger-land",
+      "isHauptmarkt": false,
+      "prices": {
+        "etwPerSqm": 2400,
+        "housePerSqm": 2400,
+        "rentPerSqm": 8.4,
+        "trend": "steigend",
+        "trendPercent": 1.5
+      },
+      "demographics": {
+        "population": 10876,
+        "areaSqKm": 85.8,
+        "distanceCityKm": 55,
+        "distanceCityMin": 45
+      },
+      "character": {
+        "shortProfile": "Im äussersten Osten des Kreises an der Grenze zu Niedersachsen. Enge Verflechtung mit Osnabrück, viele Einwohner pendeln dorthin. Weite Einfamilienhaus-Strukturen, moderate Preise. Sehr gute Autobahnanbindung über A1 und A30.",
+        "datenqualitaet": "mittel"
+      },
+      "heatmapStufe": "mittel",
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Westerkappeln wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-muenster/"
+      }
+    },
+    {
+      "id": "lotte",
+      "name": "Lotte",
+      "slug": "lotte",
+      "cluster": "tecklenburger-land",
+      "isHauptmarkt": false,
+      "prices": {
+        "etwPerSqm": 2400,
+        "housePerSqm": 2500,
+        "rentPerSqm": 8.7,
+        "trend": "fallend",
+        "trendPercent": -1.0
+      },
+      "demographics": {
+        "population": 13770,
+        "areaSqKm": 37.7,
+        "distanceCityKm": 60,
+        "distanceCityMin": 50
+      },
+      "character": {
+        "shortProfile": "Direkt an Osnabrück angrenzend, profitiert massiv vom Autobahnkreuz A1/A30. De facto Vorort-Funktion für Osnabrück. Vorwiegend Einfamilienhaus-Bestand, Kaufpreise zeigen zuletzt leichte Rückgänge. Für Osnabrück-Pendler mit Wunsch nach Kreis-Vorteilen (NRW-Grunderwerbsteuer) attraktiv.",
+        "datenqualitaet": "hoch"
+      },
+      "heatmapStufe": "mittel",
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Lotte wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-muenster/"
+      }
+    },
+    {
+      "id": "recke",
+      "name": "Recke",
+      "slug": "recke",
+      "cluster": "tecklenburger-land",
+      "isHauptmarkt": false,
+      "prices": {
+        "etwPerSqm": 2250,
+        "housePerSqm": 2250,
+        "rentPerSqm": 7.5,
+        "trend": "stabil",
+        "trendPercent": 0.5
+      },
+      "demographics": {
+        "population": 11341,
+        "areaSqKm": 53.3,
+        "distanceCityKm": 55,
+        "distanceCityMin": 50
+      },
+      "character": {
+        "shortProfile": "Historisch durch den Steinkohlebergbau geprägte Gemeinde im Nordosten. Sehr ländlicher Charakter mit EFH-Dominanz. Preise am unteren Ende des Kreisniveaus. B218/B65-Anbindung nach Ibbenbüren und Rheine. Attraktiv für preisbewusste Käufer mit ländlichem Lebensstil.",
+        "datenqualitaet": "mittel"
+      },
+      "heatmapStufe": "niedrig",
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Recke wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-muenster/"
+      }
+    },
+    {
+      "id": "rheine",
+      "name": "Rheine",
+      "slug": "rheine",
+      "cluster": "rheine-norden",
+      "isHauptmarkt": false,
+      "prices": {
+        "etwPerSqm": 2500,
+        "housePerSqm": 2400,
+        "rentPerSqm": 9.0,
+        "trend": "steigend",
+        "trendPercent": 1.5
+      },
+      "demographics": {
+        "population": 77209,
+        "areaSqKm": 145.0,
+        "distanceCityKm": 50,
+        "distanceCityMin": 45
+      },
+      "character": {
+        "shortProfile": "Grösste Stadt im Kreis und hochliquider Wohnungsmarkt. Extrem stabile Binnennachfrage durch Grossarbeitgeber wie apetito AG. Vielfältige Bausubstanz vom Reihenhaus bis zur Geschosswohnung. Exzellenter IC/RE-Bahnhof, A30-Anbindung. Breites Infrastrukturangebot.",
+        "datenqualitaet": "hoch"
+      },
+      "heatmapStufe": "hoch",
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Rheine wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-muenster/"
+      }
+    },
+    {
+      "id": "hoerstel",
+      "name": "Hörstel",
+      "slug": "hoerstel",
+      "cluster": "rheine-norden",
+      "isHauptmarkt": false,
+      "prices": {
+        "etwPerSqm": 2700,
+        "housePerSqm": 2500,
+        "rentPerSqm": 8.4,
+        "trend": "steigend",
+        "trendPercent": 2.0
+      },
+      "demographics": {
+        "population": 20166,
+        "areaSqKm": 107.5,
+        "distanceCityKm": 45,
+        "distanceCityMin": 40
+      },
+      "character": {
+        "shortProfile": "Umfasst die Ortsteile Riesenbeck, Bevergern und Dreierwalde. Bekannt durch das 'Nasse Dreieck' am Dortmund-Ems-Kanal. A30-Anschluss und eigener Bahnhof. Stabile Preise durch Logistik- und Pendlerfaktoren. Attraktiv für ländlich orientierte Pendler.",
+        "datenqualitaet": "hoch"
+      },
+      "heatmapStufe": "sehr_hoch",
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Hörstel wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-muenster/"
+      }
+    },
+    {
+      "id": "neuenkirchen",
+      "name": "Neuenkirchen",
+      "slug": "neuenkirchen",
+      "cluster": "rheine-norden",
+      "isHauptmarkt": false,
+      "prices": {
+        "etwPerSqm": 2350,
+        "housePerSqm": 2300,
+        "rentPerSqm": 8.5,
+        "trend": "stabil",
+        "trendPercent": 0.5
+      },
+      "demographics": {
+        "population": 13915,
+        "areaSqKm": 48.4,
+        "distanceCityKm": 42,
+        "distanceCityMin": 40
+      },
+      "character": {
+        "shortProfile": "Südwestlich an Rheine angrenzend, klassischer Wohnvorort der Kreisstadt. Sehr starker Eigenheimmarkt mit überwiegend freistehenden Einfamilienhäusern. Moderate Preise, B70-Anbindung. Attraktiv für Rheine-Pendler und Familien mit Wunsch nach Vorstadt-Charakter.",
+        "datenqualitaet": "mittel"
+      },
+      "heatmapStufe": "mittel",
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Neuenkirchen wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-muenster/"
+      }
+    },
+    {
+      "id": "hopsten",
+      "name": "Hopsten",
+      "slug": "hopsten",
+      "cluster": "rheine-norden",
+      "isHauptmarkt": false,
+      "prices": {
+        "etwPerSqm": 2100,
+        "housePerSqm": 2100,
+        "rentPerSqm": 7.5,
+        "trend": "steigend",
+        "trendPercent": 1.5
+      },
+      "demographics": {
+        "population": 7717,
+        "areaSqKm": 99.8,
+        "distanceCityKm": 60,
+        "distanceCityMin": 55
+      },
+      "character": {
+        "shortProfile": "Nördlichster und ländlichster Stadtteil des Kreises, geprägt durch weite Agrarflächen und den ehemaligen Fliegerhorst. Dominiert von freistehenden Einfamilienhäusern und umgenutzten Hofstellen. Preislich das untere Ende des Kreises. Attraktiv für budgetlimitierte Käufer, die längere Pendelzeiten akzeptieren.",
+        "datenqualitaet": "hoch"
+      },
+      "heatmapStufe": "niedrig",
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Hopsten wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-muenster/"
+      }
+    }
+  ]
+}
