@@ -102,6 +102,16 @@ export function DetailPanel({ district, onClose }) {
             </div>
           )}
 
+          {/* Datenqualität (nur bei Regionen, wenn niedrig oder mittel) */}
+          {character.datenqualitaet && character.datenqualitaet !== 'hoch' && (
+            <div className="flex items-start gap-2 bg-background rounded-lg px-3 py-2.5">
+              <span className="text-text/50 text-sm mt-0.5" title="Ländliche Gemeinden mit wenigen Marktangeboten haben eine dünnere Datenbasis. Richtwerte mit höherer Unsicherheit.">ⓘ</span>
+              <p className="text-xs text-text/70">
+                Datenqualität: {character.datenqualitaet}. Ländliche Gemeinden mit wenigen Marktangeboten haben eine dünnere Datenbasis.
+              </p>
+            </div>
+          )}
+
           {/* CTA Button */}
           <a
             href={cta.url}
