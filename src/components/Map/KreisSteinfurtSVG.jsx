@@ -53,7 +53,7 @@ const LABELS = [
   { id: 'lienen', x: 705.1, y: 457.6, lines: ['Lienen'], size: 11 },
   { id: 'lengerich', x: 619.6, y: 415.3, lines: ['Lengerich'], size: 12 },
   { id: 'ladbergen', x: 567.1, y: 462.7, lines: ['Ladbergen'], size: 10 },
-  { id: 'lotte', x: 694.3, y: 257.3, lines: ['Lotte'], size: 10 },
+  { id: 'lotte', x: 680.0, y: 257.3, lines: ['Lotte'], size: 10 },
   { id: 'westerkappeln', x: 631.9, y: 247.4, lines: ['Westerkappeln'], size: 12 },
   { id: 'mettingen', x: 575.1, y: 231.7, lines: ['Mettingen'], size: 10 },
   { id: 'tecklenburg', x: 616.6, y: 354.0, lines: ['Tecklenburg'], size: 11 },
