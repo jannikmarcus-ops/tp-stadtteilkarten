@@ -6,6 +6,7 @@ import { DetailPanel } from './components/Map/DetailPanel'
 import { MapLegend } from './components/Map/MapLegend'
 import { ViewToggle } from './components/Mobile/ViewToggle'
 import { CardView } from './components/Mobile/CardView'
+import { PriceTable } from './components/Map/PriceTable'
 import { Footer } from './components/shared/Footer'
 
 /**
@@ -112,6 +113,7 @@ export function CityPage({ data, MapComponent }) {
           </div>
 
           <MapLegend colorScale={data.meta.colorScale} />
+          <PriceTable districts={data.districts} />
         </main>
 
         {!isWide && selectedDistrict && (
