@@ -11,9 +11,18 @@ function getColor(price, colorScale) {
  * Collapsed: Name, Farbpunkt, ETW-Preis, Trend
  * Expanded: Alle Preise, Demographics, Profil, CTA
  */
+const SEGMENT_COLORS = {
+  'Wohnimmobilien dominant': { bg: '#E6EFEC', text: '#0A3F34' },
+  'Industrie': { bg: '#EFE8DC', text: '#6B4F1D' },
+  'Industrie/Pendler': { bg: '#EFE8DC', text: '#6B4F1D' },
+  'Mixed': { bg: '#EAE4DD', text: '#4A3A2C' },
+  'Ferienimmobilien': { bg: '#DCEAF0', text: '#1F4A63' },
+}
+
 export function DistrictCard({ district, expanded, onToggle, colorScale }) {
   const { name, bezirk, prices, demographics, character, cta } = district
   const color = getColor(prices.etwPerSqm, colorScale)
+  const segmentColor = character.marktsegment ? SEGMENT_COLORS[character.marktsegment] : null
 
   return (
     <div className="bg-white rounded-lg border border-border overflow-hidden">
@@ -33,7 +42,7 @@ export function DistrictCard({ district, expanded, onToggle, colorScale }) {
           {formatPrice(prices.etwPerSqm)}
         </span>
         <span className="text-xs whitespace-nowrap">
-          <TrendArrow trend={prices.trend} />
+          <TrendArrow trend={prices.trend} label={prices.trend12m} />
         </span>
         <svg
           className={`w-4 h-4 text-text/30 transition-transform ${expanded ? 'rotate-180' : ''}`}
@@ -49,13 +58,25 @@ export function DistrictCard({ district, expanded, onToggle, colorScale }) {
         style={{ maxHeight: expanded ? '500px' : '0', opacity: expanded ? 1 : 0 }}
       >
         <div className="px-4 pb-4 space-y-3 border-t border-border pt-3">
-          <p className="text-xs text-text/70">{bezirk}</p>
+          {bezirk && <p className="text-xs text-text/70">{bezirk}</p>}
+          {character.marktsegment && segmentColor && (
+            <span
+              className="inline-block text-[11px] font-medium px-2 py-0.5 rounded-full"
+              style={{ backgroundColor: segmentColor.bg, color: segmentColor.text }}
+            >
+              {character.marktsegment}
+            </span>
+          )}
 
           {/* Preise */}
           <div className="grid grid-cols-3 gap-2">
             <PriceBox label="ETW" value={formatPrice(prices.etwPerSqm)} />
             <PriceBox label="Haus" value={formatPrice(prices.housePerSqm)} />
-            <PriceBox label="Miete" value={formatRent(prices.rentPerSqm)} />
+            {prices.landPerSqm != null ? (
+              <PriceBox label="Grund" value={formatPrice(prices.landPerSqm)} />
+            ) : (
+              <PriceBox label="Miete" value={formatRent(prices.rentPerSqm)} />
+            )}
           </div>
 
           {/* Demographics */}
@@ -64,7 +85,9 @@ export function DistrictCard({ district, expanded, onToggle, colorScale }) {
             {demographics.areaSqKm != null && (
               <StatBox label="Fläche" value={`${demographics.areaSqKm.toFixed(1).replace('.', ',')} km²`} />
             )}
-            <StatBox label="zur City" value={demographics.distanceCityKm === 0 ? 'Zentrum' : `${demographics.distanceCityKm} km`} />
+            {demographics.distanceCityKm != null && (
+              <StatBox label="zur City" value={demographics.distanceCityKm === 0 ? 'Zentrum' : `${demographics.distanceCityKm} km`} />
+            )}
           </div>
 
           {/* ÖPNV (nur Hamburg) */}
@@ -72,7 +95,14 @@ export function DistrictCard({ district, expanded, onToggle, colorScale }) {
             <p className="text-xs text-text/70">ÖPNV: <span className="text-text font-medium">{character.oepnv}</span></p>
           )}
 
-          {/* Kurzprofil */}
+          {/* Käufergruppen (Dithmarschen) */}
+          {character.kaeufergruppen && (
+            <p className="text-xs text-text/80">
+              <span className="font-semibold">Käufer:</span> {character.kaeufergruppen}
+            </p>
+          )}
+
+          {/* Kurzprofil / Besonderheiten */}
           <p className="text-xs text-text leading-relaxed">{character.shortProfile}</p>
 
           {/* CTA */}

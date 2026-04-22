@@ -1,0 +1,663 @@
+{
+  "meta": {
+    "region": "kreis-dithmarschen",
+    "regionLabel": "Kreis Dithmarschen",
+    "cityLabel": "im Kreis Dithmarschen",
+    "city": "kreis-dithmarschen",
+    "lastUpdated": "2026-04-01",
+    "quarter": "April 2026",
+    "source": "Angebotspreise im Mehrquellen-Konsens (ImmoScout24 Preisatlas, Immowelt Immobilienpreise, Immoverkauf24, Immoportal, Gutachterausschuss Kreis Dithmarschen (Grundstücksmarktbericht 2024 und 2025), Bodenrichtwerte-Deutschland.de, AirROI Marktdaten), Stand April 2026.",
+    "methodik": "Werte sind Angebotspreise aus Mehrquellen-Konsens (Stand April 2026). Transaktionspreise liegen typischerweise 8 bis 15 Prozent unter den hier ausgewiesenen Angebotspreisen.",
+    "priceUnit": "€/m²",
+    "priceColumns": [
+      "etw",
+      "haus",
+      "grund"
+    ],
+    "colorScale": [
+      {
+        "min": 4000,
+        "max": 999999,
+        "color": "#052E26",
+        "label": "ab 4.000 €/m²"
+      },
+      {
+        "min": 2900,
+        "max": 3999,
+        "color": "#1A5C4A",
+        "label": "2.900 bis 3.999 €/m²"
+      },
+      {
+        "min": 2400,
+        "max": 2899,
+        "color": "#3D8B6E",
+        "label": "2.400 bis 2.899 €/m²"
+      },
+      {
+        "min": 2100,
+        "max": 2399,
+        "color": "#7CB89E",
+        "label": "2.100 bis 2.399 €/m²"
+      },
+      {
+        "min": 1800,
+        "max": 2099,
+        "color": "#B5D1C2",
+        "label": "1.800 bis 2.099 €/m²"
+      },
+      {
+        "min": 0,
+        "max": 1799,
+        "color": "#DCEBE2",
+        "label": "unter 1.800 €/m²"
+      }
+    ],
+    "infoBox": {
+      "heading": "Zwei Märkte in einem Kreis",
+      "paragraphs": [
+        "Der Kreis Dithmarschen ist immobilienwirtschaftlich kein homogener Raum, sondern vereint zwei unterschiedliche Märkte. Im Binnenland dominieren Wohnimmobilien für Familien, Pendler und Eigennutzer mit moderaten Preisen zwischen 1.500 und 2.500 Euro pro Quadratmeter. Die Kreisstadt Heide und Industriestandorte wie Brunsbüttel sind hier die Zentren.",
+        "An der Nordseeküste entsteht durch Tourismus und Zweitwohnsitz-Nachfrage ein deutlich höheres Preisniveau. Büsum erreicht über 5.000 Euro pro Quadratmeter für Eigentumswohnungen, Friedrichskoog und Büsumer Deichhausen folgen mit Werten über 3.700 Euro. Diese Spaltung prägt Bewertung, Vermarktung und Zielgruppe jeder Immobilie im Kreis."
+      ]
+    }
+  },
+  "districts": [
+    {
+      "id": "heide",
+      "name": "Heide",
+      "slug": "heide",
+      "isCoastal": false,
+      "prices": {
+        "etwPerSqm": 2400,
+        "housePerSqm": 2200,
+        "landPerSqm": 124,
+        "trend": "steigend",
+        "trend12m": "+2,8%"
+      },
+      "demographics": {
+        "population": 22520
+      },
+      "character": {
+        "shortProfile": "Stärkster Einpendlerort im Kreis, hohes Arbeitsmarktprofil, Northvolt-Lyten als Option für die nächsten Jahre.",
+        "marktsegment": "Wohnimmobilien dominant",
+        "kaeufergruppen": "Eigennutzer, Pendler, Kapitalanleger, projektnahe Dienstleister",
+        "tooltip": "Heide. Kreisstadt und Verwaltungs- sowie Klinikzentrum. ETW im Schnitt 2.400 Euro/qm, EFH 2.200 Euro/qm, Grundstück 124 Euro/qm. Plus 2,8 Prozent in 12 Monaten. Northvolt-Lyten als Markttreiber mit Zeitversatz."
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Heide wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-dithmarschen/"
+      }
+    },
+    {
+      "id": "brunsbuettel",
+      "name": "Brunsbüttel",
+      "slug": "brunsbuettel",
+      "isCoastal": false,
+      "prices": {
+        "etwPerSqm": 2175,
+        "housePerSqm": 2000,
+        "landPerSqm": 100,
+        "trend": "steigend",
+        "trend12m": "+2,5%"
+      },
+      "demographics": {
+        "population": 12633
+      },
+      "character": {
+        "shortProfile": "ChemCoast Park mit 4.500 direkten Arbeitsplätzen, LNG-Terminal im Aufbau, hoher Anteil Mietwohnungen für Fachkräfte.",
+        "marktsegment": "Industrie",
+        "kaeufergruppen": "Pendler, Industriehaushalte, Investoren mit Mietfokus",
+        "tooltip": "Brunsbüttel. Einer der wichtigsten Industriestandorte Norddeutschlands. ETW 2.175 Euro/qm, EFH 2.000 Euro/qm. Stabile Nachfrage durch ChemCoast Park und LNG-Terminal. Pendlerverflechtung mit St. Margarethen auf der anderen Elbseite."
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Brunsbüttel wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-dithmarschen/"
+      }
+    },
+    {
+      "id": "meldorf",
+      "name": "Meldorf",
+      "slug": "meldorf",
+      "isCoastal": false,
+      "prices": {
+        "etwPerSqm": 2400,
+        "housePerSqm": 1800,
+        "landPerSqm": 95,
+        "trend": "steigend",
+        "trend12m": "+1,8%"
+      },
+      "demographics": {
+        "population": 7295
+      },
+      "character": {
+        "shortProfile": "Historischer Stadtkern, regionale Zentralität, Nahversorgung, stabile Mittelzentrumsfunktion im Binnenmarkt.",
+        "marktsegment": "Wohnimmobilien dominant",
+        "kaeufergruppen": "Eigennutzer, regionale Best Ager, kleine Investoren",
+        "tooltip": "Meldorf. Historische Stadt mit Behörden und Nahversorgung. ETW 2.400 Euro/qm, EFH 1.800 Euro/qm. Stabiler, wenig spekulativer Markt."
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Meldorf wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-dithmarschen/"
+      }
+    },
+    {
+      "id": "marne",
+      "name": "Marne",
+      "slug": "marne",
+      "isCoastal": false,
+      "prices": {
+        "etwPerSqm": 2300,
+        "housePerSqm": 1800,
+        "landPerSqm": 85,
+        "trend": "steigend",
+        "trend12m": "+2,2%"
+      },
+      "demographics": {
+        "population": 5940
+      },
+      "character": {
+        "shortProfile": "Regionales Zentrum Amt Marne-Nordsee. Hinweis: Einzelne Plattformen weisen deutlich höhere ETW-Preise aus, diese beruhen jedoch auf sehr kleinen Stichproben und Neubauprojekten. Der hier ausgewiesene Wert ist ein konservativer Konsens.",
+        "marktsegment": "Mixed",
+        "kaeufergruppen": "Eigennutzer, Kapitalanleger, regionale Käufer",
+        "tooltip": "Marne. Kleinstadt im Süden des Kreises Dithmarschen. ETW 2.300 Euro/qm, EFH 1.800 Euro/qm. Moderates Preisniveau auf Heide/Meldorf-Niveau."
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Marne wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-dithmarschen/"
+      }
+    },
+    {
+      "id": "burg-in-dithmarschen",
+      "name": "Burg in Dithmarschen",
+      "slug": "burg-in-dithmarschen",
+      "isCoastal": false,
+      "prices": {
+        "etwPerSqm": 1920,
+        "housePerSqm": 1725,
+        "landPerSqm": 75,
+        "trend": "steigend",
+        "trend12m": "+2,0%"
+      },
+      "demographics": {
+        "population": 4171
+      },
+      "character": {
+        "shortProfile": "Eigene Versorgungsfunktion, gute Erreichbarkeit zur Achse Brunsbüttel-Itzehoe.",
+        "marktsegment": "Wohnimmobilien dominant",
+        "kaeufergruppen": "Eigennutzer, Pendler, kleinere Vermieter",
+        "tooltip": "Burg in Dithmarschen. Kleinstadt mit guter Anbindung Richtung Brunsbüttel. ETW 1.920 Euro/qm, EFH 1.725 Euro/qm. Solider Familienmarkt."
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Burg in Dithmarschen wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-dithmarschen/"
+      }
+    },
+    {
+      "id": "st-michaelisdonn",
+      "name": "St. Michaelisdonn",
+      "slug": "st-michaelisdonn",
+      "isCoastal": false,
+      "prices": {
+        "etwPerSqm": 1740,
+        "housePerSqm": 1750,
+        "landPerSqm": 80,
+        "trend": "steigend",
+        "trend12m": "+1,0%"
+      },
+      "demographics": {
+        "population": 3483
+      },
+      "character": {
+        "shortProfile": "Preisersatzmarkt für Käufer mit Arbeitsplatz in Brunsbüttel. Gute Bahnanbindung nach Hamburg.",
+        "marktsegment": "Mixed",
+        "kaeufergruppen": "Eigennutzer, Pendler, preisbewusste Käufer",
+        "tooltip": "St. Michaelisdonn. Pendlerort zwischen Brunsbüttel und Marschraum. ETW 1.740 Euro/qm, EFH 1.750 Euro/qm. Einer der günstigsten Orte im Kreis Dithmarschen."
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in St. Michaelisdonn wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-dithmarschen/"
+      }
+    },
+    {
+      "id": "albersdorf",
+      "name": "Albersdorf",
+      "slug": "albersdorf",
+      "isCoastal": false,
+      "prices": {
+        "etwPerSqm": 1865,
+        "housePerSqm": 1870,
+        "landPerSqm": 85,
+        "trend": "steigend",
+        "trend12m": "+1,8%"
+      },
+      "demographics": {
+        "population": 3860
+      },
+      "character": {
+        "shortProfile": "Gute Nahversorgung, familiengeeignet, bezahlbare Alternative zu Heide.",
+        "marktsegment": "Wohnimmobilien dominant",
+        "kaeufergruppen": "Familien, Eigennutzer, regionale Pendler",
+        "tooltip": "Albersdorf. Größter Ort im westlichen Binnenraum des Amtes Mitteldithmarschen. ETW 1.865 Euro/qm, EFH 1.870 Euro/qm."
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Albersdorf wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-dithmarschen/"
+      }
+    },
+    {
+      "id": "hemmingstedt",
+      "name": "Hemmingstedt",
+      "slug": "hemmingstedt",
+      "isCoastal": false,
+      "prices": {
+        "etwPerSqm": 2230,
+        "housePerSqm": 1800,
+        "landPerSqm": 90,
+        "trend": "steigend",
+        "trend12m": "+2,0%"
+      },
+      "demographics": {
+        "population": 2895
+      },
+      "character": {
+        "shortProfile": "Praktisch Teil des Heider Arbeits- und Einkaufsraums. Raffinerie-Standort. Für Projektgeschäft interessant.",
+        "marktsegment": "Industrie/Pendler",
+        "kaeufergruppen": "Pendler, Eigennutzer, kleine Mehrfamilienhaus-Investoren",
+        "tooltip": "Hemmingstedt. Heider Umland, direkte Anbindung an den Arbeitsmarkt der Kreisstadt. ETW 2.230 Euro/qm, EFH 1.800 Euro/qm."
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Hemmingstedt wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-dithmarschen/"
+      }
+    },
+    {
+      "id": "wesselburen",
+      "name": "Wesselburen",
+      "slug": "wesselburen",
+      "isCoastal": false,
+      "prices": {
+        "etwPerSqm": 2205,
+        "housePerSqm": 2385,
+        "landPerSqm": 85,
+        "trend": "steigend",
+        "trend12m": "+1,6%"
+      },
+      "demographics": {
+        "population": 3519
+      },
+      "character": {
+        "shortProfile": "Touristische Nähe ohne Büsum-Preisniveau. Geburtsort Friedrich Hebbels, kleiner Kulturstandort.",
+        "marktsegment": "Mixed",
+        "kaeufergruppen": "Eigennutzer, Pendler, Ferienrandkäufer",
+        "tooltip": "Wesselburen. Kleinstadtfunktion im Küstenvorland. ETW 2.205 Euro/qm, EFH 2.385 Euro/qm. Preisgünstige Alternative zur Büsum-Lage."
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Wesselburen wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-dithmarschen/"
+      }
+    },
+    {
+      "id": "hennstedt",
+      "name": "Hennstedt",
+      "slug": "hennstedt",
+      "isCoastal": false,
+      "prices": {
+        "etwPerSqm": 1900,
+        "housePerSqm": 1700,
+        "landPerSqm": 60,
+        "trend": "steigend",
+        "trend12m": "+1,2%"
+      },
+      "demographics": {
+        "population": 2054
+      },
+      "character": {
+        "shortProfile": "Datenbasis dünn, Werte sind orientierende Schätzungen. Markt ist lokal und stark nachfrageabhängig.",
+        "marktsegment": "Wohnimmobilien dominant",
+        "kaeufergruppen": "Eigennutzer, regionale Käufer",
+        "tooltip": "Hennstedt. Zentraler Binnenort im Amt KLG Eider. ETW ca. 1.900 Euro/qm, EFH ca. 1.700 Euro/qm. Kleiner, preissensitiver Markt."
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Hennstedt wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-dithmarschen/"
+      }
+    },
+    {
+      "id": "tellingstedt",
+      "name": "Tellingstedt",
+      "slug": "tellingstedt",
+      "isCoastal": false,
+      "prices": {
+        "etwPerSqm": 2500,
+        "housePerSqm": 2320,
+        "landPerSqm": 65,
+        "trend": "fallend",
+        "trend12m": "-0,8%"
+      },
+      "demographics": {
+        "population": 2737
+      },
+      "character": {
+        "shortProfile": "Höheres Preisniveau als umliegende Binnenorte, teilweise durch Neubauanteil geprägt. Planbarer Eigennutzermarkt mit leichter Abkühlung.",
+        "marktsegment": "Wohnimmobilien dominant",
+        "kaeufergruppen": "Familien, Eigennutzer, kleinere Investoren",
+        "tooltip": "Tellingstedt. Lokales Zentrum im Binnenraum. ETW 2.500 Euro/qm, EFH 2.320 Euro/qm. Leicht rückläufiger Trend seit 2022."
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Tellingstedt wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-dithmarschen/"
+      }
+    },
+    {
+      "id": "lohe-rickelshof",
+      "name": "Lohe-Rickelshof",
+      "slug": "lohe-rickelshof",
+      "isCoastal": false,
+      "prices": {
+        "etwPerSqm": 2310,
+        "housePerSqm": 1955,
+        "landPerSqm": 95,
+        "trend": "steigend",
+        "trend12m": "+1,5%"
+      },
+      "demographics": {
+        "population": 2089
+      },
+      "character": {
+        "shortProfile": "Profitiert am stärksten vom Northvolt-Lyten-Effekt durch Nähe zum geplanten Werksgelände.",
+        "marktsegment": "Wohnimmobilien dominant",
+        "kaeufergruppen": "Eigennutzer, Pendler, Heide-Ausweichkäufer",
+        "tooltip": "Lohe-Rickelshof. Direkt am Heider Rand gelegen, Ergänzungsmarkt des Oberzentrums. ETW 2.310 Euro/qm, EFH 1.955 Euro/qm."
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Lohe-Rickelshof wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-dithmarschen/"
+      }
+    },
+    {
+      "id": "eddelak",
+      "name": "Eddelak",
+      "slug": "eddelak",
+      "isCoastal": false,
+      "prices": {
+        "etwPerSqm": 1900,
+        "housePerSqm": 1645,
+        "landPerSqm": 75,
+        "trend": "steigend",
+        "trend12m": "+2,2%"
+      },
+      "demographics": {
+        "population": 1385
+      },
+      "character": {
+        "shortProfile": "Günstiger als Brunsbüttel selbst, interessant für Mitarbeiterwohnen im ChemCoast-Umfeld.",
+        "marktsegment": "Industrie/Pendler",
+        "kaeufergruppen": "Pendler, Eigennutzer, Vermieter mit Mietfokus",
+        "tooltip": "Eddelak. Nahe Brunsbüttel gelegener Industrie-Nachfragepuffer. ETW 1.900 Euro/qm, EFH 1.645 Euro/qm."
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Eddelak wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-dithmarschen/"
+      }
+    },
+    {
+      "id": "lunden",
+      "name": "Lunden",
+      "slug": "lunden",
+      "isCoastal": false,
+      "prices": {
+        "etwPerSqm": 2000,
+        "housePerSqm": 1550,
+        "landPerSqm": 70,
+        "trend": "stabil",
+        "trend12m": "+0,4%"
+      },
+      "demographics": {
+        "population": 1703
+      },
+      "character": {
+        "shortProfile": "Datenbasis dünn. Häuser preiswert, Wohnungsmarkt klein und volatil.",
+        "marktsegment": "Mixed",
+        "kaeufergruppen": "Eigennutzer, regionale Käufer",
+        "tooltip": "Lunden. Im Norden des Kreisgebiets, Binnenlage. ETW ca. 2.000 Euro/qm, EFH ca. 1.550 Euro/qm. Kleiner Markt."
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Lunden wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-dithmarschen/"
+      }
+    },
+    {
+      "id": "suederhastedt",
+      "name": "Süderhastedt",
+      "slug": "suederhastedt",
+      "isCoastal": false,
+      "prices": {
+        "etwPerSqm": 1800,
+        "housePerSqm": 1550,
+        "landPerSqm": 65,
+        "trend": "steigend",
+        "trend12m": "+2,5%"
+      },
+      "demographics": {
+        "population": 789
+      },
+      "character": {
+        "shortProfile": "Begrenzte Stückzahl, stark preis- und lebensstilgetriebene Kaufentscheidungen.",
+        "marktsegment": "Wohnimmobilien dominant",
+        "kaeufergruppen": "Eigennutzer, Familien mit Flächenwunsch",
+        "tooltip": "Süderhastedt. Kleiner Dorflage-Markt. ETW 1.800 Euro/qm, EFH 1.550 Euro/qm. Gehört zu den günstigsten Orten des Kreises Dithmarschen."
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Süderhastedt wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-dithmarschen/"
+      }
+    },
+    {
+      "id": "buesum",
+      "name": "Büsum",
+      "slug": "buesum",
+      "isCoastal": true,
+      "prices": {
+        "etwPerSqm": 5250,
+        "housePerSqm": 3000,
+        "landPerSqm": 527,
+        "trend": "steigend",
+        "trend12m": "+2,8%"
+      },
+      "demographics": {
+        "population": 5180
+      },
+      "character": {
+        "shortProfile": "Stärkster Apartmentmarkt der Region. Klimawandel und Küstenschutz als langfristige Risikofaktoren.",
+        "marktsegment": "Ferienimmobilien",
+        "kaeufergruppen": "Ferienkäufer, Kapitalanleger, Zweitwohnsitzkäufer",
+        "tooltip": "Büsum. Top-Tourismusmagnet Dithmarschens. ETW 5.250 Euro/qm, EFH 3.000 Euro/qm, Grundstück 527 Euro/qm. Hoher Ferienwohnungsmarkt, Airbnb-ADR 163 USD/Nacht."
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Büsum wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-dithmarschen/"
+      }
+    },
+    {
+      "id": "friedrichskoog",
+      "name": "Friedrichskoog",
+      "slug": "friedrichskoog",
+      "isCoastal": true,
+      "prices": {
+        "etwPerSqm": 3780,
+        "housePerSqm": 2070,
+        "landPerSqm": 120,
+        "trend": "steigend",
+        "trend12m": "+2,4%"
+      },
+      "demographics": {
+        "population": 2500
+      },
+      "character": {
+        "shortProfile": "Airbnb-Auslastung 30 Prozent, höher als Büsum. Investmentcharakter stärker als Eigennutzercharakter.",
+        "marktsegment": "Ferienimmobilien",
+        "kaeufergruppen": "Ferienkäufer, preisbewusste Investoren, Eigennutzer",
+        "tooltip": "Friedrichskoog. Wasserlagen-Gemeinde mit eigenem Hafen. ETW 3.780 Euro/qm, EFH 2.070 Euro/qm. Günstigerer Einstieg als Büsum mit höherer Renditechance."
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Friedrichskoog wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-dithmarschen/"
+      }
+    },
+    {
+      "id": "buesumer-deichhausen",
+      "name": "Büsumer Deichhausen",
+      "slug": "buesumer-deichhausen",
+      "isCoastal": true,
+      "prices": {
+        "etwPerSqm": 4265,
+        "housePerSqm": 2440,
+        "landPerSqm": 240,
+        "trend": "steigend",
+        "trend12m": "+2,9%"
+      },
+      "demographics": {
+        "population": 369
+      },
+      "character": {
+        "shortProfile": "Sehr kleiner Markt, direkt an Büsum gekoppelt. Hohe Preisdisziplin, wenig Angebot.",
+        "marktsegment": "Ferienimmobilien",
+        "kaeufergruppen": "Vermögende Eigennutzer, Ferienkäufer, Kapitalanleger",
+        "tooltip": "Büsumer Deichhausen. Premium-Nebenort von Büsum. ETW 4.265 Euro/qm, EFH 2.440 Euro/qm. Kleiner, exklusiver Markt."
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Büsumer Deichhausen wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-dithmarschen/"
+      }
+    },
+    {
+      "id": "wesselburenerkoog",
+      "name": "Wesselburenerkoog",
+      "slug": "wesselburenerkoog",
+      "isCoastal": true,
+      "prices": {
+        "etwPerSqm": 2955,
+        "housePerSqm": 2265,
+        "landPerSqm": 120,
+        "trend": "stabil",
+        "trend12m": "+0,4%"
+      },
+      "demographics": {
+        "population": 170
+      },
+      "character": {
+        "shortProfile": "Landwirtschaftlich geprägte Küstenlage, Eidersperrwerk als Standortfaktor. Ausreißerrisiko bei Einzeldeals.",
+        "marktsegment": "Mixed",
+        "kaeufergruppen": "Ferienrandkäufer, Eigennutzer, Bestandsinvestoren",
+        "tooltip": "Wesselburenerkoog. Naturstrand-Gemeinde nahe Eidersperrwerk. ETW 2.955 Euro/qm, EFH 2.265 Euro/qm. Kleine Stichproben."
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Wesselburenerkoog wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-dithmarschen/"
+      }
+    },
+    {
+      "id": "reinsbuettel",
+      "name": "Reinsbüttel",
+      "slug": "reinsbuettel",
+      "isCoastal": true,
+      "prices": {
+        "etwPerSqm": 2180,
+        "housePerSqm": 1655,
+        "landPerSqm": 105,
+        "trend": "steigend",
+        "trend12m": "+1,4%"
+      },
+      "demographics": {
+        "population": 398
+      },
+      "character": {
+        "shortProfile": "Ruhiger und preislich deutlich unter Büsum, geeignet als Zweitwohnsitz mit Feriennähe.",
+        "marktsegment": "Mixed",
+        "kaeufergruppen": "Eigennutzer, Pendler, ruhesuchende Zweitwohnsitzkäufer",
+        "tooltip": "Reinsbüttel. Hinterlandlage zur Küste. ETW 2.180 Euro/qm, EFH 1.655 Euro/qm. Ruhiges Umfeld, Ergänzungsmarkt zur Nordseeküste."
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Reinsbüttel wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-dithmarschen/"
+      }
+    },
+    {
+      "id": "schafstedt",
+      "name": "Schafstedt",
+      "slug": "schafstedt",
+      "isCoastal": false,
+      "prices": {
+        "etwPerSqm": 1935,
+        "housePerSqm": 1765,
+        "landPerSqm": 70,
+        "trend": "steigend",
+        "trend12m": "+2,0%"
+      },
+      "demographics": {
+        "population": 1308
+      },
+      "character": {
+        "shortProfile": "Solider Zubringerstandort, kein Ferienmarkt, stabiles Bestandsgeschäft.",
+        "marktsegment": "Industrie/Pendler",
+        "kaeufergruppen": "Familien, Pendler, Eigennutzer",
+        "tooltip": "Schafstedt. Binnenlage zwischen Heide und Brunsbüttel mit A23-Nähe. ETW 1.935 Euro/qm, EFH 1.765 Euro/qm."
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Schafstedt wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-dithmarschen/"
+      }
+    },
+    {
+      "id": "volsemenhusen",
+      "name": "Volsemenhusen",
+      "slug": "volsemenhusen",
+      "isCoastal": false,
+      "prices": {
+        "etwPerSqm": 1825,
+        "housePerSqm": 1935,
+        "landPerSqm": 60,
+        "trend": "steigend",
+        "trend12m": "+1,6%"
+      },
+      "demographics": {
+        "population": 361
+      },
+      "character": {
+        "shortProfile": "Windpark und Landwirtschaft prägen den Standort. Kleine Marktbreite, beratungsintensive Verkäufe.",
+        "marktsegment": "Industrie/Pendler",
+        "kaeufergruppen": "Eigennutzer, regionale Käufer, Pendler",
+        "tooltip": "Volsemenhusen. Landwirtschaftlich geprägtes Marner Umland. ETW 1.825 Euro/qm, EFH 1.935 Euro/qm."
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Volsemenhusen wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-dithmarschen/"
+      }
+    },
+    {
+      "id": "weddingstedt",
+      "name": "Weddingstedt",
+      "slug": "weddingstedt",
+      "isCoastal": false,
+      "prices": {
+        "etwPerSqm": 1860,
+        "housePerSqm": 2000,
+        "landPerSqm": 100,
+        "trend": "steigend",
+        "trend12m": "+2,6%"
+      },
+      "demographics": {
+        "population": 2328
+      },
+      "character": {
+        "shortProfile": "Wachstumsorientierte Gemeinde, Suburbanisierung statt Dorflage. Einer der besten Ergänzungsmärkte zu Heide.",
+        "marktsegment": "Wohnimmobilien dominant",
+        "kaeufergruppen": "Pendler, Familien, Eigennutzer, kleinere Investoren",
+        "tooltip": "Weddingstedt. Heider Randmarkt mit direkter Anbindung an den Arbeitsmarkt der Kreisstadt. ETW 1.860 Euro/qm, EFH 2.000 Euro/qm."
+      },
+      "cta": {
+        "text": "Was ist Ihre Immobilie in Weddingstedt wert?",
+        "url": "https://teigelerundpartner.de/immobilienbewertung-dithmarschen/"
+      }
+    }
+  ]
+}

@@ -1,8 +1,9 @@
 /**
  * Trend-Pfeil basierend auf dem Text-Trend aus dem JSON.
+ * Optional `label` zeigt einen Prozent-Wert (z.B. "+2,8%") statt des Trend-Worts.
  * Farben WCAG AA-konform auf weißem Hintergrund (Kontrast >= 4.5:1)
  */
-export function TrendArrow({ trend }) {
+export function TrendArrow({ trend, label }) {
   const t = (trend || '').toLowerCase()
   let arrow, color
 
@@ -23,7 +24,7 @@ export function TrendArrow({ trend }) {
   return (
     <span className={`inline-flex items-center gap-1 font-medium ${color}`}>
       <span>{arrow}</span>
-      <span className="text-xs">{trend || 'stabil'}</span>
+      <span className="text-xs">{label || trend || 'stabil'}</span>
     </span>
   )
 }

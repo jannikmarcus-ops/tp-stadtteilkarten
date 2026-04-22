@@ -5,10 +5,19 @@ import { TrendArrow } from '../shared/TrendArrow'
  * Detail-Panel: Schiebt von rechts rein bei Klick auf ein Viertel.
  * Ab 1024px als Sidebar neben der Karte, darunter als Overlay.
  */
+const SEGMENT_COLORS = {
+  'Wohnimmobilien dominant': { bg: '#E6EFEC', text: '#0A3F34' },
+  'Industrie': { bg: '#EFE8DC', text: '#6B4F1D' },
+  'Industrie/Pendler': { bg: '#EFE8DC', text: '#6B4F1D' },
+  'Mixed': { bg: '#EAE4DD', text: '#4A3A2C' },
+  'Ferienimmobilien': { bg: '#DCEAF0', text: '#1F4A63' },
+}
+
 export function DetailPanel({ district, onClose }) {
   if (!district) return null
 
   const { name, bezirk, prices, demographics, character, cta } = district
+  const segmentColor = character.marktsegment ? SEGMENT_COLORS[character.marktsegment] : null
 
   return (
     <>
@@ -30,7 +39,15 @@ export function DetailPanel({ district, onClose }) {
         <div className="sticky top-0 bg-white border-b border-border px-5 py-4 flex items-start justify-between">
           <div>
             <h2 className="text-xl font-bold text-primary">{name}</h2>
-            <p className="text-xs text-text/70 mt-0.5">{bezirk}</p>
+            {bezirk && <p className="text-xs text-text/70 mt-0.5">{bezirk}</p>}
+            {character.marktsegment && segmentColor && (
+              <span
+                className="inline-block text-[11px] font-medium px-2 py-0.5 rounded-full mt-1.5"
+                style={{ backgroundColor: segmentColor.bg, color: segmentColor.text }}
+              >
+                {character.marktsegment}
+              </span>
+            )}
           </div>
           <button
             onClick={onClose}
@@ -50,13 +67,19 @@ export function DetailPanel({ district, onClose }) {
           <div className="grid grid-cols-3 gap-3">
             <PriceCard label="ETW" value={formatPrice(prices.etwPerSqm)} />
             <PriceCard label="Haus" value={formatPrice(prices.housePerSqm)} />
-            <PriceCard label="Miete" value={formatRent(prices.rentPerSqm)} />
+            {prices.landPerSqm != null ? (
+              <PriceCard label="Grund" value={formatPrice(prices.landPerSqm)} />
+            ) : (
+              <PriceCard label="Miete" value={formatRent(prices.rentPerSqm)} />
+            )}
           </div>
 
           {/* Trend */}
           <div className="flex items-center gap-2 text-sm">
-            <span className="text-text/75">Preistrend:</span>
-            <TrendArrow trend={prices.trend} />
+            <span className="text-text/75">
+              {prices.trend12m ? '12-Monats-Trend:' : 'Preistrend:'}
+            </span>
+            <TrendArrow trend={prices.trend} label={prices.trend12m} />
           </div>
 
           {/* Demographics */}
@@ -71,13 +94,15 @@ export function DetailPanel({ district, onClose }) {
                 value={`${demographics.areaSqKm.toFixed(1).replace('.', ',')} km²`}
               />
             )}
-            <StatCard
-              label="zur City"
-              value={demographics.distanceCityKm === 0
-                ? 'Zentrum'
-                : `${demographics.distanceCityKm} km`
-              }
-            />
+            {demographics.distanceCityKm != null && (
+              <StatCard
+                label="zur City"
+                value={demographics.distanceCityKm === 0
+                  ? 'Zentrum'
+                  : `${demographics.distanceCityKm} km`
+                }
+              />
+            )}
           </div>
 
           {/* ÖPNV (nur Hamburg) */}
@@ -88,11 +113,21 @@ export function DetailPanel({ district, onClose }) {
             </div>
           )}
 
-          {/* Kurzprofil */}
+          {/* Kurzprofil bzw. Besonderheiten */}
           <div>
-            <h3 className="text-xs font-bold text-text/70 uppercase tracking-wider mb-1.5">Profil</h3>
+            <h3 className="text-xs font-bold text-text/70 uppercase tracking-wider mb-1.5">
+              {character.marktsegment ? 'Besonderheiten' : 'Profil'}
+            </h3>
             <p className="text-sm text-text leading-relaxed">{character.shortProfile}</p>
           </div>
+
+          {/* Käufergruppen (nur wenn vorhanden, z.B. Dithmarschen) */}
+          {character.kaeufergruppen && (
+            <div>
+              <h3 className="text-xs font-bold text-text/70 uppercase tracking-wider mb-1.5">Käufergruppen</h3>
+              <p className="text-sm text-text">{character.kaeufergruppen}</p>
+            </div>
+          )}
 
           {/* Typische Gebäude (nur wenn vorhanden) */}
           {character.typicalBuildings && (

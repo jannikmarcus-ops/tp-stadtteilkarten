@@ -8,6 +8,7 @@ import { PriceTable } from './components/Map/PriceTable'
 import { ViewToggle } from './components/Mobile/ViewToggle'
 import { CardView } from './components/Mobile/CardView'
 import { SearchBar } from './components/shared/SearchBar'
+import { InfoBox } from './components/shared/InfoBox'
 import { Footer } from './components/shared/Footer'
 
 /**
@@ -131,6 +132,7 @@ export function CityPage({ data, MapComponent }) {
           </div>
 
           <MapLegend colorScale={data.meta.colorScale} />
+          {data.meta.infoBox && <InfoBox {...data.meta.infoBox} />}
           <PriceTable districts={filteredDistricts} />
         </main>
 
@@ -182,6 +184,7 @@ export function CityPage({ data, MapComponent }) {
         )}
 
         {mobileView === 'liste' && <MapLegend colorScale={data.meta.colorScale} />}
+        {mobileView === 'liste' && data.meta.infoBox && <InfoBox {...data.meta.infoBox} />}
       </main>
 
       <Footer meta={data.meta} />

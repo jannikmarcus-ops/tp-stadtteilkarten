@@ -7,6 +7,11 @@ import { TrendArrow } from '../shared/TrendArrow'
  * Mobile: ausgeblendet, Cards übernehmen.
  */
 export function PriceTable({ districts }) {
+  const hasLand = districts.some(d => d.prices.landPerSqm != null)
+  const thirdCol = hasLand
+    ? { key: 'grund', label: 'Grund €/m²', format: formatPrice, field: 'landPerSqm' }
+    : { key: 'miete', label: 'Miete €/m²', format: formatRent, field: 'rentPerSqm' }
+
   const [sortKey, setSortKey] = useState('name')
   const [sortDir, setSortDir] = useState('asc')
 
@@ -30,12 +35,13 @@ export function PriceTable({ districts }) {
         return items.sort((a, b) => dir * (a.prices.etwPerSqm - b.prices.etwPerSqm))
       case 'haus':
         return items.sort((a, b) => dir * (a.prices.housePerSqm - b.prices.housePerSqm))
+      case 'grund':
       case 'miete':
-        return items.sort((a, b) => dir * (a.prices.rentPerSqm - b.prices.rentPerSqm))
+        return items.sort((a, b) => dir * ((a.prices[thirdCol.field] ?? 0) - (b.prices[thirdCol.field] ?? 0)))
       default:
         return items
     }
-  }, [sortKey, sortDir, districts])
+  }, [sortKey, sortDir, districts, thirdCol.field])
 
   const arrow = sortDir === 'asc' ? ' ↑' : ' ↓'
 
@@ -54,8 +60,8 @@ export function PriceTable({ districts }) {
               <Th onClick={() => handleSort('haus')} active={sortKey === 'haus'} arrow={arrow} align="right">
                 Haus €/m²
               </Th>
-              <Th onClick={() => handleSort('miete')} active={sortKey === 'miete'} arrow={arrow} align="right">
-                Miete €/m²
+              <Th onClick={() => handleSort(thirdCol.key)} active={sortKey === thirdCol.key} arrow={arrow} align="right">
+                {thirdCol.label}
               </Th>
               <Th align="left">Trend</Th>
             </tr>
@@ -69,9 +75,9 @@ export function PriceTable({ districts }) {
                 <td className="px-4 py-2.5 font-medium text-primary">{d.name}</td>
                 <td className="px-4 py-2.5 text-right tabular-nums">{formatPrice(d.prices.etwPerSqm)}</td>
                 <td className="px-4 py-2.5 text-right tabular-nums">{formatPrice(d.prices.housePerSqm)}</td>
-                <td className="px-4 py-2.5 text-right tabular-nums">{formatRent(d.prices.rentPerSqm)}</td>
+                <td className="px-4 py-2.5 text-right tabular-nums">{thirdCol.format(d.prices[thirdCol.field])}</td>
                 <td className="px-4 py-2.5">
-                  <TrendArrow trend={d.prices.trend} />
+                  <TrendArrow trend={d.prices.trend} label={d.prices.trend12m} />
                 </td>
               </tr>
             ))}

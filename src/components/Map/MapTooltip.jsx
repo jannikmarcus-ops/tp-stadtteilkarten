@@ -62,11 +62,13 @@ export function MapTooltip({ district, anchorRect, containerRect }) {
           </span>
         </div>
         <div className="mt-1 flex items-center gap-2 text-xs">
-          <TrendArrow trend={prices.trend} percent={prices.trendPercent} />
+          <TrendArrow trend={prices.trend} label={prices.trend12m} />
         </div>
-        <p className="mt-1.5 text-xs text-text/75 leading-snug">
-          {character.typicalBuildings}
-        </p>
+        {(character.typicalBuildings || character.marktsegment) && (
+          <p className="mt-1.5 text-xs text-text/75 leading-snug">
+            {character.typicalBuildings || character.marktsegment}
+          </p>
+        )}
       </div>
     </div>
   )
