@@ -1,5 +1,12 @@
-// Konvertiert kreis-dithmarschen-gemeinden.geojson in eine React-SVG-Komponente.
+// Konvertiert Gemeinden + Kreis-Geografie in eine React-SVG-Komponente.
 // Ausgabe: src/components/Map/KreisDithmarschenSVG.jsx
+//
+// Layer-Reihenfolge (unten → oben):
+//   1. Wasser (Rechteck)
+//   2. Nachbarkreise (blassgrau, gestrichelt)
+//   3. Kreis Dithmarschen als Canvas
+//   4. Gemeinden
+//   5. Wasser-Labels (Nordsee, Elbe, Eider)
 //
 // Usage: node scripts/geojson-to-dithmarschen-svg.mjs
 
@@ -7,23 +14,21 @@ import { readFileSync, writeFileSync } from 'node:fs'
 import { resolve } from 'node:path'
 import polylabel from '@mapbox/polylabel'
 
-const GEOJSON = resolve(process.cwd(), 'src/data/kreis-dithmarschen-gemeinden.geojson')
+const GEM_GEOJSON = resolve(process.cwd(), 'src/data/kreis-dithmarschen-gemeinden.geojson')
+const GEOGRAPHY = resolve(process.cwd(), 'src/data/kreis-dithmarschen-geography.geojson')
 const OUTPUT = resolve(process.cwd(), 'src/components/Map/KreisDithmarschenSVG.jsx')
 
-// ViewBox-Zielgröße (Dithmarschen ist breit/hoch ähnlich)
-const VIEW_W = 800
-const VIEW_H = 700
-const PADDING = 20
-const SIMPLIFY_TOL = 0.0008  // Grad (etwa 80 m bei 54°N)
+const PADDING_RATIO = 0.02  // 2% Padding auf jeder Seite der Kreisgrenze
+const NEIGHBOR_EXPAND = 0.12  // 12% Raum für Nachbarkreise um Dithmarschen
+const SIMPLIFY_TOL_GEMEINDEN = 0.0008
+const SIMPLIFY_TOL_KREIS = 0.0015  // Kreisgrenzen gröber simplifizieren
 const LABEL_FONT = 11
 
-// Küstenorte aus Briefing (subtiler blauer Akzent)
 const COASTAL_IDS = new Set([
   'buesum', 'friedrichskoog', 'buesumer-deichhausen',
   'wesselburenerkoog', 'reinsbuettel',
 ])
 
-// Gemeinden mit dunkler Heatmap-Farbe (für helle Schrift)
 const DARK_IDS = new Set([
   'heide', 'meldorf', 'tellingstedt', 'buesum', 'buesumer-deichhausen',
   'friedrichskoog', 'wesselburenerkoog',
@@ -37,173 +42,225 @@ const LABEL_OVERRIDES = {
   'wesselburenerkoog': ['Wesselburener-', 'koog'],
 }
 
-// Douglas-Peucker-Simplifizierung
+// Wasser-Labels in Lon/Lat (werden später projiziert)
+const WATER_LABELS = [
+  { text: 'Nordsee', lon: 8.82, lat: 54.00, size: 13 },
+  { text: 'Elbe', lon: 8.95, lat: 53.89, size: 12 },
+  { text: 'Eider', lon: 9.02, lat: 54.34, size: 11 },
+]
+
+// Nachbarkreis-Labels in Lon/Lat. Kurzform wenn Kreisname am Rand knapp wird.
+const NEIGHBOR_LABELS = {
+  'nordfriesland': { text: 'Nordfriesland', lon: 9.00, lat: 54.31 },
+  'steinburg': { text: 'Kreis Steinburg', lon: 9.32, lat: 53.95 },
+  'rendsburg-eckernfoerde': { text: 'Rendsburg-Eckernförde', lon: 9.32, lat: 54.25 },
+}
+
+// Douglas-Peucker
 function simplify(points, tol) {
   if (points.length < 4) return points
   const sqTol = tol * tol
   const keep = new Array(points.length).fill(false)
   keep[0] = true
   keep[points.length - 1] = true
-
   function visit(i, j) {
     if (j - i < 2) return
-    let maxSq = 0
-    let index = -1
-    const [ax, ay] = points[i]
-    const [bx, by] = points[j]
-    const dx = bx - ax
-    const dy = by - ay
+    let maxSq = 0, idx = -1
+    const [ax, ay] = points[i], [bx, by] = points[j]
+    const dx = bx - ax, dy = by - ay
     const len = dx * dx + dy * dy
     for (let k = i + 1; k < j; k++) {
       const [px, py] = points[k]
       let t = ((px - ax) * dx + (py - ay) * dy) / (len || 1)
       t = Math.max(0, Math.min(1, t))
-      const cx = ax + t * dx
-      const cy = ay + t * dy
+      const cx = ax + t * dx, cy = ay + t * dy
       const d = (px - cx) ** 2 + (py - cy) ** 2
-      if (d > maxSq) { maxSq = d; index = k }
+      if (d > maxSq) { maxSq = d; idx = k }
     }
-    if (maxSq > sqTol) {
-      keep[index] = true
-      visit(i, index)
-      visit(index, j)
-    }
+    if (maxSq > sqTol) { keep[idx] = true; visit(i, idx); visit(idx, j) }
   }
-
   visit(0, points.length - 1)
   return points.filter((_, i) => keep[i])
 }
 
-// Koordinaten aus Geometry extrahieren. Gibt Array von Rings (Arrays von [lon, lat]).
 function extractRings(geometry) {
   const rings = []
-  if (geometry.type === 'Polygon') {
-    rings.push(geometry.coordinates[0])  // Outer Ring
-  } else if (geometry.type === 'MultiPolygon') {
-    for (const poly of geometry.coordinates) {
-      rings.push(poly[0])  // Outer Rings aller Sub-Polygone
-    }
-  }
+  if (geometry.type === 'Polygon') rings.push(geometry.coordinates[0])
+  else if (geometry.type === 'MultiPolygon') for (const poly of geometry.coordinates) rings.push(poly[0])
   return rings
 }
 
-function main() {
-  const fc = JSON.parse(readFileSync(GEOJSON, 'utf8'))
-
-  // Globale Bounding-Box
-  let minLon = Infinity, maxLon = -Infinity
-  let minLat = Infinity, maxLat = -Infinity
-  for (const f of fc.features) {
-    for (const ring of extractRings(f.geometry)) {
-      for (const [lon, lat] of ring) {
-        if (lon < minLon) minLon = lon
-        if (lon > maxLon) maxLon = lon
-        if (lat < minLat) minLat = lat
-        if (lat > maxLat) maxLat = lat
-      }
-    }
+function ringArea(ring) {
+  let a = 0
+  for (let i = 0; i < ring.length; i++) {
+    const [x1, y1] = ring[i]
+    const [x2, y2] = ring[(i + 1) % ring.length]
+    a += x1 * y2 - x2 * y1
   }
+  return a / 2
+}
 
-  // Projektion: einfache equirectangular mit Cosinus-Korrektur auf Mittel-Breite
-  const midLat = (minLat + maxLat) / 2
-  const cosLat = Math.cos(midLat * Math.PI / 180)
-  const lonScale = 1 / cosLat  // ein Lon-Grad ist schmaler als ein Lat-Grad
+// ─── Daten laden ────────────────────────────────────────────
+const gemFC = JSON.parse(readFileSync(GEM_GEOJSON, 'utf8'))
+const geoFC = JSON.parse(readFileSync(GEOGRAPHY, 'utf8'))
 
-  const spanLon = (maxLon - minLon) * cosLat
-  const spanLat = maxLat - minLat
+const dithmarschenFeature = geoFC.features.find(f => f.properties.id === 'dithmarschen')
+const neighborFeatures = geoFC.features.filter(f => f.properties.type === 'neighbor')
 
-  const availW = VIEW_W - 2 * PADDING
-  const availH = VIEW_H - 2 * PADDING
-  const scale = Math.min(availW / spanLon, availH / spanLat)
+if (!dithmarschenFeature) throw new Error('Dithmarschen-Kreis fehlt im GeoJSON')
 
-  const renderW = spanLon * scale
-  const renderH = spanLat * scale
-  const offsetX = PADDING + (availW - renderW) / 2
-  const offsetY = PADDING + (availH - renderH) / 2
-
-  const project = ([lon, lat]) => {
-    const x = offsetX + (lon - minLon) * cosLat * scale
-    const y = offsetY + (maxLat - lat) * scale  // Y umdrehen
-    return [x, y]
+// ─── Bounding-Box aus Dithmarschen-Kreisgrenze + Padding ────
+let minLon = Infinity, maxLon = -Infinity, minLat = Infinity, maxLat = -Infinity
+for (const ring of extractRings(dithmarschenFeature.geometry)) {
+  for (const [lon, lat] of ring) {
+    if (lon < minLon) minLon = lon
+    if (lon > maxLon) maxLon = lon
+    if (lat < minLat) minLat = lat
+    if (lat > maxLat) maxLat = lat
   }
+}
 
-  const districts = []
-  const labels = []
+const spanLonRaw = maxLon - minLon
+const spanLatRaw = maxLat - minLat
+minLon -= spanLonRaw * PADDING_RATIO
+maxLon += spanLonRaw * PADDING_RATIO
+minLat -= spanLatRaw * PADDING_RATIO
+maxLat += spanLatRaw * PADDING_RATIO
 
-  for (const feature of fc.features) {
-    const id = feature.properties.id
-    const name = feature.properties.name
-    const rings = extractRings(feature.geometry)
+// ─── Projektion (equirectangular mit cos-Korrektur) ─────────
+const midLat = (minLat + maxLat) / 2
+const cosLat = Math.cos(midLat * Math.PI / 180)
+const spanLon = (maxLon - minLon) * cosLat
+const spanLat = maxLat - minLat
 
-    // Simplify in Lon/Lat (Grad), dann kleine Exklaven (< 5% vom größten Ring) verwerfen.
-    const simplifiedAll = rings.map(r => simplify(r, SIMPLIFY_TOL))
-    const ringAreas = simplifiedAll.map(r => Math.abs(ringArea(r)))
-    const maxRingArea = Math.max(...ringAreas)
-    const simplifiedRings = simplifiedAll.filter((_, i) => ringAreas[i] >= maxRingArea * 0.05)
+// ViewBox: Aspect-Ratio aus echtem Gebiet ableiten
+const VIEW_W = 800
+const VIEW_H = Math.round(VIEW_W * (spanLat / spanLon))
+const scale = Math.min(VIEW_W / spanLon, VIEW_H / spanLat)
 
-    // Zum Pfad-Konvertieren: projiziere + baue M/L-Kommandos
-    const pathParts = simplifiedRings.map(ring => {
-      const projected = ring.map(project)
-      const cmds = projected.map(([x, y], i) =>
-        `${i === 0 ? 'M' : 'L'} ${x.toFixed(1)},${y.toFixed(1)}`
-      )
-      return cmds.join(' ') + ' Z'
-    })
-    const path = pathParts.join(' ')
+const project = ([lon, lat]) => {
+  const x = (lon - minLon) * cosLat * scale
+  const y = (maxLat - lat) * scale
+  return [x, y]
+}
 
-    // Label-Position: pole of inaccessibility auf größtem Ring (projiziert)
-    let largestRing = simplifiedRings[0]
-    let largestArea = 0
-    for (const ring of simplifiedRings) {
-      const area = Math.abs(ringArea(ring))
-      if (area > largestArea) { largestArea = area; largestRing = ring }
-    }
-    const projRing = largestRing.map(project)
-    const [lx, ly] = polylabel([projRing], 1.0)
+// ─── Pfade bauen ────────────────────────────────────────────
+function buildPath(geometry, tol) {
+  const rings = extractRings(geometry).map(r => simplify(r, tol))
+  const areas = rings.map(r => Math.abs(ringArea(r)))
+  const maxArea = Math.max(...areas)
+  const kept = rings.filter((_, i) => areas[i] >= maxArea * 0.05)
+  return kept.map(ring => {
+    const pts = ring.map(project)
+    return pts.map(([x, y], i) => `${i === 0 ? 'M' : 'L'} ${x.toFixed(1)},${y.toFixed(1)}`).join(' ') + ' Z'
+  }).join(' ')
+}
 
-    districts.push({ id, path })
-    labels.push({
-      id,
-      x: +lx.toFixed(1),
-      y: +ly.toFixed(1),
-      lines: LABEL_OVERRIDES[id] || [name],
-      size: LABEL_FONT,
-    })
+const dithmarschenPath = buildPath(dithmarschenFeature.geometry, SIMPLIFY_TOL_KREIS)
+
+const neighborPaths = neighborFeatures.map(f => ({
+  id: f.properties.id,
+  path: buildPath(f.geometry, SIMPLIFY_TOL_KREIS),
+}))
+
+// Gemeinden
+const gemeinden = []
+const gemLabels = []
+
+for (const feature of gemFC.features) {
+  const id = feature.properties.id
+  const name = feature.properties.name
+  const rawRings = extractRings(feature.geometry).map(r => simplify(r, SIMPLIFY_TOL_GEMEINDEN))
+  const areas = rawRings.map(r => Math.abs(ringArea(r)))
+  const maxArea = Math.max(...areas)
+  const rings = rawRings.filter((_, i) => areas[i] >= maxArea * 0.05)
+
+  const path = rings.map(ring => {
+    const pts = ring.map(project)
+    return pts.map(([x, y], i) => `${i === 0 ? 'M' : 'L'} ${x.toFixed(1)},${y.toFixed(1)}`).join(' ') + ' Z'
+  }).join(' ')
+
+  // Label auf größtem Ring
+  let biggest = rings[0]
+  let big = 0
+  for (const r of rings) {
+    const a = Math.abs(ringArea(r))
+    if (a > big) { big = a; biggest = r }
   }
+  const projRing = biggest.map(project)
+  const [lx, ly] = polylabel([projRing], 1.0)
 
-  const sortedDark = districts.filter(d => DARK_IDS.has(d.id)).map(d => `'${d.id}'`).join(', ')
-  const sortedCoastal = districts.filter(d => COASTAL_IDS.has(d.id)).map(d => `'${d.id}'`).join(', ')
-  const staggerOrder = [...districts].sort((a, b) => {
-    const la = labels.find(l => l.id === a.id)
-    const lb = labels.find(l => l.id === b.id)
-    return (la.x + la.y) - (lb.x + lb.y)
-  }).map(d => `'${d.id}'`).join(', ')
+  gemeinden.push({ id, path })
+  gemLabels.push({ id, x: +lx.toFixed(1), y: +ly.toFixed(1), lines: LABEL_OVERRIDES[id] || [name], size: LABEL_FONT })
+}
 
-  const code = `import { useState, useEffect, useCallback, useRef, memo } from 'react'
+// Wasser-Labels projizieren
+const waterLabels = WATER_LABELS.map(l => {
+  const [x, y] = project([l.lon, l.lat])
+  return { text: l.text, x: +x.toFixed(1), y: +y.toFixed(1), size: l.size }
+})
+
+// Nachbarkreis-Labels projizieren
+const neighborLabels = neighborPaths.map(n => {
+  const cfg = NEIGHBOR_LABELS[n.id]
+  if (!cfg) return null
+  const [x, y] = project([cfg.lon, cfg.lat])
+  return { id: n.id, text: cfg.text, x: +x.toFixed(1), y: +y.toFixed(1) }
+}).filter(Boolean)
+
+// Stagger-Order für Gemeinden (von Kreisstadt Heide nach außen)
+const staggerOrder = [...gemeinden].sort((a, b) => {
+  const la = gemLabels.find(l => l.id === a.id)
+  const lb = gemLabels.find(l => l.id === b.id)
+  return (la.x + la.y) - (lb.x + lb.y)
+}).map(d => `'${d.id}'`).join(', ')
+
+const sortedDark = gemeinden.filter(d => DARK_IDS.has(d.id)).map(d => `'${d.id}'`).join(', ')
+const sortedCoastal = gemeinden.filter(d => COASTAL_IDS.has(d.id)).map(d => `'${d.id}'`).join(', ')
+
+// ─── SVG-Komponente rendern ─────────────────────────────────
+const code = `import { useState, useEffect, useCallback, useRef, memo } from 'react'
 
 function getDistrictColor(districtId, data) {
   const { colorScale } = data.meta
   const district = data.districts.find(d => d.id === districtId)
-  if (!district) return '#E8E4E0'
+  if (!district) return '#EDEAE5'
   const price = district.prices.etwPerSqm
   const scale = colorScale.find(s => price >= s.min && price <= s.max)
-  return scale ? scale.color : '#E8E4E0'
+  return scale ? scale.color : '#EDEAE5'
 }
 
 // ═══════════════════════════════════════════
 // Kreis Dithmarschen SVG Karte (23 Gemeinden)
-// Generiert aus OpenStreetMap (Overpass API, admin_level=8)
+// Layer: Wasser → Nachbarkreise → Kreis-Canvas → Gemeinden → Labels
 // ═══════════════════════════════════════════
 
+const VIEW_W = ${VIEW_W}
+const VIEW_H = ${VIEW_H}
+
+const KREIS_PATH = '${dithmarschenPath}'
+
+const NEIGHBORS = [
+${neighborPaths.map(n => `  { id: '${n.id}', path: '${n.path}' },`).join('\n')}
+]
+
+const NEIGHBOR_LABELS = [
+${neighborLabels.map(l => `  { id: '${l.id}', x: ${l.x}, y: ${l.y}, text: ${JSON.stringify(l.text)} },`).join('\n')}
+]
+
+const WATER_LABELS = [
+${waterLabels.map(l => `  { x: ${l.x}, y: ${l.y}, text: ${JSON.stringify(l.text)}, size: ${l.size} },`).join('\n')}
+]
+
 const ALL_DISTRICTS = [
-${districts.map(d => `  { id: '${d.id}', path: '${d.path}' },`).join('\n')}
+${gemeinden.map(d => `  { id: '${d.id}', path: '${d.path}' },`).join('\n')}
 ]
 
 const DARK_DISTRICTS = new Set([${sortedDark}])
 const COASTAL_DISTRICTS = new Set([${sortedCoastal}])
 
 const LABELS = [
-${labels.map(l => `  { id: '${l.id}', x: ${l.x}, y: ${l.y}, lines: ${JSON.stringify(l.lines)}, size: ${l.size} },`).join('\n')}
+${gemLabels.map(l => `  { id: '${l.id}', x: ${l.x}, y: ${l.y}, lines: ${JSON.stringify(l.lines)}, size: ${l.size} },`).join('\n')}
 ]
 
 const STAGGER_ORDER = [${staggerOrder}]
@@ -213,8 +270,8 @@ const DistrictPath = memo(function DistrictPath({
   id, d, fill, label, isSelected, isHovered, isDimmed, isCoastal, loaded, staggerDelay,
   onClick, onMouseEnter, onMouseLeave,
 }) {
-  const stroke = isCoastal ? '#2E6A8A' : '#D1CDC9'
-  const strokeWidth = isCoastal ? 2 : 1.5
+  const stroke = isCoastal ? '#2E6A8A' : '#B8B4AC'
+  const strokeWidth = isCoastal ? 1.5 : 0.8
   return (
     <path
       id={id}
@@ -271,72 +328,105 @@ export function KreisDithmarschenSVG({
     }
   }, [onDistrictHover, onDistrictRect])
 
-  const REGION_BOUNDARY = ALL_DISTRICTS.map(d => d.path).join(' ')
-
   return (
     <svg
       ref={svgRef}
-      viewBox="0 0 ${VIEW_W} ${VIEW_H}"
+      viewBox={\`0 0 \${VIEW_W} \${VIEW_H}\`}
       preserveAspectRatio="xMidYMid meet"
       xmlns="http://www.w3.org/2000/svg"
       className="w-full h-auto block"
       role="img"
       aria-label="Gemeinde-Karte Kreis Dithmarschen mit Immobilienpreisen"
     >
-      {/* SCHICHT 1: Kreisgrenze als Hintergrund */}
-      <path d={REGION_BOUNDARY} fill="#E8E4E0" stroke="#B8B4B0" strokeWidth="2" strokeLinejoin="round" />
+      <defs>
+        {/* Clip auf viewBox, damit Nachbarkreise sauber an der Kante enden */}
+        <clipPath id="viewBoxClip">
+          <rect x="0" y="0" width={VIEW_W} height={VIEW_H} />
+        </clipPath>
+      </defs>
 
-      {/* SCHICHT 2: Alle 23 Gemeinden */}
-      <g className="interactive-districts" role="list">
-        {ALL_DISTRICTS.map(({ id, path: d }) => (
-          <DistrictPath
-            key={id}
-            id={id}
-            d={d}
-            fill={getDistrictColor(id, data)}
-            label={data.districts.find(dd => dd.id === id)?.name || id}
-            isSelected={selectedId === id}
-            isHovered={hoveredId === id}
-            isDimmed={!!(selectedId && selectedId !== id) || !!(searchDimmedIds && !searchDimmedIds.has(id))}
-            isCoastal={COASTAL_DISTRICTS.has(id)}
-            loaded={loaded}
-            staggerDelay={STAGGER_ORDER.indexOf(id) * 30}
-            onClick={onDistrictClick}
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={onDistrictLeave}
-          />
-        ))}
-      </g>
+      {/* LAYER 1: Wasser als Hintergrund */}
+      <rect x="0" y="0" width={VIEW_W} height={VIEW_H} fill="#DCE9F0" />
 
-      {/* SCHICHT 3: Labels */}
-      <g fontFamily="'DM Sans', system-ui, sans-serif" style={{ pointerEvents: 'none', opacity: loaded ? 1 : 0, transition: 'opacity 400ms ease 500ms' }}>
-        {LABELS.map(({ id, x, y, lines, size }) => (
-          <text key={id} textAnchor="middle" fontSize={size} fontWeight="500" fill={DARK_DISTRICTS.has(id) ? '#F5F2F0' : '#333'}>
-            {lines.map((line, i) => (
-              <tspan key={i} x={x} y={y + i * (size * 1.2)}>{line}</tspan>
-            ))}
-          </text>
-        ))}
+      <g clipPath="url(#viewBoxClip)">
+        {/* LAYER 2: Nachbarkreise (dezentes Land-Grau, gestrichelte Grenze) */}
+        <g>
+          {NEIGHBORS.map(({ id, path: d }) => (
+            <path
+              key={id}
+              d={d}
+              fill="#F5F2F0"
+              stroke="#CFC9BD"
+              strokeWidth="1"
+              strokeDasharray="4 3"
+              strokeLinejoin="round"
+            />
+          ))}
+        </g>
+
+        {/* LAYER 3: Kreis Dithmarschen als Canvas */}
+        <path
+          d={KREIS_PATH}
+          fill="#EDEAE5"
+          stroke="#A8A498"
+          strokeWidth="1.25"
+          strokeLinejoin="round"
+        />
+
+        {/* LAYER 4: Nachbarkreis-Labels (dezent, am Rand) */}
+        <g fontFamily="'DM Sans', system-ui, sans-serif" fill="#8A857A" fontSize="10" style={{ pointerEvents: 'none' }}>
+          {NEIGHBOR_LABELS.map(l => (
+            <text key={l.id} x={l.x} y={l.y} textAnchor="middle" fontStyle="italic">{l.text}</text>
+          ))}
+        </g>
+
+        {/* LAYER 5: Gemeinden */}
+        <g className="interactive-districts" role="list">
+          {ALL_DISTRICTS.map(({ id, path: d }) => (
+            <DistrictPath
+              key={id}
+              id={id}
+              d={d}
+              fill={getDistrictColor(id, data)}
+              label={data.districts.find(dd => dd.id === id)?.name || id}
+              isSelected={selectedId === id}
+              isHovered={hoveredId === id}
+              isDimmed={!!(selectedId && selectedId !== id) || !!(searchDimmedIds && !searchDimmedIds.has(id))}
+              isCoastal={COASTAL_DISTRICTS.has(id)}
+              loaded={loaded}
+              staggerDelay={STAGGER_ORDER.indexOf(id) * 30}
+              onClick={onDistrictClick}
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={onDistrictLeave}
+            />
+          ))}
+        </g>
+
+        {/* LAYER 6: Gemeinde-Labels */}
+        <g fontFamily="'DM Sans', system-ui, sans-serif" style={{ pointerEvents: 'none', opacity: loaded ? 1 : 0, transition: 'opacity 400ms ease 500ms' }}>
+          {LABELS.map(({ id, x, y, lines, size }) => (
+            <text key={id} textAnchor="middle" fontSize={size} fontWeight="500" fill={DARK_DISTRICTS.has(id) ? '#F5F2F0' : '#333'}>
+              {lines.map((line, i) => (
+                <tspan key={i} x={x} y={y + i * (size * 1.2)}>{line}</tspan>
+              ))}
+            </text>
+          ))}
+        </g>
+
+        {/* LAYER 7: Wasser-Labels (kursiv, dezent blau) */}
+        <g fontFamily="'DM Sans', system-ui, sans-serif" fill="#6A8A98" fontStyle="italic" style={{ pointerEvents: 'none' }}>
+          {WATER_LABELS.map((l, i) => (
+            <text key={i} x={l.x} y={l.y} textAnchor="middle" fontSize={l.size}>{l.text}</text>
+          ))}
+        </g>
       </g>
     </svg>
   )
 }
 `
 
-  writeFileSync(OUTPUT, code)
-  console.log('Geschrieben: ' + OUTPUT)
-  console.log('  Gemeinden: ' + districts.length)
-  console.log('  ViewBox: ' + VIEW_W + ' × ' + VIEW_H)
-}
-
-function ringArea(ring) {
-  let area = 0
-  for (let i = 0, len = ring.length; i < len; i++) {
-    const [x1, y1] = ring[i]
-    const [x2, y2] = ring[(i + 1) % len]
-    area += x1 * y2 - x2 * y1
-  }
-  return area / 2
-}
-
-main()
+writeFileSync(OUTPUT, code)
+console.log('Geschrieben: ' + OUTPUT)
+console.log('  Gemeinden: ' + gemeinden.length)
+console.log('  Nachbarkreise: ' + neighborPaths.length)
+console.log('  ViewBox: ' + VIEW_W + ' × ' + VIEW_H)
