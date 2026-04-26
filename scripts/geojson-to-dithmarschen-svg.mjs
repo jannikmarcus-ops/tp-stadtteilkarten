@@ -65,15 +65,18 @@ const WATER_LABELS = [
   { text: 'Nord-Ostsee-Kanal', lon: 9.34, lat: 53.965, size: 10 },
 ]
 
-// Nord-Ostsee-Kanal als grobe Polyline. Verläuft von Brunsbüttel (Mündung in
-// die Elbe) nach Nordosten Richtung Rendsburg/Kiel. Punkte sind die markanten
-// Knickpunkte entlang der Strecke. Wikipedia-Referenz zeigt Kanal als blaue
-// Linie zwischen Brunsbüttel und der nordöstlichen Kreisgrenze.
+// Nord-Ostsee-Kanal als grobe Polyline. Verläuft von der Elbe (südlich von
+// Brunsbüttel) durch das Brunsbüttel-Polygon, dann nach Nordosten Richtung
+// Rendsburg/Kiel. Erster Punkt liegt absichtlich in der Elbe-Wasserfläche,
+// damit der Kanal visuell aus dem Polygon herauskommt und an der Mündung endet.
 const NORD_OSTSEE_KANAL = [
-  [9.139, 53.892], // Brunsbüttel-Schleuse (Elbe)
-  [9.165, 53.910],
-  [9.200, 53.925],
-  [9.260, 53.950],
+  [9.135, 53.870], // Mündung in die Elbe (südlich der Brunsbüttel-Schleuse)
+  [9.137, 53.880],
+  [9.139, 53.892], // Brunsbüttel-Schleuse
+  [9.155, 53.905],
+  [9.180, 53.920],
+  [9.220, 53.940],
+  [9.270, 53.960],
   [9.330, 53.985],
   [9.380, 54.020], // Austritt aus Kreis Dithmarschen Richtung Steinburg/Rendsburg
 ]
@@ -509,12 +512,22 @@ export function KreisDithmarschenSVG({
 
         {/* LAYER 5.5: Nord-Ostsee-Kanal als blaue Linie ÜBER allen Gemeinde-
             Polygonen (sonst überdeckt z.B. Brunsbüttel den Kanal-Abschnitt
-            an der Schleuse). Bleibt unter Labels und Leader-Lines. */}
+            an der Schleuse). Heller Halo unten für Kontrast auf grünen
+            Polygon-Flächen, blaue Linie oben drüber. Bleibt unter Labels. */}
         <path
           d={KANAL_PATH}
           fill="none"
-          stroke="#7AA8C0"
-          strokeWidth="2.2"
+          stroke="#F5F2F0"
+          strokeWidth="5.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          style={{ pointerEvents: 'none' }}
+        />
+        <path
+          d={KANAL_PATH}
+          fill="none"
+          stroke="#5A8FAC"
+          strokeWidth="2.6"
           strokeLinecap="round"
           strokeLinejoin="round"
           style={{ pointerEvents: 'none' }}
