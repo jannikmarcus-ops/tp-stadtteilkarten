@@ -11,6 +11,7 @@ const TARGET = resolve(process.cwd(), 'src/data/kreis-dithmarschen-geography.geo
 const KREISE = [
   { name: 'Kreis Dithmarschen', id: 'dithmarschen', type: 'focus' },
   { name: 'Kreis Nordfriesland', id: 'nordfriesland', type: 'neighbor' },
+  { name: 'Kreis Schleswig-Flensburg', id: 'schleswig-flensburg', type: 'neighbor' },
   { name: 'Kreis Rendsburg-Eckernförde', id: 'rendsburg-eckernfoerde', type: 'neighbor' },
   { name: 'Kreis Steinburg', id: 'steinburg', type: 'neighbor' },
 ]

@@ -42,7 +42,7 @@ const DARK_IDS = new Set([
 ])
 
 const LABEL_OVERRIDES = {
-  'burg-in-dithmarschen': ['Burg'],
+  'burg-in-dithmarschen': ['Burg in', 'Dithmarschen'],
   'st-michaelisdonn': ['St. Michaelis-', 'donn'],
   'lohe-rickelshof': ['Lohe-', 'Rickelshof'],
   'buesumer-deichhausen': ['Büsumer', 'Deichhausen'],
@@ -61,7 +61,21 @@ const LABEL_LEADERS = {
 const WATER_LABELS = [
   { text: 'Nordsee', lon: 8.82, lat: 54.00, size: 13 },
   { text: 'Elbe', lon: 8.95, lat: 53.84, size: 12 },
-  { text: 'Eider', lon: 9.02, lat: 54.33, size: 11 },
+  { text: 'Eider', lon: 8.92, lat: 54.34, size: 11 },
+  { text: 'Nord-Ostsee-Kanal', lon: 9.34, lat: 53.965, size: 10 },
+]
+
+// Nord-Ostsee-Kanal als grobe Polyline. Verläuft von Brunsbüttel (Mündung in
+// die Elbe) nach Nordosten Richtung Rendsburg/Kiel. Punkte sind die markanten
+// Knickpunkte entlang der Strecke. Wikipedia-Referenz zeigt Kanal als blaue
+// Linie zwischen Brunsbüttel und der nordöstlichen Kreisgrenze.
+const NORD_OSTSEE_KANAL = [
+  [9.139, 53.892], // Brunsbüttel-Schleuse (Elbe)
+  [9.165, 53.910],
+  [9.200, 53.925],
+  [9.260, 53.950],
+  [9.330, 53.985],
+  [9.380, 54.020], // Austritt aus Kreis Dithmarschen Richtung Steinburg/Rendsburg
 ]
 
 // Nachbarkreis-Labels in Lon/Lat. Positionen sicher außerhalb der
@@ -70,6 +84,7 @@ const WATER_LABELS = [
 // verschluckt — siehe PADDING für sichtbaren Rand.
 const NEIGHBOR_LABELS = {
   'nordfriesland': { text: 'Kreis Nordfriesland', lon: 9.05, lat: 54.36 },
+  'schleswig-flensburg': { text: 'Schleswig-Flensburg', lon: 9.42, lat: 54.36 },
   'rendsburg-eckernfoerde': { text: 'Rendsburg-Eckernförde', lon: 9.42, lat: 54.20 },
   'steinburg': { text: 'Kreis Steinburg', lon: 9.41, lat: 53.92 },
 }
@@ -243,13 +258,20 @@ const waterLabels = WATER_LABELS.map(l => {
   return { text: l.text, x: +x.toFixed(1), y: +y.toFixed(1), size: l.size }
 })
 
+// Nord-Ostsee-Kanal-Polyline projizieren
+const kanalPoints = NORD_OSTSEE_KANAL.map(project)
+const kanalPath = kanalPoints.map(([x, y], i) =>
+  `${i === 0 ? 'M' : 'L'} ${x.toFixed(1)},${y.toFixed(1)}`
+).join(' ')
+
 // Nachbarkreis-Labels in viewBox-Koordinaten platzieren, garantiert außerhalb
 // der Dithmarschen-Canvas (basierend auf projizierter Polygon-Bbox).
 // Rechte Labels (RE, Steinburg) werden 90° gedreht, lesen von oben nach unten.
 const ditMidX = (ditMinX + ditMaxX) / 2
 const rightX = Math.min(VIEW_W - 6, ditMaxX + 14)
 const neighborLabelPositions = {
-  'nordfriesland': { x: ditMidX, y: Math.max(14, ditMinY - 14), rotate: 0 },
+  'nordfriesland': { x: ditMinX + (ditMaxX - ditMinX) * 0.32, y: Math.max(14, ditMinY - 14), rotate: 0 },
+  'schleswig-flensburg': { x: ditMinX + (ditMaxX - ditMinX) * 0.78, y: Math.max(14, ditMinY - 14), rotate: 0 },
   'rendsburg-eckernfoerde': { x: rightX, y: ditMinY + (ditMaxY - ditMinY) * 0.32, rotate: 90 },
   'steinburg': { x: rightX, y: ditMinY + (ditMaxY - ditMinY) * 0.92, rotate: 90 },
 }
@@ -297,6 +319,8 @@ const VIEW_W = ${VIEW_W}
 const VIEW_H = ${VIEW_H}
 
 const KREIS_PATH = '${dithmarschenPath}'
+
+const KANAL_PATH = '${kanalPath}'
 
 const NEIGHBORS = [
 ${neighborPaths.map(n => `  { id: '${n.id}', path: '${n.path}' },`).join('\n')}
@@ -460,6 +484,16 @@ export function KreisDithmarschenSVG({
             >{l.text}</text>
           ))}
         </g>
+
+        {/* LAYER 4.5: Nord-Ostsee-Kanal als blaue Linie über Land */}
+        <path
+          d={KANAL_PATH}
+          fill="none"
+          stroke="#7AA8C0"
+          strokeWidth="2.2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
 
         {/* LAYER 5: Gemeinden */}
         <g className="interactive-districts" role="list">
