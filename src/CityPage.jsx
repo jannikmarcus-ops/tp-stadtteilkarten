@@ -86,16 +86,16 @@ export function CityPage({ data, MapComponent }) {
   if (isDesktop) {
     return (
       <div ref={rootRef} className="bg-background text-text font-sans">
-        <header className="px-4 py-6 text-center">
-          <h1 className="text-2xl font-bold text-primary">
+        <header className="px-4 pt-4 pb-2 text-center">
+          <h1 className="text-xl font-bold text-primary">
             Immobilienpreise {data.meta.cityLabel}
           </h1>
-          <p className="text-sm mt-1 text-text/75">
+          <p className="text-xs mt-0.5 text-text/75">
             Datenstand: {data.meta.quarter}
           </p>
         </header>
 
-        <main className="px-4 pb-6">
+        <main className="px-4 pb-4">
           <SearchBar value={searchQuery} onChange={setSearchQuery} />
 
           <div className={`max-w-5xl mx-auto ${isWide && selectedDistrict ? 'flex gap-6 items-start' : ''}`}>

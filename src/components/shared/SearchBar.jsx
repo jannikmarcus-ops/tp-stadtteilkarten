@@ -3,7 +3,7 @@
  */
 export function SearchBar({ value, onChange, placeholder = 'Gemeinde suchen...' }) {
   return (
-    <div className="max-w-xs mx-auto mb-4">
+    <div className="max-w-xs mx-auto mb-2">
       <div className="relative">
         <svg
           className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-text/40"

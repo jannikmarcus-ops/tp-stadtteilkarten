@@ -5,7 +5,7 @@
     "cityLabel": "im Kreis Dithmarschen",
     "city": "kreis-dithmarschen",
     "lastUpdated": "2026-04-01",
-    "quarter": "April 2026",
+    "quarter": "Q2/2026",
     "source": "Angebotspreise im Mehrquellen-Konsens (ImmoScout24 Preisatlas, Immowelt Immobilienpreise, Immoverkauf24, Immoportal, Gutachterausschuss Kreis Dithmarschen (Grundstücksmarktbericht 2024 und 2025), Bodenrichtwerte-Deutschland.de, AirROI Marktdaten), Stand April 2026.",
     "methodik": "Werte sind Angebotspreise aus Mehrquellen-Konsens (Stand April 2026). Transaktionspreise liegen typischerweise 8 bis 15 Prozent unter den hier ausgewiesenen Angebotspreisen.",
     "priceUnit": "€/m²",
@@ -559,7 +559,7 @@
       "id": "reinsbuettel",
       "name": "Reinsbüttel",
       "slug": "reinsbuettel",
-      "isCoastal": true,
+      "isCoastal": false,
       "prices": {
         "etwPerSqm": 2180,
         "housePerSqm": 1655,

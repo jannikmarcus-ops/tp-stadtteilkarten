@@ -4,7 +4,7 @@
  */
 export function MapLegend({ colorScale }) {
   return (
-    <div className="flex flex-wrap justify-center gap-x-4 gap-y-2 mt-4 px-4">
+    <div className="flex flex-wrap justify-center gap-x-4 gap-y-2 mt-2 px-4">
       {colorScale.map((level) => (
         <div key={level.label} className="flex items-center gap-1.5">
           <span

@@ -11,7 +11,7 @@ const TARGET = resolve(process.cwd(), 'src/data/kreis-dithmarschen-gemeinden.jso
 
 const COASTAL_IDS = new Set([
   'buesum', 'friedrichskoog', 'buesumer-deichhausen',
-  'wesselburenerkoog', 'reinsbuettel',
+  'wesselburenerkoog',
 ])
 
 // 6-stufige Heatmap-Skala (ETW €/m²)
@@ -74,7 +74,7 @@ const output = {
     cityLabel: 'im Kreis Dithmarschen',
     city: 'kreis-dithmarschen',
     lastUpdated: '2026-04-01',
-    quarter: source.datenstand,
+    quarter: 'Q2/2026',
     source: `Angebotspreise im Mehrquellen-Konsens (${source.quellen.join(', ')}), Stand ${source.datenstand}.`,
     methodik: source.methodik,
     priceUnit: '€/m²',

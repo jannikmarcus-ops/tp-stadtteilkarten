@@ -18,15 +18,22 @@ const GEM_GEOJSON = resolve(process.cwd(), 'src/data/kreis-dithmarschen-gemeinde
 const GEOGRAPHY = resolve(process.cwd(), 'src/data/kreis-dithmarschen-geography.geojson')
 const OUTPUT = resolve(process.cwd(), 'src/components/Map/KreisDithmarschenSVG.jsx')
 
-const PADDING_RATIO = 0.02  // 2% Padding auf jeder Seite der Kreisgrenze
-const NEIGHBOR_EXPAND = 0.12  // 12% Raum für Nachbarkreise um Dithmarschen
+// Asymmetrisches Padding: mehr Platz dort wo Nachbarkreis-Labels hinsollen.
+// Dithmarschen bleibt visuell zentral, Labels sitzen sauber auf Nachbar-Polygonen.
+// Rechts wenig Platz nötig, da RE/Steinburg-Labels vertikal gedreht sind.
+const PADDING = {
+  top: 0.06,    // Platz für Kreis Nordfriesland Label (über dem Lunden-Vorsprung)
+  bottom: 0.02, // Platz für Elbe-Label
+  left: 0.01,   // Nordsee-Wasser
+  right: 0.04,  // Schmaler Streifen für vertikal gedrehte Labels
+}
 const SIMPLIFY_TOL_GEMEINDEN = 0.0008
-const SIMPLIFY_TOL_KREIS = 0.0015  // Kreisgrenzen gröber simplifizieren
+const SIMPLIFY_TOL_KREIS = 0.0080  // Kreisgrenzen stark vereinfacht, glättet Eider-Mündung & Watt-Vorsprünge weg
 const LABEL_FONT = 11
 
 const COASTAL_IDS = new Set([
   'buesum', 'friedrichskoog', 'buesumer-deichhausen',
-  'wesselburenerkoog', 'reinsbuettel',
+  'wesselburenerkoog',
 ])
 
 const DARK_IDS = new Set([
@@ -42,18 +49,29 @@ const LABEL_OVERRIDES = {
   'wesselburenerkoog': ['Wesselburener-', 'koog'],
 }
 
+// Manuelle Label-Verschiebungen wegen Polygon-Kollisionen. Ankerpunkt bleibt
+// am Original-Polylabel; Label rendert an `pos` mit Leader-Line dazwischen.
+const LABEL_LEADERS = {
+  // Büsumer Deichhausen liegt direkt neben Büsum, beide Polygone winzig.
+  // Label nach Osten ins freie Festland zwischen Reinsbüttel und Hemmingstedt.
+  'buesumer-deichhausen': { pos: { x: 220, y: 540 } },
+}
+
 // Wasser-Labels in Lon/Lat (werden später projiziert)
 const WATER_LABELS = [
   { text: 'Nordsee', lon: 8.82, lat: 54.00, size: 13 },
-  { text: 'Elbe', lon: 8.95, lat: 53.89, size: 12 },
-  { text: 'Eider', lon: 9.02, lat: 54.34, size: 11 },
+  { text: 'Elbe', lon: 8.95, lat: 53.84, size: 12 },
+  { text: 'Eider', lon: 9.02, lat: 54.33, size: 11 },
 ]
 
-// Nachbarkreis-Labels in Lon/Lat. Kurzform wenn Kreisname am Rand knapp wird.
+// Nachbarkreis-Labels in Lon/Lat. Positionen sicher außerhalb der
+// Dithmarschen-Kreisgrenze, auf dem jeweiligen Nachbar-Polygon.
+// Lat/Lon hier groß genug, damit Polygon-Simplifizierung sie nicht
+// verschluckt — siehe PADDING für sichtbaren Rand.
 const NEIGHBOR_LABELS = {
-  'nordfriesland': { text: 'Nordfriesland', lon: 9.00, lat: 54.31 },
-  'steinburg': { text: 'Kreis Steinburg', lon: 9.32, lat: 53.95 },
-  'rendsburg-eckernfoerde': { text: 'Rendsburg-Eckernförde', lon: 9.32, lat: 54.25 },
+  'nordfriesland': { text: 'Kreis Nordfriesland', lon: 9.05, lat: 54.36 },
+  'rendsburg-eckernfoerde': { text: 'Rendsburg-Eckernförde', lon: 9.42, lat: 54.20 },
+  'steinburg': { text: 'Kreis Steinburg', lon: 9.41, lat: 53.92 },
 }
 
 // Douglas-Peucker
@@ -122,10 +140,10 @@ for (const ring of extractRings(dithmarschenFeature.geometry)) {
 
 const spanLonRaw = maxLon - minLon
 const spanLatRaw = maxLat - minLat
-minLon -= spanLonRaw * PADDING_RATIO
-maxLon += spanLonRaw * PADDING_RATIO
-minLat -= spanLatRaw * PADDING_RATIO
-maxLat += spanLatRaw * PADDING_RATIO
+minLon -= spanLonRaw * PADDING.left
+maxLon += spanLonRaw * PADDING.right
+minLat -= spanLatRaw * PADDING.bottom
+maxLat += spanLatRaw * PADDING.top
 
 // ─── Projektion (equirectangular mit cos-Korrektur) ─────────
 const midLat = (minLat + maxLat) / 2
@@ -157,6 +175,18 @@ function buildPath(geometry, tol) {
 }
 
 const dithmarschenPath = buildPath(dithmarschenFeature.geometry, SIMPLIFY_TOL_KREIS)
+
+// Projizierte Bbox des Dithmarschen-Polygons → bestimmt sichere Label-Positionen
+// für Nachbarkreise (außerhalb der Canvas, im Padding-Bereich).
+const ditProjectedPoints = []
+for (const ring of extractRings(dithmarschenFeature.geometry)) {
+  const simplified = simplify(ring, SIMPLIFY_TOL_KREIS)
+  for (const pt of simplified) ditProjectedPoints.push(project(pt))
+}
+const ditMinX = Math.min(...ditProjectedPoints.map(p => p[0]))
+const ditMaxX = Math.max(...ditProjectedPoints.map(p => p[0]))
+const ditMinY = Math.min(...ditProjectedPoints.map(p => p[1]))
+const ditMaxY = Math.max(...ditProjectedPoints.map(p => p[1]))
 
 const neighborPaths = neighborFeatures.map(f => ({
   id: f.properties.id,
@@ -191,7 +221,20 @@ for (const feature of gemFC.features) {
   const [lx, ly] = polylabel([projRing], 1.0)
 
   gemeinden.push({ id, path })
-  gemLabels.push({ id, x: +lx.toFixed(1), y: +ly.toFixed(1), lines: LABEL_OVERRIDES[id] || [name], size: LABEL_FONT })
+
+  const leader = LABEL_LEADERS[id]
+  if (leader) {
+    gemLabels.push({
+      id,
+      x: leader.pos.x,
+      y: leader.pos.y,
+      lines: LABEL_OVERRIDES[id] || [name],
+      size: leader.size || LABEL_FONT,
+      leaderFrom: { x: +lx.toFixed(1), y: +ly.toFixed(1) },
+    })
+  } else {
+    gemLabels.push({ id, x: +lx.toFixed(1), y: +ly.toFixed(1), lines: LABEL_OVERRIDES[id] || [name], size: LABEL_FONT })
+  }
 }
 
 // Wasser-Labels projizieren
@@ -200,12 +243,27 @@ const waterLabels = WATER_LABELS.map(l => {
   return { text: l.text, x: +x.toFixed(1), y: +y.toFixed(1), size: l.size }
 })
 
-// Nachbarkreis-Labels projizieren
+// Nachbarkreis-Labels in viewBox-Koordinaten platzieren, garantiert außerhalb
+// der Dithmarschen-Canvas (basierend auf projizierter Polygon-Bbox).
+// Rechte Labels (RE, Steinburg) werden 90° gedreht, lesen von oben nach unten.
+const ditMidX = (ditMinX + ditMaxX) / 2
+const rightX = Math.min(VIEW_W - 6, ditMaxX + 14)
+const neighborLabelPositions = {
+  'nordfriesland': { x: ditMidX, y: Math.max(14, ditMinY - 14), rotate: 0 },
+  'rendsburg-eckernfoerde': { x: rightX, y: ditMinY + (ditMaxY - ditMinY) * 0.32, rotate: 90 },
+  'steinburg': { x: rightX, y: ditMinY + (ditMaxY - ditMinY) * 0.92, rotate: 90 },
+}
 const neighborLabels = neighborPaths.map(n => {
   const cfg = NEIGHBOR_LABELS[n.id]
-  if (!cfg) return null
-  const [x, y] = project([cfg.lon, cfg.lat])
-  return { id: n.id, text: cfg.text, x: +x.toFixed(1), y: +y.toFixed(1) }
+  const pos = neighborLabelPositions[n.id]
+  if (!cfg || !pos) return null
+  return {
+    id: n.id,
+    text: cfg.text,
+    x: +pos.x.toFixed(1),
+    y: +pos.y.toFixed(1),
+    rotate: pos.rotate,
+  }
 }).filter(Boolean)
 
 // Stagger-Order für Gemeinden (von Kreisstadt Heide nach außen)
@@ -245,7 +303,7 @@ ${neighborPaths.map(n => `  { id: '${n.id}', path: '${n.path}' },`).join('\n')}
 ]
 
 const NEIGHBOR_LABELS = [
-${neighborLabels.map(l => `  { id: '${l.id}', x: ${l.x}, y: ${l.y}, text: ${JSON.stringify(l.text)} },`).join('\n')}
+${neighborLabels.map(l => `  { id: '${l.id}', x: ${l.x}, y: ${l.y}, text: ${JSON.stringify(l.text)}, rotate: ${l.rotate} },`).join('\n')}
 ]
 
 const WATER_LABELS = [
@@ -260,7 +318,10 @@ const DARK_DISTRICTS = new Set([${sortedDark}])
 const COASTAL_DISTRICTS = new Set([${sortedCoastal}])
 
 const LABELS = [
-${gemLabels.map(l => `  { id: '${l.id}', x: ${l.x}, y: ${l.y}, lines: ${JSON.stringify(l.lines)}, size: ${l.size} },`).join('\n')}
+${gemLabels.map(l => {
+  const leader = l.leaderFrom ? `, leaderFrom: { x: ${l.leaderFrom.x}, y: ${l.leaderFrom.y} }` : ''
+  return `  { id: '${l.id}', x: ${l.x}, y: ${l.y}, lines: ${JSON.stringify(l.lines)}, size: ${l.size}${leader} },`
+}).join('\n')}
 ]
 
 const STAGGER_ORDER = [${staggerOrder}]
@@ -334,7 +395,8 @@ export function KreisDithmarschenSVG({
       viewBox={\`0 0 \${VIEW_W} \${VIEW_H}\`}
       preserveAspectRatio="xMidYMid meet"
       xmlns="http://www.w3.org/2000/svg"
-      className="w-full h-auto block"
+      className="block mx-auto w-auto h-auto"
+      style={{ maxHeight: '600px', maxWidth: '100%' }}
       role="img"
       aria-label="Gemeinde-Karte Kreis Dithmarschen mit Immobilienpreisen"
     >
@@ -349,6 +411,17 @@ export function KreisDithmarschenSVG({
       <rect x="0" y="0" width={VIEW_W} height={VIEW_H} fill="#DCE9F0" />
 
       <g clipPath="url(#viewBoxClip)">
+        {/* LAYER 1.5: Land-Filler mit dickem gleichfarbigen Stroke — schließt
+            Gaps zwischen den unabhängig simplifizierten Polygonen (besonders
+            an der Eider-Mündung), sodass kein Wasser zwischen den Kreisen
+            durchscheint. Stroke wird später vom Detail-Layer überdeckt. */}
+        <g>
+          {NEIGHBORS.map(({ id, path: d }) => (
+            <path key={\`fill-\${id}\`} d={d} fill="#EDEAE5" stroke="#EDEAE5" strokeWidth="40" strokeLinejoin="round" />
+          ))}
+          <path d={KREIS_PATH} fill="#EDEAE5" stroke="#EDEAE5" strokeWidth="40" strokeLinejoin="round" />
+        </g>
+
         {/* LAYER 2: Nachbarkreise (dezentes Land-Grau, gestrichelte Grenze) */}
         <g>
           {NEIGHBORS.map(({ id, path: d }) => (
@@ -373,10 +446,18 @@ export function KreisDithmarschenSVG({
           strokeLinejoin="round"
         />
 
-        {/* LAYER 4: Nachbarkreis-Labels (dezent, am Rand) */}
+        {/* LAYER 4: Nachbarkreis-Labels (dezent, außerhalb Dithmarschen-Canvas;
+            rechte Labels vertikal gedreht für schmalen Padding-Streifen). */}
         <g fontFamily="'DM Sans', system-ui, sans-serif" fill="#8A857A" fontSize="10" style={{ pointerEvents: 'none' }}>
           {NEIGHBOR_LABELS.map(l => (
-            <text key={l.id} x={l.x} y={l.y} textAnchor="middle" fontStyle="italic">{l.text}</text>
+            <text
+              key={l.id}
+              x={l.x}
+              y={l.y}
+              textAnchor="middle"
+              fontStyle="italic"
+              transform={l.rotate ? \`rotate(\${l.rotate} \${l.x} \${l.y})\` : undefined}
+            >{l.text}</text>
           ))}
         </g>
 
@@ -402,7 +483,23 @@ export function KreisDithmarschenSVG({
           ))}
         </g>
 
-        {/* LAYER 6: Gemeinde-Labels */}
+        {/* LAYER 6a: Leader-Lines für versetzte Labels (z.B. Büsumer Deichhausen) */}
+        <g style={{ pointerEvents: 'none', opacity: loaded ? 1 : 0, transition: 'opacity 400ms ease 500ms' }}>
+          {LABELS.filter(l => l.leaderFrom).map(({ id, x, y, leaderFrom }) => (
+            <line
+              key={\`leader-\${id}\`}
+              x1={leaderFrom.x}
+              y1={leaderFrom.y}
+              x2={x}
+              y2={y - 4}
+              stroke="#8A857A"
+              strokeWidth="0.8"
+              strokeLinecap="round"
+            />
+          ))}
+        </g>
+
+        {/* LAYER 6b: Gemeinde-Labels */}
         <g fontFamily="'DM Sans', system-ui, sans-serif" style={{ pointerEvents: 'none', opacity: loaded ? 1 : 0, transition: 'opacity 400ms ease 500ms' }}>
           {LABELS.map(({ id, x, y, lines, size }) => (
             <text key={id} textAnchor="middle" fontSize={size} fontWeight="500" fill={DARK_DISTRICTS.has(id) ? '#F5F2F0' : '#333'}>
