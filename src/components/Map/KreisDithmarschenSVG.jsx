@@ -234,16 +234,6 @@ export function KreisDithmarschenSVG({
           ))}
         </g>
 
-        {/* LAYER 4.5: Nord-Ostsee-Kanal als blaue Linie über Land */}
-        <path
-          d={KANAL_PATH}
-          fill="none"
-          stroke="#7AA8C0"
-          strokeWidth="2.2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-
         {/* LAYER 5: Gemeinden */}
         <g className="interactive-districts" role="list">
           {ALL_DISTRICTS.map(({ id, path: d }) => (
@@ -265,6 +255,19 @@ export function KreisDithmarschenSVG({
             />
           ))}
         </g>
+
+        {/* LAYER 5.5: Nord-Ostsee-Kanal als blaue Linie ÜBER allen Gemeinde-
+            Polygonen (sonst überdeckt z.B. Brunsbüttel den Kanal-Abschnitt
+            an der Schleuse). Bleibt unter Labels und Leader-Lines. */}
+        <path
+          d={KANAL_PATH}
+          fill="none"
+          stroke="#7AA8C0"
+          strokeWidth="2.2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          style={{ pointerEvents: 'none' }}
+        />
 
         {/* LAYER 6a: Leader-Lines für versetzte Labels (z.B. Büsumer Deichhausen) */}
         <g style={{ pointerEvents: 'none', opacity: loaded ? 1 : 0, transition: 'opacity 400ms ease 500ms' }}>
