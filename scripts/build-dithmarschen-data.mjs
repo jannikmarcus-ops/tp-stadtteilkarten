@@ -76,7 +76,7 @@ const output = {
     city: 'kreis-dithmarschen',
     lastUpdated: '2026-04-01',
     quarter: 'Q2/2026',
-    source: `Angebotspreise im Mehrquellen-Konsens (${source.quellen.join(', ')}), Stand ${source.datenstand}.`,
+    source: `Angebotspreise im Mehrquellen-Konsens (${source.quellen.join(', ')}), Stand Q2/2026.`,
     methodik: source.methodik,
     priceUnit: '€/m²',
     priceColumns: ['etw', 'haus', 'grund'],
