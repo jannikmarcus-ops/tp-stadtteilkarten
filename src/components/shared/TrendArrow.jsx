@@ -1,7 +1,10 @@
 /**
  * Trend-Pfeil basierend auf dem Text-Trend aus dem JSON.
  * Optional `label` zeigt einen Prozent-Wert (z.B. "+2,8%") statt des Trend-Worts.
- * Farben WCAG AA-konform auf weißem Hintergrund (Kontrast >= 4.5:1)
+ * Farben WCAG AA-konform auf weißem Hintergrund (Kontrast >= 4.5:1).
+ *
+ * Strikt nach Richtung: steigend grün ↗, fallend rot ↘, stabil grau →.
+ * Keine Schwellwerte — jeder positive Wert ist steigend.
  */
 export function TrendArrow({ trend, label }) {
   const t = (trend || '').toLowerCase()
@@ -13,12 +16,9 @@ export function TrendArrow({ trend, label }) {
   } else if (t.includes('fallend') || t.includes('fällt') || t.includes('sinkend')) {
     arrow = '↘'
     color = 'text-red-700'
-  } else if (t.includes('gemischt')) {
-    arrow = '↔'
-    color = 'text-yellow-800'
   } else {
     arrow = '→'
-    color = 'text-yellow-800'
+    color = 'text-text/60'
   }
 
   return (

@@ -26,12 +26,13 @@ const COLOR_SCALE = [
 ]
 
 // Trend aus "+2,8%" → 'steigend' / 'fallend' / 'stabil'
+// Strikt nach Vorzeichen, ohne Schwellwert: jeder positive Wert ist steigend.
 function parseTrend(raw) {
   if (!raw) return { label: 'stabil', direction: 'stabil' }
   const num = Number(String(raw).replace(/[+%\s]/g, '').replace(',', '.'))
   if (Number.isNaN(num)) return { label: raw, direction: 'stabil' }
-  if (num > 0.5) return { label: raw, direction: 'steigend' }
-  if (num < -0.5) return { label: raw, direction: 'fallend' }
+  if (num > 0) return { label: raw, direction: 'steigend' }
+  if (num < 0) return { label: raw, direction: 'fallend' }
   return { label: raw, direction: 'stabil' }
 }
 

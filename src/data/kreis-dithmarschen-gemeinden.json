@@ -408,7 +408,7 @@
         "etwPerSqm": 2000,
         "housePerSqm": 1550,
         "landPerSqm": 70,
-        "trend": "stabil",
+        "trend": "steigend",
         "trend12m": "+0,4%"
       },
       "demographics": {
@@ -538,7 +538,7 @@
         "etwPerSqm": 2955,
         "housePerSqm": 2265,
         "landPerSqm": 120,
-        "trend": "stabil",
+        "trend": "steigend",
         "trend12m": "+0,4%"
       },
       "demographics": {
